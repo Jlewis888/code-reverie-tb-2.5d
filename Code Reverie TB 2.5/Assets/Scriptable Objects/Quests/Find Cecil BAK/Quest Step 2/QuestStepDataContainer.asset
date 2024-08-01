@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3cbb9923ae4433f8e1a9b523277ccaa, type: 3}
+  m_Name: QuestStepDataContainer
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: questObjectives
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.QuestStepObjective,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  id: QuestStepDataContainer_a53f2ccd-7a77-4758-af06-4aaecc07c642
+  questStepDescription: 
+  questObjectiveDataList:
+  - {fileID: 11400000, guid: 5dd689642105078468c84f70d818bcbb, type: 2}
+  startQuest: 0
+  onComplete: 
+  questGiver: {fileID: 0}

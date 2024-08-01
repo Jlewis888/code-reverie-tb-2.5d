@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594113c686a343739a891034b76b492a, type: 3}
+  m_Name: Ember Explosion Skill
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: statModifiers
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.Stat, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: skillEventListeners
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[CodeReverie.SkillEventListener,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  icon: {fileID: 21300000, guid: d981d4ce5d063d042bf0d2863f4373e2, type: 3}
+  id: EmberExplosionSkill
+  skillId: EmberExplosionSkill
+  skillName: Ember Explosion
+  skillDescription: Detonates an area with explosive fire, causing knockback.
+  skillType: 2
+  archetypeCategory: 0
+  actionPointsCost: 1
+  skillPointsCost: 5
+  skillRange: 1
+  skillCastTime: 3
+  skillModifierDetailsList: []
+  skillDamageTypes: 
+  skillGameObject: {fileID: 0}
+  initialAnimation: 
+  castAnimation: cast_1
+  animationComboList:
+  - 

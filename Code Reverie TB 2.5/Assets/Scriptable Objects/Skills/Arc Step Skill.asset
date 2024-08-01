@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594113c686a343739a891034b76b492a, type: 3}
+  m_Name: Arc Step Skill
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: statModifiers
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.Stat, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: skillEventListeners
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[CodeReverie.SkillEventListener,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  icon: {fileID: 21300000, guid: 0cf2d892d47796f4c878c7570b7921b4, type: 3}
+  id: ArcStepSkill
+  skillId: ArcStepSkill
+  skillName: Arc Step
+  skillDescription: Teleports a short distance, emitting a burst of electrical energy
+    upon arrival that damages nearby enemies.
+  skillType: 1
+  archetypeCategory: 0
+  actionPointsCost: 1
+  skillPointsCost: 5
+  skillRange: 1
+  skillCastTime: 3
+  skillModifierDetailsList: []
+  skillDamageTypes: 
+  skillGameObject: {fileID: 0}
+  initialAnimation: basic_attack_1
+  castAnimation: cast_1
+  animationComboList: []

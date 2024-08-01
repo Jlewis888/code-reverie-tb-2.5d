@@ -1,0 +1,162 @@
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace CodeReverie
+{
+    public class CommandMenuNavigation
+    {
+        public List<CommandMenuNavigationButton> commandMenuNavigationButtons = new List<CommandMenuNavigationButton>();
+        public CommandMenuNavigationButton selectedNavigationButton;
+        public int navigationButtonsIndex;
+        public float navigationDelay = 0.35f;
+        public float navigationDelayTimer;
+        public Action callBack;
+
+
+        public CommandMenuNavigation()
+        {
+            commandMenuNavigationButtons = new List<CommandMenuNavigationButton>();
+        }
+        
+        
+        public CommandMenuNavigationButton SelectedNavigationButton
+        {
+            get => selectedNavigationButton;
+
+            set
+            {
+                if (selectedNavigationButton == value)
+                {
+                    return;
+                }
+
+                selectedNavigationButton = value;
+                
+                CommandMenuNavigationUpdate();
+                
+                
+                selectedNavigationButton.selector.SetActive(true);
+                
+                OnSelectedNavigationButtonChange();
+
+            }
+        }
+        
+        
+        public void CommandMenuNavigationUpdate()
+        {
+            foreach (CommandMenuNavigationButton commandMenuNavigationButton in commandMenuNavigationButtons)
+            {
+           
+                if (SelectedNavigationButton != commandMenuNavigationButton)
+                {
+                    commandMenuNavigationButton.selector.SetActive(false);
+                }
+                else
+                {
+                    commandMenuNavigationButton.selector.SetActive(true);
+                }
+            }
+            
+            selectedNavigationButton.selector.SetActive(true);
+        }
+
+        public void NavigationInputUpdate()
+        {
+            if (navigationDelayTimer <= 0)
+            {
+                if (GameManager.Instance.playerInput.GetAxis("Navigate Combat Vertical Axis") < 0)
+                {
+                    navigationDelayTimer = navigationDelay;
+                    if (navigationButtonsIndex + 1 > commandMenuNavigationButtons.Count - 1)
+                    {
+                        navigationButtonsIndex = 0;
+                    }
+                    else
+                    {
+                        navigationButtonsIndex++;
+                    }
+                    
+                    SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+                }
+                else if (GameManager.Instance.playerInput.GetAxis("Navigate Combat Vertical Axis") > 0)
+                {
+                    navigationDelayTimer = navigationDelay;
+                    if (navigationButtonsIndex == 0)
+                    {
+                        navigationButtonsIndex = commandMenuNavigationButtons.Count - 1;
+                    }
+                    else
+                    {
+                        navigationButtonsIndex--;
+                    }
+                    
+                    SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+                }
+            }
+            else {
+                navigationDelayTimer -= Time.unscaledDeltaTime;
+            }
+            
+            if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Combat Vertical"))
+            {
+               
+                //navigationDelayTimer = navigationDelay;
+                if (navigationButtonsIndex + 1 > commandMenuNavigationButtons.Count - 1)
+                {
+                    navigationButtonsIndex = 0;
+                }
+                else
+                {
+                    navigationButtonsIndex++;
+                }
+                    
+                SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+            }
+            else if (GameManager.Instance.playerInput.GetButtonDown("Navigate Combat Vertical"))
+            {
+                
+                
+                //navigationDelayTimer = navigationDelay;
+                if (navigationButtonsIndex == 0)
+                {
+                    navigationButtonsIndex = commandMenuNavigationButtons.Count - 1;
+                }
+                else
+                {
+                    navigationButtonsIndex--;
+                }
+                    
+                SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+            }
+        }
+
+        public void SetFirstItem()
+        {
+            navigationButtonsIndex = 0;
+            SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+        }
+
+        public void Add(CommandMenuNavigationButton commandMenuNavigationButton)
+        {
+            commandMenuNavigationButtons.Add(commandMenuNavigationButton);
+        }
+
+        public void ClearNavigationList()
+        {
+            commandMenuNavigationButtons = new List<CommandMenuNavigationButton>();
+        }
+        
+        
+        public void OnSelectedNavigationButtonChange()
+        {
+            if (callBack != null)
+            {
+                callBack(); 
+            }
+            
+        }
+        
+    }
+}

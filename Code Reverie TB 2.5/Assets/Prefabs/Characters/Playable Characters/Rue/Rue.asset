@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ca9e7e9cb44891812a8e5d2c8d83ce, type: 3}
+  m_Name: Rue
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  characterPortrait: {fileID: 21300000, guid: c6c993f64515c5c4fa195bb9f7ee9980, type: 3}
+  characterSprite: {fileID: 0}
+  id: 5e12313e-89db-45aa-83df-5c14e73213f3
+  characterID: Rue
+  characterName: 
+  characterType: 0
+  characterUnitPF: {fileID: 9057630342193770972, guid: fbe934ee2acc0724899e3544a4b65498,
+    type: 3}
+  experienceToGive: 0
+  attackRange: 1
+  baseStats: {fileID: 11400000, guid: 991946971c4b1ab4d9cdcf3b49c5cbc6, type: 2}
+  healthBarCount: 5
+  archetypes:
+  - {fileID: 11400000, guid: 799f6d3d256a3d243925505812267194, type: 2}
+  - {fileID: 11400000, guid: 43b6b91d46328fa4689ed7a12abe1c7a, type: 2}
+  - {fileID: 11400000, guid: e9691af086ec1734688621f9260b333b, type: 2}
+  lootTableDataContainer: {fileID: 0}
+  vendorInventory: {fileID: 0}

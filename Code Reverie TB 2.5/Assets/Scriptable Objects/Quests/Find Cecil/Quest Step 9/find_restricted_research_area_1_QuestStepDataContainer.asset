@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3cbb9923ae4433f8e1a9b523277ccaa, type: 3}
+  m_Name: find_restricted_research_area_1_QuestStepDataContainer
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: c86f4169be901a944b69e2bdb2266a3a, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: questObjectives
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.QuestStepObjective,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|CodeReverie.SearchQuestStepObjective, Assembly-CSharp
+    - Name: questId
+      Entry: 1
+      Data: find_restricted_research_area_1
+    - Name: questObjectiveDescription
+      Entry: 1
+      Data: Find the Entrance <color={{color}}>Restricted Research Area</color>
+    - Name: questObjectiveDescriptionHud
+      Entry: 6
+      Data: 
+    - Name: questObjectiveDescriptionMenu
+      Entry: 6
+      Data: 
+    - Name: questObjectiveType
+      Entry: 3
+      Data: 10
+    - Name: requiredAmount
+      Entry: 3
+      Data: 1
+    - Name: showRequiredAmount
+      Entry: 5
+      Data: false
+    - Name: questTriggerIdList
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: optional
+      Entry: 5
+      Data: false
+    - Name: requiresItemsToComplete
+      Entry: 5
+      Data: false
+    - Name: requiredItems
+      Entry: 7
+      Data: 3|System.Collections.Generic.Dictionary`2[[CodeReverie.ItemInfo, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 4|System.Collections.Generic.ObjectEqualityComparer`1[[CodeReverie.ItemInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: questObjectiveStatus
+      Entry: 3
+      Data: 0
+    - Name: questStepObjectiveListener
+      Entry: 10
+      Data: 0
+    - Name: characterQuestTriggerList
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[CodeReverie.CharacterDataContainer,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: searchQuestType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  id: find_research_base_1QuestStepDataContainer_763d8248-4c30-4f91-a817-5ca65436a3a1
+  questStepDescription: 
+  questObjectiveDataList: []
+  startQuest: 0
+  onComplete: 
+  questGiver: {fileID: 0}

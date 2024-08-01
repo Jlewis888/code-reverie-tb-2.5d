@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e64da42792f4c88bfbb0c3e755e1a18, type: 3}
+  m_Name: CharacterDataContainerList
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 0ea7de866c51b5a46b95ccdb7ecd8d96, type: 2}
+    - {fileID: 11400000, guid: d68c0dd35b7e7304891f00377e7e11c9, type: 2}
+    - {fileID: 11400000, guid: 5e9faffa0199d81438f2328ea31283c2, type: 2}
+    - {fileID: 11400000, guid: dab779990c7ec3c498798e6099915d14, type: 2}
+    - {fileID: 11400000, guid: f2025b533c26df94daf53013f1489ada, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: charactersMap
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[CodeReverie.CharacterDataContainer,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 270c98a0-18d5-45ee-9b4b-b0d198252099
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 5e12313e-89db-45aa-83df-5c14e73213f3
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 62fef5aa-e3af-4174-8f3f-4f99379f5090
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: de8e0283-d978-436e-9293-61fa9a911619
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 66ba6012-9ce0-4862-abe5-487f42ba8251
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  characters:
+  - {fileID: 11400000, guid: 0ea7de866c51b5a46b95ccdb7ecd8d96, type: 2}
+  - {fileID: 11400000, guid: d68c0dd35b7e7304891f00377e7e11c9, type: 2}
+  - {fileID: 11400000, guid: 5e9faffa0199d81438f2328ea31283c2, type: 2}
+  - {fileID: 11400000, guid: dab779990c7ec3c498798e6099915d14, type: 2}
+  - {fileID: 11400000, guid: f2025b533c26df94daf53013f1489ada, type: 2}

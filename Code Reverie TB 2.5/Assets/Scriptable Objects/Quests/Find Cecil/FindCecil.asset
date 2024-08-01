@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3558d75f7ec441499f6f845d120a3a3b, type: 3}
+  m_Name: FindCecil
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <id>k__BackingField: FindCecil
+  questName: Find Cecil
+  description: 
+  questStatus: 0
+  questDetailsPrerequisites: []
+  questStepDataContainers:
+  - {fileID: 11400000, guid: 0faf1cbf3ba7ab548bc996e139c14d48, type: 2}
+  - {fileID: 11400000, guid: 1e048e1cca6c98d49a4a5442230dd943, type: 2}
+  - {fileID: 11400000, guid: c3890f0de50707045895723fc89f4d1d, type: 2}
+  - {fileID: 11400000, guid: 27be816db761e864694ab646a867616b, type: 2}
+  - {fileID: 11400000, guid: df5f9e1a28fefbd4aa08fcd697365a9b, type: 2}
+  - {fileID: 11400000, guid: d69f60d448a128a4199e41f6379461e7, type: 2}
+  - {fileID: 11400000, guid: e89f41341e6d7d149ab855160359310b, type: 2}
+  - {fileID: 11400000, guid: 72c3b8aa60f6dba478e3bbde49373c37, type: 2}
+  - {fileID: 11400000, guid: 357b9a66cd29b0246b4564d02cca7949, type: 2}
+  - {fileID: 11400000, guid: 07f84387e0cfeff428044471436183d3, type: 2}
+  - {fileID: 11400000, guid: 2e8d82d9635d02a4aa26353f48a2f9bd, type: 2}
+  - {fileID: 11400000, guid: e5af28b9d6752104c988fa61e379ef08, type: 2}
+  - {fileID: 11400000, guid: eb47969a80d77f34b8d676216eb07965, type: 2}
+  questType: 0
+  goldReward: 0
+  experienceReward: 0
+  questGiver: {fileID: 11400000, guid: 364cf73798556874f945186980e9b992, type: 2}

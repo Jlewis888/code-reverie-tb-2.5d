@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe1b1b54f7440a9b5a40f7ce7cf01d4, type: 3}
+  m_Name: EscortQuestObjectiveData 1
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: requiredItems
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeReverie.ItemInfo, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[CodeReverie.ItemInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  questId: TestEscortMission
+  questObjectiveDescription: Follow Cecil
+  questObjectiveDescriptionHud: 
+  questObjectiveDescriptionMenu: 
+  questObjectiveType: 2
+  requiredAmount: 0
+  showRequiredAmount: 0
+  questTriggerIdList: []
+  optional: 0
+  requiresItemsToComplete: 0
+  escortQuestTriggerList:
+  - {fileID: 11400000, guid: 364cf73798556874f945186980e9b992, type: 2}

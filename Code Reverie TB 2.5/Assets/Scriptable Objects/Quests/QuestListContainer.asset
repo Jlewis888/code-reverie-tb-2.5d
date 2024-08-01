@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46de4da926d47af8cd38c81f7a3df47, type: 3}
+  m_Name: QuestListContainer
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  questDataContainers:
+  - {fileID: 11400000, guid: fa7bba0899b13d24aaef7491dce1f5be, type: 2}
+  - {fileID: 11400000, guid: 69aac342c8ce0604eb7660e30f3baa23, type: 2}
+  - {fileID: 11400000, guid: 45c21f8b8d6a89a4bbf8165f15023309, type: 2}
+  - {fileID: 11400000, guid: 92fcca761e19f2b4cb3d5cbdc31cf686, type: 2}
+  - {fileID: 11400000, guid: fea8f552c0448244584e67b874f4ea0b, type: 2}
+  questStepDataContainers: []

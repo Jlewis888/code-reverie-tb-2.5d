@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3558d75f7ec441499f6f845d120a3a3b, type: 3}
+  m_Name: TestQuest
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <id>k__BackingField: TestQuest
+  questName: Test Quest
+  description: 
+  questStatus: 1
+  questDetailsPrerequisites: []
+  questStepDataContainers:
+  - {fileID: 11400000, guid: 607bd7c1bc560dd4180856db263eca58, type: 2}
+  - {fileID: 11400000, guid: abac1306dfc6cd44eb7472ea375ab73c, type: 2}
+  - {fileID: 11400000, guid: e89f41341e6d7d149ab855160359310b, type: 2}
+  questType: 1
+  goldReward: 0
+  experienceReward: 0
+  questGiver: {fileID: 0}

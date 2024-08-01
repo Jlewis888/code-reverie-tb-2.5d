@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ca9e7e9cb44891812a8e5d2c8d83ce, type: 3}
+  m_Name: Cecil
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  characterPortrait: {fileID: 21300000, guid: 15922825558ef0e4d982e186c4653915, type: 3}
+  characterSprite: {fileID: 0}
+  id: 66ba6012-9ce0-4862-abe5-487f42ba8251
+  characterID: Cecil
+  characterName: Cecil
+  characterType: 0
+  characterUnitPF: {fileID: 9057630342193770972, guid: e7dc8399e058b7142867499eea3baeab,
+    type: 3}
+  experienceToGive: 0
+  attackRange: 1
+  baseStats: {fileID: 11400000, guid: 27686ee2624ba424386f3585919e330c, type: 2}
+  healthBarCount: 5
+  archetypes:
+  - {fileID: 11400000, guid: 5ec42afa6d5ef314a901e39fa5155c25, type: 2}
+  lootTableDataContainer: {fileID: 0}
+  vendorInventory: {fileID: 0}

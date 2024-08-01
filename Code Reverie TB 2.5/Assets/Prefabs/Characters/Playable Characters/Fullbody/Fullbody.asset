@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ca9e7e9cb44891812a8e5d2c8d83ce, type: 3}
+  m_Name: Fullbody
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  characterPortrait: {fileID: 21300000, guid: 626538565c2b6e246b41d32db645c03e, type: 3}
+  characterSprite: {fileID: 21300000, guid: 309b041bb6a3f8b45b99e05b1578613b, type: 3}
+  id: 270c98a0-18d5-45ee-9b4b-b0d198252099
+  characterID: Fullbody
+  characterName: Fullbody
+  characterType: 0
+  characterUnitPF: {fileID: 9057630342193770972, guid: 5a42d4f8c3228c14cb9e56dd737be644,
+    type: 3}
+  experienceToGive: 0
+  attackRange: 1
+  baseStats: {fileID: 11400000, guid: d90e7e66d32d0a346803e4b2eb5b41da, type: 2}
+  healthBarCount: 5
+  archetypes:
+  - {fileID: 11400000, guid: 36a9d0dfd2411ca4ea9e8560062077d2, type: 2}
+  - {fileID: 11400000, guid: 4619f9db20b27b743bcd39332a93d20b, type: 2}
+  - {fileID: 11400000, guid: d0db44a73f68df94ba273cf26d0b6dcf, type: 2}
+  lootTableDataContainer: {fileID: 0}
+  vendorInventory: {fileID: 0}

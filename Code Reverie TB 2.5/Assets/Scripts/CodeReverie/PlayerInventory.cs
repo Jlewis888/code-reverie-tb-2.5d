@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace CodeReverie
+{
+    
+    public class PlayerInventory
+    {
+        public List<Item> items = new List<Item>();
+        
+
+        public PlayerInventory()
+        {
+            // for (int i = 0; i < 30; i++)
+            // {
+            //     if (!inventoryMap.ContainsKey(i))
+            //     {
+            //         inventoryMap.Add(i, null);
+            //     }
+            // }
+        }
+
+        // public void AddItem(string itemId)
+        // {
+        //     foreach (int index in inventoryMap.Keys)
+        //     {
+        //         if (InventorySlotEmpty(index))
+        //         {
+        //             inventoryMap[index] = new InventorySlot();
+        //             break;
+        //         }
+        //     }
+        // }
+        
+        public void AddItem(Item item, int amount = 1)
+        {
+            
+            (bool, int) inventorySlotCheck = ItemInInventory(item);
+               
+               
+            if (inventorySlotCheck.Item1)
+            {
+                //inventorySlotCheck.Item2.AddAmount(amount);
+                items[inventorySlotCheck.Item2].AddAmount(amount);
+            }
+            else
+            {
+                item.AddAmount(amount);
+                items.Add(item);
+            }
+            
+        }
+        
+        
+        public void RemoveItem(ItemInfo itemInfo, int amount = 1)
+        {
+            
+            int count = 0;
+            
+            foreach (Item inventorySlot in items)
+            {
+
+                if (inventorySlot.info.id == itemInfo.id)
+                {
+                    items[count].RemoveAmount(amount);
+                        
+                    if (items[count].amount <= 0)
+                    {
+                        RemoveItems(count);
+                    }
+                    return;
+                }
+
+                count++;
+            }
+            
+        }
+
+        public void RemoveItem(int index, int amount = 1)
+        {
+            items[index].RemoveAmount(amount);
+
+            if (items[index].amount <= 0)
+            {
+                RemoveItems(index);
+            }
+        }
+
+        public void ItemAmountCheck(Item item)
+        {
+            
+        }
+
+
+        public void RemoveItems(int index)
+        {
+            items.RemoveAt(index);
+        }
+        
+        
+        public (bool, int) ItemInInventory(ItemInfo item)
+        {
+            int count = 0;
+            
+            foreach (Item inventorySlot in items)
+            {
+
+                if (inventorySlot.info.id == item.id)
+                {
+                    return (true, count);
+                }
+
+                count++;
+            }
+
+            return (false, -1);
+        }
+        
+        
+        
+        public (bool, int) ItemInInventory(Item item)
+        {
+
+            int count = 0;
+            
+            foreach (Item inventorySlot in items)
+            {
+                if (inventorySlot.info.id == item.info.id)
+                {
+                    return (true, count);
+                }
+
+                count++;
+            }
+
+            return (false, -1);
+        }
+    }
+}

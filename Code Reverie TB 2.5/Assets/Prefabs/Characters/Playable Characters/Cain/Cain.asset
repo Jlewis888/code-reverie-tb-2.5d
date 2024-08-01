@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ca9e7e9cb44891812a8e5d2c8d83ce, type: 3}
+  m_Name: Cain
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  characterPortrait: {fileID: 21300000, guid: 8a06ab6c4f2538541beb117ab7ef5085, type: 3}
+  characterSprite: {fileID: 0}
+  id: de8e0283-d978-436e-9293-61fa9a911619
+  characterID: Cain
+  characterName: 
+  characterType: 0
+  characterUnitPF: {fileID: 9057630342193770972, guid: 6471b31e497efb74a89760fc3c5d1cb7,
+    type: 3}
+  experienceToGive: 0
+  attackRange: 1
+  baseStats: {fileID: 11400000, guid: 403067256c3767e45adf60f187b81e5a, type: 2}
+  healthBarCount: 5
+  archetypes:
+  - {fileID: 11400000, guid: 715fd0ece1249c04c8d7b41c09b25b51, type: 2}
+  - {fileID: 11400000, guid: d38f1226b048c8e488b497410991436a, type: 2}
+  - {fileID: 11400000, guid: b088ac2b48bc5ce48983151be9e2100a, type: 2}
+  lootTableDataContainer: {fileID: 0}
+  vendorInventory: {fileID: 0}

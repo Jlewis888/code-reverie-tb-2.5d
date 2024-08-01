@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594113c686a343739a891034b76b492a, type: 3}
+  m_Name: FireBlastSkill
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: statModifiers
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.Stat, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: skillEventListeners
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[CodeReverie.SkillEventListener,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 2|CodeReverie.SkillEventListener, Assembly-CSharp
+    - Name: skillInputType
+      Entry: 3
+      Data: 0
+    - Name: actionId
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|CodeReverie.SkillEventListener, Assembly-CSharp
+    - Name: skillInputType
+      Entry: 3
+      Data: 1
+    - Name: actionId
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  icon: {fileID: 21300000, guid: 9b89bf88edf2e5f44b9c43b9d5bd9b6b, type: 3}
+  id: FireBlastSkill
+  skillId: FireBlastSkill
+  skillName: FireBlast
+  skillDescription: 
+  skillType: 0
+  archetypeCategory: 0
+  actionPointsCost: 1
+  skillPointsCost: 5
+  skillRange: 1
+  skillCastTime: 3
+  skillModifierDetailsList: []
+  skillDamageTypes: 
+  skillGameObject: {fileID: 4458741695297324379, guid: 345e3b008d158834695c56043c0e649f,
+    type: 3}
+  initialAnimation: basic_attack_1a
+  castAnimation: cast_1
+  animationComboList:
+  - basic_attack_1a
+  - basic_attack_2a
+  - basic_attack_3a
