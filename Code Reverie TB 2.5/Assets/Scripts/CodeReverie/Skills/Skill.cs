@@ -45,7 +45,11 @@ namespace CodeReverie
             Debug.Log($"Use {skillName}");
         }
 
-
+        public void SetSkillCamera()
+        {
+            
+        }
+        
 
         public abstract void SubscribeSkillListeners();
         public abstract void UnsubscribeSkillListeners();

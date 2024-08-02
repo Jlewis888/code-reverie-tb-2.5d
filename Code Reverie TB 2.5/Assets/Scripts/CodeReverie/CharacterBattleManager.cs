@@ -10,7 +10,7 @@ namespace CodeReverie
 {
     public class CharacterBattleManager : SerializedMonoBehaviour
     {
-        private Rigidbody2D rb;
+        private Rigidbody rb;
         public CharacterBattleState battleState;
         public CharacterBattleActionState characterBattleActionState;
         public CharacterTimelineGaugeState characterTimelineGaugeState;
@@ -23,7 +23,7 @@ namespace CodeReverie
         public int currentMaxTargets;
         public float actionPhaseCooldown;
         public float cooldownTimer;
-        public Vector2 moveDir;
+        public Vector3 moveDir;
         public float repositionTime;
         public float repositionTimer;
         public float moveSpeed;
@@ -44,13 +44,14 @@ namespace CodeReverie
                 namePanel.SetActive(false);
             }
 
-            rb = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody>();
             moveSpeed = 5f;
 
             actionPhaseCooldown = 5f;
             cooldownTimer = 0;
 
-            repositionTime = 0.5f;
+            //repositionTime = 0.5f;
+            repositionTime = .75f;
 
             skillPointsMax = 100;
             currentSkillPoints = 100;
@@ -61,13 +62,13 @@ namespace CodeReverie
         {
             actionRange = GetComponent<CharacterController>().character.info.attackRange;
             EventManager.Instance.combatEvents.onAttackEnd += OnAttackEnd;
-            EventManager.Instance.combatEvents.onSkillComplete += OnAttackEnd;
+            EventManager.Instance.combatEvents.onSkillComplete += OnSkillEnd;
         }
 
         private void OnEnable()
         {
             EventManager.Instance.combatEvents.onAttackEnd += OnAttackEnd;
-            EventManager.Instance.combatEvents.onSkillComplete += OnAttackEnd;
+            EventManager.Instance.combatEvents.onSkillComplete += OnSkillEnd;
         }
 
         private void OnDisable()
@@ -259,7 +260,7 @@ namespace CodeReverie
                                     
                                     GetComponent<AnimationManager>().ChangeAnimationState("run");
                         
-                                    Vector2 direction = targetPosition.position - transform.position;
+                                    Vector3 direction = targetPosition.position - transform.position;
                                     
                                     rb.MovePosition(rb.position + direction * (5f * Time.fixedDeltaTime));
                         
@@ -327,7 +328,7 @@ namespace CodeReverie
         public void SetStartingPosition()
         {
             SetRoamingDirection();
-            repositionTimer = 0.15f;
+            repositionTimer = 0.25f;
         }
         
 
@@ -341,7 +342,7 @@ namespace CodeReverie
             characterBattleActionState = CharacterBattleActionState.Attack;
 
             selectedTargets = new List<CharacterBattleManager>();
-            
+            SetSkillCast();
             switch (characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
@@ -373,6 +374,9 @@ namespace CodeReverie
                 //     
                 //     break;
             }
+            
+            
+            
             
         }
 
@@ -454,6 +458,24 @@ namespace CodeReverie
                 
                 EventManager.Instance.combatEvents.OnCombatPause(false);
                 //DequeueAction();
+                cooldownTimer = 0;
+                characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
+            }
+        }
+        
+        public void OnSkillEnd(CharacterBattleManager characterBattleManager)
+        {
+            if (characterBattleManager == this)
+            {
+                CameraManager.Instance.ResetCombatFollowTarget();
+                CameraManager.Instance.ResetTargetGroupSetting();
+                characterBattleActionState = CharacterBattleActionState.Idle;
+                SetRoamingDirection();
+                repositionTimer = repositionTime;
+                battleState = CharacterBattleState.MoveToRandomBattlePosition;
+                
+                EventManager.Instance.combatEvents.OnCombatPause(false);
+                DequeueAction();
                 cooldownTimer = 0;
                 characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
             }

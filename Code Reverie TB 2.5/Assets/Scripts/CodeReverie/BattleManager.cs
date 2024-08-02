@@ -153,6 +153,7 @@ namespace CodeReverie
                 character.SetStartingPosition();
                 character.battleState = CharacterBattleState.MoveToStartingBattlePosition;
                 character.inCombat = true;
+                CameraManager.Instance.AddToTargetGroup(character.transform);
             }
             
             // SetOrderOfTurnsLists(orderOfTurnsMap, orderOfTurnsList);
@@ -266,6 +267,12 @@ namespace CodeReverie
             
             foreach (CharacterBattleManager selectableTargetcharacterBattleManager in selectableTargets)
             {
+
+                if (selectableTargetcharacterBattleManager.namePanel == null)
+                {
+                    continue;
+                }
+                
                 if (selectableTargetcharacterBattleManager != characterBattleManager)
                 {
                     selectableTargetcharacterBattleManager.namePanel.gameObject.SetActive(false);
@@ -319,6 +326,10 @@ namespace CodeReverie
             
             foreach (CharacterBattleManager characterBattleManager in selectableTargets)
             {
+                if (characterBattleManager.namePanel == null)
+                {
+                    continue;
+                }
                 characterBattleManager.namePanel.gameObject.SetActive(false);
             }
 
@@ -326,7 +337,8 @@ namespace CodeReverie
             selectableTargets = new List<CharacterBattleManager>();
                         
             battleManagerState = BattleManagerState.Battle;
-            CameraManager.Instance.UpdateCamera(currentBattleArea.transform);
+            CameraManager.Instance.ResetTargetGroupSetting();
+            //CameraManager.Instance.UpdateCamera(currentBattleArea.transform);
             EventManager.Instance.combatEvents.OnActionSelected();
         }
         

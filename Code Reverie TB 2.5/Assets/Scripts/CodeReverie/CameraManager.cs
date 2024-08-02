@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using CodeReverie;
-
+using FullscreenEditor;
 using UnityEngine;
 
 [DefaultExecutionOrder(-115)]
@@ -18,7 +18,8 @@ public class CameraManager : ManagerSingleton<CameraManager>
     public CinemachineVirtualCamera inventoryVirtualCamera;
     public CinemachineVirtualCamera skillVirtualCamera;
     public CinemachineVirtualCamera dialogueVirtualCamera;
-    public CinemachineVirtualCamera battleVirtualCamera;
+    public CinemachineVirtualCamera combatVirtualCamera;
+    public CinemachineTargetGroup combatTargetGroup;
     private CinemachineImpulseSource impulseSource;
     public float impulseForce = 1f;
     public bool screenShake = false;
@@ -36,14 +37,14 @@ public class CameraManager : ManagerSingleton<CameraManager>
 
     private void OnEnable()
     {
-        EventManager.Instance.generalEvents.toggleInventory += ToggleInventoryCamera;
-        EventManager.Instance.combatEvents.onEnemyDamageTaken += ScreenShake;
+        // EventManager.Instance.generalEvents.toggleInventory += ToggleInventoryCamera;
+        // EventManager.Instance.combatEvents.onEnemyDamageTaken += ScreenShake;
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.generalEvents.toggleInventory -= ToggleInventoryCamera;
-        EventManager.Instance.combatEvents.onEnemyDamageTaken -= ScreenShake;
+        // EventManager.Instance.generalEvents.toggleInventory -= ToggleInventoryCamera;
+        // EventManager.Instance.combatEvents.onEnemyDamageTaken -= ScreenShake;
         
     }
 
@@ -89,18 +90,77 @@ public class CameraManager : ManagerSingleton<CameraManager>
 
     public void SetBattleCamera(BattleArea battleArea)
     {
-        // battleVirtualCamera.transform.localPosition = mainVirtualCamera.transform.localPosition;
-        // battleVirtualCamera.m_Follow = battleArea.transform;
-        // battleVirtualCamera.LookAt = battleArea.transform;
-        // battleVirtualCamera.m_Priority = 10;
-
-        //mainVirtualCamera.m_Priority = 1;
-        //battleVirtualCamera.transform.localPosition = mainVirtualCamera.transform.localPosition;
-        mainVirtualCamera.m_Follow = battleArea.transform;
-        mainVirtualCamera.LookAt = battleArea.transform;
-        //mainVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y = -2.34f;
-
+        combatVirtualCamera.m_Priority = 11;
+        mainVirtualCamera.m_Priority = 1;
     }
+
+    public void SetTargetGroup(List<CharacterBattleManager> characterBattleManager)
+    {
+        
+    }
+
+    public void AddToTargetGroup(Transform targetTransform, float weight = 1f, float radius = 1f)
+    {
+        combatTargetGroup.AddMember(targetTransform, weight, radius);
+        //combatTargetGroup.m_Targets[0].
+    }
+
+
+    public void SetSelectedPlayerWeight(CharacterBattleManager characterBattleManager, float weight, float radius = 1f)
+    {
+        
+        for (int i = 0; i < combatTargetGroup.m_Targets.Length; i++)
+        {
+            if (combatTargetGroup.m_Targets[i].target == characterBattleManager.transform)
+            {
+                
+                //int member = combatTargetGroup.FindMember(characterBattleManager.transform);
+                combatTargetGroup.m_Targets[i].weight = weight;
+                combatTargetGroup.m_Targets[i].radius = radius;
+            }
+            else
+            {
+                combatTargetGroup.m_Targets[i].weight = 1f;
+                combatTargetGroup.m_Targets[i].radius = 1f;
+            }
+        }
+    }
+
+    public void SetCombatFollowTarget(Transform transform)
+    {
+        combatVirtualCamera.m_Follow = transform;
+        combatVirtualCamera.LookAt = transform;
+    }
+    
+    public void ResetCombatFollowTarget()
+    {
+        combatVirtualCamera.m_Follow = combatTargetGroup.transform;
+        combatVirtualCamera.LookAt = combatTargetGroup.transform;
+    }
+
+    public void SetCharacterWeight(CharacterBattleManager characterBattleManager, float weight, float radius = 1f)
+    {
+        int member = combatTargetGroup.FindMember(characterBattleManager.transform);
+        combatTargetGroup.m_Targets[member].weight = weight;
+        combatTargetGroup.m_Targets[member].radius = radius;
+    }
+    
+    
+    
+    public void ResetTargetGroupSetting()
+    {
+        for (int i = 0; i < combatTargetGroup.m_Targets.Length; i++)
+        {
+            combatTargetGroup.m_Targets[i].weight = 1f;
+            combatTargetGroup.m_Targets[i].radius = 1f;
+        }
+    }
+
+    public void ClearTargetGroup()
+    {
+        combatTargetGroup.m_Targets = new CinemachineTargetGroup.Target[] { };
+    }
+    
     
     public void UnsetBattleCamera()
     {
@@ -110,6 +170,8 @@ public class CameraManager : ManagerSingleton<CameraManager>
         // battleVirtualCamera.m_Priority = 1;
         //mainVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y = 0f;
         mainVirtualCamera.m_Priority = 10;
+        combatVirtualCamera.m_Priority = 1;
+        ClearTargetGroup();
 
     }
 
@@ -145,15 +207,15 @@ public class CameraManager : ManagerSingleton<CameraManager>
     {
         mainVirtualCamera.m_Follow = transform;
         mainVirtualCamera.LookAt = transform;
-        
-        inventoryVirtualCamera.m_Follow = transform;
-        inventoryVirtualCamera.LookAt = transform;
-        
-        skillVirtualCamera.m_Follow = transform;
-        skillVirtualCamera.LookAt = transform;
-        
-        dialogueVirtualCamera.m_Follow = transform;
-        dialogueVirtualCamera.LookAt = transform;
+        //
+        // inventoryVirtualCamera.m_Follow = transform;
+        // inventoryVirtualCamera.LookAt = transform;
+        //
+        // skillVirtualCamera.m_Follow = transform;
+        // skillVirtualCamera.LookAt = transform;
+        //
+        // dialogueVirtualCamera.m_Follow = transform;
+        // dialogueVirtualCamera.LookAt = transform;
     }
 
     public void ScreenShake()

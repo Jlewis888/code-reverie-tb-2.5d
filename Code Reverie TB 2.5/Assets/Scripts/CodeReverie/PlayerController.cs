@@ -102,6 +102,74 @@ namespace CodeReverie
         }
         
         
+        private void OnTriggerEnter(Collider other)
+        {
+            
+            //Debug.Log(other.name);
+            
+            if (other.TryGetComponent(out Interactable interactable))
+            {
+                if (!PlayerManager.Instance.interactables.Contains(interactable))
+                { 
+                    PlayerManager.Instance.interactables.Add(interactable);
+                    interactable.SetQueue();
+
+                    if (PlayerManager.Instance.interactables.Count == 1)
+                    {
+                        if (PlayerManager.Instance.interactables[0] != null)
+                        {
+                            PlayerManager.Instance.interactables[0].Activate();
+                        }
+                    }
+                    
+                }
+            }
+            
+            if (other.TryGetComponent(out ComponentTagManager tagManager))
+            {
+                
+                
+                if (tagManager.HasTag(ComponentTag.BattleArea))
+                {
+                    //BattleManager.Instance.currentBattleArea = other.GetComponent<BattleArea>();
+                }
+                
+                if (tagManager.HasTag(ComponentTag.Enemy))
+                {
+                  
+                    if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
+                    {
+                        EventManager.Instance.combatEvents.OnCombatEnter();
+                    }
+                    
+                    
+                }
+            }
+            
+        }
+        
+        
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent(out Interactable interactable))
+            {
+                PlayerManager.Instance.interactables.Remove(interactable);
+                interactable.Deactivate();
+            }
+            
+            if (other.TryGetComponent(out ComponentTagManager tagManager))
+            {
+                
+                if (tagManager.HasTag(ComponentTag.BattleArea))
+                {
+                    //BattleManager.Instance.currentBattleArea = null;
+                }
+            }
+        }
+        
+        
+        
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             

@@ -8,7 +8,7 @@ namespace CodeReverie
     {
         public CharacterBattleManager source;
         public GameObject target;
-        private Vector2 targetDirection;
+        private Vector3 targetDirection;
         public float speed;
 
         private void Awake()
@@ -23,6 +23,7 @@ namespace CodeReverie
             
             if (Vector3.Distance(transform.position, target.transform.position) <= 1f)
             {
+                Debug.Log("THis is complete");
                 EventManager.Instance.combatEvents.OnSkillComplete(source);
                 Destroy(gameObject);
             }

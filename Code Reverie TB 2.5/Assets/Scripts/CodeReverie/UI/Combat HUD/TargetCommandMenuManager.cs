@@ -44,7 +44,8 @@ namespace CodeReverie
             commandMenuNavigation = new CommandMenuNavigation();
             commandMenuNavigation.callBack = () =>
             {
-                CameraManager.Instance.UpdateCamera(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager.transform);
+                //CameraManager.Instance.UpdateCamera(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager.transform);
+                CameraManager.Instance.SetSelectedPlayerWeight(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager, 1000f, 2f);
                 EventManager.Instance.combatEvents.OnPlayerSelectTarget(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
             };
         }

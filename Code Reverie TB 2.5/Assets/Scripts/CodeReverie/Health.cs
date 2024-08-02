@@ -42,7 +42,7 @@ namespace CodeReverie
             //     defaultMaterial = GetComponent<SpriteRenderer>().material;
             // }
             
-            defaultMaterial = spriteRenderer.material;
+            //defaultMaterial = spriteRenderer.material;
         }
 
         private void Start()

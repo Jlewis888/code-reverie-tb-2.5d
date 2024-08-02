@@ -13,6 +13,8 @@ namespace CodeReverie
         public float moveSpeed;
         public float speedClamp;
         public float activeMoveSpeed;
+        public CharacterDirection characterDirection;
+        public CharacterMovementState characterMovementState;
 
         private void Awake()
         {
@@ -37,14 +39,112 @@ namespace CodeReverie
             
             GamepadMovementControls();
 
-            if (direction.magnitude > 0)
-            {
-                rb.MovePosition(rb.position + moveInput * moveSpeed * Time.deltaTime);
-            }
+            // if (direction.magnitude > 0)
+            // {
+            //     rb.MovePosition(rb.position + moveInput * moveSpeed * Time.deltaTime);
+            // }
             
         }
+
+        private void FixedUpdate()
+        {
+             if (PlayerManager.Instance.currentParty != null)
+            {
+                switch (characterMovementState)
+                {
+                    case CharacterMovementState.Idle: 
+                        if (direction.magnitude != 0)
+                        {
+                            characterMovementState = CharacterMovementState.Moving;
+                        }
+                    
+                        activeMoveSpeed = 0;
+                    
+                        PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("idle");
+                    
+                        break;
+                
+                    case CharacterMovementState.Moving:
+
+                        activeMoveSpeed = moveSpeed;
+                    
+                        if (direction.magnitude != 0)
+                        {
+                            //rb.MovePosition(rb.position + moveInput * (activeMoveSpeed * Time.fixedDeltaTime));
+                            Move(moveInput);
+
+                            if (MathF.Abs(moveInput.z) > MathF.Abs(moveInput.x))
+                            {
+                                if (moveInput.z > 0)
+                                {
+                            
+                                    characterDirection = CharacterDirection.Up;
+                                    //characterUnit.animationManager.ChangeAnimationState("fullbody_back_run");
+                                    
+                                
+                                    //Debug.Log("Direction is up");
+                                } else if (moveInput.z < 0)
+                                {
+                                    characterDirection = CharacterDirection.Down;
+                                    //characterUnit.animationManager.ChangeAnimationState("fullbody_front_run");
+                                    //PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("run_down");
+
+                                }
+                            }
+                            else if (MathF.Abs(moveInput.z) < MathF.Abs(moveInput.x))
+                            {
+                                if (moveInput.x < 0)
+                                {
+                                    //todo update
+                                    GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
+
+                                }
+                                else if (moveInput.x > 0)
+                                {
+                                    //todo update
+                                    GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
+                                }
+
+                                
+                                characterDirection = CharacterDirection.Side;
+                            }
+
+                            switch (characterDirection)
+                            {
+                                case CharacterDirection.Up:
+                                    //PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("run_up");
+                                    GetComponent<AnimationManager>().ChangeAnimationState("run_up");
+                                    break;
+                                case CharacterDirection.Down:
+                                    //PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("run_down");
+                                    GetComponent<AnimationManager>().ChangeAnimationState("run_down");
+                                    break;
+                                case CharacterDirection.Side:
+                                    //PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("run");
+                                    GetComponent<AnimationManager>().ChangeAnimationState("run");
+                                    break;
+                            }
+                            
+                            
+                        }
+                        else
+                        {
+                            characterMovementState = CharacterMovementState.Idle;
+                        } 
+                        break;
+                }
+            }
+        }
         
-        
+        public void Move(Vector3 input)
+        {
+
+            Vector3 movement = Vector3.ClampMagnitude(input, 1);
+            
+            rb.MovePosition(rb.position + movement * (activeMoveSpeed * Time.fixedDeltaTime));
+        }
+
+
         public void GamepadMovementControls()
         {
             moveInput.x = GameManager.Instance.playerInput.GetAxis("Move Horizontal");
@@ -55,7 +155,7 @@ namespace CodeReverie
             // aimInput.y = GameManager.Instance.playerInput.GetAxis("Aim Vertical");
             //
             //
-            // SwapCharacterDirection();
+            SwapCharacterDirection();
             
         }
         
@@ -92,6 +192,20 @@ namespace CodeReverie
             
             // SwapCharacterDirection();
 
+        }
+        
+        public void SwapCharacterDirection()
+        {
+            if (moveInput.x < 0)
+            {
+                GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
+                //transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1f, transform.localScale.y, transform.localScale.z);
+            }
+            else if (moveInput.x > 0)
+            {
+                GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
+                //transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * 1f, transform.localScale.y, transform.localScale.z);
+            }
         }
         
     }

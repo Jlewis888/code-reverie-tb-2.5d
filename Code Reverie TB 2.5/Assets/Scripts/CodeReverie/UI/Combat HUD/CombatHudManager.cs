@@ -102,8 +102,8 @@ namespace CodeReverie
             commandMenu.characterBattleManager = characterBattleManager;
             commandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterController>().character.GetCharacterPortrait();
             commandMenu.characterName.text = characterBattleManager.GetComponent<CharacterController>().character.info.characterName;
-            CameraManager.Instance.UpdateCamera(characterBattleManager.transform);
-            
+            //CameraManager.Instance.UpdateCamera(characterBattleManager.transform);
+            CameraManager.Instance.SetSelectedPlayerWeight(characterBattleManager, 10f);
             commandMenu.SetCharacterSkillDetails();
             // currentCharacterBattleManager = characterBattleManager;
             // SetNavigationPanel(commandsPanel);

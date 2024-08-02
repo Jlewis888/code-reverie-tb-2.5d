@@ -321,7 +321,7 @@ MonoBehaviour:
   currentMaxTargets: 0
   actionPhaseCooldown: 0
   cooldownTimer: 0
-  moveDir: {x: 0, y: 0}
+  moveDir: {x: 0, y: 0, z: 0}
   repositionTime: 0
   repositionTimer: 0
   moveSpeed: 0
@@ -488,6 +488,8 @@ MonoBehaviour:
   moveSpeed: 3
   speedClamp: 0
   activeMoveSpeed: 0
+  characterDirection: 0
+  characterMovementState: 0
 --- !u!114 &4615081604668051212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,7 +661,7 @@ GameObject:
   - component: {fileID: 1585713923221433528}
   - component: {fileID: 4718724242311690908}
   m_Layer: 0
-  m_Name: Character Unit
+  m_Name: project_alchemy_human (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
