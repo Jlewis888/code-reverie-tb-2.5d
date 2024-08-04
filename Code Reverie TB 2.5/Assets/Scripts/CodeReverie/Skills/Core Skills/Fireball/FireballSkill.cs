@@ -11,7 +11,8 @@ namespace CodeReverie
         public override void UseSkill()
         {
             base.UseSkill();
-            SkillObject skillObject = GameObject.Instantiate(info.skillGameObject, source.transform.position, Quaternion.identity);
+            //SkillObject skillObject = GameObject.Instantiate(info.skillGameObject, source.castObjectHolder.transform.position, Quaternion.identity);
+            SkillObject skillObject = GameObject.Instantiate(info.skillGameObject, source.castObjectHolder.transform);
             skillObject.characterUnitSource = source;
             skillObject.Init();
 

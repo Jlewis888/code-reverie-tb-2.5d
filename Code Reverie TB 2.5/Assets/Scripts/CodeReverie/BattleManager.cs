@@ -218,8 +218,8 @@ namespace CodeReverie
             switch (selectedPlayerCharacter.characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
-                    selectableTargets = enemyUnits.FindAll(x =>
-                        x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
+                    Debug.Log("Here");
+                    selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
                     
                     // //todo Placeholder: To use the above code
                     // selectableTargets = enemyUnits.FindAll(x =>
@@ -230,8 +230,7 @@ namespace CodeReverie
                     //     x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
                     
                     //todo Placeholder: To use the above code
-                    selectableTargets = enemyUnits.FindAll(x =>
-                        x.GetComponent<Health>().characterState == CharacterState.Alive);
+                    selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
                     break;
             }
         }

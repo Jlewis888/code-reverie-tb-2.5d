@@ -34,6 +34,6 @@ MonoBehaviour:
   baseStats: {fileID: 11400000, guid: 0d52781af8292fa4ea149af7f69c234f, type: 2}
   healthBarCount: 5
   archetypes:
-  - {fileID: 11400000, guid: 43079137139985a4e9afd599d93e1035, type: 2}
+  - {fileID: 0}
   lootTableDataContainer: {fileID: 0}
   vendorInventory: {fileID: 0}

@@ -123,21 +123,23 @@ namespace CodeReverie
                 // activeParty.ActivePartySlot.character.EquipSkill(SkillsManager.Instance.GetSkillById("FlameWardSkill"), 5);
                 
                 
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"), 0);
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"), 1);
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"), 2);
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireballSkill"), 3);
-                
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
-                
-                
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"), 0);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"), 1);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"), 2);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireballSkill"), 3);
+                //
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
             }
             
             if (Input.GetKeyDown(KeyCode.X))
             {
+                currentParty[0].characterSkills.equippedActionSkills[3].source =
+                    currentParty[0].characterController.GetComponent<CharacterBattleManager>();
+                currentParty[0].characterSkills.equippedActionSkills[3].UseSkill();
+                
                 //Experience = 1000;
                 // AddCharacterToAvailablePartyPool("Arcalia");
                 // AddCharacterToActiveParty("Arcalia");
@@ -291,6 +293,16 @@ namespace CodeReverie
                     character.characterController.gameObject.SetActive(true);
                     count++;
                 }
+                
+                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"), 0);
+                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"), 1);
+                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"), 2);
+                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireballSkill"), 3);
+                
+                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
+                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
+                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
+                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
             }
         }
 

@@ -20,17 +20,17 @@ namespace CodeReverie
         public void Activate()
         {
 
-            if (GetComponent<Renderer>())
-            {
-                GetComponent<Renderer>().material.SetFloat("_Thickness", 2f);
-                GetComponent<Renderer>().material.color = Color.red;
-            }
-
-            if (GetComponentInChildren<CharacterUnit>())
-            {
-                GetComponentInChildren<CharacterUnit>().GetComponent<Renderer>().material.SetFloat("_Thickness", 2f);
-                GetComponentInChildren<CharacterUnit>().GetComponent<Renderer>().material.color = Color.red;
-            }
+            // if (GetComponent<Renderer>())
+            // {
+            //     GetComponent<Renderer>().material.SetFloat("_Thickness", 2f);
+            //     GetComponent<Renderer>().material.color = Color.red;
+            // }
+            //
+            // if (GetComponentInChildren<CharacterUnit>())
+            // {
+            //     GetComponentInChildren<CharacterUnit>().GetComponent<Renderer>().material.SetFloat("_Thickness", 2f);
+            //     GetComponentInChildren<CharacterUnit>().GetComponent<Renderer>().material.color = Color.red;
+            // }
             
             
         }
@@ -38,16 +38,16 @@ namespace CodeReverie
         public void Deactivate()
         {
             
-            if (GetComponent<Renderer>())
-            {
-                GetComponent<Renderer>().material.SetFloat("_Thickness", 0f);
-                
-            }
-
-            if (GetComponentInChildren<CharacterUnit>())
-            {
-                GetComponentInChildren<CharacterUnit>().GetComponent<Renderer>().material.SetFloat("_Thickness", 0f);
-            }
+            // if (GetComponent<Renderer>())
+            // {
+            //     GetComponent<Renderer>().material.SetFloat("_Thickness", 0f);
+            //     
+            // }
+            //
+            // if (GetComponentInChildren<CharacterUnit>())
+            // {
+            //     GetComponentInChildren<CharacterUnit>().GetComponent<Renderer>().material.SetFloat("_Thickness", 0f);
+            // }
             
         }
 

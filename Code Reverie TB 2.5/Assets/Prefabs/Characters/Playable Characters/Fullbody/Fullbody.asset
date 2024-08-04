@@ -34,7 +34,7 @@ MonoBehaviour:
   baseStats: {fileID: 11400000, guid: d90e7e66d32d0a346803e4b2eb5b41da, type: 2}
   healthBarCount: 5
   archetypes:
-  - {fileID: 11400000, guid: 36a9d0dfd2411ca4ea9e8560062077d2, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 4619f9db20b27b743bcd39332a93d20b, type: 2}
   - {fileID: 11400000, guid: d0db44a73f68df94ba273cf26d0b6dcf, type: 2}
   lootTableDataContainer: {fileID: 0}

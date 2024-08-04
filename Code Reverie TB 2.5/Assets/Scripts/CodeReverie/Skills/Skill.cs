@@ -6,13 +6,7 @@ using UnityEngine;
 
 namespace CodeReverie
 {
-
-    
-    
-    
-    
     //Action Skill types: Basic(Melee or Range), Dodge Skill, Standard (core) Skill, Alchemic Burst Skill (ultimate skill)
-    
     
     public abstract class Skill
     {
