@@ -10,8 +10,6 @@ namespace CodeReverie
         public CharacterController characterController;
         public CharacterState characterState;
         
-        public int level;
-
         public CharacterSkills characterSkills;
         
         public Archetype equippedArchetype;
@@ -27,10 +25,14 @@ namespace CodeReverie
 
         public Dictionary<ArchetypeCategory, int> archetypeLevelMap = new Dictionary<ArchetypeCategory, int>();
         
+        public int currentLevel = 1;
+        public float currentExp = 0;
+        public int skillPoints = 0;
 
         public Character(CharacterDataContainer info)
         {
             this.info = info;
+            currentLevel = 1;
 
             characterSkills = new CharacterSkills();
 
@@ -125,6 +127,62 @@ namespace CodeReverie
             }
         }
         
+        public int Level
+        {
+            get => currentLevel;
+            set
+            {
+                if (currentLevel + value > currentLevel)
+                {
+                    EventManager.Instance.playerEvents.OnLevelUp();
+                    currentLevel += value;
+                    skillPoints += 1;
+                }
+            }
+        }
+        
+        
+        public float Experience
+        {
+            get => currentExp;
+
+            set
+            {
+                if (Level >= 99)
+                {
+                    currentExp = 0;
+                    return;
+                }
+
+                currentExp += value;
+
+                if (Level < 99)
+                {
+                    while (ExperienceAboveNextLevelCheck())
+                    {
+                        currentExp -= PlayerManager.Instance.playerExperienceMap.experienceMap[Level];
+
+                        Level = 1;
+
+                        if (Level >= 99)
+                        {
+                            currentExp = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public bool ExperienceAboveNextLevelCheck()
+        {
+            if (currentExp >= PlayerManager.Instance.playerExperienceMap.experienceMap[Level])
+            {
+                return true;
+            }
+
+            return false;
+        }
 
 
         // public bool SkillEquipped(string skillID)

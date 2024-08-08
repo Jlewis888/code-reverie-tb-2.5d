@@ -11,7 +11,6 @@ namespace CodeReverie
     public class CharacterSkillsMenu : SerializedMonoBehaviour
     {
         private PartySlot activePartySlot;
-        public SelectArchetypeTreeButton selectArchetypeTreeButtonPF;
         public GameObject selectArchetypeTreeButtonHolder;
         public SkillType selectedSkillType;
         public GameObject skillButtonHolder;
@@ -40,20 +39,7 @@ namespace CodeReverie
         {
             if (activePartySlot != null)
             {
-                foreach (Archetype archetype in activePartySlot.character.availableArchetypes)
-                {
-                    SelectArchetypeTreeButton selectArchetypeTreeButton = Instantiate(selectArchetypeTreeButtonPF,
-                        selectArchetypeTreeButtonHolder.transform);
-
-                    foreach (ArchetypeTree archetypeTree in CanvasManager.Instance.characterMenuManager.archetypeTrees)
-                    {
-                        if (archetypeTree.archetype.info.id == archetype.info.id)
-                        {
-                            selectArchetypeTreeButton.archetypeTree = archetypeTree;
-                            break;
-                        }
-                    }
-                }
+                
 
                 SelectedSkillType = SkillType.Basic;
                 

@@ -9,7 +9,6 @@ namespace CodeReverie
 {
     public class FireBlastSkillObject : SkillObject
     {
-        public CharacterBattleManager characterUnitSource;
         public List<DamageTypes> damageTypes;
         public FireBlastSkillDamageObject fireBlastSkillDamageObject;
         public GameObject spawnPoint;

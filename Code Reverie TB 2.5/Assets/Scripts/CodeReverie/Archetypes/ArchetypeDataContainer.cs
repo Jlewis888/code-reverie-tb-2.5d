@@ -41,8 +41,6 @@ namespace CodeReverie
         [TabGroup("Skill Tree Details", TextColor = "blue")]
         public List<ArchetypeSkillNodeDataContainer> archetypeSkillNodeDataContainers = new List<ArchetypeSkillNodeDataContainer>();
 
-        [TabGroup("Skill Tree Details")]
-        public ArchetypeTree archetypeTree;
         
 #if UNITY_EDITOR
         //[ContextMenu("Update Archetype Data Containers")]
@@ -53,9 +51,7 @@ namespace CodeReverie
             assetPath = assetPath.Replace($"/{name}.asset", "");
             
             archetypeSkillNodeDataContainers = AssetDatabase.FindAssets("t:ArchetypeSkillNodeDataContainer", new []{assetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<ArchetypeSkillNodeDataContainer>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
-            List<ArchetypeTree> archetypeTrees = AssetDatabase.FindAssets("Archetype Tree t:prefab", new []{assetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<ArchetypeTree>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
-
-            archetypeTree = archetypeTrees[0];
+           
             
         }
 

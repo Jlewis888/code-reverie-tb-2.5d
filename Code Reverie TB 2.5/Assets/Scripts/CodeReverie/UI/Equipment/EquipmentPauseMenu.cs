@@ -71,7 +71,7 @@ namespace CodeReverie
             {
                 partySlotIndex++;
 
-                if (partySlotIndex == PlayerManager.Instance.availableCharacters.Count + 1)
+                if (partySlotIndex >= PlayerManager.Instance.availableCharacters.Count)
                 {
                     partySlotIndex = 0;
                 }
@@ -83,7 +83,7 @@ namespace CodeReverie
             {
                 partySlotIndex--;
                 
-                if (partySlotIndex < 0)
+                if (partySlotIndex <= 0)
                 {
                     partySlotIndex = PlayerManager.Instance.availableCharacters.Count - 1;
                 }

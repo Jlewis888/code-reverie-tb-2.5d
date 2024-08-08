@@ -8,6 +8,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 588026674948223095, guid: e6759ac8ae53d6c4baccff93adb5657f,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 588026674948223095, guid: e6759ac8ae53d6c4baccff93adb5657f,
+        type: 3}
     - target: {fileID: 1200862948920266832, guid: e6759ac8ae53d6c4baccff93adb5657f,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -117,6 +123,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arcalia Controller Unit
       objectReference: {fileID: 0}
+    - target: {fileID: 8357509338124791466, guid: e6759ac8ae53d6c4baccff93adb5657f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 58b6c22aa2ea1ba4d9c3527a3028b6be, type: 2}
     - target: {fileID: 8932686705678154491, guid: e6759ac8ae53d6c4baccff93adb5657f,
         type: 3}
       propertyPath: serializationData.Prefab

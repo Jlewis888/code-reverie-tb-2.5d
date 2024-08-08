@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -36,6 +37,11 @@ namespace CodeReverie
             if (Vector3.Distance(transform.position, target.transform.position) <= 1f)
             {
                 Debug.Log("THis is complete");
+                List<DamageTypes> damageTypes = new List<DamageTypes>();
+                damageTypes.Add(DamageTypes.Fire);
+                DamageProfile damage = new DamageProfile(source, source.selectedTargets[0].GetComponent<Health>(), damageTypes);
+                var exp = Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
+                Destroy(exp, DestroyExplosion);
                 EventManager.Instance.combatEvents.OnSkillComplete(source);
                 Destroy(gameObject);
             }
@@ -49,6 +55,8 @@ namespace CodeReverie
         public void RotateToTarget()
         {
             targetDirection = target.transform.position - transform.position;
+
+            targetDirection.y = target.transform.position.y;
 
             transform.forward = targetDirection;
         }

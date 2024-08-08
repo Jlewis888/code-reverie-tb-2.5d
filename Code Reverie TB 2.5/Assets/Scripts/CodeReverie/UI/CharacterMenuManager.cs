@@ -15,9 +15,6 @@ namespace CodeReverie
         public Image characterSprite;
         private PartySlot activePartySlot;
         
-        public List<ArchetypeTree> archetypeTrees;
-        public GameObject treeHolder;
-        public ArchetypeTree activeArchetypeTree;
         public List<StatMenuPanel> statMenuPanels;
 
         private void Awake()
@@ -32,7 +29,6 @@ namespace CodeReverie
             //ActivePartySlot = PlayerManager.Instance.currentParty[0];
             characterName.text = ActivePartySlot.character.info.characterName;
             characterSprite.sprite = ActivePartySlot.character.info.characterSprite;
-            ActiveArchetypeTree = null;
 
         }
 
@@ -79,53 +75,6 @@ namespace CodeReverie
             }
         }
         
-        public ArchetypeTree ActiveArchetypeTree
-        {
-            get { return activeArchetypeTree; }
-            set
-            {
-                
-                if (value != activeArchetypeTree)
-                {
-                   
-                    activeArchetypeTree = value;
-                    
-                }
-                
-                
-                SetActiveTree();
-            }
-        }
-        
-        public void SetActiveTree()
-        {
-            foreach (ArchetypeTree archetypeTree in archetypeTrees)
-            {
-
-                if (ActiveArchetypeTree == null)
-                {
-                    if (archetypeTree.gameObject.activeInHierarchy)
-                    {
-                        characterSkillsMenu.gameObject.SetActive(true);
-                    }
-                    
-                    archetypeTree.gameObject.SetActive(false);
-                }
-                else
-                {
-                    if (archetypeTree == ActiveArchetypeTree)
-                    {
-                        archetypeTree.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        archetypeTree.gameObject.SetActive(false);
-                    }
-                    
-                    characterSkillsMenu.gameObject.SetActive(false);
-                }
-            }
-        }
 
         public void SetStatMenuPanels()
         {

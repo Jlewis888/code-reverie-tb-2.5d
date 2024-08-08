@@ -224,7 +224,7 @@ namespace CodeReverie
                     EventManager.Instance.combatEvents.OnPlayerDamageTaken(damageProfile);
                 }
 
-                if (GetComponent<CharacterBattleManager>().battleState == CharacterBattleState.WaitingAction)
+                if (GetComponent<CharacterBattleManager>().battleState == CharacterBattleState.WaitingAction && damageProfile.isBreak)
                 {
                     GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Interrupted;
                 }

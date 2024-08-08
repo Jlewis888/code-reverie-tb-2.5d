@@ -7,7 +7,6 @@ namespace CodeReverie
     public class ArcStrikeSkillObject : SkillObject
     {
         public ArcStrikeGameObject arcStrikeGameObjectPF;
-        public CharacterBattleManager characterUnitSource;
         public GameObject spawnPoint;
 
         private void Awake()

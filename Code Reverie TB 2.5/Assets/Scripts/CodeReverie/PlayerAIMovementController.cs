@@ -10,16 +10,19 @@ namespace CodeReverie
     public class PlayerAIMovementController : SerializedMonoBehaviour
     {
         public GameObject followTarget;
+        public bool isMoving;
 
         private void Update()
         {
             float moveSpeed = followTarget.GetComponent<PlayerMovementController>().moveSpeed;
             FaceFollowTarget();
             
-            if (Vector2.Distance(transform.position, followTarget.transform.position) >= 2)
+            if (Vector3.Distance(transform.position, followTarget.transform.position) >= 1)
             {
                 
                 GetComponent<AnimationManager>().ChangeAnimationState("run");
+
+                isMoving = true;
                 
                 transform.position = Vector3.MoveTowards(transform.position,
                     followTarget.transform.position,
@@ -27,7 +30,23 @@ namespace CodeReverie
             }
             else
             {
-                GetComponent<AnimationManager>().ChangeAnimationState("idle");
+                
+                if (isMoving & Vector3.Distance(transform.position, followTarget.transform.position) >= .75f)
+                {
+                
+                    GetComponent<AnimationManager>().ChangeAnimationState("run");
+                    
+                    transform.position = Vector3.MoveTowards(transform.position,
+                        followTarget.transform.position,
+                        moveSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    isMoving = false;
+                    GetComponent<AnimationManager>().ChangeAnimationState("idle");
+                }
+                
+                
             }
             
         }

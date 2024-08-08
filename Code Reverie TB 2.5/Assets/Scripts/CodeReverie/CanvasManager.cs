@@ -10,18 +10,13 @@ namespace CodeReverie
     [DefaultExecutionOrder(-115)]
     public class CanvasManager : ManagerSingleton<CanvasManager>
     {
-        public GameObject gameMenu;
+        //public GameObject gameMenu;
         public List<MenuManager> menuManagers = new List<MenuManager>();
-        public InventoryMenuManager inventory;
         public HudManager hudManager;
-        public ArchetypeMenuManager archetypeMenuManager;
         public DialogueManager dialogueManager;
         public VendorMenuManager vendorMenuManager;
         public SystemMenuManager systemMenuManager;
         public MapMenuManager mapMenuManager;
-        public JournalMenuManager journalMenuManager;
-        public CraftingMenuManager craftingMenuManager;
-        public CharacterMenuManager characterMenuManager;
         public PauseMenuManager pauseMenuManager;
 
         public UIFade uiFade;
@@ -71,30 +66,20 @@ namespace CodeReverie
             saveDataConfirmationPopup.gameObject.SetActive(false);
             
             
-            journalMenuButton.onClick.AddListener(() =>
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(journalMenuManager);
-            });
             
-            mapMenuButton.onClick.AddListener(() =>
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(mapMenuManager);
-            });
+            // mapMenuButton.onClick.AddListener(() =>
+            // {
+            //     EventManager.Instance.generalEvents.OpenMenuManager(mapMenuManager);
+            // });
+            //
+            //
+            //
+            // systemMenuButton.onClick.AddListener(() =>
+            // {
+            //     EventManager.Instance.generalEvents.OpenMenuManager(systemMenuManager);
+            // });
             
-            characterMenuButton.onClick.AddListener(() =>
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(characterMenuManager);
-            });
-            
-            systemMenuButton.onClick.AddListener(() =>
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(systemMenuManager);
-            });
-            
-            craftingMenuButton.onClick.AddListener(() =>
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(craftingMenuManager);
-            });
+           
             
             
             levelUpPopUp.gameObject.SetActive(false);
@@ -164,18 +149,6 @@ namespace CodeReverie
                 {
                     ToggleMap();
                 }
-                else if (GameManager.Instance.playerInput.GetButtonDown("Journal"))
-                {
-                    ToggleJournal();
-                }
-                else if (GameManager.Instance.playerInput.GetButtonDown("Crafting"))
-                {
-                    ToggleCrafting();
-                }
-                else if (GameManager.Instance.playerInput.GetButtonDown("Character Menu"))
-                {
-                    ToggleCharacterPage();
-                }
             }
 
 
@@ -183,35 +156,9 @@ namespace CodeReverie
         
         public void SetInventoryMenuManager()
         {
-
-            if (SceneManager.GetActiveScene().name != "Title Screen")
-            {
-                if (!inventory.gameObject.activeInHierarchy)
-                {
-                    EventManager.Instance.generalEvents.OpenMenuManager(inventory);
-                }
-                else
-                {
-                    //EventManager.Instance.generalEvents.OpenMenuManager(hudManager);
-           
-                }
-            }
-            
             
         }
-
-
-        public void ToggleSkillsMenu()
-        {
-            if (!archetypeMenuManager.gameObject.activeInHierarchy)
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(archetypeMenuManager);
-            } else
-            {
-                //EventManager.Instance.generalEvents.OpenMenuManager(hudManager);
-           
-            }
-        }
+        
 
         public void OpenVendorMenu()
         {
@@ -305,31 +252,6 @@ namespace CodeReverie
         }
         
         
-        public void ToggleJournal()
-        {
-          
-            if (!journalMenuManager.gameObject.activeInHierarchy)
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(journalMenuManager);
-            } else
-            {
-                //EventManager.Instance.generalEvents.OpenMenuManager(hudManager);
-           
-            }
-        }
-        
-        public void ToggleCrafting()
-        {
-          
-            if (!craftingMenuManager.gameObject.activeInHierarchy)
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(craftingMenuManager);
-            } else
-            {
-                //EventManager.Instance.generalEvents.OpenMenuManager(hudManager);
-           
-            }
-        }
 
         public void OpenLevelUpPopup()
         {
@@ -342,18 +264,7 @@ namespace CodeReverie
             
         }
         
-        public void ToggleCharacterPage()
-        {
-          
-            if (!characterMenuManager.gameObject.activeInHierarchy)
-            {
-                EventManager.Instance.generalEvents.OpenMenuManager(characterMenuManager);
-            } else
-            {
-                //EventManager.Instance.generalEvents.OpenMenuManager(hudManager);
-           
-            }
-        }
+        
         
         
         // public void SetActiveUiPanel()

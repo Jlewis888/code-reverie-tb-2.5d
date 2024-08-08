@@ -80,7 +80,6 @@ namespace CodeReverie
                     SetInventorySlot();
                    
                     
-                    CanvasManager.Instance.inventory.ActivePartySlot.character.characterGear.UnequipItem(inventoryItemUI.item);
                     EventManager.Instance.playerEvents.OnGearUpdate(PlayerManager.Instance.currentParty[0]);
                     Destroy(draggableItem.gameObject);
                     //gearSlotUI.SetGearSlot();

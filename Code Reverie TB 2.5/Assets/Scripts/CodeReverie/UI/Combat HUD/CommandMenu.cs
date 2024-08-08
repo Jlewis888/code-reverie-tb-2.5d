@@ -18,9 +18,11 @@ namespace CodeReverie
         
         public List<GameObject> commandMenus;
         public CommandSelectMenuManager commandSelectMenuManager;
+        public ActionCommandSelectMenuManager actionCommandSelectMenu;
         public SkillCommandMenuManager skillCommandMenuManager;
         public ItemCommandMenuManager itemCommandMenuManager;
         public TargetCommandMenuManager targetCommandMenuManager;
+        public MoveCommandMenuManager moveCommandMenuManager;
 
 
         private void Awake()
@@ -30,6 +32,8 @@ namespace CodeReverie
             commandMenus.Add(skillCommandMenuManager.gameObject);
             commandMenus.Add(targetCommandMenuManager.gameObject);
             commandMenus.Add(itemCommandMenuManager.gameObject);
+            commandMenus.Add(actionCommandSelectMenu.gameObject);
+            commandMenus.Add(moveCommandMenuManager.gameObject);
         }
 
         private void OnEnable()
@@ -95,6 +99,11 @@ namespace CodeReverie
             ToggleCommandMenus(commandSelectMenuManager.gameObject);
         }
         
+        public void ToggleActionMenu()
+        {
+            ToggleCommandMenus(actionCommandSelectMenu.gameObject);
+        }
+        
         public void ToggleSkillMenu()
         {
             ToggleCommandMenus(skillCommandMenuManager.gameObject);
@@ -108,6 +117,11 @@ namespace CodeReverie
         public void ToggleTargetMenu()
         {
             ToggleCommandMenus(targetCommandMenuManager.gameObject);
+        }
+        
+        public void ToggleMoveActionMenu()
+        {
+            ToggleCommandMenus(moveCommandMenuManager.gameObject);
         }
         
     }

@@ -82,7 +82,7 @@ namespace CodeReverie
                 return 0f;
             }
             
-            return GetComponent<CharacterController>().character.info.baseStats.baseStats[stat];
+            return GetComponent<CharacterController>().character.info.baseStats.progressionStatMap[stat].statMap[GetComponent<CharacterController>().character.Level];
         }
         
         

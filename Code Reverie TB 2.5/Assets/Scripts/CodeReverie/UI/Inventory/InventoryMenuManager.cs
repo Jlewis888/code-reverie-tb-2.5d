@@ -47,8 +47,6 @@ namespace CodeReverie
 
         private void Update()
         {
-            atkStatText.text = CanvasManager.Instance.inventory.ActivePartySlot.character.characterController
-                .GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Atk).ToString();
         }
 
 

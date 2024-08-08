@@ -14,8 +14,7 @@ namespace CodeReverie
         public CommandMenuNavigationButton commandSkillsSelect;
         public CommandMenuNavigationButton commandItemsSelect;
         public CommandMenuNavigationButton commandMoveSelect;
-
-
+        
         private void Awake()
         {
             commandMenuNavigation = new CommandMenuNavigation();
@@ -34,16 +33,13 @@ namespace CodeReverie
 
         private void Update()
         {
-
-
+            
             if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
             {
                 ConfirmAction();
             }
-            
-            commandMenuNavigation.NavigationInputUpdate();
 
-            
+            commandMenuNavigation.NavigationInputUpdate();
         }
 
 
@@ -52,10 +48,10 @@ namespace CodeReverie
             if (commandMenuNavigation.SelectedNavigationButton == commandActionSelect)
             {
                // Debug.Log("Attack Action. Need to Set Target enemy window now");
-                BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
-                    CharacterBattleActionState.Attack;
-                BattleManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleTargetMenu();
+                // BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+                //     CharacterBattleActionState.Attack;
+                // BattleManager.Instance.SetSelectableTargets();
+                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleActionMenu();
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandDefendSelect)
             {
@@ -70,7 +66,7 @@ namespace CodeReverie
                 BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Skill;
                // Debug.Log("Skill Action. Need to set Skill window now");
-               BattleManager.Instance.SetSelectableTargets();
+               //BattleManager.Instance.SetSelectableTargets();
                 
                 CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleSkillMenu();
             }
@@ -82,7 +78,9 @@ namespace CodeReverie
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandMoveSelect)
             {
-                //Debug.Log("Move Action. Need to allow player to move character to a location");
+                
+                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleMoveActionMenu();
+                Debug.Log("Move Action. Need to allow player to move character to a location");
             }
         }
     }

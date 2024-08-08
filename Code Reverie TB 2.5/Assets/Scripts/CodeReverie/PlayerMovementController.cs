@@ -31,13 +31,14 @@ namespace CodeReverie
         // Update is called once per frame
         void Update()
         {
-            moveInput.x = GameManager.Instance.playerInput.GetAxis("Move Horizontal");
-            moveInput.z = GameManager.Instance.playerInput.GetAxis("Move Vertical");
+            GamepadMovementControls();
+            // moveInput.x = GameManager.Instance.playerInput.GetAxis("Move Horizontal");
+            // moveInput.z = GameManager.Instance.playerInput.GetAxis("Move Vertical");
             direction = moveInput.normalized;
 
             activeMoveSpeed = moveSpeed * speedClamp;
             
-            GamepadMovementControls();
+            
 
             // if (direction.magnitude > 0)
             // {
@@ -148,7 +149,7 @@ namespace CodeReverie
         public void GamepadMovementControls()
         {
             moveInput.x = GameManager.Instance.playerInput.GetAxis("Move Horizontal");
-            moveInput.y = GameManager.Instance.playerInput.GetAxis("Move Vertical");
+            moveInput.z = GameManager.Instance.playerInput.GetAxis("Move Vertical");
 
             
             // aimInput.x = GameManager.Instance.playerInput.GetAxis("Aim Horizontal");

@@ -14,8 +14,8 @@ namespace CodeReverie
         
         private void OnEnable()
         {
-            levelUpText.text = $"Level {PlayerManager.Instance.Level}";
-
+            // levelUpText.text = $"Level {PlayerManager.Instance.Level}";
+            //
             timer = 5f;
 
 
@@ -23,7 +23,7 @@ namespace CodeReverie
 
         private void Update()
         {
-            levelUpText.text = $"Level {PlayerManager.Instance.Level}";
+            //levelUpText.text = $"Level {PlayerManager.Instance.Level}";
             
             if (timer < 0)
             {

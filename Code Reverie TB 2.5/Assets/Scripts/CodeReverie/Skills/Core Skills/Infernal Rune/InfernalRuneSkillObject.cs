@@ -5,14 +5,14 @@ namespace CodeReverie
 {
     public class InfernalRuneSkillObject : SkillObject
     {
-        public CharacterController characterUnitSource;
+        
         public InfernalRuneGameObject infernalRuneGameObjectPF;
         public GameObject spawnPoint;
 
         private void Awake()
         {
             
-            characterUnitSource = GetComponentInParent<CharacterController>();
+            characterUnitSource = GetComponentInParent<CharacterBattleManager>();
         }
         
         public override void Init()
@@ -25,7 +25,7 @@ namespace CodeReverie
         {
             if (characterUnitSource == null)
             {
-                characterUnitSource = GetComponentInParent<CharacterController>();
+                characterUnitSource = GetComponentInParent<CharacterBattleManager>();
             }
             
             

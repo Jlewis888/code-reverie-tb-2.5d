@@ -46,7 +46,8 @@ namespace CodeReverie
                 fire = true;
                 
             }));
-
+            
+            
         }
 
         public override void Attack()
@@ -59,6 +60,8 @@ namespace CodeReverie
             fireballSkillProjectile.target = characterUnitSource.selectedTargets[0].gameObject;
             fireballSkillProjectile.Init();
             fireballSkillProjectile.gameObject.SetActive(true);
+            
+            Destroy(gameObject);
             
         }
     }

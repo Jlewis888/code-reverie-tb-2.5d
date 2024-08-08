@@ -20,15 +20,7 @@ namespace CodeReverie
             }
             else
             {
-                if (openGameMenu)
-                {
-                    CanvasManager.Instance.gameMenu.SetActive(true);
-                }
-                else
-                {
-                    CanvasManager.Instance.gameMenu.SetActive(false);
-                }
-
+                
                 if (pauseGame)
                 {
                     Time.timeScale = 0;

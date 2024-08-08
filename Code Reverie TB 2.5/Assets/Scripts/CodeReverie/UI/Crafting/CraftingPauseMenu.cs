@@ -8,12 +8,16 @@ namespace CodeReverie
     {
         public CraftingItemPauseMenuNavigationButton craftingItemPauseMenuNavigationPF;
         
+        public GameObject craftIngredientItemPanelHolder;
+        public CraftIngredientItemPanelUI craftIngredientItemPanelPF;
+        
         public MenuNavigation pauseMenuNavigation;
 
         private void Awake()
         {
             pauseMenuNavigation = new MenuNavigation();
             pauseMenuNavigation.callBack = OnSelectedNavigationButtonChange;
+            ClearNavigationButtons();
         }
         
         private void OnEnable()
@@ -49,15 +53,7 @@ namespace CodeReverie
         
         private void Confirm()
         {
-            if (pauseMenuNavigation.SelectedNavigationButton
-                .GetComponent<InventoryPauseMenuNavigationButton>().item.info.canUseInMenu)
-            {
-                EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState
-                    .CurrentPartyMenuManager);
-
-                EventManager.Instance.inventoryEvents.OnItemMenuSelect(pauseMenuNavigation.SelectedNavigationButton
-                    .GetComponent<InventoryPauseMenuNavigationButton>().item);
-            }
+            CraftItem();
         }
 
         public void SetCraftableItemRecipes()
@@ -85,6 +81,72 @@ namespace CodeReverie
             }
         }
         
+        public void CraftItem()
+        {
+           
+            ItemInfo selectedItemInfo = pauseMenuNavigation.SelectedNavigationButton
+                .GetComponent<CraftingItemPauseMenuNavigationButton>().itemInfo;
+            
+            if (selectedItemInfo != null && CanCraft())
+            {
+                
+                foreach (KeyValuePair<ItemInfo, int> item in selectedItemInfo.requiredItems)
+                {
+                    PlayerManager.Instance.inventory.RemoveItem(item.Key, item.Value);
+                }
+                
+                PlayerManager.Instance.inventory.AddItem(new Item(selectedItemInfo));
+                EventManager.Instance.playerEvents.OnItemCrafted(selectedItemInfo.id);
+                EventManager.Instance.playerEvents.OnItemPickup(selectedItemInfo.id, 1);
+                
+                
+            }
+            
+        }
+
+        public bool CanCraft()
+        {
+            ItemInfo selectedItemInfo = pauseMenuNavigation.SelectedNavigationButton
+                .GetComponent<CraftingItemPauseMenuNavigationButton>().itemInfo;
+            
+            if (selectedItemInfo == null)
+            {
+                return false;
+            }
+
+
+            if (selectedItemInfo.requiredItems.Count < 1)
+            {
+                return false;
+            }
+
+            foreach (KeyValuePair<ItemInfo, int> item in selectedItemInfo.requiredItems)
+            {
+                (bool, int) itemCheck = PlayerManager.Instance.inventory.ItemInInventory(item.Key);
+                
+                if (!itemCheck.Item1)
+                {
+                    
+                    return false;
+                }
+                
+                // Debug.Log(item.Value);
+                // Debug.Log(PlayerManager.Instance.inventory.items[itemCheck.Item2].amount);
+                
+                if (item.Value > PlayerManager.Instance.inventory.items[itemCheck.Item2].amount)
+                {
+                    return false;
+                }
+                
+            }
+            
+            
+
+            return true;
+        }
+        
+        
+        
         public void OnPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState pauseMenuNavigationState)
         {
             //navigationDelayTimer = navigationDelay;
@@ -93,7 +155,28 @@ namespace CodeReverie
 
         public override void OnSelectedNavigationButtonChange()
         {
+            foreach (Transform child in craftIngredientItemPanelHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
             
+            
+            foreach (KeyValuePair<ItemInfo, int> itemInfoRequiredItem in pauseMenuNavigation.SelectedNavigationButton.GetComponent<CraftingItemPauseMenuNavigationButton>().itemInfo.requiredItems)
+            {
+                CraftIngredientItemPanelUI craftIngredientItemPanelUI =
+                    Instantiate(craftIngredientItemPanelPF, craftIngredientItemPanelHolder.transform);
+                
+                (bool, int) inventorySlotCheck = PlayerManager.Instance.inventory.ItemInInventory(itemInfoRequiredItem.Key);
+
+                craftIngredientItemPanelUI.requiredAmount = itemInfoRequiredItem.Value;
+                craftIngredientItemPanelUI.nameText.text = itemInfoRequiredItem.Key.itemName;
+                
+                if (inventorySlotCheck.Item1)
+                {
+                    craftIngredientItemPanelUI.item = PlayerManager.Instance.inventory.items[inventorySlotCheck.Item2];
+                }
+                
+            }
         }
     }
 }

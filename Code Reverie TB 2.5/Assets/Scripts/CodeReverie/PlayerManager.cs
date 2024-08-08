@@ -34,7 +34,7 @@ namespace CodeReverie
         //todo move or refactor later
         public Dictionary<int, GearSlot> combatItemSlots = new Dictionary<int, GearSlot>();
         public List<Interactable> interactables = new List<Interactable>();
-
+        public Dictionary<int, int> accountExperienceMap= new Dictionary<int, int>();
         protected override void Awake()
         {
             base.Awake();
@@ -46,6 +46,14 @@ namespace CodeReverie
             combatItemSlots.Add(3, new GearSlot());
             combatItemSlots.Add(4, new GearSlot());
             combatItemSlots.Add(5, new GearSlot());
+            
+            
+            accountExperienceMap.Add(1, 6);
+
+            for (int i = 1; i < 99; i++)
+            {
+                accountExperienceMap.Add(i + 1, (int)(accountExperienceMap[i] * 1.7));
+            }
            
         }
 
@@ -417,74 +425,81 @@ namespace CodeReverie
         }
         
 
-        public int Level
-        {
-            get => currentLevel;
-            set
-            {
-                if (currentLevel + value > currentLevel)
-                {
-                    EventManager.Instance.playerEvents.OnLevelUp();
-                    currentLevel += value;
-                    skillPoints += 1;
-                }
-            }
-        }
-
-
-        public float Experience
-        {
-            get => currentExp;
-
-            set
-            {
-                if (Level >= 99)
-                {
-                    currentExp = 0;
-                    return;
-                }
-
-                currentExp += value;
-
-                if (Level < 99)
-                {
-                    while (ExperienceAboveNextLevelCheck())
-                    {
-                        currentExp -= playerExperienceMap.experienceMap[Level];
-
-                        Level = 1;
-
-                        if (Level >= 99)
-                        {
-                            currentExp = 0;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public bool ExperienceAboveNextLevelCheck()
-        {
-            if (currentExp >= playerExperienceMap.experienceMap[Level])
-            {
-                return true;
-            }
-
-            return false;
-        }
+        // public int Level
+        // {
+        //     get => currentLevel;
+        //     set
+        //     {
+        //         if (currentLevel + value > currentLevel)
+        //         {
+        //             EventManager.Instance.playerEvents.OnLevelUp();
+        //             currentLevel += value;
+        //             skillPoints += 1;
+        //         }
+        //     }
+        // }
+        //
+        //
+        // public float Experience
+        // {
+        //     get => currentExp;
+        //
+        //     set
+        //     {
+        //         if (Level >= 99)
+        //         {
+        //             currentExp = 0;
+        //             return;
+        //         }
+        //
+        //         currentExp += value;
+        //
+        //         if (Level < 99)
+        //         {
+        //             while (ExperienceAboveNextLevelCheck())
+        //             {
+        //                 currentExp -= playerExperienceMap.experienceMap[Level];
+        //
+        //                 Level = 1;
+        //
+        //                 if (Level >= 99)
+        //                 {
+        //                     currentExp = 0;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        //
+        // public bool ExperienceAboveNextLevelCheck()
+        // {
+        //     if (currentExp >= playerExperienceMap.experienceMap[Level])
+        //     {
+        //         return true;
+        //     }
+        //
+        //     return false;
+        // }
 
 
         public void GiveExperienceOnEnemyDeath(CharacterController enemy)
         {
-            Experience = enemy.character.info.experienceToGive;
+            //Experience = enemy.character.info.experienceToGive;
+
+            foreach (Character character in currentParty)
+            {
+                character.Experience = enemy.character.info.experienceToGive;
+            }
+            
+            
             CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{enemy.character.info.experienceToGive} gained");
         }
 
-        public float GetCurrentMaxExperience()
-        {
-            return playerExperienceMap.experienceMap[Level];
-        }
+        // public float GetCurrentMaxExperience()
+        // {
+        //     return playerExperienceMap.experienceMap[Level];
+        // }
 
         public void AddCharacterToActiveParty(string characterID)
         {
@@ -586,8 +601,8 @@ namespace CodeReverie
                 else
                 {
                     AddCharacterToAvailablePartyPool("Fullbody");
-                    // AddCharacterToAvailablePartyPool("Cecil");
-                    // AddCharacterToAvailablePartyPool("Arcalia");
+                    AddCharacterToAvailablePartyPool("Cecil");
+                    AddCharacterToAvailablePartyPool("Arcalia");
                     
                     
                     // availableCharacters = new List<PartySlot>();
@@ -708,18 +723,18 @@ namespace CodeReverie
             Debug.Log("Set New Game Data");
             availableCharacters = new List<Character>();
             AddCharacterToAvailablePartyPool("Fullbody");
-            // AddCharacterToAvailablePartyPool("Cecil");
-            // AddCharacterToAvailablePartyPool("Arcalia");
-            //AddCharacterToAvailablePartyPool("Cecil");
-            //AddCharacterToAvailablePartyPool("Arcalia");
+             AddCharacterToAvailablePartyPool("Cecil");
+             AddCharacterToAvailablePartyPool("Arcalia");
+            AddCharacterToAvailablePartyPool("Cecil");
+            AddCharacterToAvailablePartyPool("Arcalia");
             inventory = new PlayerInventory();
             
             //activeParty = new Party();
             currentParty = new List<Character>();
             
             currentParty.Add(availableCharacters[0]);
-            // currentParty.Add(availableCharacters[1]);
-            // currentParty.Add(availableCharacters[2]);
+            currentParty.Add(availableCharacters[1]);
+            currentParty.Add(availableCharacters[2]);
             
             currentLevel = 1;
             currentExp = 0;

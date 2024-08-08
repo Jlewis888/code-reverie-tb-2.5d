@@ -13,14 +13,16 @@ namespace CodeReverie
         public List<DamageTypes> damageTypes;
         public bool isCrit;
         public bool applyAbsorptionHeal;
+        public bool isBreak;
         
 
-        public DamageProfile(CharacterBattleManager damageSource, Health damageTarget, List<DamageTypes> damageTypes)
+        public DamageProfile(CharacterBattleManager damageSource, Health damageTarget, List<DamageTypes> damageTypes, bool isBreak = false)
         {
             this.damageSource = damageSource;
             this.damageTarget = damageTarget;
             this.damageTypes = damageTypes;
             isCrit = false;
+            this.isBreak = isBreak;
             
             ApplyDamage();
         }
@@ -171,7 +173,7 @@ namespace CodeReverie
 
             if (damageTarget.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Character))
             {
-                damageReduction = (10f + ((1.5f * damageTarget.GetComponent<CharacterController>().character.level)/100) + ((.25f * damageTarget.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Defense))/100))/100;
+                damageReduction = (10f + ((1.5f * damageTarget.GetComponent<CharacterController>().character.Level)/100) + ((.25f * damageTarget.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Defense))/100))/100;
             }
 
             

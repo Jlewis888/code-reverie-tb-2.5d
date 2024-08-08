@@ -9,10 +9,12 @@ namespace CodeReverie
 
     public class CharacterBaseStats : SerializedScriptableObject
     {
-        public Dictionary<StatAttribute, float> baseStats = new Dictionary<StatAttribute, float>();
+        private Dictionary<StatAttribute, float> baseStats = new Dictionary<StatAttribute, float>();
         
         public Dictionary<DamageTypes, DamageEffectiveTypes> damageEffectiveTypes = new Dictionary<DamageTypes, DamageEffectiveTypes>();
 
+        public Dictionary<StatAttribute, ProgressionStatContainer> progressionStatMap = new Dictionary<StatAttribute, ProgressionStatContainer>();
+        
         public CharacterBaseStats()
         {
             SetAllStats();
@@ -48,6 +50,11 @@ namespace CodeReverie
                             break;
                     }
                 }
+
+                if (!progressionStatMap.ContainsKey((StatAttribute)stat.GetValue(i)))
+                {
+                    progressionStatMap.Add((StatAttribute)stat.GetValue(i), new ProgressionStatContainer());
+                }
             }
             
             
@@ -70,6 +77,13 @@ namespace CodeReverie
                     damageEffectiveTypes.Add((DamageTypes)stat.GetValue(i), DamageEffectiveTypes.NormalDamage);
                 }
             }
+
+            foreach (var progressionStat in progressionStatMap)
+            {
+                progressionStat.Value.UpdateProgression(baseStats[progressionStat.Key]);
+            }
+            
+            
         }
     }
 }

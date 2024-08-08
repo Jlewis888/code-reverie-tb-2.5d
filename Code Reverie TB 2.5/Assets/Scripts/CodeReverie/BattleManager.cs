@@ -23,6 +23,7 @@ namespace CodeReverie
         public List<CharacterBattleManager> selectableTargets;
         public int targetIndex;
         public Queue<CharacterBattleManager> combatQueue;
+        public MovePlayerObject movePlayerObject;
 
         protected override void Awake()
         {
@@ -218,18 +219,11 @@ namespace CodeReverie
             switch (selectedPlayerCharacter.characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
-                    Debug.Log("Here");
+                case CharacterBattleActionState.Break:
                     selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
                     
-                    // //todo Placeholder: To use the above code
-                    // selectableTargets = enemyUnits.FindAll(x =>
-                    //     x.GetComponent<Health>().characterState == CharacterState.Alive);
                     break;
                 case CharacterBattleActionState.Skill:
-                    // selectableTargets = enemyUnits.FindAll(x =>
-                    //     x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
-                    
-                    //todo Placeholder: To use the above code
                     selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
                     break;
             }
@@ -292,6 +286,7 @@ namespace CodeReverie
             switch (selectedPlayerCharacter.characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
+                case CharacterBattleActionState.Break:
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     // selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
@@ -316,6 +311,11 @@ namespace CodeReverie
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     selectedPlayerCharacter.battleState = CharacterBattleState.Action;
+                    break;
+                case CharacterBattleActionState.Move:
+                    selectedPlayerCharacter.targetPosition = movePlayerObject.transform.position;
+                    CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
                 
             }

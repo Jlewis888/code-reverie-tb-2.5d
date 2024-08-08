@@ -7,7 +7,6 @@ namespace CodeReverie
     public class Archetype
     {
         public ArchetypeDataContainer info;
-        public Dictionary<string, ArchetypeSkillNode> skillNodesMap = new Dictionary<string, ArchetypeSkillNode>();
         public ArchetypeSkills skills;
        
         public Archetype(ArchetypeDataContainer info)
@@ -39,40 +38,7 @@ namespace CodeReverie
             EquipBaseSkill(SkillType.AlchemicBurst);
         }
         
-        
-        public void InitializeSetSkillNodesMap()
-        {
-            skillNodesMap = new Dictionary<string, ArchetypeSkillNode>();
-
-            foreach (ArchetypeSkillNodeDataContainer skillNodeDataContainer in info.archetypeSkillNodeDataContainers)
-            {
-                if (!skillNodesMap.ContainsKey(skillNodeDataContainer.id))
-                {
-                    skillNodesMap.Add(skillNodeDataContainer.id, new ArchetypeSkillNode(skillNodeDataContainer));
-                    //skillNodesMap[skillNodeDataContainer.id].archetype = this;
-                }
-            }
-            
-            
-            
-            
-            
-        }
-
-        public int AssignedPoints
-        {
-            get
-            {
-                int count = 0;
-
-                foreach (ArchetypeSkillNode archetypeSkillNode in skillNodesMap.Values)
-                {
-                    count += archetypeSkillNode.assignedPoints;
-                }
-
-                return count;
-            }
-        }
+       
 
         public void SetSkillData()
         {

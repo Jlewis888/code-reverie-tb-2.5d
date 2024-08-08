@@ -33,7 +33,10 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Cinemachine
+    - Crest
+    - Crest.Examples
     - DamageNumbersPro
+    - Enviro3.Runtime
     - Ink-Libraries
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
