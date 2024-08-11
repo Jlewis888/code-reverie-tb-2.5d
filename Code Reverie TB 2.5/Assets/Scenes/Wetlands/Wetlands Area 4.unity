@@ -444,15 +444,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494735925}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 33.57, y: 0, z: -48.08}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -41.51319, y: 0, z: 130.5132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1892904040}
   - {fileID: 1227240152}
   m_Father: {fileID: 517268241}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &494735927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -496,8 +496,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   sceneToLoad:
-    m_SceneAsset: {fileID: 102900000, guid: 34994bdacb4ceed41a77087062d18e3e, type: 3}
-    m_SceneName: Wetlands Area 0
+    m_SceneAsset: {fileID: 102900000, guid: a7d8d6bf0ae54604fa40ebdc6ea7d955, type: 3}
+    m_SceneName: Wetlands Area 5
   sceneTransitionName: entrance 1
 --- !u!1 &517268239
 GameObject:
@@ -652,7 +652,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  transitionName: entrance 1
+  transitionName: entrance 2
 --- !u!1 &1297486920
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,15 +816,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862056288}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.47, y: 0, z: 16.26}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -44.070465, y: 0, z: -29.486795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 94850536}
   - {fileID: 2104453144}
   m_Father: {fileID: 517268241}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &1862056290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -868,9 +868,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   sceneToLoad:
-    m_SceneAsset: {fileID: 0}
-    m_SceneName: Wetlands Area 2
-  sceneTransitionName: entrance 1
+    m_SceneAsset: {fileID: 102900000, guid: 00db0a6229e245d44bd9c7c36140519f, type: 3}
+    m_SceneName: Wetlands Area 3
+  sceneTransitionName: entrance 2
 --- !u!1 &1892904039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1009,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  transitionName: entrance 2
+  transitionName: entrance 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

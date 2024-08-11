@@ -18,7 +18,9 @@ namespace CodeReverie
                 {
                     if (character.characterController != null)
                     {
+                        character.characterController.GetComponent<CharacterController>().enabled = false;
                         character.characterController.transform.position = transform.position;
+                        character.characterController.GetComponent<CharacterController>().enabled = true;
                     }
                 }
                 

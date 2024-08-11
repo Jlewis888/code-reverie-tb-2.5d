@@ -352,15 +352,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494735925}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 33.57, y: 0, z: -48.08}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 42.07047, y: 0, z: -31.513199}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1892904040}
   - {fileID: 1227240152}
   m_Father: {fileID: 517268241}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &494735927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -404,9 +404,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   sceneToLoad:
-    m_SceneAsset: {fileID: 102900000, guid: 34994bdacb4ceed41a77087062d18e3e, type: 3}
-    m_SceneName: Wetlands Area 0
-  sceneTransitionName: entrance 1
+    m_SceneAsset: {fileID: 102900000, guid: a7d8d6bf0ae54604fa40ebdc6ea7d955, type: 3}
+    m_SceneName: Wetlands Area 5
+  sceneTransitionName: entrance 2
 --- !u!1 &517268239
 GameObject:
   m_ObjectHideFlags: 0
