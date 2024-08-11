@@ -64,7 +64,7 @@ namespace CodeReverie
                 
 
 
-                if (health.GetComponent<CharacterController>().character.characterState == CharacterState.Dead)
+                if (health.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Dead)
                 {
                     gameObject.SetActive(false);
                 }

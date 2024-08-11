@@ -134,21 +134,21 @@ namespace CodeReverie
         public void OnCharacterDeath(CharacterBattleManager characterBattleManager)
         {
             onCharacterDeath?.Invoke(characterBattleManager);
-            CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{characterBattleManager.GetComponent<CharacterController>().character.info.characterName} defeated");
+            CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} defeated");
         }
 
-        public Action<CharacterController> onEnemyDeath;
+        public Action<CharacterUnitController> onEnemyDeath;
 
-        public void OnEnemyDeath(CharacterController characterUnit)
+        public void OnEnemyDeath(CharacterUnitController characterUnit)
         {
             onEnemyDeath?.Invoke(characterUnit);
         }
         
         
         
-        public Action<CharacterController> onPlayerDeath;
+        public Action<CharacterUnitController> onPlayerDeath;
 
-        public void OnPlayerDeath(CharacterController characterUnit)
+        public void OnPlayerDeath(CharacterUnitController characterUnit)
         {
             onPlayerDeath?.Invoke(characterUnit);
         }

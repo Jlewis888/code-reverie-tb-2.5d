@@ -182,8 +182,8 @@ namespace CodeReverie
         {
             
             speaker = dialogueSpeaker;
-            speakerPortrait.sprite = dialogueSpeaker.GetComponent<CharacterController>().character.GetCharacterPortrait();
-            dialogueName.text = dialogueSpeaker.GetComponent<CharacterController>().character.info.characterName;
+            speakerPortrait.sprite = dialogueSpeaker.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+            dialogueName.text = dialogueSpeaker.GetComponent<CharacterUnitController>().character.info.characterName;
             
             //CameraManager.Instance.UpdateCamera(speaker.transform);
             CameraManager.Instance.ToggleDialogueCamera();

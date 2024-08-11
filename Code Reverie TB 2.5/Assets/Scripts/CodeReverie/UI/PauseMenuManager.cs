@@ -21,6 +21,9 @@ namespace CodeReverie
         public CurrentPartyMenuManager currentPartyMenuManager;
         public MenuNavigation pauseMenuNavigation;
 
+        public GameObject characterSidePanel;
+        
+
         private void Awake()
         {
             pauseMenuNavigation = new MenuNavigation();
@@ -34,6 +37,7 @@ namespace CodeReverie
         private void OnEnable()
         {
             EventManager.Instance.generalEvents.onPauseMenuNavigationStateChange += OnPauseMenuNavigationStateChange;
+            EventManager.Instance.generalEvents.toggleCharacterSidePanelUI += ToggleCharacterSidePanelUI;
             
             pauseMenuNavigation.SetFirstItem();
             
@@ -43,7 +47,7 @@ namespace CodeReverie
             {
                 pauseMenu.SetListeners();
             }
-            
+            characterSidePanel.SetActive(true);
             currentPartyMenuManager.SetParty();
         }
 
@@ -51,6 +55,7 @@ namespace CodeReverie
         {
             EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
             EventManager.Instance.generalEvents.onPauseMenuNavigationStateChange -= OnPauseMenuNavigationStateChange;
+            EventManager.Instance.generalEvents.toggleCharacterSidePanelUI -= ToggleCharacterSidePanelUI;
             
             List<PauseMenu> pauseMenus = GetComponentsInChildren<PauseMenu>(true).ToList();
 
@@ -132,7 +137,17 @@ namespace CodeReverie
 
         public void OnPauseMenuNavigationStateChange(PauseMenuNavigationState pauseMenuNavigationState)
         {
+            if (pauseMenuNavigationState == PauseMenuNavigationState.Menu)
+            {
+                EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(true);
+            }
+            
             this.pauseMenuNavigationState = pauseMenuNavigationState;
+        }
+        
+        public void ToggleCharacterSidePanelUI(bool setActive)
+        {
+            characterSidePanel.SetActive(setActive);
         }
         
     }

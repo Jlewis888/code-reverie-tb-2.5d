@@ -22,6 +22,7 @@ namespace CodeReverie
         
         private void OnEnable()
         {
+            EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(false);
             EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange += OnPauseMenuSubNavigationStateChange;
             
             SetCraftableItemRecipes();

@@ -22,7 +22,6 @@ namespace CodeReverie
         public List<Transform> spawnPoints3;
 
         public List<AreaEntrance> areaEntrances;
-        public PolygonCollider2D areaCameraConfiner;
         public bool sceneAutoSaved;
         public float autoSaveDelay;
 

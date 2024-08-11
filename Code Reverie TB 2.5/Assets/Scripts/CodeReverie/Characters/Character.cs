@@ -7,7 +7,7 @@ namespace CodeReverie
     public class Character
     {
         public CharacterDataContainer info;
-        public CharacterController characterController;
+        public CharacterUnitController characterController;
         public CharacterState characterState;
         
         public CharacterSkills characterSkills;

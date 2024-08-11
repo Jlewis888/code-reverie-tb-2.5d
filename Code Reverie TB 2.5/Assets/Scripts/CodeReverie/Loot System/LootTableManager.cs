@@ -66,7 +66,7 @@ namespace CodeReverie
             }
         }
 
-        public void DropLoot(CharacterController characterUnit)
+        public void DropLoot(CharacterUnitController characterUnit)
         {
             
             

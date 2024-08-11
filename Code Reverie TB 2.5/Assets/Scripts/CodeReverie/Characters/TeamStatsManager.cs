@@ -76,13 +76,13 @@ namespace CodeReverie
 
         float GetBaseStat(StatAttribute stat)
         {
-            if (GetComponent<CharacterController>().character == null)
+            if (GetComponent<CharacterUnitController>().character == null)
             {
                 //Debug.Log("Character not initialized on Character Unit");
                 return 0f;
             }
             
-            return GetComponent<CharacterController>().character.info.baseStats.progressionStatMap[stat].statMap[GetComponent<CharacterController>().character.Level];
+            return GetComponent<CharacterUnitController>().character.info.baseStats.progressionStatMap[stat].statMap[GetComponent<CharacterUnitController>().character.Level];
         }
         
         
@@ -92,13 +92,13 @@ namespace CodeReverie
         //     
         //     
         //     
-        //     if (GetComponent<CharacterController>().character == null)
+        //     if (GetComponent<CharacterUnitController>().character == null)
         //     {
         //         //Debug.Log("Character not initialized on Character Unit");
         //         return 0f;
         //     }
         //     
-        //     return GetComponent<CharacterController>().character.info.baseStats.basePercentageStats[stat];
+        //     return GetComponent<CharacterUnitController>().character.info.baseStats.basePercentageStats[stat];
         // }
         
 
@@ -210,7 +210,7 @@ namespace CodeReverie
             
             
             
-            if (TryGetComponent(out CharacterController characterController))
+            if (TryGetComponent(out CharacterUnitController characterController))
             {
 
                 if (characterController.character.characterGear.weaponSlot.item != null)
@@ -313,7 +313,7 @@ namespace CodeReverie
             
             
             
-            if (TryGetComponent(out CharacterController characterController))
+            if (TryGetComponent(out CharacterUnitController characterController))
             {
 
                 if (characterController.character.characterGear.weaponSlot.item != null)

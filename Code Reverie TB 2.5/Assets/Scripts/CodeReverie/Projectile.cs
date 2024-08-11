@@ -90,7 +90,7 @@ namespace CodeReverie
                 {
                     
                     
-                    if (other.TryGetComponent(out Health health) && other.GetComponent<CharacterController>().character.characterState != CharacterState.Dead)
+                    if (other.TryGetComponent(out Health health) && other.GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
                     {
                         //impulseSource.GenerateImpulseWithForce(impulseForce);
                         projectileGameObject.SetActive(false);
@@ -111,7 +111,7 @@ namespace CodeReverie
                 {
                     
                     
-                    if (other.TryGetComponent(out Health health) && other.GetComponent<CharacterController>().character.characterState != CharacterState.Dead)
+                    if (other.TryGetComponent(out Health health) && other.GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
                     {
 
                         if (health.canTakeDamage)

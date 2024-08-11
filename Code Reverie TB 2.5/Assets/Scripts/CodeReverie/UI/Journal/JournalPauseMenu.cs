@@ -29,12 +29,11 @@ namespace CodeReverie
 
         private void OnEnable()
         {
+            EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(false);
             ClearNavigationButtons();
             SetNavigationButtons();
             questFilterIndex = 0;
             SetFilters();
-            
-            
         }
 
         private void OnDisable()
@@ -87,6 +86,9 @@ namespace CodeReverie
 
         public void SetNavigationButtons()
         {
+
+            journalPauseMenuNavigationButtonList = new List<JournalPauseMenuNavigationButton>();
+            
             foreach (Quest quest in QuestManager.Instance.quests.Values)
             {
                 if (quest.Status == QuestStatus.Active || quest.Status == QuestStatus.Complete)
@@ -177,12 +179,15 @@ namespace CodeReverie
             switch (questFilterIndex)
             {
                 case 0:
+                    //Debug.Log("Filtering Main Quest");
                     FilterMainQuest();
                     break;
                 case 1:
+                    //Debug.Log("Filtering Side Quest");
                     FilterSideQuest();
                     break;
                 case 2:
+                    //Debug.Log("Filtering Completed Quest");
                     FilterCompletedQuest();
                     break;
             }

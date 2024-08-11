@@ -11,6 +11,7 @@ namespace CodeReverie
         public Action<MenuManager, bool> toggleMenuManager;
         public Action<MenuManager> openMenuManager;
         public Action onGameRestart;
+        public Action<bool> toggleCharacterSidePanelUI;
 
 
         public void OnGamePause(bool pause)
@@ -99,6 +100,11 @@ namespace CodeReverie
         public void OnPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState pauseMenuNavigationState)
         {
             onPauseMenuSubNavigationStateChange?.Invoke(pauseMenuNavigationState);
+        }
+
+        public void ToggleCharacterSidePanelUI(bool setActive)
+        {
+            toggleCharacterSidePanelUI?.Invoke(setActive);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace CodeReverie
 
         public void SwapCharacterListener(Character character, CharacterController characterUnitManager)
         {
-            if (GetComponent<CharacterController>().character == character)
+            if (GetComponent<CharacterUnitController>().character == character)
             {
                 
             }

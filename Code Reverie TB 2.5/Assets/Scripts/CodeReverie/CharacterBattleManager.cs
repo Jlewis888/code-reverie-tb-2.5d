@@ -65,7 +65,7 @@ namespace CodeReverie
 
         private void Start()
         {
-            actionRange = GetComponent<CharacterController>().character.info.attackRange;
+            actionRange = GetComponent<CharacterUnitController>().character.info.attackRange;
             EventManager.Instance.combatEvents.onAttackEnd += OnAttackEnd;
             EventManager.Instance.combatEvents.onSkillComplete += OnSkillEnd;
         }
@@ -87,7 +87,7 @@ namespace CodeReverie
         {
             if (BattleManager.Instance.pause)
             {
-                if (inCombat && GetComponent<CharacterController>().character.characterState == CharacterState.Alive)
+                if (inCombat && GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive)
                 {
                     switch (characterTimelineGaugeState)
                     {
@@ -128,7 +128,7 @@ namespace CodeReverie
             }
             else
             {
-                if (inCombat && GetComponent<CharacterController>().character.characterState == CharacterState.Alive)
+                if (inCombat && GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive)
                 {
                     switch (characterTimelineGaugeState)
                     {
@@ -451,10 +451,10 @@ namespace CodeReverie
             switch (characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
-                    actionRange = GetComponent<CharacterController>().character.info.attackRange;
+                    actionRange = GetComponent<CharacterUnitController>().character.info.attackRange;
                     break;
                 case CharacterBattleActionState.Break:
-                    actionRange = GetComponent<CharacterController>().character.info.attackRange;
+                    actionRange = GetComponent<CharacterUnitController>().character.info.attackRange;
                     break;
                 case CharacterBattleActionState.Skill:
                     if (selectedSkill != null)
@@ -463,16 +463,16 @@ namespace CodeReverie
                     }
                     else
                     {
-                        actionRange = GetComponent<CharacterController>().character.info.attackRange;
+                        actionRange = GetComponent<CharacterUnitController>().character.info.attackRange;
                     }
 
 
                     break;
                 case CharacterBattleActionState.Defend:
-                    actionRange = GetComponent<CharacterController>().character.info.attackRange;
+                    actionRange = GetComponent<CharacterUnitController>().character.info.attackRange;
                     break;
                 case CharacterBattleActionState.Item:
-                    actionRange = GetComponent<CharacterController>().character.info.attackRange;
+                    actionRange = GetComponent<CharacterUnitController>().character.info.attackRange;
                     break;
                 case CharacterBattleActionState.Move:
                     actionRange = 0;

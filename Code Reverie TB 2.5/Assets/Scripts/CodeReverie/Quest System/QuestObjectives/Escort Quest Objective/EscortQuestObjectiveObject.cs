@@ -44,11 +44,11 @@ namespace CodeReverie
             //     
             // }
             
-            if (other.GetComponent<CharacterController>())
+            if (other.GetComponent<CharacterUnitController>())
             {
 
                 // if (escortQuestObjectiveData.escortQuestTriggerList.Find(x =>
-                //         x.id == other.GetComponent<CharacterController>().character.info.id))
+                //         x.id == other.GetComponent<CharacterUnitController>().character.info.id))
                 // {
                 //    
                 //     EventManager.Instance.questEvents.OnEscortTargetEnter(escortQuestObjectiveData.questId);

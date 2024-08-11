@@ -112,7 +112,7 @@ namespace CodeReverie
                 
                 if (damageTarget.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Character))
                 {
-                    damageEffectiveType = damageTarget.GetComponent<CharacterController>().character.info.baseStats.damageEffectiveTypes[damageType];
+                    damageEffectiveType = damageTarget.GetComponent<CharacterUnitController>().character.info.baseStats.damageEffectiveTypes[damageType];
                 }
                 
                 
@@ -173,7 +173,7 @@ namespace CodeReverie
 
             if (damageTarget.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Character))
             {
-                damageReduction = (10f + ((1.5f * damageTarget.GetComponent<CharacterController>().character.Level)/100) + ((.25f * damageTarget.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Defense))/100))/100;
+                damageReduction = (10f + ((1.5f * damageTarget.GetComponent<CharacterUnitController>().character.Level)/100) + ((.25f * damageTarget.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Defense))/100))/100;
             }
 
             

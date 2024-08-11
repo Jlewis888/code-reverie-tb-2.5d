@@ -114,11 +114,11 @@ namespace CodeReverie
                
                 }
             
-                if (other.GetComponent<CharacterController>())
+                if (other.GetComponent<CharacterUnitController>())
                 {
 
                     if (questStepObjective.characterQuestTriggerList.Find(x =>
-                            x.id == other.GetComponent<CharacterController>().character.info.id))
+                            x.id == other.GetComponent<CharacterUnitController>().character.info.id))
                     {
                         targetInRange = true;
                         //EventManager.Instance.questEvents.OnEscortTargetEnter(escortQuestObjectiveData.questId);
@@ -144,11 +144,11 @@ namespace CodeReverie
                
                 }
             
-                if (other.GetComponent<CharacterController>())
+                if (other.GetComponent<CharacterUnitController>())
                 {
 
                     if (questStepObjective.characterQuestTriggerList.Find(x =>
-                            x.id == other.GetComponent<CharacterController>().character.info.id))
+                            x.id == other.GetComponent<CharacterUnitController>().character.info.id))
                     {
                         targetInRange = false;
                         //EventManager.Instance.questEvents.OnEscortTargetEnter(escortQuestObjectiveData.questId);

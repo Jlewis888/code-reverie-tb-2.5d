@@ -66,7 +66,7 @@ namespace CodeReverie
                     Instantiate(targetCommandMenuNavigationButtonPF, targetCommandMenuNavigationButtonHolder.transform);
 
                 targetCommandMenuNavigationButton.characterBattleManager = characterBattleManager;
-                targetCommandMenuNavigationButton.nameText.text = characterBattleManager.GetComponent<CharacterController>()
+                targetCommandMenuNavigationButton.nameText.text = characterBattleManager.GetComponent<CharacterUnitController>()
                     .character.info.characterName;
                 commandMenuNavigation.Add(targetCommandMenuNavigationButton);
             }
@@ -89,7 +89,7 @@ namespace CodeReverie
                     Instantiate(targetCommandMenuNavigationButtonPF, targetCommandMenuNavigationButtonHolder.transform);
 
                 targetCommandMenuNavigationButton.characterBattleManager = characterBattleManager;
-                targetCommandMenuNavigationButton.nameText.text = characterBattleManager.GetComponent<CharacterController>()
+                targetCommandMenuNavigationButton.nameText.text = characterBattleManager.GetComponent<CharacterUnitController>()
                     .character.info.characterName;
                 commandMenuNavigation.Add(targetCommandMenuNavigationButton);
             }

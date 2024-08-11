@@ -51,10 +51,10 @@ namespace CodeReverie
             } 
             
          
-            if (GetComponent<CharacterController>())
+            if (GetComponent<CharacterUnitController>())
             {
                 
-                if (GetComponent<CharacterController>().character.info.id == quest.info.questGiver.id)
+                if (GetComponent<CharacterUnitController>().character.info.id == quest.info.questGiver.id)
                 {
                     
                     
@@ -144,10 +144,10 @@ namespace CodeReverie
             
             
          
-                if (GetComponent<CharacterController>())
+                if (GetComponent<CharacterUnitController>())
                 {
                 
-                    if (GetComponent<CharacterController>().character.info.id == quest.currentQuestStep.info.id)
+                    if (GetComponent<CharacterUnitController>().character.info.id == quest.currentQuestStep.info.id)
                     {
                         DestroyIcons();
                         
@@ -184,10 +184,10 @@ namespace CodeReverie
             
             
          
-                if (GetComponent<CharacterController>())
+                if (GetComponent<CharacterUnitController>())
                 {
                 
-                    if (GetComponent<CharacterController>().character.info.id == quest.currentQuestStep.info.questGiver.id)
+                    if (GetComponent<CharacterUnitController>().character.info.id == quest.currentQuestStep.info.questGiver.id)
                     {
                         DestroyIcons();
                         
@@ -230,10 +230,10 @@ namespace CodeReverie
         //     
         //     
         //  
-        //     if (GetComponent<CharacterController>())
+        //     if (GetComponent<CharacterUnitController>())
         //     {
         //         
-        //         if (GetComponent<CharacterController>().character.info.id == quest.currentQuestStep.info.id)
+        //         if (GetComponent<CharacterUnitController>().character.info.id == quest.currentQuestStep.info.id)
         //         {
         //             
         //             if (quest.currentQuestStep.Status == QuestObjectiveStatus.Complete)

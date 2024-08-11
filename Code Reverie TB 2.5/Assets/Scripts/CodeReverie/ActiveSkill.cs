@@ -63,7 +63,7 @@ namespace CodeReverie
             {
                 case ControlSchemeType.KeyboardMouse:
 
-                    if (GetComponentInParent<CharacterController>().characterUnit.spriteRenderer.flipX)
+                    if (GetComponentInParent<CharacterUnitController>().characterUnit.spriteRenderer.flipX)
                     {
                         //transform.rotation = Quaternion.Euler(180,0,angle);
                         transform.localScale = new Vector3(1, -1, 1);

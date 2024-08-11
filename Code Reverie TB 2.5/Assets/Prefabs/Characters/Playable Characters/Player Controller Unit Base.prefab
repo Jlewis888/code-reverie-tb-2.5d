@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2039520131209433326}
   - component: {fileID: 7731905840939474314}
   - component: {fileID: 8029409203234419779}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3565071138203421712}
   - component: {fileID: 8357509338124791466}
-  - component: {fileID: 8475766865820538849}
+  - component: {fileID: 4662933673690888661}
   - component: {fileID: 8730055778077673353}
   - component: {fileID: 8932686705678154491}
   - component: {fileID: 588026674948223095}
@@ -153,6 +153,7 @@ Transform:
   - {fileID: 6754063178410040282}
   - {fileID: 5366337067149398529}
   - {fileID: 1316548137956211380}
+  - {fileID: 1464115369240447472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8357509338124791466
@@ -176,33 +177,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &8475766865820538849
-Rigidbody:
+--- !u!143 &4662933673690888661
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6907802491086714676}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 0.62
+  m_Radius: 0.1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.26, z: 0}
 --- !u!136 &8730055778077673353
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.108844995
   m_Height: 0.7301334
@@ -315,7 +315,7 @@ MonoBehaviour:
   characterTimelineGaugeState: 0
   battlePosition: {fileID: 0}
   selectedTargets: []
-  targetPosition: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   targetBattlePosition: {x: 0, y: 0}
   inCombat: 0
   namePanel: {fileID: 0}
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3247202db1f361c4587651a4765a96ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  characterController: {fileID: 0}
   moveSpeed: 3
   speedClamp: 0
   activeMoveSpeed: 0
@@ -549,6 +549,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   followTarget: {fileID: 0}
+  isMoving: 0
 --- !u!1 &8146441165837285600
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +682,61 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!1 &8273305364880096805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464115369240447472}
+  - component: {fileID: 1277981244942925550}
+  m_Layer: 9
+  m_Name: Ground Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1464115369240447472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273305364880096805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3565071138203421712}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1277981244942925550
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273305364880096805}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.07
+  m_Height: 0.03
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &8537880336221126786
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +749,7 @@ GameObject:
   - component: {fileID: 641085188473357019}
   - component: {fileID: 1585713923221433528}
   - component: {fileID: 4718724242311690908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: project_alchemy_human (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

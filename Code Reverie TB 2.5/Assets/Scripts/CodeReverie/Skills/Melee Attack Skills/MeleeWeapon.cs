@@ -71,7 +71,7 @@ namespace CodeReverie
                          
                      }
                      
-                     if (enemy.TryGetComponent(out Health health) && !damagedTarget.Contains(enemy.GetComponent<Health>()) && enemy.GetComponent<CharacterController>().character.characterState != CharacterState.Dead)
+                     if (enemy.TryGetComponent(out Health health) && !damagedTarget.Contains(enemy.GetComponent<Health>()) && enemy.GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
                      {
                          new DamageProfile(GetComponentInParent<CharacterBattleManager>(), health,
                              new List<DamageTypes>());

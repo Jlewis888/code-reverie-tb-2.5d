@@ -7,18 +7,22 @@ namespace CodeReverie
 {
     public class PlayerMovementController : MonoBehaviour
     {
-        
-        public Rigidbody rb;
+        public CharacterController characterController;
+        //public Rigidbody rb;
         private Vector3 moveInput, direction;
         public float moveSpeed;
         public float speedClamp;
         public float activeMoveSpeed;
         public CharacterDirection characterDirection;
         public CharacterMovementState characterMovementState;
-
+        private Vector3 playerVelocity;
+        private bool groundedPlayer;
+        private float gravityValue = -9.81f;
+        
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
+            //rb = GetComponent<Rigidbody>();
+            characterController = GetComponent<CharacterController>();
         }
 
 
@@ -31,6 +35,14 @@ namespace CodeReverie
         // Update is called once per frame
         void Update()
         {
+            
+            groundedPlayer = characterController.isGrounded;
+            
+            if (groundedPlayer && playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+            }
+            
             GamepadMovementControls();
             // moveInput.x = GameManager.Instance.playerInput.GetAxis("Move Horizontal");
             // moveInput.z = GameManager.Instance.playerInput.GetAxis("Move Vertical");
@@ -38,7 +50,7 @@ namespace CodeReverie
 
             activeMoveSpeed = moveSpeed * speedClamp;
             
-            
+            playerVelocity.y += gravityValue * Time.deltaTime;
 
             // if (direction.magnitude > 0)
             // {
@@ -62,7 +74,7 @@ namespace CodeReverie
                         activeMoveSpeed = 0;
                     
                         PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("idle");
-                    
+                        characterController.Move(playerVelocity * Time.deltaTime);
                         break;
                 
                     case CharacterMovementState.Moving:
@@ -142,7 +154,9 @@ namespace CodeReverie
 
             Vector3 movement = Vector3.ClampMagnitude(input, 1);
             
-            rb.MovePosition(rb.position + movement * (activeMoveSpeed * Time.fixedDeltaTime));
+            //rb.MovePosition(rb.position + movement * (activeMoveSpeed * Time.fixedDeltaTime));
+            characterController.Move(movement * (activeMoveSpeed * Time.fixedDeltaTime));
+            characterController.Move(playerVelocity * Time.deltaTime);
         }
 
 

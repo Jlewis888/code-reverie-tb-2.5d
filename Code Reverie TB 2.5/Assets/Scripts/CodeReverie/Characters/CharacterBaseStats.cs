@@ -9,7 +9,7 @@ namespace CodeReverie
 
     public class CharacterBaseStats : SerializedScriptableObject
     {
-        private Dictionary<StatAttribute, float> baseStats = new Dictionary<StatAttribute, float>();
+        [SerializeField]private Dictionary<StatAttribute, float> baseStats = new Dictionary<StatAttribute, float>();
         
         public Dictionary<DamageTypes, DamageEffectiveTypes> damageEffectiveTypes = new Dictionary<DamageTypes, DamageEffectiveTypes>();
 

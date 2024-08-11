@@ -87,10 +87,10 @@ namespace CodeReverie
             return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
         }
 
-        public void OnEnemyDeath(CharacterController characterController)
+        public void OnEnemyDeath(CharacterUnitController characterController)
         {
             
-            if (characterController == GetComponent<CharacterController>())
+            if (characterController == GetComponent<CharacterUnitController>())
             {
                 Debug.Log("yas");
                 attackIndicatorsManager.CloseAllIndicators();

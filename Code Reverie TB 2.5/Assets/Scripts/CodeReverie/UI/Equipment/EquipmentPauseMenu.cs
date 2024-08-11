@@ -7,6 +7,7 @@ namespace CodeReverie
 {
     public class EquipmentPauseMenu : PauseMenu
     {
+        public EquipItemMenuNavigationState equipItemMenuNavigationState;
         public PartySlotNavigationUI partySlotNavigationUIPF;
         public PartySlotNavigationUI selectedPartySlotNavigationUI;
         public List<PartySlotNavigationUI> partySlotNavigationUIList;
@@ -32,7 +33,8 @@ namespace CodeReverie
 
         private void OnEnable()
         {
-            
+            EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(false);
+            equipItemPauseMenuNavigationButtonPanel.SetActive(false);
             //ClearNavigationButtons();
             ClearPartSlotUI();
             SetPartySlotUI();
@@ -54,49 +56,81 @@ namespace CodeReverie
 
         private void Update()
         {
-            
-            if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
-            {
-                Confirm();
-            }
-            
-            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-            {
-                EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState
-                    .Menu);
-            }
-            
-            
-            if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
-            {
-                partySlotIndex++;
 
-                if (partySlotIndex >= PlayerManager.Instance.availableCharacters.Count)
-                {
-                    partySlotIndex = 0;
-                }
-
-                SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
-
-            } 
-            else if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Menu Horizontal Button"))
+            switch (equipItemMenuNavigationState)
             {
-                partySlotIndex--;
+                case EquipItemMenuNavigationState.Menu:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
+                    }
+            
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    {
+                        EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState
+                            .Menu);
+                    }
+                    
+                    if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
+                    {
+                        partySlotIndex++;
+
+                        if (partySlotIndex >= PlayerManager.Instance.availableCharacters.Count)
+                        {
+                            partySlotIndex = 0;
+                        }
+
+                        SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
+
+                    } 
+                    else if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Menu Horizontal Button"))
+                    {
+                        partySlotIndex--;
                 
-                if (partySlotIndex <= 0)
-                {
-                    partySlotIndex = PlayerManager.Instance.availableCharacters.Count - 1;
-                }
+                        if (partySlotIndex < 0)
+                        {
+                            partySlotIndex = PlayerManager.Instance.availableCharacters.Count - 1;
+                        }
 
-                SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
+                        SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
+                    }
+                    
+                    pauseMenuNavigation.NavigationInputUpdate();
+                    
+                    break;
+                
+                case EquipItemMenuNavigationState.EquipItem:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        ConfirmItemSelection();
+                    }
+            
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    {
+                        equipItemMenuNavigationState = EquipItemMenuNavigationState.Menu;
+                        equipItemPauseMenuNavigationButtonPanel.SetActive(false);
+                    }
+                    
+                    
+                    
+                    equipmentItemMenuNavigation.NavigationInputUpdate();
+                    break;
             }
             
-            pauseMenuNavigation.NavigationInputUpdate();
+            
         }
 
         private void Confirm()
         {
+            equipItemPauseMenuNavigationButtonPanel.SetActive(true);
+            equipItemMenuNavigationState = EquipItemMenuNavigationState.EquipItem;
             SetEquipmentNavigationButtons();
+        }
+
+        void ConfirmItemSelection()
+        {
+            equipItemMenuNavigationState = EquipItemMenuNavigationState.Menu;
+            equipItemPauseMenuNavigationButtonPanel.SetActive(false);
         }
 
 
@@ -135,6 +169,7 @@ namespace CodeReverie
 
         public void SetEquipmentNavigationButtons()
         {
+            
             foreach (Transform child in equipItemPauseMenuNavigationButtonHolder.transform)
             {
                 Destroy(child.gameObject);

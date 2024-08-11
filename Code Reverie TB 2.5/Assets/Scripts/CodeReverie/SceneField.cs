@@ -21,6 +21,19 @@ namespace CodeReverie
         {
             return sceneField.SceneName;
         }
+
+        public bool IsNullOrEmpty
+        {
+            get
+            {
+                if (m_SceneAsset == null)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
     
     

@@ -42,11 +42,11 @@ namespace CodeReverie
             slider.maxValue = characterBattleManager.actionPhaseCooldown;
             slider.value = characterBattleManager.cooldownTimer;
 
-            if (GetComponent<CharacterController>() != null)
+            if (GetComponent<CharacterUnitController>() != null)
             {
-                if (GetComponent<CharacterController>().character != null)
+                if (GetComponent<CharacterUnitController>().character != null)
                 {
-                    characterPortrait.sprite = characterBattleManager.GetComponent<CharacterController>().character
+                    characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character
                         .GetCharacterPortrait();
                 }
             }

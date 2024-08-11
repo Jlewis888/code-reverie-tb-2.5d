@@ -34,6 +34,8 @@ namespace CodeReverie
 
         private void OnEnable()
         {
+            equipSkillsPanel.SetActive(false);
+            EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(false);
             //ClearNavigationButtons();
             ClearPartSlotUI();
             SetPartySlotUI();
@@ -104,6 +106,7 @@ namespace CodeReverie
 
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
+                        equipSkillsPanel.SetActive(false);
                         skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
                         SetNavigationButtons();
                     }
@@ -119,10 +122,12 @@ namespace CodeReverie
             switch (skillsMenuNavigationState)
             {
                 case SkillsMenuNavigationState.SelectSkillSlot:
+                    equipSkillsPanel.SetActive(true);
                     skillsMenuNavigationState = SkillsMenuNavigationState.EquipSkills;
                     SetLearnedSkills(skillSlotPauseMenuNavigation.SelectedNavigationButton.GetComponent<SkillSlotPauseMenuNavigationButton>().skillType);
                     break;
                 case SkillsMenuNavigationState.EquipSkills:
+                    equipSkillsPanel.SetActive(false);
                     skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
                     SetNavigationButtons();
                     break;

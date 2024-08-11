@@ -67,7 +67,7 @@ namespace CodeReverie
             commandMenuNavigation.ClearNavigationList();
             
             Clear();
-            foreach (Skill skill in BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterController>().character.characterSkills.equippedActionSkills.Values)
+            foreach (Skill skill in BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character.characterSkills.equippedActionSkills.Values)
             {
 
                 if (skill != null)

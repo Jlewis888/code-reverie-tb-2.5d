@@ -20,8 +20,8 @@ namespace CodeReverie
         {
             base.Awake();
             ChangeMasterVolume(0.5f);
-            ChangeEffectsVolume(0.1f);
-            ChangeMusicVolume(0.1f);
+            ChangeEffectsVolume(0.25f);
+            ChangeMusicVolume(0.25f);
             Initialize();
             audioClipManagers = new Dictionary<string, AudioClipManager>();
         }

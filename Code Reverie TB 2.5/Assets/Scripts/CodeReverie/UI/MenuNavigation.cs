@@ -147,6 +147,12 @@ namespace CodeReverie
 
         public void SetFirstItem()
         {
+
+            if (pauseMenuNavigationButtons.Count < 1)
+            {
+                return;
+            }
+            
             navigationButtonsIndex = 0;
             
             SelectedNavigationButton = pauseMenuNavigationButtons[navigationButtonsIndex];

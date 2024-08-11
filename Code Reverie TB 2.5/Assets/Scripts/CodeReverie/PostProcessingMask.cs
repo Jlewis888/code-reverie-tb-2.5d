@@ -22,7 +22,7 @@ namespace CodeReverie
             {
                 case PostProcessingDepthOfFieldState.Close:
                     //layerMask = LayerMask.NameToLayer("No Post Processing");
-                    gameObject.layer = LayerMask.NameToLayer("No Post Processing");
+                    gameObject.layer = LayerMask.NameToLayer("Focused");
                     break;
                 
                 case PostProcessingDepthOfFieldState.Far:

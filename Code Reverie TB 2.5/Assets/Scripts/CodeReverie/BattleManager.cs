@@ -220,16 +220,16 @@ namespace CodeReverie
             {
                 case CharacterBattleActionState.Attack:
                 case CharacterBattleActionState.Break:
-                    selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
+                    selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive);
                     
                     break;
                 case CharacterBattleActionState.Skill:
-                    selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterController>().character.characterState == CharacterState.Alive);
+                    selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive);
                     break;
             }
         }
         
-        public void AllEnemyDeathCheck(CharacterController characterController)
+        public void AllEnemyDeathCheck(CharacterUnitController characterController)
         {
             for (int i = 0; i < enemyUnits.Count; i++)
             {

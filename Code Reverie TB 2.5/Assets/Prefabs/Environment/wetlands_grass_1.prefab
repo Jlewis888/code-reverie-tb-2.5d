@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2666676502706075494}
   - component: {fileID: -8086338228879782695}
   - component: {fileID: 3677286164858555486}
+  - component: {fileID: -712767180611054788}
   m_Layer: 0
   m_Name: wetlands_grass_1
   m_TagString: Untagged
@@ -106,3 +107,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-712767180611054788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8703253120603202237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb80fdfae2d44e18e52edc2efc1a48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []

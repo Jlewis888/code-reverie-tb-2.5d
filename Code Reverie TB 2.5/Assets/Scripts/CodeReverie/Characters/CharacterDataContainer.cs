@@ -32,7 +32,7 @@ namespace CodeReverie
         public CharacterType characterType;
         
         [TabGroup("Character Details")]
-        public CharacterController characterUnitPF;
+        public CharacterUnitController characterUnitPF;
         
         [TabGroup("Character Details")]
         public float experienceToGive;
@@ -81,7 +81,7 @@ namespace CodeReverie
             
             string baseStatsAssetPath = assetPath.Replace($"/{name}.asset", "");
             List<CharacterBaseStats> baseStatsList = AssetDatabase.FindAssets("t:CharacterBaseStats", new []{baseStatsAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterBaseStats>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
-            List<CharacterController> characterControllers = AssetDatabase.FindAssets("Character Unit Manager t:prefab", new []{baseStatsAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterController>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
+            List<CharacterUnitController> characterControllers = AssetDatabase.FindAssets("Character Unit Manager t:prefab", new []{baseStatsAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterUnitController>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
 
             
             if (baseStatsList.Count > 0)

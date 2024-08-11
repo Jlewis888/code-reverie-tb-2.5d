@@ -13,21 +13,26 @@ namespace CodeReverie
 
         private float waitToLoadTime = 1f;
         
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<CharacterGroundCollider>() && other.gameObject.GetComponentInParent<ComponentTagManager>().HasTag(ComponentTag.Player))
+            
+            if (other.gameObject.GetComponentInParent<ComponentTagManager>().HasTag(ComponentTag.Player) && other.gameObject == PlayerManager.Instance.currentParty[0].characterController.gameObject)
             {
-                GameSceneManager.Instance.isTransitioningScenes = true;
-                GameSceneManager.Instance.SetTransitionName(sceneTransitionName);
+
+                if (!sceneToLoad.IsNullOrEmpty)
+                {
+                    GameSceneManager.Instance.isTransitioningScenes = true;
+                    GameSceneManager.Instance.SetTransitionName(sceneTransitionName);
                 
+                    CanvasManager.Instance.uiFade.FadeToBlack();
+                    StartCoroutine(LoadSceneRoutine());
+                }
                 
-                CanvasManager.Instance.uiFade.FadeToBlack();
-                StartCoroutine(LoadSceneRoutine());
+                Debug.Log("Load New Area");
 
             }
         }
-
-
+        
         IEnumerator LoadSceneRoutine()
         {
             // while (waitToLoadTime >= 0)

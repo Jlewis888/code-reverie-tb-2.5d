@@ -3,6 +3,6 @@
     public class CharacterContainer
     {
         public Character character;
-        public CharacterController characterUnitController;
+        public CharacterUnitController characterUnitController;
     }
 }

@@ -34,7 +34,7 @@ namespace CodeReverie
 
             // if (transform.CompareTag("Player"))
             // {
-            //     //defaultMaterial = GetComponent<CharacterController>().characterUnit.spriteRenderer.material;
+            //     //defaultMaterial = GetComponent<CharacterUnitController>().characterUnit.spriteRenderer.material;
             //     defaultMaterial = spriteRenderer.material;
             // }
             // else if (transform.CompareTag("Enemy"))
@@ -133,7 +133,7 @@ namespace CodeReverie
                 MaxHealth = characterStatsManager.GetStat(StatAttribute.Health);
             }
 
-            if (TryGetComponent(out CharacterController characterController))
+            if (TryGetComponent(out CharacterUnitController characterController))
             {
                 healthBarCount = characterController.character.info.healthBarCount;
             }
@@ -174,7 +174,7 @@ namespace CodeReverie
         {
             if (canTakeDamage && !invincible)
             {
-                // if (GetComponent<CharacterController>().character.characterState != CharacterState.Dead)
+                // if (GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
                 // {
                 //     CreateDamagePopup(damageProfile);
                 //     //StartCoroutine(ApplyDamageFlash());
@@ -261,17 +261,17 @@ namespace CodeReverie
         public void Death()
         {
 
-            if (GetComponent<CharacterController>().character.characterState != CharacterState.Dead)
+            if (GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
             {
                 if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
                 {
-                    EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterController>()); 
+                    EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterUnitController>()); 
                 }
             
             
                 if (CompareTag("Player"))
                 {
-                    EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterController>());
+                    EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterUnitController>());
                     
                     
                     // PlayerManager.Instance.SwapCharacterOnDeath();
@@ -286,10 +286,10 @@ namespace CodeReverie
                     
                 }
             
-                GetComponent<CharacterController>().character.characterState = CharacterState.Dead;
+                GetComponent<CharacterUnitController>().character.characterState = CharacterState.Dead;
                 GetComponent<AnimationManager>().ChangeAnimationState("death");
                 EventManager.Instance.combatEvents.OnCharacterDeath(GetComponent<CharacterBattleManager>());
-                EventManager.Instance.combatEvents.OnDeath(GetComponent<CharacterController>().character.info.id);
+                EventManager.Instance.combatEvents.OnDeath(GetComponent<CharacterUnitController>().character.info.id);
                 
             }
             
@@ -300,13 +300,13 @@ namespace CodeReverie
             //     
             //     if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
             //     {
-            //         EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterController>()); 
+            //         EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterUnitController>()); 
             //     }
             //     
             //     
             //     if (CompareTag("Player"))
             //     {
-            //         EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterController>());
+            //         EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterUnitController>());
             //         
             //         
             //         // PlayerManager.Instance.SwapCharacterOnDeath();

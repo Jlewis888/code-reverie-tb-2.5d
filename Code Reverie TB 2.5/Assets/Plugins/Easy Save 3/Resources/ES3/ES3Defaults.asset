@@ -37,6 +37,7 @@ MonoBehaviour:
     - Crest.Examples
     - DamageNumbersPro
     - Enviro3.Runtime
+    - GaiaCore
     - Ink-Libraries
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0

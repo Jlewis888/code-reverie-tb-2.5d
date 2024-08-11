@@ -85,13 +85,13 @@ namespace CodeReverie
 
         float GetBaseStat(StatAttribute stat)
         {
-            if (GetComponent<CharacterController>().character == null)
+            if (GetComponent<CharacterUnitController>().character == null)
             {
                 //Debug.Log("Character not initialized on Character Unit");
                 return 0f;
             }
             
-            return GetComponent<CharacterController>().character.info.baseStats.progressionStatMap[stat].statMap[GetComponent<CharacterController>().character.Level];
+            return GetComponent<CharacterUnitController>().character.info.baseStats.progressionStatMap[stat].statMap[GetComponent<CharacterUnitController>().character.Level];
         }
         
         public StatAttribute DamageTypeStatToDamageBonusStat(DamageTypes damageType)
@@ -142,7 +142,7 @@ namespace CodeReverie
             
             
             
-            if (TryGetComponent(out CharacterController characterController) && characterController.character != null)
+            if (TryGetComponent(out CharacterUnitController characterController) && characterController.character != null)
             {
 
                 if (characterController.character.characterGear.weaponSlot.item != null)
@@ -244,7 +244,7 @@ namespace CodeReverie
             
             
             
-            if (TryGetComponent(out CharacterController characterController) && characterController.character != null)
+            if (TryGetComponent(out CharacterUnitController characterController) && characterController.character != null)
             {
 
                 if (characterController.character.characterGear.weaponSlot.item != null)

@@ -388,7 +388,7 @@ namespace CodeReverie
         }
 
 
-        public void SwapCharacterOnDeath(CharacterController enemy)
+        public void SwapCharacterOnDeath(CharacterUnitController enemy)
         {
             // for (int i = 0; i < activeParty.team.Count; i++)
             // {
@@ -400,7 +400,7 @@ namespace CodeReverie
             // }
         }
 
-        public void AllPartyMembersDeathCheck(CharacterController enemy)
+        public void AllPartyMembersDeathCheck(CharacterUnitController enemy)
         {
 
             // if (GameOverDeathCheck())
@@ -483,7 +483,7 @@ namespace CodeReverie
         // }
 
 
-        public void GiveExperienceOnEnemyDeath(CharacterController enemy)
+        public void GiveExperienceOnEnemyDeath(CharacterUnitController enemy)
         {
             //Experience = enemy.character.info.experienceToGive;
 

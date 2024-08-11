@@ -71,9 +71,9 @@ namespace CodeReverie
             //     
             //     if(BattleManager.Instance.selectedPlayerCharacter != null)
             //     {
-            //         if (BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterController>() != null)
+            //         if (BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>() != null)
             //         {
-            //             skillSlot = BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterController>().character.characterSkills.equippedActionSkills[slotNumber];
+            //             skillSlot = BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character.characterSkills.equippedActionSkills[slotNumber];
             //     
             //             if (skillSlot != null && skillSlot.skill != null)
             //             {
