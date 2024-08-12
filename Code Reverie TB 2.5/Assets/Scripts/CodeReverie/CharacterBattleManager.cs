@@ -10,7 +10,8 @@ namespace CodeReverie
 {
     public class CharacterBattleManager : SerializedMonoBehaviour
     {
-        private Rigidbody rb;
+        //private Rigidbody rb;
+        public CharacterController characterController;
         public CharacterBattleState battleState;
         public CharacterBattleActionState characterBattleActionState;
         public CharacterTimelineGaugeState characterTimelineGaugeState;
@@ -45,7 +46,8 @@ namespace CodeReverie
                 namePanel.SetActive(false);
             }
 
-            rb = GetComponent<Rigidbody>();
+            //rb = GetComponent<Rigidbody>();
+            characterController = GetComponent<CharacterController>();
             moveSpeed = 5f;
 
             if (actionPhaseCooldown == 0)
@@ -105,7 +107,8 @@ namespace CodeReverie
 
                                     repositionTimer -= Time.deltaTime;
 
-                                    rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
+                                    //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
+                                    characterController.Move( moveDir * (15f * Time.fixedDeltaTime));
 
                                     if (repositionTimer <= 0)
                                     {
@@ -167,7 +170,8 @@ namespace CodeReverie
 
                                     repositionTimer -= Time.deltaTime;
 
-                                    rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
+                                    //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
+                                    characterController.Move( moveDir * (15f * Time.fixedDeltaTime));
 
                                     if (repositionTimer <= 0)
                                     {
@@ -186,8 +190,10 @@ namespace CodeReverie
                                     GetComponent<AnimationManager>().ChangeAnimationState("run");
                                     repositionTimer -= Time.deltaTime;
 
-                                    rb.MovePosition(rb.position + moveDir * (5f * Time.fixedDeltaTime));
+                                    //rb.MovePosition(rb.position + moveDir * (5f * Time.fixedDeltaTime));
 
+                                    characterController.Move( moveDir * (15f * Time.fixedDeltaTime));
+                                    
                                     if (repositionTimer <= 0)
                                     {
                                         if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))

@@ -202,11 +202,16 @@ public class CameraManager : ManagerSingleton<CameraManager>
     {
         mainVirtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = collider2D;
     }
+    
+    public void SetCameraConfiner(Collider collider)
+    {
+        mainVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingVolume = collider;
+    }
 
     public void UpdateCamera(Transform transform)
     {
         mainVirtualCamera.m_Follow = transform;
-        mainVirtualCamera.LookAt = transform;
+        mainVirtualCamera.LookAt = null;
         //
         // inventoryVirtualCamera.m_Follow = transform;
         // inventoryVirtualCamera.LookAt = transform;
