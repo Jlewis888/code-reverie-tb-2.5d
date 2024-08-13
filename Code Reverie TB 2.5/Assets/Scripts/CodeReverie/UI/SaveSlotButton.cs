@@ -9,14 +9,6 @@ namespace CodeReverie
     public class SaveSlotButton : DataSlotButton
     {
         
-        private void Awake()
-        {
-            button = GetComponent<Button>();
-            button.onClick.AddListener(SaveGame);
-            
-            
-        }
-
         // private void Start()
         // {
         //     SetHasDataPanel();

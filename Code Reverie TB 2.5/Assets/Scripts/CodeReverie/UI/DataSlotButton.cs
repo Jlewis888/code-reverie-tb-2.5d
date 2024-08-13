@@ -7,10 +7,9 @@ using UnityEngine.UI;
 
 namespace CodeReverie
 {
-    public abstract class DataSlotButton : SerializedMonoBehaviour
+    public abstract class DataSlotButton : PauseMenuNavigationButton
     {
         public int gameSlot;
-        protected Button button;
         public List<CharacterPortrait> characterPortraits;
         public CharacterPortrait partySlotPortrait1;
         public CharacterPortrait partySlotPortrait2;

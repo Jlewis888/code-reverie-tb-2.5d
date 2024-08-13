@@ -69,9 +69,7 @@ namespace CodeReverie
             
             return false;
         }
-
-       
-
+        
         public void LoadData(string dataSlot) { }
 
         public void SaveData(string dataSlot)

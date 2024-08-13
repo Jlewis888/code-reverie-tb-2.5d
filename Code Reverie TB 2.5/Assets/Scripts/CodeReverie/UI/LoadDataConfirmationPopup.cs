@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,24 +9,47 @@ namespace CodeReverie
 {
     public class LoadDataConfirmationPopup : SerializedMonoBehaviour
     {
-        public Button confirmationButton;
-        public Button exitButton;
+        public MenuNavigation menuNavigation;
+        public PauseMenuNavigationButton confirmationButton;
+        public PauseMenuNavigationButton exitButton;
         public int gameSlot;
 
         public void Awake()
         {
-            confirmationButton.onClick.AddListener(LoadGame);
-            exitButton.onClick.AddListener(() =>
+            
+            menuNavigation = new MenuNavigation();
+            
+            menuNavigation.Add(confirmationButton);
+            menuNavigation.Add(exitButton);
+            
+            //menuNavigation.pauseMenuNavigationButtons = GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+            
+        }
+
+        private void OnEnable()
+        {
+            menuNavigation.SetFirstItem();
+        }
+
+        private void Update()
+        {
+            if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
             {
-                Debug.Log("Close this shiot");
-                gameObject.SetActive(false);
-            });
+                Confirm();
+            }
+            
+            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            {
+                Cancel();
+            }
+            
+            menuNavigation.NavigationInputUpdate();
         }
 
 
         public void LoadGame()
         {
-            
+            Debug.Log("SHould not be working here 222");
             if (DataPersistenceManager.Instance.SaveFileExist(gameSlot))
             {
                 
@@ -40,6 +64,29 @@ namespace CodeReverie
                 }
                 
             }
+        }
+
+        void Cancel()
+        {
+            gameObject.SetActive(false);
+        }
+        
+        private void Confirm()
+        {
+            
+            if (menuNavigation.SelectedNavigationButton == confirmationButton)
+            {
+                Debug.Log("working here");
+                LoadGame();
+            }
+            if (menuNavigation.SelectedNavigationButton == exitButton)
+            {
+                Cancel();
+            }
+            
+            
+            
+            //menuNavigation.SelectedNavigationButton.GetComponent<LoadSlotButton>().LoadGame();
         }
         
         

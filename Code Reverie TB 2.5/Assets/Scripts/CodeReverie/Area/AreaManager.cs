@@ -10,7 +10,7 @@ namespace CodeReverie
     public class AreaManager : SerializedMonoBehaviour
     {
         public static AreaManager instance;
-
+        public AreaManagerData areaManagerData;
 
         public AreaType areaType;
         public Transform defaultAreaSpawnPoint;
@@ -33,7 +33,8 @@ namespace CodeReverie
             instance = this;
             autoSaveDelay = 5f;
             
-            
+            GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
+            GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
         }
 
         private void OnEnable()

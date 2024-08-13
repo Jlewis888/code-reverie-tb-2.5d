@@ -8,13 +8,6 @@ namespace CodeReverie
 {
     public class LoadSlotButton : DataSlotButton
     {
-       
-
-        private void Awake()
-        {
-            button = GetComponent<Button>();
-            button.onClick.AddListener(LoadGame);
-        }
         
         // private void Start()
         // {

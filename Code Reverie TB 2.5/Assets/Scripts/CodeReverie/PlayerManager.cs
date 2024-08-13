@@ -67,12 +67,8 @@ namespace CodeReverie
             EventManager.Instance.generalEvents.onLoad += Init;
             EventManager.Instance.generalEvents.onGameRestart += ResetParty;
             EventManager.Instance.combatEvents.onEnemyDeath += GiveExperienceOnEnemyDeath;
-            EventManager.Instance.combatEvents.onPlayerDeath += SwapCharacterOnDeath;
             EventManager.Instance.combatEvents.onPlayerDeath += AllPartyMembersDeathCheck;
-
             SceneManager.sceneLoaded += OnSceneLoaded;
-            
-            
         }
 
 
@@ -89,7 +85,6 @@ namespace CodeReverie
         {
             if (DataPersistenceManager.Instance.debugging)
             {
-               
                 SetNewGameData();
                 Init();
                 DataPersistenceManager.Instance.debugging = false;
@@ -97,7 +92,6 @@ namespace CodeReverie
             if (GameSceneManager.Instance.fromLoadedData)
             {
                 Init();
-                
             }
         }
 
@@ -140,28 +134,6 @@ namespace CodeReverie
                 // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
                 // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
                 // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
-            }
-            
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                currentParty[0].characterSkills.equippedActionSkills[3].source =
-                    currentParty[0].characterController.GetComponent<CharacterBattleManager>();
-                currentParty[0].characterSkills.equippedActionSkills[3].UseSkill();
-                
-                //Experience = 1000;
-                // AddCharacterToAvailablePartyPool("Arcalia");
-                // AddCharacterToActiveParty("Arcalia");
-                // DataPersistenceManager.Instance.LoadGame(1);
-                // Init();
-            }
-            
-            
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                //Experience = 1000;
-                // AddCharacterToAvailablePartyPool("Rue");
-                // AddCharacterToActiveParty("Rue");
-                
             }
             
             if (GameManager.Instance.playerInput.GetButtonDown("Interact"))
@@ -245,21 +217,6 @@ namespace CodeReverie
             {
                 partySlot.Init();
             }
-            
-
-            // if (currentParty != null)
-            // {
-            //     currentParty[0].SpawnCharacter(AreaManager.instance.defaultAreaSpawnPoint != null ? AreaManager.instance.defaultAreaSpawnPoint.position : Vector3.zero);
-            //     //activeParty.ActivePartySlot.character.characterController.transform.position = AreaManager.instance.defaultAreaSpawnPoint != null ? AreaManager.instance.defaultAreaSpawnPoint.position : Vector3.zero;
-            //     currentParty[0].characterController.gameObject.SetActive(true);
-            //     CameraManager.Instance.UpdateCamera(currentParty[0].characterController.transform);
-            //     currentParty[0].equippedArchetype.skills.SubscribeEquippedSkills();
-            //     
-            //     EventManager.Instance.playerEvents.OnPartyUpdate();
-            // }
-            
-            //AddCharacterToActiveParty("Cecil");
-            //AddCharacterToActiveParty("Arcalia");
         }
 
         public void SetPartyUnits()
@@ -267,17 +224,8 @@ namespace CodeReverie
             
             if (currentParty != null)
             {
-                
-                //currentParty[0].SpawnCharacter(AreaManager.instance.defaultAreaSpawnPoint != null ? AreaManager.instance.defaultAreaSpawnPoint.position : Vector3.zero);
-                //activeParty.ActivePartySlot.character.characterController.transform.position = AreaManager.instance.defaultAreaSpawnPoint != null ? AreaManager.instance.defaultAreaSpawnPoint.position : Vector3.zero;
-                //currentParty[0].characterController.gameObject.SetActive(true);
-                
-                //currentParty[0].equippedArchetype.skills.SubscribeEquippedSkills();
-                
                 int count = 0;
                 
-                
-            
                 foreach (Character character in currentParty)
                 {
                     character.SpawnCharacter(AreaManager.instance.defaultAreaSpawnPoint != null ? AreaManager.instance.defaultAreaSpawnPoint.position : Vector3.zero);
@@ -295,7 +243,6 @@ namespace CodeReverie
                         character.characterController.GetComponent<PlayerMovementController>().enabled = false;
                         character.characterController.GetComponent<PlayerAIMovementController>().followTarget =
                             currentParty[count - 1].characterController.gameObject;
-                        //character.characterController.
                     }
                     
                     character.characterController.gameObject.SetActive(true);
@@ -366,14 +313,7 @@ namespace CodeReverie
                 count++;
             }
         }
-
-
-        public void SwapCharacter(int index)
-        {
-            
-            
-        }
-
+        
         public List<CharacterBattleManager> GetCharacterBattleManagers()
         {
 
@@ -386,30 +326,15 @@ namespace CodeReverie
 
             return party;
         }
-
-
-        public void SwapCharacterOnDeath(CharacterUnitController enemy)
-        {
-            // for (int i = 0; i < activeParty.team.Count; i++)
-            // {
-            //     if (activeParty.team[i].characterUnitController.GetComponent<Health>().CurrentHealth >= 1)
-            //     {
-            //         SwapCharacter(i);
-            //         return;
-            //     }
-            // }
-        }
-
+        
         public void AllPartyMembersDeathCheck(CharacterUnitController enemy)
         {
-
             // if (GameOverDeathCheck())
             // {
             //     Debug.Log("All Party Members have died");
             //     CanvasManager.Instance.gameOverUIManager.gameObject.SetActive(true);
             // }
         }
-        
         
         public bool GameOverDeathCheck()
         {
@@ -424,65 +349,6 @@ namespace CodeReverie
             return true;
         }
         
-
-        // public int Level
-        // {
-        //     get => currentLevel;
-        //     set
-        //     {
-        //         if (currentLevel + value > currentLevel)
-        //         {
-        //             EventManager.Instance.playerEvents.OnLevelUp();
-        //             currentLevel += value;
-        //             skillPoints += 1;
-        //         }
-        //     }
-        // }
-        //
-        //
-        // public float Experience
-        // {
-        //     get => currentExp;
-        //
-        //     set
-        //     {
-        //         if (Level >= 99)
-        //         {
-        //             currentExp = 0;
-        //             return;
-        //         }
-        //
-        //         currentExp += value;
-        //
-        //         if (Level < 99)
-        //         {
-        //             while (ExperienceAboveNextLevelCheck())
-        //             {
-        //                 currentExp -= playerExperienceMap.experienceMap[Level];
-        //
-        //                 Level = 1;
-        //
-        //                 if (Level >= 99)
-        //                 {
-        //                     currentExp = 0;
-        //                     break;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        //
-        // public bool ExperienceAboveNextLevelCheck()
-        // {
-        //     if (currentExp >= playerExperienceMap.experienceMap[Level])
-        //     {
-        //         return true;
-        //     }
-        //
-        //     return false;
-        // }
-
-
         public void GiveExperienceOnEnemyDeath(CharacterUnitController enemy)
         {
             //Experience = enemy.character.info.experienceToGive;
@@ -495,12 +361,7 @@ namespace CodeReverie
             
             CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{enemy.character.info.experienceToGive} gained");
         }
-
-        // public float GetCurrentMaxExperience()
-        // {
-        //     return playerExperienceMap.experienceMap[Level];
-        // }
-
+        
         public void AddCharacterToActiveParty(string characterID)
         {
             if (availableCharacters.Count > 0)
@@ -526,8 +387,7 @@ namespace CodeReverie
                 }
             }
         }
-
-
+        
         public void AddCharacterToAvailablePartyPool(string characterID)
         {
             CharacterDataContainer characterDataContainer = CharacterManager.Instance.GetCharacterByCharacterId(characterID);
