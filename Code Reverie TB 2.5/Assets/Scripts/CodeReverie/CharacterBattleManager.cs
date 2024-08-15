@@ -108,7 +108,7 @@ namespace CodeReverie
                                     repositionTimer -= Time.deltaTime;
 
                                     //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
-                                    characterController.Move( moveDir * (15f * Time.fixedDeltaTime));
+                                    characterController.Move( moveDir * (8f * Time.fixedDeltaTime));
 
                                     if (repositionTimer <= 0)
                                     {
@@ -171,7 +171,7 @@ namespace CodeReverie
                                     repositionTimer -= Time.deltaTime;
 
                                     //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
-                                    characterController.Move( moveDir * (15f * Time.fixedDeltaTime));
+                                    characterController.Move( moveDir * (8f * Time.fixedDeltaTime));
 
                                     if (repositionTimer <= 0)
                                     {
@@ -192,7 +192,7 @@ namespace CodeReverie
 
                                     //rb.MovePosition(rb.position + moveDir * (5f * Time.fixedDeltaTime));
 
-                                    characterController.Move( moveDir * (15f * Time.fixedDeltaTime));
+                                    characterController.Move( moveDir * (4f * Time.fixedDeltaTime));
                                     
                                     if (repositionTimer <= 0)
                                     {
@@ -328,11 +328,11 @@ namespace CodeReverie
                                             GetComponent<AnimationManager>().ChangeAnimationState("run");
 
                                             //rb.MovePosition(GetPosition() + direction * 2f * Time.fixedDeltaTime);
-                                            transform.position = Vector3.MoveTowards(GetPosition(), targetPosition,
+                                            transform.position = Vector3.MoveTowards(GetPosition(), selectedTargets[0].transform.position,
                                                 4f * Time.fixedDeltaTime);
                                             
                                             
-                                            if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z)) <= actionRange)
+                                            if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(selectedTargets[0].transform.position.x, 0, selectedTargets[0].transform.position.z)) <= actionRange)
                                             {
                                                 GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                 battleState = CharacterBattleState.Action;
@@ -570,11 +570,10 @@ namespace CodeReverie
             {
                 GetComponent<AnimationManager>().ChangeAnimationState("idle");
                 characterBattleActionState = CharacterBattleActionState.Idle;
-                // Debug.Log("use Skill");
                 EventManager.Instance.combatEvents.OnCombatPause(true);
+                BattleManager.Instance.PauseAnimationsForSkills();
                 selectedSkill.source = this;
                 selectedSkill.UseSkill();
-                //StartCoroutine(Rotate());
             }
         }
 

@@ -278,6 +278,7 @@ namespace DamageNumbersPro
         Transform targetCamera;
         Camera targetFovCamera;
         float simulatedScale;
+        float lastFOV;
 
         //Destruction:
         bool isDestroyed;
@@ -291,6 +292,7 @@ namespace DamageNumbersPro
         DamageNumber originalPrefab;
         public static Transform poolParent;
         static Dictionary<int, HashSet<DamageNumber>> pools;
+        public static HashSet<DamageNumber> activeInstances;
         int poolingID;
         bool performRestart;
         bool destroyAfterSpawning;
@@ -1031,9 +1033,6 @@ namespace DamageNumbersPro
         /// </summary>
         public void DestroyDNP()
         {
-            //Updater:
-            DNPUpdater.UnregisterPopup(unscaledTime, updateDelay, this);
-
             //Pooling / Destroying:
             if (enablePooling && originalPrefab != null)
             {
@@ -1047,8 +1046,19 @@ namespace DamageNumbersPro
                     pools.Add(poolingID, new HashSet<DamageNumber>());
                 }
 
+                //Static Reference:
+                if (activeInstances != null && activeInstances.Contains(this))
+                {
+                    activeInstances.Remove(this);
+                }
+
+                //Updater:
+                DNPUpdater.UnregisterPopup(unscaledTime, updateDelay, this);
+
+                //Remove from dictionaries.
                 RemoveFromDictionary();
 
+                //Pooling:
                 if (pools[poolingID].Count < poolSize)
                 {
                     PreparePooling();
@@ -1153,8 +1163,126 @@ namespace DamageNumbersPro
             }
         }
 
+        /// <summary>
+        /// Clears all pooled popups.
+        /// </summary>
+        /// <param name="type">The type of pooled popups to clear. All by default.</param>
+        public static void ClearPooled(DNPType type = DNPType.All)
+        {
+            //Check if pools exist.
+            if(pools != null)
+            {
+                //Iterate through pools.
+                foreach (KeyValuePair<int, HashSet<DamageNumber>> entry in pools)
+                {
+                    //Check if pool contains popups.
+                    if (entry.Value != null)
+                    {
+                        //Iterate through the pool's popups.
+                        foreach (DamageNumber popup in entry.Value)
+                        {
+                            //Check type.
+                            if (type == DNPType.All || (popup.IsMesh() == (type == DNPType.Mesh)))
+                            {
+                                //Destroy pooled popup.
+                                Destroy(popup.gameObject);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Destroys all currently active popups.
+        /// </summary>
+        /// <param name="type">The type of popup to destroy. All by default.</param>
+        /// <param name="allowPooling">Whether destroyed popups are allowed to pool.</param>
+        /// <param name="ignorePermanent">Whether permanent popups should be destroyed.</param>
+        public static void ClearActive(DNPType type = DNPType.All, bool allowPooling = true, bool ignorePermanent = true)
+        {
+            if (allowPooling)
+            {
+                //Get all active popups.
+                List<DamageNumber> popups = new List<DamageNumber>();
+                foreach (DamageNumber dn in activeInstances)
+                {
+                    if (dn != null)
+                    {
+                        popups.Add(dn);
+                    }
+                }
+
+                //Destroy all active popups with potential pooling.
+                foreach(DamageNumber popup in popups)
+                {
+                    //Check permanent.
+                    if (!ignorePermanent || !popup.permanent)
+                    {
+                        //Check type.
+                        if (type == DNPType.All || (popup.IsMesh() == (type == DNPType.Mesh)))
+                        {
+                            popup.DestroyDNP();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (DamageNumber popup in activeInstances)
+                {
+                    if (popup != null)
+                    {
+                        //Check permanent.
+                        if (!ignorePermanent || !popup.permanent)
+                        {
+                            //Check type.
+                            if (type == DNPType.All || (popup.IsMesh() == (type == DNPType.Mesh)))
+                            {
+                                Destroy(popup.gameObject);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fades out all currently active popups.
+        /// </summary>
+        /// <param name="type">The type of the popup to fade out. All by default.</param>
+        /// <param name="ignorePermanent">Whether permanent popups should be faded out.</param>
+        public static void FadeOutActive(DNPType type = DNPType.All, bool ignorePermanent = true)
+        {
+            foreach(DamageNumber popup in activeInstances)
+            {
+                if (popup != null)
+                {
+                    //Check permanent.
+                    if (!ignorePermanent || !popup.permanent)
+                    {
+                        //Check type.
+                        if (type == DNPType.All || (popup.IsMesh() == (type == DNPType.Mesh)))
+                        {
+                            popup.FadeOut();
+                        }
+                    }
+                }
+            }
+        }
+
         protected void Restart()
         {
+            //Static Reference:
+            if(activeInstances == null)
+            {
+                activeInstances = new HashSet<DamageNumber>();
+            }
+            if (activeInstances.Contains(this) == false)
+            {
+                activeInstances.Add(this);
+            }
+
             //Updater:
             DNPUpdater.RegisterPopup(unscaledTime, updateDelay, this);
 
@@ -1328,7 +1456,7 @@ namespace DamageNumbersPro
             }
 
             //Scale:
-            UpdateScaleAnd3D();
+            UpdateScaleAnd3D(true);
 
             //Rotation:
             if (enableRotateOverTime)
@@ -1431,6 +1559,7 @@ namespace DamageNumbersPro
             myAbsorber = null;
 
             //Reset some Setting Variables:
+            permanent = originalPrefab.permanent;
             spamGroup = originalPrefab.spamGroup;
             leftText = originalPrefab.leftText;
             rightText = originalPrefab.rightText;
@@ -2527,7 +2656,7 @@ namespace DamageNumbersPro
             currentRotation += currentRotationSpeed * delta * rotateOverTime.Evaluate((time - startTime) / currentLifetime);
         }
 
-        void UpdateScaleAnd3D()
+        void UpdateScaleAnd3D(bool beforeMeshBuild = false)
         {
             Vector3 appliedScale = originalScale;
             lastScaleFactor = 1f;
@@ -2604,7 +2733,7 @@ namespace DamageNumbersPro
                 }
 
                 //FOV Scaling.
-                if (scaleWithFov)
+                if (scaleWithFov && !beforeMeshBuild)
                 {
                     lastScaleFactor *= targetFovCamera.fieldOfView / defaultFov;
                 }
@@ -2647,6 +2776,7 @@ namespace DamageNumbersPro
             //Apply:
             transform.localScale = appliedScale;
 
+            //First Frame Fix:
             if (firstFrameScale)
             {
                 if(durationFadeIn > 0)
@@ -2725,6 +2855,16 @@ namespace DamageNumbersPro
         #region Unity Events
         void OnDestroy()
         {
+            //Static Reference:
+            if (activeInstances != null && activeInstances.Contains(this))
+            {
+                activeInstances.Remove(this);
+            }
+
+            //Updater:
+            DNPUpdater.UnregisterPopup(unscaledTime, updateDelay, this);
+
+            //Remove from dictionaries.
             RemoveFromDictionary();
 
             //Clear Mesh:

@@ -60,11 +60,6 @@ namespace CodeReverie
             GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 1);
             
             
-            
-            
-            
-            
-
             startMenuPanels = new List<GameObject>();
             
             startMenuPanels.Add(welcomePanel);
@@ -113,43 +108,6 @@ namespace CodeReverie
                 // if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
                 // {
                 //     OnMenuOptionSelect();
-                // }
-                
-                // if (navigationDelayTimer <= 0)
-                // {
-                //     if (GameManager.Instance.playerInput.GetAxis("Navigate Menu Vertical") < 0)
-                //     {
-                //         navigationDelayTimer = navigationDelay;
-                //         if (navigationButtonsIndex + 1 > pauseMenuNavigationButtons.Count - 1)
-                //         {
-                //             navigationButtonsIndex = 0;
-                //         }
-                //         else
-                //         {
-                //             navigationButtonsIndex++;
-                //         }
-                //
-                //         SelectedNavigationButton = pauseMenuNavigationButtons[navigationButtonsIndex];
-                //     }
-                //
-                //     if (GameManager.Instance.playerInput.GetAxis("Navigate Menu Vertical") > 0)
-                //     {
-                //         navigationDelayTimer = navigationDelay;
-                //         if (navigationButtonsIndex == 0)
-                //         {
-                //             navigationButtonsIndex = pauseMenuNavigationButtons.Count - 1;
-                //         }
-                //         else
-                //         {
-                //             navigationButtonsIndex--;
-                //         }
-                //
-                //         SelectedNavigationButton = pauseMenuNavigationButtons[navigationButtonsIndex];
-                //     }
-                // }
-                // else
-                // {
-                //     navigationDelayTimer -= Time.unscaledDeltaTime;
                 // }
             }
 

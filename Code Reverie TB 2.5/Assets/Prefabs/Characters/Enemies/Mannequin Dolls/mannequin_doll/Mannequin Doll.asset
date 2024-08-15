@@ -27,7 +27,7 @@ MonoBehaviour:
   characterID: Mannequin Doll
   characterName: Mannequin Doll
   characterType: 2
-  characterUnitPF: {fileID: 3883581989913460218, guid: 8d264b17fa35cd14396bff72cec431e8,
+  characterUnitPF: {fileID: 7890904489174111990, guid: 5401d84aa9da1f641b835ffa8edc2e0d,
     type: 3}
   experienceToGive: 5000
   attackRange: 1

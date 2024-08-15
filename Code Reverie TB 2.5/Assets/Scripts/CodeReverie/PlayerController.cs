@@ -124,6 +124,27 @@ namespace CodeReverie
                     
                 }
             }
+
+            if (other.TryGetComponent(out CombatTrigger combatTrigger))
+            {
+                if (other.GetComponentInParent<ComponentTagManager>())
+                {
+
+                    ComponentTagManager componentTagManager = other.GetComponentInParent<ComponentTagManager>();
+                    
+                    if (componentTagManager.HasTag(ComponentTag.Enemy))
+                    {
+                  
+                        if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
+                        {
+                            EventManager.Instance.combatEvents.OnCombatEnter();
+                        }
+                    
+                    
+                    }
+                }
+            }
+            
             
             if (other.TryGetComponent(out ComponentTagManager tagManager))
             {
@@ -134,16 +155,16 @@ namespace CodeReverie
                     //BattleManager.Instance.currentBattleArea = other.GetComponent<BattleArea>();
                 }
                 
-                if (tagManager.HasTag(ComponentTag.Enemy))
-                {
-                  
-                    if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
-                    {
-                        EventManager.Instance.combatEvents.OnCombatEnter();
-                    }
-                    
-                    
-                }
+                // if (tagManager.HasTag(ComponentTag.Enemy))
+                // {
+                //   
+                //     if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
+                //     {
+                //         EventManager.Instance.combatEvents.OnCombatEnter();
+                //     }
+                //     
+                //     
+                // }
             }
             
         }

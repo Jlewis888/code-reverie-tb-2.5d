@@ -435,7 +435,7 @@ namespace DamageNumbersPro.Internal {
             GUI.backgroundColor = externalInspectorColor;
             EditorGUILayout.BeginVertical();
 
-            bool editingPrefabPreview = EditingPrefabPreview(target); ;
+            bool editingPrefabPreview = EditingPrefabPreview(target);
 
             if (editingPrefabPreview)
             {

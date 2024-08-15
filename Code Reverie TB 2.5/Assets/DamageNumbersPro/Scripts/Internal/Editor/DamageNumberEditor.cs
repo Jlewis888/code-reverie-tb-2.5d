@@ -13,7 +13,7 @@ namespace DamageNumbersPro
     [CustomEditor(typeof(DamageNumber), true), CanEditMultipleObjects]
     public class DamageNumberEditor : Editor
     {
-        public static string version = "4.36";
+        public static string version = "4.37";
 
         void OnEnable()
         {

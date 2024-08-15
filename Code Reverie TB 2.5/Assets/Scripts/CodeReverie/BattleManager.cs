@@ -204,6 +204,35 @@ namespace CodeReverie
         public void SetPauseTimer(bool isPaused)
         {
             pause = isPaused;
+
+            if (!isPaused)
+            {
+                foreach (CharacterBattleManager characterBattleManager in allUnits)
+                {
+                    characterBattleManager.GetComponent<AnimationManager>().ResumeAnimation();
+                }
+            }
+        }
+
+        public void PauseAllAnimations()
+        {
+            foreach (CharacterBattleManager characterBattleManager in allUnits)
+            {
+                characterBattleManager.GetComponent<AnimationManager>().PauseAnimation();
+            }
+        }
+        
+        public void PauseAnimationsForSkills()
+        {
+            foreach (CharacterBattleManager characterBattleManager in allUnits)
+            {
+
+                if (characterBattleManager != selectedPlayerCharacter &&
+                    !selectedPlayerCharacter.selectedTargets.Contains(characterBattleManager))
+                {
+                    characterBattleManager.GetComponent<AnimationManager>().PauseAnimation();
+                }
+            }
         }
 
         public void SetSelectedCharacter(CharacterBattleManager characterBattleManager)
@@ -238,6 +267,7 @@ namespace CodeReverie
                     return;
                 }
             }
+            
             EventManager.Instance.combatEvents.OnPlayerWin();
             Debug.Log("All Enemies Dead");
             UnsetBattle();

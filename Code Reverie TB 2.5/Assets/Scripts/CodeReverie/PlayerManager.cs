@@ -303,6 +303,7 @@ namespace CodeReverie
                 {
                         
                     character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                    character.characterController.GetComponent<PlayerAIMovementController>().enabled = true;
                     character.characterController.GetComponent<PlayerAIMovementController>().followTarget =
                         currentParty[count - 1].characterController.gameObject;
                 }

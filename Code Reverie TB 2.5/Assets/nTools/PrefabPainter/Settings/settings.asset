@@ -1029,7 +1029,7 @@ MonoBehaviour:
     - name: tree_assest_1
       settings:
         brushRadius: 1.92
-        brushSpacing: 0.606
+        brushSpacing: 1.389
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
@@ -2925,8 +2925,8 @@ MonoBehaviour:
       customPreviewImage: {fileID: 0}
     - name: Wetlands Grass 2
       settings:
-        brushRadius: 5.09
-        brushSpacing: 0.01
+        brushRadius: 1.93
+        brushSpacing: 0.221
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
@@ -3982,8 +3982,8 @@ MonoBehaviour:
   pinSnapScale: 0
   placeAngleStep: 15
   placeScaleStep: 0.1
-  eraseBrushRadius: 0.82
-  eraseByLayer: 1
+  eraseBrushRadius: 0.44
+  eraseByLayer: 0
   eraseLayers:
     serializedVersion: 2
     m_Bits: 32

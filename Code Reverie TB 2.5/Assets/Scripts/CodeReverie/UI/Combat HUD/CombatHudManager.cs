@@ -98,6 +98,7 @@ namespace CodeReverie
         public void OnPlayerTurn(CharacterBattleManager characterBattleManager)
         {
             EventManager.Instance.combatEvents.OnCombatPause(true);
+            BattleManager.Instance.PauseAllAnimations();
             commandMenu.characterBattleManager = characterBattleManager;
             commandMenu.characterBattleManager = characterBattleManager;
             commandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();

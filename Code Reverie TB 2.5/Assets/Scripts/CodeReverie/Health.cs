@@ -20,8 +20,6 @@ namespace CodeReverie
         public float damageFlashDuration;
         public bool invincible;
         public bool canTakeDamage = true;
-        public float iFramesTimer;
-        public float iFramesTime = 1f;
         public int healthBarCount;
         public int currentHealthBarCount;
         public CharacterState characterState;
@@ -60,8 +58,7 @@ namespace CodeReverie
             //     EventManager.Instance.playerEvents.onDashEnd += DisableInvincibility;
             // }
             
-            EventManager.Instance.playerEvents.onDodgeStart += EnableIFrames;
-            EventManager.Instance.playerEvents.onDodgeEnd += DisableIFrames;
+           
             
             // EventManager.Instance.playerEvents.onDashStart += EnableIFrames;
             // EventManager.Instance.playerEvents.onDashEnd += DisableIFrames;
@@ -78,9 +75,6 @@ namespace CodeReverie
             //     EventManager.Instance.playerEvents.onDashEnd -= DisableInvincibility;
             // }
             
-            
-            EventManager.Instance.playerEvents.onDodgeStart -= EnableIFrames;
-            EventManager.Instance.playerEvents.onDodgeEnd -= DisableIFrames;
             
             // EventManager.Instance.playerEvents.onDashStart -= EnableIFrames;
             // EventManager.Instance.playerEvents.onDashEnd -= DisableIFrames;
@@ -107,22 +101,8 @@ namespace CodeReverie
                 
             }
 
-            if (iFramesTimer > 0)
-            {
-                canTakeDamage = false;
-                iFramesTimer -= Time.deltaTime;
-            }
-            else
-            {
-                canTakeDamage = true;
-            }
 
-
-            // if (CurrentHealth <= 0)
-            // {
-            //     Death();
-            // }
-           
+            canTakeDamage = true;
         }
         
         
@@ -207,36 +187,43 @@ namespace CodeReverie
                 //         Death();
                 //     }
                 // }
-                
-                //CreateDamagePopup(damageProfile);
-                //StartCoroutine(ApplyDamageFlash());
-                    
-                CurrentHealth -= damageProfile.damageAmount;
 
-                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                {
-                    EventManager.Instance.combatEvents.OnEnemyDamageTaken(damageProfile);
-                        
-                }
-                    
-                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
-                {
-                    EventManager.Instance.combatEvents.OnPlayerDamageTaken(damageProfile);
-                }
 
-                if (GetComponent<CharacterBattleManager>().battleState == CharacterBattleState.WaitingAction && damageProfile.isBreak)
+                if (GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
                 {
-                    GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Interrupted;
-                }
-                    
-                    
-                    
-                EventManager.Instance.combatEvents.OnDamage(damageProfile);
-                SoundManager.Instance.PlayOneShotSound("punch_general_body_impact_08", true);
 
-                if (CurrentHealth <= 0)
-                {
-                    Death();
+
+                    CreateDamagePopup(damageProfile);
+                    //StartCoroutine(ApplyDamageFlash());
+
+                    CurrentHealth -= damageProfile.damageAmount;
+
+                    if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                    {
+                        EventManager.Instance.combatEvents.OnEnemyDamageTaken(damageProfile);
+
+                    }
+
+                    if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
+                    {
+                        EventManager.Instance.combatEvents.OnPlayerDamageTaken(damageProfile);
+                    }
+
+                    if (GetComponent<CharacterBattleManager>().battleState == CharacterBattleState.WaitingAction &&
+                        damageProfile.isBreak)
+                    {
+                        GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Interrupted;
+                    }
+
+
+
+                    EventManager.Instance.combatEvents.OnDamage(damageProfile);
+                    SoundManager.Instance.PlayOneShotSound("punch_general_body_impact_08", true);
+
+                    if (CurrentHealth <= 0)
+                    {
+                        Death();
+                    }
                 }
             }
             else
@@ -373,26 +360,5 @@ namespace CodeReverie
             spriteRenderer.materials = materials;
             spriteRenderer.color = color;
         }
-
-        public void EnableIFrames()
-        {
-            
-            if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
-            {
-                
-                canTakeDamage = false;
-            }
-          
-        }
-
-        public void DisableIFrames()
-        {
-            if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
-            {
-                iFramesTimer = iFramesTime;
-            }
-        }
-        
-        
     }
 }

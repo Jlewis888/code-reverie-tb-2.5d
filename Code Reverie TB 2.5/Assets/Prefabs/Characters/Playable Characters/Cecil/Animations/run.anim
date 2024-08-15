@@ -33,7 +33,7 @@ AnimationClip:
     - time: 0.41666666
       value: {fileID: 1010423476, guid: 95d85ff999d41f44e9c81cb4a3fd15cf, type: 3}
     attribute: m_Sprite
-    path: project_alchemy_human (1)
+    path: Sprite
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -45,7 +45,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 231327515
+      path: 850496168
       attribute: 0
       script: {fileID: 0}
       typeID: 212

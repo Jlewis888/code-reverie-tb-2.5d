@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using CodeReverie;
-using FullscreenEditor;
 using UnityEngine;
 
 [DefaultExecutionOrder(-115)]
