@@ -9,6 +9,7 @@ namespace CodeReverie
     public class BattleArea : SerializedMonoBehaviour
     {
         public List<CharacterBattleManager> enemies;
+        public Collider areaCollider;
         
         private void Awake()
         {

@@ -16,7 +16,7 @@ namespace CodeReverie
         public CharacterDirection characterDirection;
         public CharacterMovementState characterMovementState;
         private Vector3 playerVelocity;
-        private bool groundedPlayer;
+        [SerializeField]private bool groundedPlayer;
         private float gravityValue = -9.81f;
         
         private void Awake()

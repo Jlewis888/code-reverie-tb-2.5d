@@ -104,7 +104,6 @@ namespace CodeReverie
             currentBattleArea.SetEnemyPositions();
             PlayerManager.Instance.SetPlayerBattleMode();
             
-            
             playerUnits = PlayerManager.Instance.GetCharacterBattleManagers();
             allUnits.AddRange(playerUnits);
             
@@ -116,6 +115,7 @@ namespace CodeReverie
             CanvasManager.Instance.hudManager.combatHudManager.Init();
             battleManagerState = BattleManagerState.PreBattle;
             CameraManager.Instance.SetBattleCamera(currentBattleArea);
+            //currentBattleArea.areaCollider.isTrigger = false;
         }
 
         public void UnsetBattle()
