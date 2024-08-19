@@ -140,6 +140,7 @@ namespace CodeReverie
             {
                 if (interactables.Count > 0)
                 {
+                    
                     if (interactables[0] != null)
                     {
                         if (interactables[0].interactableQueue.Count > 0)

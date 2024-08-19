@@ -82,6 +82,7 @@ MonoBehaviour:
   skillPointsCost: 5
   skillRange: 1
   skillCastTime: 3
+  targetType: 0
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 6186891313667908791, guid: 323b55ffac1795d4585c06c7668d7f82,

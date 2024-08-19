@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2b2ef9820f8d61e4facb243fbf85be5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cec055ede3b96d3489c803eba96be9d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -173,7 +173,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: partySlot
+    - Name: character
       Entry: 6
       Data: 
   characterPortrait: {fileID: 6275650783307098093}

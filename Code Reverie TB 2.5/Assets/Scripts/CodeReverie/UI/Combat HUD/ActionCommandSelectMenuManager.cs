@@ -49,7 +49,7 @@ namespace CodeReverie
                 BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Attack;
                 BattleManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleTargetMenu();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandBreakSelect)
             {
@@ -57,7 +57,7 @@ namespace CodeReverie
                 BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Break;
                 BattleManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleTargetMenu();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
                 
             }
         }

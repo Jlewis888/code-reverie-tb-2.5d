@@ -9,6 +9,9 @@ namespace CodeReverie
     {
         public int Priority { get; }
 
+        public InteractableType interactableType { get; set; }
+        public string interactableMessage { get; set; }
+
         public void Interact();
         public void InteractOnPress(Action onComplete);
         public void InteractOnHold(Action onComplete);

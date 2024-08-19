@@ -76,7 +76,7 @@ namespace CodeReverie
 
             BattleManager.Instance.SetSelectableTargets();
             BattleManager.Instance.selectedPlayerCharacter.selectedItem = commandMenuNavigation.SelectedNavigationButton.GetComponent<ItemCommandMenuNavigationButton>().item;
-            CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleTargetMenu();
+            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
         }
         
         private void Update()

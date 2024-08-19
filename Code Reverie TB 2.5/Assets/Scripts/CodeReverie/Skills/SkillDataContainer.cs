@@ -42,6 +42,7 @@ namespace CodeReverie
 
         [TabGroup("Skill Details")] public float skillRange = 1f;
         [TabGroup("Skill Details")] public SkillCastTime skillCastTime = SkillCastTime.Medium;
+        [TabGroup("Skill Details")] public TargetType targetType;
         
         [TabGroup("Modifiers", TextColor = "blue")]
         public List<SkillModifierDataContainer> skillModifierDetailsList = new List<SkillModifierDataContainer>();

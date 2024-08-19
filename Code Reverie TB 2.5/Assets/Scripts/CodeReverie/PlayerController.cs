@@ -109,19 +109,44 @@ namespace CodeReverie
             
             if (other.TryGetComponent(out Interactable interactable))
             {
-                if (!PlayerManager.Instance.interactables.Contains(interactable))
-                { 
-                    PlayerManager.Instance.interactables.Add(interactable);
-                    interactable.SetQueue();
+                
+                // if (!PlayerManager.Instance.interactables.Contains(interactable))
+                // { 
+                //     PlayerManager.Instance.interactables.Add(interactable);
+                //     interactable.SetQueue();
+                //
+                //     if (PlayerManager.Instance.interactables.Count == 1)
+                //     {
+                //         if (PlayerManager.Instance.interactables[0] != null)
+                //         {
+                //             PlayerManager.Instance.interactables[0].Activate();
+                //         }
+                //     }
+                // }
+                
+                
+                if (!CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Contains(interactable))
+                {
 
-                    if (PlayerManager.Instance.interactables.Count == 1)
+                    if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.isActiveAndEnabled)
                     {
-                        if (PlayerManager.Instance.interactables[0] != null)
-                        {
-                            PlayerManager.Instance.interactables[0].Activate();
-                        }
+                        CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.AddInteractableButton(interactable);
                     }
-                    
+                    else
+                    {
+                        CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Add(interactable);
+                        interactable.SetQueue();
+
+                        if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Count == 1)
+                        {
+                            if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0] != null)
+                            {
+                                CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0].Activate();
+                            }
+                        }
+                        
+                        CanvasManager.Instance.hudManager.commandMenu.ToggleInteractiveCommandMenuHolderOn();
+                    }
                 }
             }
 
@@ -174,8 +199,10 @@ namespace CodeReverie
         {
             if (other.TryGetComponent(out Interactable interactable))
             {
-                PlayerManager.Instance.interactables.Remove(interactable);
-                interactable.Deactivate();
+                // PlayerManager.Instance.interactables.Remove(interactable);
+                // interactable.Deactivate();
+                CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.RemoveInteractableButton(
+                    interactable);
             }
             
             if (other.TryGetComponent(out ComponentTagManager tagManager))

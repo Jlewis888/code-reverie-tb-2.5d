@@ -51,7 +51,8 @@ namespace CodeReverie
                 // BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                 //     CharacterBattleActionState.Attack;
                 // BattleManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleActionMenu();
+                Debug.Log("is this hitting");
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleActionMenu();
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandDefendSelect)
             {
@@ -68,18 +69,18 @@ namespace CodeReverie
                // Debug.Log("Skill Action. Need to set Skill window now");
                //BattleManager.Instance.SetSelectableTargets();
                 
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleSkillMenu();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleSkillMenu();
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandItemsSelect)
             {
                 BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Item;
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleItemMenu();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleItemMenu();
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandMoveSelect)
             {
                 
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleMoveActionMenu();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleMoveActionMenu();
                 Debug.Log("Move Action. Need to allow player to move character to a location");
             }
         }

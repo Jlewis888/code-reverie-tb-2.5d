@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,21 @@ namespace CodeReverie
         public float gatheringTime;
         public float gatheringTimer;
         public bool exhausted;
+        [SerializeField] private string _interactableMessage;
         //public Slider slider;
 
 
         private void Awake()
         {
             CanInteract = true;
+            interactableType = InteractableType.Gather;
             // slider.maxValue = gatheringTime;
             // slider.gameObject.SetActive(false);
+            
+            if (_interactableMessage.IsNullOrWhitespace())
+            {
+                _interactableMessage = $"Collect {itemInfo.itemName}";
+            }
         }
 
         private void Update()
@@ -39,6 +47,13 @@ namespace CodeReverie
         }
         
         public int Priority { get; }
+        public InteractableType interactableType { get; set; }
+
+        public string interactableMessage
+        {
+            get => _interactableMessage;
+            set => _interactableMessage = value;
+        }
 
         public void Interact()
         {

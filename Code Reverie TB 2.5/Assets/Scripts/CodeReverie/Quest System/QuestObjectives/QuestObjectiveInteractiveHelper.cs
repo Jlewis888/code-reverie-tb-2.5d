@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace CodeReverie
@@ -11,13 +12,27 @@ namespace CodeReverie
         public float holdTimer;
         public bool canInteract;
         [SerializeField] public bool _canInteract;
-
+        [SerializeField] private string _interactableMessage;
         private void Awake()
         {
             CanInteract = true;
+            interactableType = InteractableType.Dialogue;
+            
+            if (_interactableMessage.IsNullOrWhitespace())
+            {
+                _interactableMessage = $"NEED TO UPDATE INTERACTABLE MESSAGE ON OBJECT";
+            }
         }
 
         public int Priority { get; }
+        public InteractableType interactableType { get; set; }
+        
+        public string interactableMessage
+        {
+            get => _interactableMessage;
+            set => _interactableMessage = value;
+        }
+        
         public void Interact() { }
 
         public void InteractOnPress(Action onComplete) { }

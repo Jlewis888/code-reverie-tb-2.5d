@@ -85,12 +85,6 @@ namespace CodeReverie
         
         private void AddDragHandles(OdinMenuItem menuItem)
         {
-            //Debug.Log(menuItem.Value);
-
-            // OdinMenuItem odinMenuItem = new OdinMenuItem();
-            //
-            // tree.AddMenuItemAtPath("Passive", menuItem);
-            
             menuItem.OnDrawItem += x => DragAndDropUtilities.DragZone(menuItem.Rect, menuItem.Value, false, false);
         }
         

@@ -75,3 +75,4 @@ MonoBehaviour:
   canUseInMenu: 1
   canUseInBattle: 1
   itemRecipes: []
+  targetType: 0

@@ -58,8 +58,12 @@ namespace CodeReverie
                     commandMenuNavigationButton.selector.SetActive(true);
                 }
             }
+
+            if (selectedNavigationButton != null)
+            {
+                selectedNavigationButton.selector.SetActive(true); 
+            }
             
-            selectedNavigationButton.selector.SetActive(true);
         }
 
         public void NavigationInputUpdate()
@@ -135,12 +139,23 @@ namespace CodeReverie
         public void SetFirstItem()
         {
             navigationButtonsIndex = 0;
+
+            if (commandMenuNavigationButtons.Count <= 0)
+            {
+                return;
+            }
+            
             SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
         }
 
         public void Add(CommandMenuNavigationButton commandMenuNavigationButton)
         {
             commandMenuNavigationButtons.Add(commandMenuNavigationButton);
+        }
+        
+        public void Remove(CommandMenuNavigationButton commandMenuNavigationButton)
+        {
+            commandMenuNavigationButtons.Remove(commandMenuNavigationButton);
         }
 
         public void ClearNavigationList()
@@ -156,6 +171,14 @@ namespace CodeReverie
                 callBack(); 
             }
             
+        }
+
+        public void Reset()
+        {
+            ClearNavigationList();
+            navigationButtonsIndex = 0;
+            selectedNavigationButton = null;
+            callBack = null;
         }
         
     }

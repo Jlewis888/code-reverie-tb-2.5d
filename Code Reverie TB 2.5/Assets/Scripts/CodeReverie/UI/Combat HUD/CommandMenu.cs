@@ -9,37 +9,14 @@ namespace CodeReverie
 {
     public class CommandMenu : SerializedMonoBehaviour
     {
-        public CharacterBattleManager characterBattleManager;
-        public Image characterPortrait;
-        public TMP_Text characterName;
         
         public GameObject commandMenuPrompt;
-        public GameObject commandMenuHolder;
+        public CombatCommandMenu combatCommandMenu;
+        public InteractiveCommandMenu interactiveCommandMenuHolder;
         
-        public List<GameObject> commandMenus;
-        public CommandSelectMenuManager commandSelectMenuManager;
-        public ActionCommandSelectMenuManager actionCommandSelectMenu;
-        public SkillCommandMenuManager skillCommandMenuManager;
-        public ItemCommandMenuManager itemCommandMenuManager;
-        public TargetCommandMenuManager targetCommandMenuManager;
-        public MoveCommandMenuManager moveCommandMenuManager;
-
-
-        private void Awake()
-        {
-            commandMenus = new List<GameObject>();
-            commandMenus.Add(commandSelectMenuManager.gameObject);
-            commandMenus.Add(skillCommandMenuManager.gameObject);
-            commandMenus.Add(targetCommandMenuManager.gameObject);
-            commandMenus.Add(itemCommandMenuManager.gameObject);
-            commandMenus.Add(actionCommandSelectMenu.gameObject);
-            commandMenus.Add(moveCommandMenuManager.gameObject);
-        }
-
         private void OnEnable()
         {
             ToggleCommandMenuHolderOff();
-            ToggleCommandAction();
             EventManager.Instance.combatEvents.onPlayerTurn += ToggleCommandMenuHolderOn;
         }
 
@@ -49,80 +26,44 @@ namespace CodeReverie
         }
 
 
-        public void ToggleCommandMenuHolderOn()
+        public void ToggleCombatCommandMenuHolderOn()
         {
             commandMenuPrompt.SetActive(false);
-            commandMenuHolder.SetActive(true);
-            ToggleCommandAction();
+            combatCommandMenu.gameObject.SetActive(true);
+            interactiveCommandMenuHolder.gameObject.SetActive(false);
         }
         
-        public void ToggleCommandMenuHolderOff()
+        public void ToggleInteractiveCommandMenuHolderOn()
+        {
+            commandMenuPrompt.SetActive(false);
+            combatCommandMenu.gameObject.SetActive(false);
+            interactiveCommandMenuHolder.gameObject.SetActive(true);
+        }
+        
+        public void ToggleCommandMenuPromptOn()
         {
             commandMenuPrompt.SetActive(true);
-            commandMenuHolder.SetActive(false);
-            ToggleCommandAction();
+            combatCommandMenu.gameObject.SetActive(false);
+            interactiveCommandMenuHolder.gameObject.SetActive(false);
         }
+        
         
         public void ToggleCommandMenuHolderOn(CharacterBattleManager characterBattleManager = null)
         {
-           ToggleCommandMenuHolderOn();
+            //combatCommandMenu.characterBattleManager = characterBattleManager;
+            ToggleCombatCommandMenuHolderOn();
         }
         
         public void ToggleCommandMenuHolderOff(CharacterBattleManager characterBattleManager = null)
         {
-            ToggleCommandMenuHolderOff();
-          
+            //combatCommandMenu.characterBattleManager = characterBattleManager;
+            ToggleCommandMenuPromptOn();
+
         }
 
         public void SetCharacterSkillDetails()
         {
             
         }
-
-        public void ToggleCommandMenus(GameObject menu)
-        {
-            foreach (GameObject commandMenu in commandMenus)
-            {
-                if (commandMenu == menu)
-                {
-                    commandMenu.SetActive(true);
-                }
-                else
-                {
-                    commandMenu.SetActive(false);
-                }
-            }
-        }
-
-        public void ToggleCommandAction()
-        {
-            ToggleCommandMenus(commandSelectMenuManager.gameObject);
-        }
-        
-        public void ToggleActionMenu()
-        {
-            ToggleCommandMenus(actionCommandSelectMenu.gameObject);
-        }
-        
-        public void ToggleSkillMenu()
-        {
-            ToggleCommandMenus(skillCommandMenuManager.gameObject);
-        }
-        
-        public void ToggleItemMenu()
-        {
-            ToggleCommandMenus(itemCommandMenuManager.gameObject);
-        }
-        
-        public void ToggleTargetMenu()
-        {
-            ToggleCommandMenus(targetCommandMenuManager.gameObject);
-        }
-        
-        public void ToggleMoveActionMenu()
-        {
-            ToggleCommandMenus(moveCommandMenuManager.gameObject);
-        }
-        
     }
 }

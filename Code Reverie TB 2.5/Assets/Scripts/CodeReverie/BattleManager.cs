@@ -102,6 +102,7 @@ namespace CodeReverie
             orderOfTurnsMap = new Dictionary<CharacterBattleManager, int>();
             
             currentBattleArea.SetEnemyPositions();
+            currentBattleArea.SetAreaMaterial();
             PlayerManager.Instance.SetPlayerBattleMode();
             
             playerUnits = PlayerManager.Instance.GetCharacterBattleManagers();
@@ -320,31 +321,31 @@ namespace CodeReverie
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     // selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
-                    CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     break;
                 case CharacterBattleActionState.Skill:
                     selectedPlayerCharacter.GetComponent<AnimationManager>().ChangeAnimationState("cast");
                     //selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
-                    CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.currentSkillPoints -= selectedPlayerCharacter.selectedSkill.info.skillPointsCost;
                     break;
                 case CharacterBattleActionState.Defend:
-                    CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     // selectedPlayerCharacter.SetActionRange();
                     // selectedPlayerCharacter.SetSkillCast();
                     selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
                 case CharacterBattleActionState.Item:
-                    CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     selectedPlayerCharacter.battleState = CharacterBattleState.Action;
                     break;
                 case CharacterBattleActionState.Move:
                     selectedPlayerCharacter.targetPosition = movePlayerObject.transform.position;
-                    CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
                 

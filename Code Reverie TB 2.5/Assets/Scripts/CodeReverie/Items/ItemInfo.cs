@@ -15,7 +15,6 @@ namespace CodeReverie
         public string itemDescription;
         public ItemType itemType;
         public ItemRarity itemRarity;
-        
         public bool stackable;
         public int price;
         public Sprite lootIcon;
@@ -31,9 +30,8 @@ namespace CodeReverie
         public bool canUseInMenu;
         public bool canUseInBattle;
         public List<ItemRecipeData> itemRecipes = new List<ItemRecipeData>();
-        //public List<List<ItemIngredient>> requiredItems = new List<List<ItemIngredient>>();
-        //public List<Dictionary<ItemInfo, int>> requiredItems = new List<Dictionary<ItemInfo, int>>();
         public Dictionary<ItemInfo, int> requiredItems = new Dictionary<ItemInfo, int>();
+        public TargetType targetType;
         
         private void OnValidate()
         {

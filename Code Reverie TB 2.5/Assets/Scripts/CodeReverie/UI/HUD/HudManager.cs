@@ -8,6 +8,7 @@ namespace CodeReverie
 {
     public class HudManager : MenuManager
     {
+        public CommandMenu commandMenu;
         public CombatHudManager combatHudManager;
         public CurrentEnemyHealthPanel currentEnemyHealthPanel;
         public PartyHudPanelManager partyHudPanelManager;
@@ -18,20 +19,12 @@ namespace CodeReverie
         private void Awake()
         {
             currentEnemyHealthPanel.gameObject.SetActive(false);
-            //partyHudPanelManager.SetListeners();
         }
 
 
         private void OnEnable()
         {
             EventManager.Instance.combatEvents.onCombatEnter += ToggleCombatHudManager;
-            // CameraManager.Instance.ToggleMainCamera();
-            // EventManager.Instance.playerEvents.OnPlayerLock(false);
-            // actionBarManager.SetActionBar();
-            // GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
-            // GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
-            //
-            // EventManager.Instance.combatEvents.onEnemyDamageTaken += EnableEnemyHealthPanel;
         }
 
         private void OnDisable()
@@ -62,14 +55,6 @@ namespace CodeReverie
         public void ToggleCombatHudManager()
         {
             combatHudManager.gameObject.SetActive(true);
-            // Debug.Log("this here be her");
-            // if (!combatHudManager.gameObject.activeInHierarchy)
-            // {
-            //     combatHudManager.gameObject.SetActive(true);
-            // } else
-            // {
-            //     combatHudManager.gameObject.SetActive(false);
-            // }
         }
         
         

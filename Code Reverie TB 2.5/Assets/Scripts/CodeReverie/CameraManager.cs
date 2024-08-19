@@ -98,14 +98,14 @@ public class CameraManager : ManagerSingleton<CameraManager>
         
     }
 
-    public void AddToTargetGroup(Transform targetTransform, float weight = 1f, float radius = 1f)
+    public void AddToTargetGroup(Transform targetTransform, float weight = 1f, float radius = 2f)
     {
         combatTargetGroup.AddMember(targetTransform, weight, radius);
         //combatTargetGroup.m_Targets[0].
     }
 
 
-    public void SetSelectedPlayerWeight(CharacterBattleManager characterBattleManager, float weight, float radius = 1f)
+    public void SetSelectedPlayerWeight(CharacterBattleManager characterBattleManager, float weight, float radius = 2f)
     {
         
         for (int i = 0; i < combatTargetGroup.m_Targets.Length; i++)
@@ -120,7 +120,7 @@ public class CameraManager : ManagerSingleton<CameraManager>
             else
             {
                 combatTargetGroup.m_Targets[i].weight = 1f;
-                combatTargetGroup.m_Targets[i].radius = 1f;
+                combatTargetGroup.m_Targets[i].radius = 2f;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 
@@ -12,7 +13,8 @@ namespace CodeReverie
         public bool playerInRange;
         public bool instantTrigger;
         public string storyPath;
-
+        [SerializeField] public string _interactableMessage;
+        
         private void Awake()
         {
 
@@ -22,12 +24,28 @@ namespace CodeReverie
             // }
             
             dialogueSpeaker = GetComponent<DialogueSpeaker>();
+            interactableType = InteractableType.Dialogue;
+
+
+            if (_interactableMessage.IsNullOrWhitespace())
+            {
+                _interactableMessage = $"Speak with {dialogueSpeaker.GetComponent<CharacterUnitController>().character.info.characterName}";
+            }
         }
 
 
         public int Priority
         { 
             get { return priority; }
+        }
+
+        public InteractableType interactableType { get; set; }
+
+
+        public string interactableMessage
+        {
+            get => _interactableMessage;
+            set => _interactableMessage = value;
         }
 
         public void Interact()

@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 3565071138203421712}
   - component: {fileID: 8357509338124791466}
   - component: {fileID: 4662933673690888661}
-  - component: {fileID: 8730055778077673353}
   - component: {fileID: 8932686705678154491}
   - component: {fileID: 588026674948223095}
   - component: {fileID: 1985655139726216316}
@@ -196,36 +195,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 0.62
+  m_Height: 0.42
   m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.26, z: 0}
---- !u!136 &8730055778077673353
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6907802491086714676}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.108844995
-  m_Height: 0.7301334
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.3050667, z: 0}
 --- !u!114 &8932686705678154491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +310,7 @@ MonoBehaviour:
   actionRange: 0
   skillCastTime: 0
   castObjectHolder: {fileID: 8146441165837285600}
+  distanceFromCenter: 0
 --- !u!114 &3298262477157302555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +341,6 @@ MonoBehaviour:
   damageFlashDuration: 0
   invincible: 0
   canTakeDamage: 1
-  iFramesTimer: 0
-  iFramesTime: 1
   healthBarCount: 0
   currentHealthBarCount: 0
   characterState: 0
@@ -494,6 +469,7 @@ MonoBehaviour:
   activeMoveSpeed: 0
   characterDirection: 0
   characterMovementState: 0
+  groundedPlayer: 0
 --- !u!114 &4615081604668051212
 MonoBehaviour:
   m_ObjectHideFlags: 0

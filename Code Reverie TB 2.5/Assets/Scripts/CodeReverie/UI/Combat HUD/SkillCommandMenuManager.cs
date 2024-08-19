@@ -48,7 +48,7 @@ namespace CodeReverie
             {
                 BattleManager.Instance.SetSelectableTargets();
                 BattleManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
-                CanvasManager.Instance.hudManager.combatHudManager.commandMenu.ToggleTargetMenu();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
             }
             else
             {

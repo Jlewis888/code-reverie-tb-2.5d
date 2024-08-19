@@ -37,6 +37,7 @@ namespace CodeReverie
         public float actionRange;
         public SkillCastTime skillCastTime;
         public GameObject castObjectHolder;
+        public float distanceFromCenter;
 
 
         private void Awake()
@@ -87,6 +88,13 @@ namespace CodeReverie
 
         private void Update()
         {
+
+            if (BattleManager.Instance.currentBattleArea != null)
+            {
+                
+            }
+            
+            
             if (BattleManager.Instance.pause)
             {
                 if (inCombat && GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive)
@@ -104,11 +112,13 @@ namespace CodeReverie
                                     break;
 
                                 case CharacterBattleState.MoveToStartingBattlePosition:
-
+                                    
                                     repositionTimer -= Time.deltaTime;
 
                                     //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
                                     characterController.Move( moveDir * (8f * Time.fixedDeltaTime));
+
+                                    StopMovementOnReachingMaxDistance();
 
                                     if (repositionTimer <= 0)
                                     {
@@ -172,6 +182,8 @@ namespace CodeReverie
 
                                     //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
                                     characterController.Move( moveDir * (8f * Time.fixedDeltaTime));
+                                    
+                                    StopMovementOnReachingMaxDistance();
 
                                     if (repositionTimer <= 0)
                                     {
@@ -193,7 +205,7 @@ namespace CodeReverie
                                     //rb.MovePosition(rb.position + moveDir * (5f * Time.fixedDeltaTime));
 
                                     characterController.Move( moveDir * (4f * Time.fixedDeltaTime));
-                                    
+                                    StopMovementOnReachingMaxDistance();
                                     if (repositionTimer <= 0)
                                     {
                                         if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
@@ -383,6 +395,24 @@ namespace CodeReverie
 
 
             
+        }
+
+        private void GetDistanceFromBattleAreaCenter()
+        {
+            distanceFromCenter = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(BattleManager.Instance.currentBattleArea.areaCollider.transform.position.x, 0, BattleManager.Instance.currentBattleArea.areaCollider.transform.position.z));
+        }
+
+
+        public void StopMovementOnReachingMaxDistance()
+        {
+            GetDistanceFromBattleAreaCenter();
+            if (distanceFromCenter > BattleManager.Instance.currentBattleArea.areaRange)
+            {
+                repositionTimer = 0;
+                Vector3 vect =  transform.position - BattleManager.Instance.currentBattleArea.areaCollider.transform.position;
+                vect *= BattleManager.Instance.currentBattleArea.areaRange/distanceFromCenter;
+                transform.position = BattleManager.Instance.currentBattleArea.areaCollider.transform.position + vect;
+            }
         }
 
         private void FixedUpdate()
