@@ -1,86 +1,110 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeReverie
 {
     public class InventoryPauseMenu : PauseMenu
     {
+        public InventoryMenuNavigationState inventoryMenuNavigationState;
         public InventoryPauseMenuNavigationButton inventoryPauseMenuNavigationButtonPF;
-        public List<InventoryPauseMenuNavigationButton> pauseMenuNavigationButtonList;
+        public GameObject inventoryPauseMenuNavigationButtonHolder;
+        public List<InventoryPauseMenuNavigationButton> inventoryPauseMenuNavigationButtonList;
         public List<InventoryFilterButton> inventoryFilterButtons;
         public int itemFilterIndex;
+        
 
-        public MenuNavigation pauseMenuNavigation;
+        public MenuNavigation inventoryMenuNavigation;
 
         private void Awake()
         {
             pauseMenuNavigation = new MenuNavigation();
-            pauseMenuNavigation.callBack = OnSelectedNavigationButtonChange;
+            pauseMenuNavigation.pauseMenuNavigationButtons = pauseMenuNavigationHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+            pauseMenuNavigation.SetFirstItem();
+            
+            inventoryMenuNavigation = new MenuNavigation();
+            inventoryMenuNavigation.callBack = OnSelectedNavigationButtonChange;
         }
         
         private void OnEnable()
         {
+            pauseMenuNavigation.SetFirstItem();
             EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange += OnPauseMenuSubNavigationStateChange;
-            pauseMenuNavigationButtonList = new List<InventoryPauseMenuNavigationButton>();
+            inventoryPauseMenuNavigationButtonList = new List<InventoryPauseMenuNavigationButton>();
             
-            ClearNavigationButtons();
+            ClearInventoryNavigationButtons();
             SetInventoryItems();
             itemFilterIndex = 0;
             SetFilters();
             
-            pauseMenuNavigation.SetFirstItem();
+            inventoryMenuNavigation.SetFirstItem();
         }
 
         private void OnDisable()
         {
             EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange -= OnPauseMenuSubNavigationStateChange;
-            pauseMenuNavigationButtonList = new List<InventoryPauseMenuNavigationButton>();
-            ClearNavigationButtons();
+            inventoryPauseMenuNavigationButtonList = new List<InventoryPauseMenuNavigationButton>();
+            ClearInventoryNavigationButtons();
         }
 
         private void Update()
         {
-            if (pauseMenuSubNavigationState == PauseMenuSubNavigationState.None)
+
+            switch (inventoryMenuNavigationState)
             {
-                if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
-                {
-                    Confirm();
-                }
-
-                if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-                {
-                    //if (navigationDelayTimer <= 0)
-                   // {
-                        EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState
-                            .Menu);
-                    //}
-                }
-
-                if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
-                {
-                    itemFilterIndex++;
-
-                    if (itemFilterIndex >= inventoryFilterButtons.Count + 1)
+                case InventoryMenuNavigationState.Menu:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
                     {
-                        itemFilterIndex = 0;
+                        Confirm();
+                    }
+                    
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    {
+                    
+                        EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
+                    
+                    }
+                    
+                    
+                    pauseMenuNavigation.NavigationInputUpdate();
+                    break;
+                case InventoryMenuNavigationState.Inventory:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
                     }
 
-                    SetFilters();
-                }
-                else if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Menu Horizontal Button"))
-                {
-                    itemFilterIndex--;
-
-                    if (itemFilterIndex < 0)
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
-                        itemFilterIndex = inventoryFilterButtons.Count - 1;
+                        inventoryMenuNavigationState = InventoryMenuNavigationState.Menu;
                     }
 
-                    SetFilters();
-                }
+                    if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
+                    {
+                        itemFilterIndex++;
 
-                pauseMenuNavigation.NavigationInputUpdate();
+                        if (itemFilterIndex >= inventoryFilterButtons.Count + 1)
+                        {
+                            itemFilterIndex = 0;
+                        }
+
+                        SetFilters();
+                    }
+                    else if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Menu Horizontal Button"))
+                    {
+                        itemFilterIndex--;
+
+                        if (itemFilterIndex < 0)
+                        {
+                            itemFilterIndex = inventoryFilterButtons.Count - 1;
+                        }
+
+                        SetFilters();
+                    }
+
+                    inventoryMenuNavigation.NavigationInputUpdate();
+                    break;
             }
         }
 
@@ -98,25 +122,48 @@ namespace CodeReverie
 
         public void FilterAll()
         {
-            pauseMenuNavigation.ResetNavigationList();
-            foreach (PauseMenuNavigationButton pauseMenuNavigationItem in pauseMenuNavigationButtonList)
+            inventoryMenuNavigation.ResetNavigationList();
+            foreach (PauseMenuNavigationButton pauseMenuNavigationItem in inventoryPauseMenuNavigationButtonList)
             {
                 pauseMenuNavigationItem.gameObject.SetActive(true);
-                pauseMenuNavigation.Add(pauseMenuNavigationItem
+                inventoryMenuNavigation.Add(pauseMenuNavigationItem
                     .GetComponent<InventoryPauseMenuNavigationButton>());
             }
         }
 
         public void FilterCategory(ItemType itemTypeFilter)
         {
-            pauseMenuNavigation.ResetNavigationList();
-            foreach (PauseMenuNavigationButton pauseMenuNavigationItem in pauseMenuNavigationButtonList)
+            inventoryMenuNavigation.ResetNavigationList();
+            foreach (PauseMenuNavigationButton pauseMenuNavigationItem in inventoryPauseMenuNavigationButtonList)
             {
-                if (pauseMenuNavigationItem.GetComponent<InventoryPauseMenuNavigationButton>().item.info.itemType ==
-                    itemTypeFilter)
+                // if (pauseMenuNavigationItem.GetComponent<InventoryPauseMenuNavigationButton>().item.info.itemType ==
+                //     itemTypeFilter) 
+
+                ItemSubType itemSubType = pauseMenuNavigationItem.GetComponent<InventoryPauseMenuNavigationButton>()
+                    .item.info.itemSubType;
+                
+                if (ItemManager.Instance.itemTypeMap[itemTypeFilter].Contains(itemSubType))
                 {
                     pauseMenuNavigationItem.gameObject.SetActive(true);
-                    pauseMenuNavigation.Add(pauseMenuNavigationItem
+                    inventoryMenuNavigation.Add(pauseMenuNavigationItem
+                        .GetComponent<InventoryPauseMenuNavigationButton>());
+                }
+                else
+                {
+                    pauseMenuNavigationItem.gameObject.SetActive(false);
+                }
+            }
+        }
+        
+        public void FilterSubCategory(ItemSubType itemTypeFilter)
+        {
+            inventoryMenuNavigation.ResetNavigationList();
+            foreach (PauseMenuNavigationButton pauseMenuNavigationItem in inventoryPauseMenuNavigationButtonList)
+            {
+                if (pauseMenuNavigationItem.GetComponent<InventoryPauseMenuNavigationButton>().item.info.itemSubType == itemTypeFilter) 
+                {
+                    pauseMenuNavigationItem.gameObject.SetActive(true);
+                    inventoryMenuNavigation.Add(pauseMenuNavigationItem
                         .GetComponent<InventoryPauseMenuNavigationButton>());
                 }
                 else
@@ -129,14 +176,34 @@ namespace CodeReverie
 
         private void Confirm()
         {
-            if (pauseMenuNavigation.SelectedNavigationButton
-                .GetComponent<InventoryPauseMenuNavigationButton>().item.info.canUseInMenu)
+            
+            switch (inventoryMenuNavigationState)
             {
-                EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState
-                    .CurrentPartyMenuManager);
+                case InventoryMenuNavigationState.Menu:
+                    if (pauseMenuNavigation.SelectedNavigationButton.GetComponent<ItemFilterMenuNavigationButton>()
+                        .applyAllFilter)
+                    {
+                        FilterAll();
+                        inventoryMenuNavigationState = InventoryMenuNavigationState.Inventory;
+                    }
+                    else
+                    {
+                        FilterCategory(pauseMenuNavigation.SelectedNavigationButton.GetComponent<ItemFilterMenuNavigationButton>().itemType);
+                        inventoryMenuNavigationState = InventoryMenuNavigationState.Inventory;
+                    }
+                    
+                    break;
+                case InventoryMenuNavigationState.Inventory:
+                    if (inventoryMenuNavigation.SelectedNavigationButton
+                        .GetComponent<InventoryPauseMenuNavigationButton>().item.info.canUseInMenu)
+                    {
+                        EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState
+                            .CurrentPartyMenuManager);
 
-                EventManager.Instance.inventoryEvents.OnItemMenuSelect(pauseMenuNavigation.SelectedNavigationButton
-                    .GetComponent<InventoryPauseMenuNavigationButton>().item);
+                        EventManager.Instance.inventoryEvents.OnItemMenuSelect(inventoryMenuNavigation.SelectedNavigationButton
+                            .GetComponent<InventoryPauseMenuNavigationButton>().item);
+                    }
+                    break;
             }
         }
 
@@ -146,13 +213,13 @@ namespace CodeReverie
             foreach (Item item in PlayerManager.Instance.inventory.items)
             {
                 InventoryPauseMenuNavigationButton inventoryPauseMenuNavigationButton =
-                    Instantiate(inventoryPauseMenuNavigationButtonPF, pauseMenuNavigationHolder.transform);
+                    Instantiate(inventoryPauseMenuNavigationButtonPF, inventoryPauseMenuNavigationButtonHolder.transform);
 
                 inventoryPauseMenuNavigationButton.item = item;
                 inventoryPauseMenuNavigationButton.nameText.text = item.info.itemName;
                 inventoryPauseMenuNavigationButton.inventoryCountText.text = item.amount.ToString();
 
-                pauseMenuNavigationButtonList.Add(inventoryPauseMenuNavigationButton);
+                inventoryPauseMenuNavigationButtonList.Add(inventoryPauseMenuNavigationButton);
             }
         }
 
@@ -161,5 +228,17 @@ namespace CodeReverie
             //navigationDelayTimer = navigationDelay;
             pauseMenuSubNavigationState = pauseMenuNavigationState;
         }
+        
+        public void ClearInventoryNavigationButtons()
+        {
+            //pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+            
+            foreach (Transform child in inventoryPauseMenuNavigationButtonHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
+        
     }
 }

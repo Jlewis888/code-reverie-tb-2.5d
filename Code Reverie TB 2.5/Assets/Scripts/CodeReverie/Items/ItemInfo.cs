@@ -14,6 +14,7 @@ namespace CodeReverie
         public string itemName;
         public string itemDescription;
         public ItemType itemType;
+        public ItemSubType itemSubType;
         public ItemRarity itemRarity;
         public bool stackable;
         public int price;

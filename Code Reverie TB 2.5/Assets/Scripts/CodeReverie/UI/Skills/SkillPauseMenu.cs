@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ink.Parsed;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeReverie
 {
@@ -9,7 +12,8 @@ namespace CodeReverie
     {
         public SkillsMenuNavigationState skillsMenuNavigationState;
         public MenuNavigation skillSlotPauseMenuNavigation;
-        
+        public Image characterPortrait;
+        public TMP_Text characterName;
         
         public PartySlotNavigationUI partySlotNavigationUIPF;
         public PartySlotNavigationUI selectedPartySlotNavigationUI;
@@ -24,16 +28,24 @@ namespace CodeReverie
         public GameObject equipSkillsButtonNavigationHolder;
         public EquipSkillPauseMenuNavigationButton equipSkillPauseMenuNavigationButtonPF;
         public MenuNavigation equipSkillPauseMenuNavigation;
+        
 
         private void Awake()
         {
+            pauseMenuNavigation = new MenuNavigation();
             equipSkillPauseMenuNavigation = new MenuNavigation();
             skillSlotPauseMenuNavigation = new MenuNavigation();
+            
+            pauseMenuNavigation.pauseMenuNavigationButtons = pauseMenuNavigationHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+            
+            pauseMenuNavigation.SetFirstItem();
         }
 
 
         private void OnEnable()
         {
+            pauseMenuNavigation.SetFirstItem();
+            
             equipSkillsPanel.SetActive(false);
             EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(false);
             //ClearNavigationButtons();
@@ -59,6 +71,23 @@ namespace CodeReverie
         {
             switch (skillsMenuNavigationState)
             {
+                
+                // case SkillsMenuNavigationState.Main:
+                //     if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                //     {
+                //         Confirm();
+                //     }
+                //     
+                //     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                //     {
+                //     
+                //         EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
+                //     
+                //     }
+                //     
+                //     
+                //     pauseMenuNavigation.NavigationInputUpdate();
+                //     break;
                 case SkillsMenuNavigationState.SelectSkillSlot:
                     if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
                     {
@@ -67,8 +96,8 @@ namespace CodeReverie
 
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
-                        EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState
-                            .Menu);
+                        //skillsMenuNavigationState = SkillsMenuNavigationState.Main;
+                        EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
                     }
 
 
@@ -121,6 +150,9 @@ namespace CodeReverie
         {
             switch (skillsMenuNavigationState)
             {
+                // case SkillsMenuNavigationState.Main:
+                //     skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
+                //     break;
                 case SkillsMenuNavigationState.SelectSkillSlot:
                     equipSkillsPanel.SetActive(true);
                     skillsMenuNavigationState = SkillsMenuNavigationState.EquipSkills;
@@ -183,6 +215,9 @@ namespace CodeReverie
                     {
                         EventManager.Instance.generalEvents.OnPauseMenuCharacterSwap(selectedPartySlotNavigationUI
                             .character);
+                        
+                        characterName.text = value.character.info.characterName;
+                        characterPortrait.sprite = value.character.GetCharacterPortrait();
                     }
                 }
             }

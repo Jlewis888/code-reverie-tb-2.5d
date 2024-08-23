@@ -61,6 +61,7 @@ MonoBehaviour:
   itemName: Lifeweed
   itemDescription: Need Description
   itemType: 1
+  itemSubType: 0
   itemRarity: 0
   stackable: 1
   price: 0

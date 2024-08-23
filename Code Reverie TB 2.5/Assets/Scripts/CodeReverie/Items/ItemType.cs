@@ -18,7 +18,8 @@
         EnvyRelic,
         GreedRelic,
         LustRelic,
-        SlothRelic
+        SlothRelic,
+        KeyItem
         
     }
 }

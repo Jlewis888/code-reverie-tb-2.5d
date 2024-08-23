@@ -76,6 +76,7 @@ MonoBehaviour:
   itemName: Old Sword
   itemDescription: Old Sword from down the way
   itemType: 0
+  itemSubType: 0
   itemRarity: 2
   stackable: 0
   price: 0

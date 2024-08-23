@@ -12,14 +12,8 @@ namespace CodeReverie
         public PauseMenuNavigationState pauseMenuNavigationState;
         public PauseMenuNavigationState pauseMenuNavigationPreviousState;
         public PauseMenuSubNavigationState pauseMenuSubNavigationState;
-        
         public GameObject pauseMenuNavigationHolder;
-        
-        
-        
-      
-        
-       
+        public MenuNavigation pauseMenuNavigation;
         
         public void ClearNavigationButtons()
         {

@@ -76,6 +76,7 @@ MonoBehaviour:
   itemName: Common Core Crystal
   itemDescription: Common Item
   itemType: 2
+  itemSubType: 0
   itemRarity: 0
   stackable: 0
   price: 0

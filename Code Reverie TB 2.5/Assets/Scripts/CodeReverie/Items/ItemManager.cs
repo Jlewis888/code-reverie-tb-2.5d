@@ -11,21 +11,40 @@ namespace CodeReverie
         public BaseItemDetailsListContainer baseItemDetailsListContainer;
         public GearSetDataContainerList gearSets;
         
-        
-        
-        
         public Dictionary<string, ItemInfo> allItemInfoMap;
         public Dictionary<GearSetType, GearSetDataContainer> gearSetDataContainersMap =
             new Dictionary<GearSetType, GearSetDataContainer>();
 
         public Dictionary<ItemRarity, ItemRarityData> itemRarityMap = new Dictionary<ItemRarity, ItemRarityData>();
-
+        public Dictionary<ItemType, List<ItemSubType>> itemTypeMap = new Dictionary<ItemType, List<ItemSubType>>();
 
         protected override void Awake()
         {
             base.Awake();
             SetAllItemsMap();
             gearSetDataContainersMap = gearSets.gearSetDataContainersMap;
+
+            itemTypeMap = new Dictionary<ItemType, List<ItemSubType>>();
+
+            List<ItemSubType> consumableList = new List<ItemSubType>();
+            consumableList.Add(ItemSubType.Consumable);
+            itemTypeMap.Add(ItemType.Consumable, consumableList);
+            
+            List<ItemSubType> relicList = new List<ItemSubType>();
+            relicList.Add(ItemSubType.GluttonRelic);
+            relicList.Add(ItemSubType.WrathRelic);
+            relicList.Add(ItemSubType.PrideRelic);
+            relicList.Add(ItemSubType.EnvyRelic);
+            relicList.Add(ItemSubType.GreedRelic);
+            relicList.Add(ItemSubType.LustRelic);
+            relicList.Add(ItemSubType.SlothRelic);
+            itemTypeMap.Add(ItemType.Relic, relicList);
+            
+            
+            List<ItemSubType> materialList = new List<ItemSubType>();
+            materialList.Add(ItemSubType.Material);
+            itemTypeMap.Add(ItemType.Material, materialList);
+
         }
 
 
