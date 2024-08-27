@@ -41,6 +41,7 @@ namespace CodeReverie
             if (pauseMenuNavigationState == this.pauseMenuNavigationState)
             {
                 gameObject.SetActive(true);
+                CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu = this;
             }
             else
             {
@@ -52,6 +53,8 @@ namespace CodeReverie
         {
             
         }
+
+        
 
         // public void SetInputListeners()
         // {

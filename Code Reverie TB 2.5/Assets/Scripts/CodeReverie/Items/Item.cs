@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace CodeReverie
@@ -18,11 +21,46 @@ namespace CodeReverie
         
         public virtual void UseItem()
         {
+            if (String.IsNullOrEmpty(info.onUse))
+            {
+                return;
+            }
+            
+            Type thisType = this.GetType();
+            MethodInfo theMethod = thisType.GetMethod(info.onUse);
+            theMethod.Invoke(this, info.onUseParameters.ToArray());
+            
             if (info.consumeOnUse)
             {
                 RemoveAmount(1);
             }
         }
+        
+        public virtual void UseItem(ItemUseSectionType itemUseSectionType)
+        {
+            if (String.IsNullOrEmpty(info.onUse))
+            {
+                return;
+            }
+
+            object[] onUseParameters = info.onUseParameters.ToArray();
+            onUseParameters = onUseParameters.Append(itemUseSectionType).ToArray();
+            
+            
+            Type thisType = this.GetType();
+            MethodInfo onUseMethod = thisType.GetMethod(info.onUse);
+            ParameterInfo[] onUseParametersList = onUseMethod.GetParameters();
+            
+            //if(onUseParametersList.Contains())
+            
+            onUseMethod.Invoke(this, onUseParameters);
+            
+            if (info.consumeOnUse)
+            {
+                RemoveAmount(1);
+            }
+        }
+        
         
         public virtual void UseMenuItem()
         {
@@ -58,7 +96,6 @@ namespace CodeReverie
             
         }
         
-        
         public void AddAmount(int value)
         {
             amount += value;
@@ -68,6 +105,45 @@ namespace CodeReverie
         {
             amount -= value;
         }
+
+        // public void ApplyHeal(int healAmount, ItemUseSectionType itemUseSectionType)
+        // {
+        //     switch (itemUseSectionType)
+        //     {
+        //         case ItemUseSectionType.InventoryMenu:
+        //             Debug.Log("This works here buddy");
+        //             break;
+        //         case ItemUseSectionType.Combat:
+        //             BattleManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(healAmount);
+        //             break;
+        //     }
+        // }
         
+        public void ApplyHeal(string healAmount, ItemUseSectionType itemUseSectionType)
+        {
+            
+            
+            int x = 0;
+
+            if (Int32.TryParse(healAmount, out x))
+            {
+                switch (itemUseSectionType)
+                {
+                    case ItemUseSectionType.InventoryMenu:
+                        Debug.Log(CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu);
+                        Debug.Log(CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>());
+                        Debug.Log(CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>().selectedPartyMenuSlot);
+                        
+                        CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>()
+                            .selectedPartyMenuSlot.character.characterController.GetComponent<Health>().ApplyHeal(x);
+                        break;
+                    case ItemUseSectionType.Combat:
+                        BattleManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
+                        break;
+                }
+            }
+            
+            
+        }
     }
 }

@@ -38,6 +38,7 @@ MonoBehaviour:
     - DamageNumbersPro
     - Enviro3.Runtime
     - GaiaCore
+    - IEVO.uGUIDirectedNavigation.Runtime
     - Ink-Libraries
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0

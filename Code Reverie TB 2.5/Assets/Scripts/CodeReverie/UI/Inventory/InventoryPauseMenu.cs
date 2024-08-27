@@ -14,31 +14,41 @@ namespace CodeReverie
         public List<InventoryFilterButton> inventoryFilterButtons;
         public int itemFilterIndex;
         
+        public PartyMenuSlot partyMenuSlotPF;
+        public GameObject partySlotMenuHolder;
+
+        public MenuNavigation partyNavigation;
 
         public MenuNavigation inventoryMenuNavigation;
+
+        public PartyMenuSlot selectedPartyMenuSlot;
 
         private void Awake()
         {
             pauseMenuNavigation = new MenuNavigation();
+            partyNavigation = new MenuNavigation();
             pauseMenuNavigation.pauseMenuNavigationButtons = pauseMenuNavigationHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
             pauseMenuNavigation.SetFirstItem();
             
             inventoryMenuNavigation = new MenuNavigation();
             inventoryMenuNavigation.callBack = OnSelectedNavigationButtonChange;
+            partyNavigation.callBack = OnPartySelectedNavigationButtonChange;
         }
         
         private void OnEnable()
         {
+            inventoryMenuNavigationState = InventoryMenuNavigationState.Menu;
             pauseMenuNavigation.SetFirstItem();
             EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange += OnPauseMenuSubNavigationStateChange;
             inventoryPauseMenuNavigationButtonList = new List<InventoryPauseMenuNavigationButton>();
             
             ClearInventoryNavigationButtons();
             SetInventoryItems();
+            SetCurrentPartyNavigation();
             itemFilterIndex = 0;
             SetFilters();
             
-            inventoryMenuNavigation.SetFirstItem();
+            //inventoryMenuNavigation.SetFirstItem();
         }
 
         private void OnDisable()
@@ -104,6 +114,21 @@ namespace CodeReverie
                     }
 
                     inventoryMenuNavigation.NavigationInputUpdate();
+                    break;
+                
+                case InventoryMenuNavigationState.Character:
+                    
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
+                    }
+
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    {
+                        inventoryMenuNavigationState = InventoryMenuNavigationState.Inventory;
+                    }
+                    
+                    partyNavigation.NavigationInputUpdate();
                     break;
             }
         }
@@ -173,6 +198,27 @@ namespace CodeReverie
             }
         }
 
+        public void SetCurrentPartyNavigation()
+        {
+            partyNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+            
+            foreach (Transform child in partySlotMenuHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            
+            foreach (Character character in PlayerManager.Instance.currentParty)
+            {
+                PartyMenuSlot partyMenuSlot =
+                    Instantiate(partyMenuSlotPF, partySlotMenuHolder.transform);
+
+                partyMenuSlot.character = character;
+                partyMenuSlot.characterPortrait.sprite = character.GetCharacterPortrait();
+                partyMenuSlot.selector.SetActive(false);
+                partyMenuSlot.nameText.text = character.info.characterName;
+                partyNavigation.Add(partyMenuSlot);
+            }
+        }
 
         private void Confirm()
         {
@@ -197,11 +243,42 @@ namespace CodeReverie
                     if (inventoryMenuNavigation.SelectedNavigationButton
                         .GetComponent<InventoryPauseMenuNavigationButton>().item.info.canUseInMenu)
                     {
-                        EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState
-                            .CurrentPartyMenuManager);
+                        
+                        if (inventoryMenuNavigation.SelectedNavigationButton
+                                .GetComponent<InventoryPauseMenuNavigationButton>().item.info.targetType ==
+                            TargetType.SingleTarget)
+                        {
+                            partyNavigation.SetFirstItem();
+                        } else if (inventoryMenuNavigation.SelectedNavigationButton
+                                       .GetComponent<InventoryPauseMenuNavigationButton>().item.info.targetType ==
+                                   TargetType.All)
+                        {
+                            pauseMenuNavigation.SetAllItems();
+                        }
+                        
+                        inventoryMenuNavigationState = InventoryMenuNavigationState.Character;
+                        // inventoryMenuNavigation.SelectedNavigationButton
+                        //     .GetComponent<InventoryPauseMenuNavigationButton>().item.UseItem(ItemUseSectionType.InventoryMenu);
 
-                        EventManager.Instance.inventoryEvents.OnItemMenuSelect(inventoryMenuNavigation.SelectedNavigationButton
-                            .GetComponent<InventoryPauseMenuNavigationButton>().item);
+                        // EventManager.Instance.generalEvents.onPauseMenuSubNavigationStateChange(PauseMenuSubNavigationState
+                        //     .CurrentPartyMenuManager);
+                        //
+                        // EventManager.Instance.inventoryEvents.OnItemMenuSelect(inventoryMenuNavigation.SelectedNavigationButton
+                        //     .GetComponent<InventoryPauseMenuNavigationButton>().item);
+                    }
+                    break;
+                case InventoryMenuNavigationState.Character:
+                    if (inventoryMenuNavigation.SelectedNavigationButton
+                            .GetComponent<InventoryPauseMenuNavigationButton>().item.info.targetType ==
+                        TargetType.SingleTarget)
+                    {
+                        
+                        inventoryMenuNavigation.SelectedNavigationButton.GetComponent<InventoryPauseMenuNavigationButton>().item.UseItem(ItemUseSectionType.InventoryMenu);
+                    } else if (inventoryMenuNavigation.SelectedNavigationButton
+                                   .GetComponent<InventoryPauseMenuNavigationButton>().item.info.targetType ==
+                               TargetType.All)
+                    {
+                        pauseMenuNavigation.SetAllItems();
                     }
                     break;
             }
@@ -239,6 +316,11 @@ namespace CodeReverie
             }
         }
         
+        
+        public void OnPartySelectedNavigationButtonChange()
+        {
+            selectedPartyMenuSlot = partyNavigation.SelectedNavigationButton.GetComponent<PartyMenuSlot>();
+        }
         
     }
 }

@@ -77,3 +77,6 @@ MonoBehaviour:
   canUseInBattle: 0
   itemRecipes: []
   targetType: 0
+  gearSlotType: 0
+  onUse: 
+  onUseParameters: []

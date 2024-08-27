@@ -5,11 +5,9 @@ namespace CodeReverie
 {
     public class CharacterSkills
     {
-        public SkillSlot basicSkill = new SkillSlot();
-        public SkillSlot dashSkill = new SkillSlot();
-        public SkillSlot actionSkill = new SkillSlot();
-        public SkillSlot equippedAlchemicBurst = new SkillSlot();
-        //public Dictionary<int, SkillSlot> equippedSkills = new Dictionary<int, SkillSlot>();
+
+
+        public Dictionary<GearSlotType, List<Skill>> equippedSkills = new Dictionary<GearSlotType, List<Skill>>();
         public Dictionary<int, Skill> equippedActionSkills = new Dictionary<int, Skill>();
         //public Dictionary<int, SkillSlot> equippedActionSkills = new Dictionary<int, SkillSlot>();
         public Dictionary<int, Skill> equippedPassivesSkills = new Dictionary<int, Skill>();

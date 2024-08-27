@@ -33,6 +33,9 @@ namespace CodeReverie
         public List<ItemRecipeData> itemRecipes = new List<ItemRecipeData>();
         public Dictionary<ItemInfo, int> requiredItems = new Dictionary<ItemInfo, int>();
         public TargetType targetType;
+        public GearSlotType gearSlotType;
+        public string onUse;
+        public List<string> onUseParameters;
         
         private void OnValidate()
         {

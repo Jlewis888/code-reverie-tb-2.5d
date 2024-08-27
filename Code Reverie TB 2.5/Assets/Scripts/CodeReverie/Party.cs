@@ -108,16 +108,6 @@ namespace CodeReverie
                     }
                    
                 }
-                
-                
-                
-                if (partySlot.character.characterSkills.equippedAlchemicBurst != null)
-                {
-                    if (partySlot.character.characterSkills.equippedAlchemicBurst.skill != null)
-                    {
-                        partySlot.character.characterSkills.equippedAlchemicBurst.skill.SetSkillInfo();
-                    }
-                }
                
             }
 

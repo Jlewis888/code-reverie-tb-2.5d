@@ -158,6 +158,14 @@ namespace CodeReverie
             SelectedNavigationButton = pauseMenuNavigationButtons[navigationButtonsIndex];
         }
 
+        public void SetAllItems()
+        {
+            foreach (PauseMenuNavigationButton pauseMenuNavigationButton in pauseMenuNavigationButtons)
+            {
+                pauseMenuNavigationButton.selector.SetActive(true);
+            }
+        }
+
         public void ResetNavigationList()
         {
             pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();

@@ -90,3 +90,7 @@ MonoBehaviour:
   canUseInBattle: 1
   itemRecipes: []
   targetType: 0
+  gearSlotType: 0
+  onUse: ApplyHeal
+  onUseParameters:
+  - 150

@@ -44,6 +44,7 @@ namespace CodeReverie
 
         private void OnEnable()
         {
+            SelectedPartySlotNavigationUI = null;
             pauseMenuNavigation.SetFirstItem();
             
             equipSkillsPanel.SetActive(false);
@@ -52,11 +53,9 @@ namespace CodeReverie
             ClearPartSlotUI();
             SetPartySlotUI();
             SetNavigationButtons();
-
-            partySlotIndex = 0;
-            
             skillSlotPauseMenuNavigation.SetFirstItem();
             
+            partySlotIndex = 0;
             SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
         }
 
@@ -137,7 +136,7 @@ namespace CodeReverie
                     {
                         equipSkillsPanel.SetActive(false);
                         skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
-                        SetNavigationButtons();
+                        //SetNavigationButtons();
                     }
                     
                     equipSkillPauseMenuNavigation.NavigationInputUpdate();
@@ -159,9 +158,19 @@ namespace CodeReverie
                     SetLearnedSkills(skillSlotPauseMenuNavigation.SelectedNavigationButton.GetComponent<SkillSlotPauseMenuNavigationButton>().skillType);
                     break;
                 case SkillsMenuNavigationState.EquipSkills:
+                    
+                    
+                    
+                    SkillDataContainer skillDataContainer = equipSkillPauseMenuNavigation.SelectedNavigationButton
+                        .GetComponent<EquipSkillPauseMenuNavigationButton>().skill.info;
+                    int skillSlotIndex = skillSlotPauseMenuNavigation.SelectedNavigationButton
+                        .GetComponent<SkillSlotPauseMenuNavigationButton>().skillSlotIndex;
+                    
+                    
+                    EquipActionSkill(skillDataContainer, skillSlotIndex);
                     equipSkillsPanel.SetActive(false);
                     skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
-                    SetNavigationButtons();
+                    //SetNavigationButtons();
                     break;
             }
         }
@@ -198,6 +207,8 @@ namespace CodeReverie
             foreach (SkillSlotPauseMenuNavigationButton skillSlotPauseMenuNavigationButton in skillSlotPauseMenuNavigationButtons)
             {
                 skillSlotPauseMenuNavigation.pauseMenuNavigationButtons.Add(skillSlotPauseMenuNavigationButton);
+                
+                skillSlotPauseMenuNavigationButton.SetListeners();
             }
         }
 
@@ -221,6 +232,16 @@ namespace CodeReverie
                     }
                 }
             }
+        }
+
+        public void EquipActionSkill(SkillDataContainer skillDataContainer, int index)
+        {
+            Character character = SelectedPartySlotNavigationUI.character;
+            
+            character.characterSkills.EquipActionSkill(skillDataContainer, index);
+            
+            skillSlotPauseMenuNavigation.SelectedNavigationButton
+                .GetComponent<SkillSlotPauseMenuNavigationButton>().Init(character);
         }
 
         public void SetLearnedSkills(SkillType skillType)
@@ -248,6 +269,8 @@ namespace CodeReverie
                     equipSkillPauseMenuNavigation.pauseMenuNavigationButtons.Add(equipSkillPauseMenuNavigationButton);
                 }
             }
+            
+            equipSkillPauseMenuNavigation.SetFirstItem();
         }
         
     }

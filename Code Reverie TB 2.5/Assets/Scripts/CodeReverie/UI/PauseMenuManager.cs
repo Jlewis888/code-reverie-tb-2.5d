@@ -84,7 +84,7 @@ namespace CodeReverie
 
                 
                 
-                SetMenuManagers();
+                //SetMenuManagers();
                 //onMenuChange?.Invoke(selectedMenuManager);
 
             }

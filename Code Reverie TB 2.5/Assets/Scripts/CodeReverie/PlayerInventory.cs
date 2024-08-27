@@ -34,6 +34,37 @@ namespace CodeReverie
         //     }
         // }
         
+        public void AddItem(ItemInfo item, int amount = 1)
+        {
+            
+            (bool, int) inventorySlotCheck = ItemInInventory(item);
+               
+               
+            if (inventorySlotCheck.Item1)
+            {
+                //inventorySlotCheck.Item2.AddAmount(amount);
+                items[inventorySlotCheck.Item2].AddAmount(amount);
+            }
+            else
+            {
+
+                Item itemToAdd = ItemManager.Instance.CreateItem(item);
+
+                if (itemToAdd != null)
+                {
+                    itemToAdd.AddAmount(amount);
+                    items.Add(itemToAdd);
+                }
+                else
+                {
+                    Debug.Log("Item Could not be created");
+                }
+                
+                
+            }
+            
+        }
+        
         public void AddItem(Item item, int amount = 1)
         {
             

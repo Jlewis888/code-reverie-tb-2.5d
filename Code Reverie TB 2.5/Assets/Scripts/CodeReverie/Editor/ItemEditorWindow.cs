@@ -12,10 +12,10 @@ namespace CodeReverie
 {
     public class ItemEditorWindow : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Skills/Skill Editor")]
+        [MenuItem("Tools/Items/Item Editor")]
         static void Open()
         {
-            var window = GetWindow<SkillEditorWindow>();
+            var window = GetWindow<ItemEditorWindow>();
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 500);
         }
 

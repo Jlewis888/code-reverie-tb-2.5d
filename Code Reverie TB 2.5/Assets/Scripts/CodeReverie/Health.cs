@@ -126,7 +126,11 @@ namespace CodeReverie
         public float CurrentHealth
         {
             get => currentHealth;
-            set => currentHealth = value;
+            set
+            {
+                currentHealth = value;
+                GetComponent<CharacterUnitController>().character.currentHealth = currentHealth;
+            }
         }
 
         public float MaxHealth { 
@@ -235,6 +239,7 @@ namespace CodeReverie
 
         public void ApplyHeal(float amount)
         {
+            Debug.Log("Does this work here");
             //throw new System.NotImplementedException();
             CurrentHealth += amount;
 

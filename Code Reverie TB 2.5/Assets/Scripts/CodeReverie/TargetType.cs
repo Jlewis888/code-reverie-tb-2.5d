@@ -2,8 +2,9 @@
 {
     public enum TargetType
     {
-        Self,
+        SingleTarget,
         All,
+        Self,
         SingleAlly,
         AllAllies,
         SingleEnemy,

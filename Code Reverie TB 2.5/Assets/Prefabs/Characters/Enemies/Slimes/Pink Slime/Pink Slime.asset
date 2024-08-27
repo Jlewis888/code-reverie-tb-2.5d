@@ -27,8 +27,7 @@ MonoBehaviour:
   characterID: Pink Slime
   characterName: 
   characterType: 2
-  characterUnitPF: {fileID: 3883581989913460218, guid: 2409d779d09c1db4b984adf3fbabbd68,
-    type: 3}
+  characterUnitPF: {fileID: 0}
   experienceToGive: 5000
   attackRange: 1
   baseStats: {fileID: 11400000, guid: bbbfe7159ab1e5c4a8a67393f1328f02, type: 2}

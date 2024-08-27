@@ -1146,7 +1146,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   pauseMenuNavigationState: 0
-  selector: {fileID: 0}
+  selector: {fileID: 6426526079669327229}
   nameText: {fileID: 0}
   icon: {fileID: 0}
   canNavigate: 1

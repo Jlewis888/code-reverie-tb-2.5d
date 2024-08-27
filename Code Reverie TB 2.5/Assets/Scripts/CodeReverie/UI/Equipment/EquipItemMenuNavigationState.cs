@@ -3,6 +3,8 @@
     public enum EquipItemMenuNavigationState
     {
         Menu,
-        EquipItem
+        EquipItem,
+        NavigateSkills,
+        EquipSkill
     }
 }

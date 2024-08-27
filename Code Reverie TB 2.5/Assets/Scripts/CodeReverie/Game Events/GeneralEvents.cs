@@ -106,5 +106,13 @@ namespace CodeReverie
         {
             toggleCharacterSidePanelUI?.Invoke(setActive);
         }
+
+        public Action<SkillSlotUI> onSkillSlotSelect;
+
+        public void OnSkillSlotSelect(SkillSlotUI skillSlotUI)
+        {
+            onSkillSlotSelect?.Invoke(skillSlotUI);
+        }
+        
     }
 }

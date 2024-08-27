@@ -83,20 +83,31 @@ namespace CodeReverie
             }
         }
 
-        public Item CreateItem(ItemInfo info)
+        public Item CreateItem(ItemInfo info, bool createItemFromType = false)
         {
             if (info != null)
             {
-                Type itemType = Type.GetType($"CodeReverie.{GetItemDetails(info.id)}");
-          
-                if (itemType != null)
+
+                if (createItemFromType)
                 {
-                    return (Item)Activator.CreateInstance(itemType, new [] {GetItemDetails(info.id)});
+                    Type itemType = Type.GetType($"CodeReverie.{GetItemDetails(info.id)}");
+          
+                    if (itemType != null)
+                    {
+                        return (Item)Activator.CreateInstance(itemType, new [] {GetItemDetails(info.id)});
+                    }
+                    else
+                    {
+                        Debug.Log("SKill is null");
+                    } 
                 }
                 else
                 {
-                    Debug.Log("SKill is null");
+                    return new Item(info);
                 }
+                
+                
+                
             }
 
             return null;

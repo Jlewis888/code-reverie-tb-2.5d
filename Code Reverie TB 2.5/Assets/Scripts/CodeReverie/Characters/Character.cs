@@ -255,12 +255,7 @@ namespace CodeReverie
         //     }
         // }
 
-
-        public void EquipAlchemicBurst(SkillDataContainer skillDataContainer)
-        {
-            characterSkills.equippedAlchemicBurst.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
-        }
-
+        
         public int SkillPoints
         {
             get

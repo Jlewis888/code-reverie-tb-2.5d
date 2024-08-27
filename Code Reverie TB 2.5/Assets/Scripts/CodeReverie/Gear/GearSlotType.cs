@@ -2,6 +2,7 @@
 {
     public enum GearSlotType
     {
+        None,
         Gluttony,
         Wrath,
         Pride,

@@ -27,8 +27,7 @@ MonoBehaviour:
   characterID: Blue  Slime
   characterName: Blue Slime
   characterType: 2
-  characterUnitPF: {fileID: 4581661602954197083, guid: 9ed43593fcd627c41b1aa917567883c6,
-    type: 3}
+  characterUnitPF: {fileID: 0}
   experienceToGive: 5000
   attackRange: 1
   baseStats: {fileID: 11400000, guid: 61c442188888df24f978695fc36f8861, type: 2}

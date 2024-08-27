@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace CodeReverie
 {
@@ -8,15 +9,21 @@ namespace CodeReverie
         public int skillSlotIndex;
         public Skill skill;
 
+        
 
         private void OnEnable()
         {
-            EventManager.Instance.generalEvents.onPauseMenuCharacterSwap += Init;
+            
         }
         
         private void OnDisable()
         {
             EventManager.Instance.generalEvents.onPauseMenuCharacterSwap -= Init;
+        }
+
+        public void SetListeners()
+        {
+            EventManager.Instance.generalEvents.onPauseMenuCharacterSwap += Init;
         }
 
 

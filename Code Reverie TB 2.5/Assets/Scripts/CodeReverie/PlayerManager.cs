@@ -59,7 +59,7 @@ namespace CodeReverie
 
         private void Start()
         {
-            
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
         }
 
         private void OnEnable()
@@ -100,6 +100,7 @@ namespace CodeReverie
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
+                inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
                 //Experience = 10000;
                 // AddCharacterToAvailablePartyPool("Cecil");
                 // AddCharacterToActiveParty("Cecil");
