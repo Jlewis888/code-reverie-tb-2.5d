@@ -11,6 +11,7 @@ namespace CodeReverie
 
         public ItemSubType itemSubType;
         public int slotIndex;
+        [SerializeField]public SkillSlot skillSlot;
         
         protected override void Awake()
         {
@@ -22,14 +23,15 @@ namespace CodeReverie
 
         public override void OnSelect(BaseEventData eventData)
         {
-            base.OnDeselect(eventData);
-            //GetComponent<Image>().color = Color.red;
+            //base.OnDeselect(eventData);
+            GetComponent<Image>().color = Color.red;
             EventManager.Instance.generalEvents.OnSkillSlotSelect(this);
         }
 
         public override void OnDeselect(BaseEventData eventData)
         {
-            base.OnDeselect(eventData);
+            //base.OnDeselect(eventData);
+            GetComponent<Image>().color = Color.white;
         }
     }
 }

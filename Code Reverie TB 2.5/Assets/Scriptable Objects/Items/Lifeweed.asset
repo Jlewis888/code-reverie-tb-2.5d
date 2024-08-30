@@ -57,6 +57,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: skillSlots
+      Entry: 6
+      Data: 
   id: Lifeweed
   itemName: Lifeweed
   itemDescription: Need Description
@@ -80,3 +83,4 @@ MonoBehaviour:
   gearSlotType: 0
   onUse: 
   onUseParameters: []
+  skillDataContainer: {fileID: 0}

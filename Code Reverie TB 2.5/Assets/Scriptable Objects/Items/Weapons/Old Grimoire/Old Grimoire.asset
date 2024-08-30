@@ -87,6 +87,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: skillSlots
+      Entry: 6
+      Data: 
   id: Old Grimoire
   itemName: Old Grimoire
   itemDescription: 
@@ -110,3 +113,4 @@ MonoBehaviour:
   gearSlotType: 0
   onUse: 
   onUseParameters: []
+  skillDataContainer: {fileID: 0}

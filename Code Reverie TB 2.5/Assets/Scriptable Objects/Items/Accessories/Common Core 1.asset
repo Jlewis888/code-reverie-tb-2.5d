@@ -72,6 +72,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: skillSlots
+      Entry: 6
+      Data: 
   id: Common Core 1
   itemName: Common Core Crystal
   itemDescription: Common Item
@@ -95,3 +98,4 @@ MonoBehaviour:
   gearSlotType: 0
   onUse: 
   onUseParameters: []
+  skillDataContainer: {fileID: 0}

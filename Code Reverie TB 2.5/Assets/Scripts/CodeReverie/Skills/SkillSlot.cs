@@ -8,18 +8,21 @@ namespace CodeReverie
     public class SkillSlot
     {
         public float skillSlotCooldownTimer;
+        public SkillType skillType;
         public Skill skill;
+        public Item equippedItem;
 
+        
+        public void EquipSkillSlotItem(Item item)
+        {
+            equippedItem = item;
+        }
+        
         public void SetCooldownTimer()
         {
             //skillSlotCooldownTimer = skill.info.cooldown;
         }
         
-        public void ResetCooldownTimer()
-        {
-            skillSlotCooldownTimer = 0;
-        }
-
         public void SubscribeListeners()
         {
             // if (skill != null)

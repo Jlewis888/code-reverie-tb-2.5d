@@ -176,7 +176,26 @@ namespace CodeReverie
                         }
                         
                     }
-                    
+                }
+                
+                
+                foreach (GearSlot gearSlot in characterController.character.characterGear.relicSlots.Values)
+                {
+                
+                    if (gearSlot != null)
+                    {
+                        if (gearSlot.item != null)
+                        {
+                            
+                            if (gearSlot.item.info.baseItemStats != null)
+                            {
+                                stats.AddRange(gearSlot.item.info.baseItemStats);
+                            }
+                            
+                            stats.AddRange(gearSlot.item.stats);
+                        }
+                        
+                    }
                 }
 
                 stats.AddRange(characterController.character.characterGear.gearSetBonusStats);
@@ -262,6 +281,25 @@ namespace CodeReverie
                 }
                 
                 foreach (GearSlot gearSlot in characterController.character.characterGear.accessorySlots.Values)
+                {
+                
+                    if (gearSlot != null)
+                    {
+                        if (gearSlot.item != null)
+                        {
+
+                            if (gearSlot.item.info.baseItemStats != null)
+                            {
+                                stats.AddRange(gearSlot.item.info.baseItemStats);
+                            }
+                            
+                            stats.AddRange(gearSlot.item.stats);
+                            
+                        }
+                    }
+                }
+                
+                foreach (GearSlot gearSlot in characterController.character.characterGear.relicSlots.Values)
                 {
                 
                     if (gearSlot != null)

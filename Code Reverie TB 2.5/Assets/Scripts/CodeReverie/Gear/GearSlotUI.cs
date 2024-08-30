@@ -38,13 +38,54 @@ namespace CodeReverie
                     item = character.characterGear.relicSlots[gearSlotType].item;
                     nameText.text = item.info.itemName;
                 }
+                else
+                {
+                    item = null;
+                    nameText.text = "Empty";
+                }
             }
             
         }
 
         public void SetSkillSlots()
         {
-            skillSlotUIList = GetComponentsInChildren<SkillSlotUI>().ToList();
+            
+            skillSlotUIList = new List<SkillSlotUI>();
+            
+            //TODO Convert to a POOL
+            foreach (Transform child in skillSlotHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            
+
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item.skillSlots == null)
+            {
+                return;
+            }
+            
+
+            if (item.skillSlots.Count > 0)
+            {
+                SkillSlotUI skillSlotUIPF = CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu
+                    .GetComponent<EquipmentPauseMenu>().skillSlotUIPF;
+
+                foreach (SkillSlot skillSlot in item.skillSlots)
+                {
+                    SkillSlotUI skillSlotUI = Instantiate(skillSlotUIPF, skillSlotHolder.transform);
+                    skillSlotUI.skillSlot = skillSlot;
+                    skillSlotUIList.Add(skillSlotUI);
+                }
+            }
+            
+            
+            //skillSlotUIList = GetComponentsInChildren<SkillSlotUI>().ToList();
             
             foreach (SkillSlotUI skillSlotUI in skillSlotUIList)
             {

@@ -19,7 +19,8 @@
         GreedRelic,
         LustRelic,
         SlothRelic,
-        KeyItem
+        KeyItem,
+        SkillItem
         
     }
 }

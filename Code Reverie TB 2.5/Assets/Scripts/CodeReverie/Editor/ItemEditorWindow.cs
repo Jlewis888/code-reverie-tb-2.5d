@@ -87,7 +87,7 @@ namespace CodeReverie
 
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Item")))
                 {
-                    ScriptableObjectCreator.ShowDialog<SkillDataContainer>("Assets/Scriptable Objects/Items", obj =>
+                    ScriptableObjectCreator.ShowDialog<ItemInfo>("Assets/Scriptable Objects/Items", obj =>
                     {
                         //obj.Name = obj.name;
                         base.TrySelectMenuItemWithObject(obj); // Selects the newly created item in the editor

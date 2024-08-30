@@ -165,6 +165,14 @@ namespace CodeReverie
                 pauseMenuNavigationButton.selector.SetActive(true);
             }
         }
+        
+        public void UnsetAllItems()
+        {
+            foreach (PauseMenuNavigationButton pauseMenuNavigationButton in pauseMenuNavigationButtons)
+            {
+                pauseMenuNavigationButton.selector.SetActive(false);
+            }
+        }
 
         public void ResetNavigationList()
         {

@@ -88,6 +88,7 @@ namespace CodeReverie
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
                         inventoryMenuNavigationState = InventoryMenuNavigationState.Menu;
+                        inventoryMenuNavigation.UnsetAllItems();
                     }
 
                     if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
@@ -126,9 +127,17 @@ namespace CodeReverie
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
                         inventoryMenuNavigationState = InventoryMenuNavigationState.Inventory;
+                        partyNavigation.UnsetAllItems();
                     }
-                    
-                    partyNavigation.NavigationInputUpdate();
+
+                    if (inventoryMenuNavigation.SelectedNavigationButton
+                            .GetComponent<InventoryPauseMenuNavigationButton>().item.info.targetType ==
+                        TargetType.SingleTarget)
+                    {
+                        partyNavigation.NavigationInputUpdate(); 
+                    }
+
+                   
                     break;
             }
         }
@@ -238,6 +247,8 @@ namespace CodeReverie
                         inventoryMenuNavigationState = InventoryMenuNavigationState.Inventory;
                     }
                     
+                    inventoryMenuNavigation.SetFirstItem();
+                    
                     break;
                 case InventoryMenuNavigationState.Inventory:
                     if (inventoryMenuNavigation.SelectedNavigationButton
@@ -253,7 +264,7 @@ namespace CodeReverie
                                        .GetComponent<InventoryPauseMenuNavigationButton>().item.info.targetType ==
                                    TargetType.All)
                         {
-                            pauseMenuNavigation.SetAllItems();
+                            partyNavigation.SetAllItems();
                         }
                         
                         inventoryMenuNavigationState = InventoryMenuNavigationState.Character;

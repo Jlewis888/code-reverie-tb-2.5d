@@ -57,11 +57,14 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: skillSlots
+      Entry: 6
+      Data: 
   id: Common Potion 1
   itemName: Common Potion 1
   itemDescription: Common Potion 1
   itemType: 1
-  itemSubType: 0
+  itemSubType: 1
   itemRarity: 0
   stackable: 1
   price: 0
@@ -81,3 +84,4 @@ MonoBehaviour:
   onUse: ApplyHeal
   onUseParameters:
   - 150
+  skillDataContainer: {fileID: 0}

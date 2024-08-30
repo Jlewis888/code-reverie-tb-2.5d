@@ -13,10 +13,12 @@ namespace CodeReverie
         public ItemInfo info;
         public List<Stat> stats = new List<Stat>();
         public int amount;
+        public List<SkillSlot> skillSlots;
 
         public Item(ItemInfo itemInfo)
         {
             info = itemInfo;
+            skillSlots = info.skillSlots;
         }
         
         public virtual void UseItem()
@@ -130,20 +132,31 @@ namespace CodeReverie
                 switch (itemUseSectionType)
                 {
                     case ItemUseSectionType.InventoryMenu:
-                        Debug.Log(CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu);
-                        Debug.Log(CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>());
-                        Debug.Log(CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>().selectedPartyMenuSlot);
+
+                        if (info.targetType == TargetType.All || info.targetType == TargetType.AllAllies)
+                        {
+
+                            foreach (Character character in PlayerManager.Instance.currentParty)
+                            {
+                                character.characterController.GetComponent<Health>().ApplyHeal(x);
+                            }
+                            
+                        } 
+                        else if (info.targetType == TargetType.SingleTarget || info.targetType == TargetType.SingleAlly)
+                        {
+                            CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>()
+                                .selectedPartyMenuSlot.character.characterController.GetComponent<Health>().ApplyHeal(x);
+                        }
                         
-                        CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu.GetComponent<InventoryPauseMenu>()
-                            .selectedPartyMenuSlot.character.characterController.GetComponent<Health>().ApplyHeal(x);
+                        
                         break;
                     case ItemUseSectionType.Combat:
                         BattleManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
                         break;
                 }
             }
-            
-            
         }
+
+        
     }
 }

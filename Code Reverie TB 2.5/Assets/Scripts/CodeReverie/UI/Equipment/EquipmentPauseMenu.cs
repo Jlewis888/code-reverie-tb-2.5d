@@ -30,6 +30,7 @@ namespace CodeReverie
         public GameObject equipItemPauseMenuNavigationButtonPanel;
         public GameObject equipItemPauseMenuNavigationButtonHolder;
         public List<SkillSlotUI> skillSlotUIList = new List<SkillSlotUI>();
+        public SkillSlotUI skillSlotUIPF;
         public SkillSlotUI selectedSkillSlotUI;
 
         private void Awake()
@@ -56,8 +57,9 @@ namespace CodeReverie
             SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
             
             pauseMenuNavigation.SetFirstItem();
-            
-            
+            InitGearSlotButtons();
+
+
         }
 
         private void OnDisable()
@@ -130,7 +132,7 @@ namespace CodeReverie
                 case EquipItemMenuNavigationState.EquipItem:
                     if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
                     {
-                        ConfirmItemSelection();
+                        Confirm();
                     }
             
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
@@ -144,12 +146,29 @@ namespace CodeReverie
                     equipmentItemMenuNavigation.NavigationInputUpdate();
                     break;
                 case EquipItemMenuNavigationState.NavigateSkills:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
+                    }
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
                         equipItemMenuNavigationState = EquipItemMenuNavigationState.Menu;
                         ToggleSkillSlotsOff();
                     }
                    
+                    break;
+                case EquipItemMenuNavigationState.EquipSkill:
+                    equipmentItemMenuNavigation.NavigationInputUpdate();
+                    
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
+                    }
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    {
+                        equipItemMenuNavigationState = EquipItemMenuNavigationState.NavigateSkills;
+                    }
+                    
                     break;
             }
             
@@ -158,9 +177,29 @@ namespace CodeReverie
 
         private void Confirm()
         {
-            equipItemPauseMenuNavigationButtonPanel.SetActive(true);
-            equipItemMenuNavigationState = EquipItemMenuNavigationState.EquipItem;
-            SetEquipmentNavigationButtons();
+
+            switch (equipItemMenuNavigationState)
+            {
+                case EquipItemMenuNavigationState.Menu:
+                    equipItemPauseMenuNavigationButtonPanel.SetActive(true);
+                    equipItemMenuNavigationState = EquipItemMenuNavigationState.EquipItem;
+                    SetEquipmentNavigationButtons();
+                    
+                    break;
+                
+                case EquipItemMenuNavigationState.EquipItem:
+                    ConfirmItemSelection();
+                    break;
+                case EquipItemMenuNavigationState.NavigateSkills:
+                    ConfirmSkillSlot();
+                   
+                    break;
+                case EquipItemMenuNavigationState.EquipSkill:
+                    ConfirmSkillSelection();
+                    break;
+            }
+
+            
         }
 
         void ConfirmSkillSlot()
@@ -175,6 +214,7 @@ namespace CodeReverie
             
             Character character = SelectedPartySlotNavigationUI.character;
             character.characterGear.EquipRelic(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
+            pauseMenuNavigation.SelectedNavigationButton.GetComponent<GearSlotUI>().Init(character);
             SetStatMenuPanels();
             equipItemMenuNavigationState = EquipItemMenuNavigationState.Menu;
             equipItemPauseMenuNavigationButtonPanel.SetActive(false);
@@ -182,8 +222,7 @@ namespace CodeReverie
 
         void ConfirmSkillSelection()
         {
-            Character character = SelectedPartySlotNavigationUI.character;
-            character.characterGear.EquipRelic(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
+            selectedSkillSlotUI.skillSlot.EquipSkillSlotItem(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
             SetStatMenuPanels();
             equipItemMenuNavigationState = EquipItemMenuNavigationState.NavigateSkills;
             equipItemPauseMenuNavigationButtonPanel.SetActive(false);
@@ -220,6 +259,15 @@ namespace CodeReverie
             foreach (GearSlotUI gearSlotUI in gearSlotUiList)
             {
                 pauseMenuNavigation.pauseMenuNavigationButtons.Add(gearSlotUI);
+            }
+        }
+
+        public void InitGearSlotButtons()
+        {
+            Character character = SelectedPartySlotNavigationUI.character;
+            foreach (GearSlotUI gearSlotUI in gearSlotUiList)
+            {
+                gearSlotUI.Init(character);
             }
         }
 
@@ -274,6 +322,7 @@ namespace CodeReverie
 
         public void SetEquipmentNavigationButtons()
         {
+            equipmentItemMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
             
             foreach (Transform child in equipItemPauseMenuNavigationButtonHolder.transform)
             {
@@ -297,10 +346,13 @@ namespace CodeReverie
                 }
                 
             }
+            
+            equipmentItemMenuNavigation.SetFirstItem();
         }
         
         public void SetSkillSlotNavigationButtons()
         {
+            equipmentItemMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
             
             foreach (Transform child in equipItemPauseMenuNavigationButtonHolder.transform)
             {
@@ -311,7 +363,7 @@ namespace CodeReverie
             foreach (Item item in PlayerManager.Instance.inventory.items)
             {
 
-                if (item.info.itemType == ItemType.Relic && item.info.itemSubType == selectedSkillSlotUI.itemSubType)
+                if (item.info.itemType == ItemType.SkillItem)
                 {
                     EquipItemPauseMenuNavigationButton equipItemPauseMenuNavigationButton =
                         Instantiate(equipItemPauseMenuNavigationButtonPF, equipItemPauseMenuNavigationButtonHolder.transform);
@@ -320,10 +372,12 @@ namespace CodeReverie
                     equipItemPauseMenuNavigationButton.nameText.text = item.info.itemName;
                     equipItemPauseMenuNavigationButton.inventoryCountText.text = item.amount.ToString();
 
-                    //equipmentItemMenuNavigation.Add(equipItemPauseMenuNavigationButton);
+                    equipmentItemMenuNavigation.Add(equipItemPauseMenuNavigationButton);
                 }
                 
             }
+            
+            equipmentItemMenuNavigation.SetFirstItem();
         }
         
 

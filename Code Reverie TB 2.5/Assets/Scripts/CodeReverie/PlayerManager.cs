@@ -60,6 +60,9 @@ namespace CodeReverie
         private void Start()
         {
             inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem2"));
         }
 
         private void OnEnable()
@@ -101,6 +104,7 @@ namespace CodeReverie
             if (Input.GetKeyDown(KeyCode.L))
             {
                 inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
+                inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
                 //Experience = 10000;
                 // AddCharacterToAvailablePartyPool("Cecil");
                 // AddCharacterToActiveParty("Cecil");

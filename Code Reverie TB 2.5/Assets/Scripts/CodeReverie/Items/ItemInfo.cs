@@ -36,6 +36,8 @@ namespace CodeReverie
         public GearSlotType gearSlotType;
         public string onUse;
         public List<string> onUseParameters;
+        public List<SkillSlot> skillSlots;
+        public SkillDataContainer skillDataContainer;
         
         private void OnValidate()
         {

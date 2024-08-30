@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae583d1c8394ec197deb81e5500d6a2, type: 3}
+  m_Name: GenericSkillItem2
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: primaryStat
+      Entry: 6
+      Data: 
+    - Name: baseItemStats
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.Stat, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: requiredItems
+      Entry: 7
+      Data: 1|System.Collections.Generic.Dictionary`2[[CodeReverie.ItemInfo, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 2|System.Collections.Generic.ObjectEqualityComparer`1[[CodeReverie.ItemInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: skillSlots
+      Entry: 6
+      Data: 
+  id: GenericSkillItem2
+  itemName: Generic Skill Item 2
+  itemDescription: Generic Skill Item 2
+  itemType: 18
+  itemSubType: 0
+  itemRarity: 0
+  stackable: 0
+  price: 0
+  lootIcon: {fileID: 0}
+  uiIcon: {fileID: 0}
+  weaponInfo: {fileID: 0}
+  gearSetType: 0
+  isInteractivePickup: 1
+  combatItem: 0
+  consumeOnUse: 0
+  craftable: 0
+  canUseInMenu: 0
+  canUseInBattle: 0
+  itemRecipes: []
+  targetType: 0
+  gearSlotType: 0
+  onUse: 
+  onUseParameters: []
+  skillDataContainer: {fileID: 0}
