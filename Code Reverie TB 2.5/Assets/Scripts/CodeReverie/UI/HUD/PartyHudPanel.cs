@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
@@ -12,9 +14,13 @@ namespace CodeReverie
         public Slider skillPointsSlider;
         public Image characterPortrait;
         public TMP_Text nameText;
-        
-        
-        
+        public List<SkillBurstPointsUI> skillBurstPointsUis = new List<SkillBurstPointsUI>();
+
+        private void Awake()
+        {
+            skillBurstPointsUis = GetComponentsInChildren<SkillBurstPointsUI>().ToList();
+        }
+
         private void Update()
         {
             // if (PlayerManager.Instance.characterSwapCooldownTimer > 0)
@@ -37,22 +43,34 @@ namespace CodeReverie
                     
                 skillPointsSlider.value = character.characterController.GetComponent<CharacterBattleManager>().currentSkillPoints;
                 skillPointsSlider.maxValue = character.characterController.GetComponent<CharacterBattleManager>().skillPointsMax;
+                
+                SetSkillPointsBurstUI();
             }
-            
-
-            
-            
         }
         
         
         public void InitCharacterHudPanel()
         {
             
-            //characterPortrait.sprite = partySlot.character.GetCharacterPortrait();
+            characterPortrait.sprite = character.GetCharacterPortrait();
             // healthSlider.maxValue = partySlot.character.characterController.GetComponent<Health>().MaxHealth;
-            // nameText.text = partySlot.character.info.characterName;
+            nameText.text = character.info.characterName;
         }
-        
-        
+
+        public void SetSkillPointsBurstUI()
+        {
+            int availableBurstPoints = character.availableSkillBurstPoints;
+            
+            foreach (SkillBurstPointsUI skillBurstPointsUi in skillBurstPointsUis)
+            {
+                skillBurstPointsUi.innerImage.gameObject.SetActive(false);
+                if (availableBurstPoints > 0)
+                {
+                    skillBurstPointsUi.innerImage.gameObject.SetActive(true);
+                }
+
+                availableBurstPoints -= 1;
+            }
+        }
     }
 }

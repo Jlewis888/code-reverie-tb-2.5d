@@ -17,6 +17,7 @@ namespace CodeReverie
         {
             CanInteract = true;
             interactableType = InteractableType.Dialogue;
+            removeOnInteractComplete = false;
             
             if (_interactableMessage.IsNullOrWhitespace())
             {
@@ -32,8 +33,10 @@ namespace CodeReverie
             get => _interactableMessage;
             set => _interactableMessage = value;
         }
-        
-        public void Interact() { }
+
+        public bool removeOnInteractComplete { get; set; }
+
+        public void Interact(Action onComplete) { }
 
         public void InteractOnPress(Action onComplete) { }
 

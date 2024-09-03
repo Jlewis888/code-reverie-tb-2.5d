@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeReverie
@@ -8,6 +9,7 @@ namespace CodeReverie
 
 
         public Dictionary<GearSlotType, List<Skill>> equippedSkills = new Dictionary<GearSlotType, List<Skill>>();
+        public Dictionary<GearSlotType, List<SkillSlot>> skillSlots = new Dictionary<GearSlotType, List<SkillSlot>>();
         public Dictionary<int, Skill> equippedActionSkills = new Dictionary<int, Skill>();
         //public Dictionary<int, SkillSlot> equippedActionSkills = new Dictionary<int, SkillSlot>();
         public Dictionary<int, Skill> equippedPassivesSkills = new Dictionary<int, Skill>();
@@ -54,6 +56,14 @@ namespace CodeReverie
             }
             
             learnedSkills = new List<Skill>();
+            
+            skillSlots.Add(GearSlotType.Gluttony, new List<SkillSlot>());
+            skillSlots.Add(GearSlotType.Wrath, new List<SkillSlot>());
+            skillSlots.Add(GearSlotType.Pride, new List<SkillSlot>());
+            skillSlots.Add(GearSlotType.Envy, new List<SkillSlot>());
+            skillSlots.Add(GearSlotType.Greed, new List<SkillSlot>());
+            skillSlots.Add(GearSlotType.Lust, new List<SkillSlot>());
+            skillSlots.Add(GearSlotType.Sloth, new List<SkillSlot>());
         }
         
         public void EquipActionSkill(SkillDataContainer skillDataContainer, int index)
@@ -103,6 +113,28 @@ namespace CodeReverie
             {
                 learnedSkills.Add(skill);
             }
+        }
+
+        public void SetLearnedSkills()
+        {
+            
+            learnedSkills = new List<Skill>();
+
+            foreach (List<SkillSlot> skillSlotsList in skillSlots.Values)
+            {
+                foreach (SkillSlot skillSlot in skillSlotsList)
+                {
+                    if (skillSlot.skill != null)
+                    {
+                        learnedSkills.Add(skillSlot.skill);
+                    }
+                    
+                }
+                
+            }
+
+            learnedSkills = learnedSkills.GroupBy(x => x.info.id).Select(y => y.First()).ToList();
+
         }
         
     }

@@ -24,17 +24,17 @@ namespace CodeReverie
 
         private void OnEnable()
         {
-            BattleManager.Instance.movePlayerObject.characterBattleManager = BattleManager.Instance.selectedPlayerCharacter;
-            BattleManager.Instance.movePlayerObject.Init();
-            BattleManager.Instance.movePlayerObject.gameObject.SetActive(true);
-            BattleManager.Instance.movePlayerObject.GetComponent<AnimationManager>().ChangeAnimationState("run");
-            CameraManager.Instance.SetSelectedPlayerWeight(BattleManager.Instance.movePlayerObject.characterBattleManager, 10f, 3f);
+            CombatManager.Instance.movePlayerObject.characterBattleManager = CombatManager.Instance.selectedPlayerCharacter;
+            CombatManager.Instance.movePlayerObject.Init();
+            CombatManager.Instance.movePlayerObject.gameObject.SetActive(true);
+            CombatManager.Instance.movePlayerObject.GetComponent<AnimationManager>().ChangeAnimationState("run");
+            CameraManager.Instance.SetSelectedPlayerWeight(CombatManager.Instance.movePlayerObject.characterBattleManager, 10f, 3f);
           
         }
 
         private void OnDisable()
         {
-            BattleManager.Instance.movePlayerObject.gameObject.SetActive(false);
+            CombatManager.Instance.movePlayerObject.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -44,6 +44,11 @@ namespace CodeReverie
             {
                 ConfirmAction();
             }
+            
+            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            {
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+            }
 
             //commandMenuNavigation.NavigationInputUpdate();
         }
@@ -51,10 +56,10 @@ namespace CodeReverie
 
         public void ConfirmAction()
         {
-            BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+            CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                 CharacterBattleActionState.Move;
             
-            BattleManager.Instance.ConfirmAction();
+            CombatManager.Instance.ConfirmAction();
         }
     }
 }

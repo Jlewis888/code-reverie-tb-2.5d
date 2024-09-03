@@ -199,6 +199,10 @@ MonoBehaviour:
     SerializationNodes: []
   animator: {fileID: 0}
   currentAnimation: 
+  currentAnimationSpeed: 0
+  pausedAnimation: 
+  pausedAnimationSpeed: 0
+  animationsPaused: 0
 --- !u!114 &278163925677524926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 525593400898842794}
   - component: {fileID: 7234959052657159054}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

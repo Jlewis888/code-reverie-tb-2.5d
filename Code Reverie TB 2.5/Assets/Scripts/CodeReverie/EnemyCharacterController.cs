@@ -4,6 +4,6 @@ namespace CodeReverie
 {
     public class EnemyCharacterController : SerializedMonoBehaviour
     {
-        public BattleArea battleArea;
+        public BattleAreaManager battleArea;
     }
 }

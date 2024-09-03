@@ -2,8 +2,12 @@
 {
     public enum CharacterTimelineGaugeState
     {
+        PreBattle,
+        StartTurnPhase,
         WaitPhase,
         CommandPhase,
-        ActionPhase
+        ActionPhase,
+        EndTurnPhase,
+        PostBattle
     }
 }

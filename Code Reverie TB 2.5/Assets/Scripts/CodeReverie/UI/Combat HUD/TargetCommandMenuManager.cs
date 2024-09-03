@@ -10,6 +10,7 @@ namespace CodeReverie
         public GameObject targetCommandMenuNavigationButtonHolder;
         public TargetCommandMenuNavigationButton targetCommandMenuNavigationButtonPF;
         
+        
         private void Awake()
         {
 
@@ -33,6 +34,12 @@ namespace CodeReverie
             if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
             {
                 ConfirmAction();
+            }
+            
+            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            {
+                Debug.Log("Go to previous menu");
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
             }
             
             commandMenuNavigation.NavigationInputUpdate();
@@ -60,7 +67,7 @@ namespace CodeReverie
             
             commandMenuNavigation.ClearNavigationList();
             Clear();
-            foreach (CharacterBattleManager characterBattleManager in BattleManager.Instance.enemyUnits)
+            foreach (CharacterBattleManager characterBattleManager in CombatManager.Instance.enemyUnits)
             {
                 TargetCommandMenuNavigationButton targetCommandMenuNavigationButton =
                     Instantiate(targetCommandMenuNavigationButtonPF, targetCommandMenuNavigationButtonHolder.transform);
@@ -83,7 +90,7 @@ namespace CodeReverie
             
             commandMenuNavigation.ClearNavigationList();
             Clear();
-            foreach (CharacterBattleManager characterBattleManager in BattleManager.Instance.selectableTargets)
+            foreach (CharacterBattleManager characterBattleManager in CombatManager.Instance.selectableTargets)
             {
                 TargetCommandMenuNavigationButton targetCommandMenuNavigationButton =
                     Instantiate(targetCommandMenuNavigationButtonPF, targetCommandMenuNavigationButtonHolder.transform);
@@ -106,7 +113,7 @@ namespace CodeReverie
         public void ConfirmAction()
         {
             //EventManager.Instance.combatEvents.OnPlayerSelectTarget(SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
-            BattleManager.Instance.ConfirmAction();
+            CombatManager.Instance.ConfirmAction();
         }
         
     }

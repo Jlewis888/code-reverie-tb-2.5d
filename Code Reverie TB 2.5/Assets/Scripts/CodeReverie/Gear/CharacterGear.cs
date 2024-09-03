@@ -62,16 +62,16 @@ namespace CodeReverie
             relicSlots[gearSlotType].item = item;
         }
         
-        public void EquipRelic(Item item)
-        {
-
-            if (item.info.gearSlotType == GearSlotType.None)
-            {
-                return;
-            }
-            
-            relicSlots[item.info.gearSlotType].item = item;
-        }
+        // public void EquipRelic(Item item)
+        // {
+        //
+        //     if (item.info.gearSlotType == GearSlotType.None)
+        //     {
+        //         return;
+        //     }
+        //     
+        //     relicSlots[item.info.gearSlotType].item = item;
+        // }
 
 
         public void EquipAccessory(Item item, int slot)

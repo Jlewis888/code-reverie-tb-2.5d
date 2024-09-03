@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeReverie
@@ -28,6 +29,8 @@ namespace CodeReverie
         public int currentLevel = 1;
         public float currentExp = 0;
         public int skillPoints = 0;
+        public int maxSkillBurstPoints = 5;
+        public int availableSkillBurstPoints = 0;
 
         public Character(CharacterDataContainer info)
         {
@@ -184,6 +187,23 @@ namespace CodeReverie
             return false;
         }
 
+        public void AddSkillBurstPoints(int amount = 1)
+        {
+            availableSkillBurstPoints += amount;
+            if (availableSkillBurstPoints > maxSkillBurstPoints)
+            {
+                availableSkillBurstPoints = maxSkillBurstPoints;
+            }
+        }
+        
+        public void RemoveSkillBurstPoints(int amount = 1)
+        {
+            availableSkillBurstPoints -= amount;
+            if (availableSkillBurstPoints < 0)
+            {
+                availableSkillBurstPoints = 0;
+            }
+        }
 
         // public bool SkillEquipped(string skillID)
         // {
@@ -254,7 +274,41 @@ namespace CodeReverie
         //         
         //     }
         // }
+        
+        public void EquipRelic(Item item)
+        {
 
+            if (item.info.gearSlotType == GearSlotType.None)
+            {
+                return;
+            }
+            
+            characterGear.relicSlots[item.info.gearSlotType].item = item;
+            UpdateSkillSlots(item);
+            characterSkills.SetLearnedSkills();
+            
+        }
+
+        public void UpdateSkillSlots(Item item)
+        {
+            if (item.skillSlots.Count == 0)
+            {
+                characterSkills.skillSlots[item.info.gearSlotType] = new List<SkillSlot>();
+            }
+            else if (item.skillSlots.Count < characterSkills.skillSlots[item.info.gearSlotType].Count)
+            {
+                int countDiff = characterSkills.skillSlots[item.info.gearSlotType].Count - item.skillSlots.Count;
+                
+                characterSkills.skillSlots[item.info.gearSlotType].RemoveRange(countDiff - 1, 1);
+            } else if (item.skillSlots.Count > characterSkills.skillSlots[item.info.gearSlotType].Count)
+            {
+                int countDiff =  item.skillSlots.Count - characterSkills.skillSlots[item.info.gearSlotType].Count;
+                
+                characterSkills.skillSlots[item.info.gearSlotType].AddRange(new SkillSlot[countDiff].Select(x => new SkillSlot()));
+            }
+            
+        }
+        
         
         public int SkillPoints
         {

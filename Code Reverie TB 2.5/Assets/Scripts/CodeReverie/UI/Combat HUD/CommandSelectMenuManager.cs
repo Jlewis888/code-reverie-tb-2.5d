@@ -38,6 +38,8 @@ namespace CodeReverie
             {
                 ConfirmAction();
             }
+            
+           
 
             commandMenuNavigation.NavigationInputUpdate();
         }
@@ -51,20 +53,20 @@ namespace CodeReverie
                 // BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                 //     CharacterBattleActionState.Attack;
                 // BattleManager.Instance.SetSelectableTargets();
-                Debug.Log("is this hitting");
+               
                 CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleActionMenu();
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandDefendSelect)
             {
                 //Debug.Log("Defend Action. Restart Character and up defense for turn or until hit");
-                BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Defend;
-                BattleManager.Instance.ConfirmAction();
+                CombatManager.Instance.ConfirmAction();
                 
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandSkillsSelect)
             {
-                BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Skill;
                // Debug.Log("Skill Action. Need to set Skill window now");
                //BattleManager.Instance.SetSelectableTargets();
@@ -73,7 +75,7 @@ namespace CodeReverie
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandItemsSelect)
             {
-                BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Item;
                 CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleItemMenu();
             }

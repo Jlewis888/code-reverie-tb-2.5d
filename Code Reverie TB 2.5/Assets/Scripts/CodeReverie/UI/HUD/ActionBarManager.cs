@@ -74,7 +74,7 @@ namespace CodeReverie
 
         public void Init()
         {
-            foreach (CharacterBattleManager characterBattleManager in BattleManager.Instance.allUnits)
+            foreach (CharacterBattleManager characterBattleManager in CombatManager.Instance.allUnits)
             {
                 CharacterActionSlider characterActionSlider = Instantiate(characterActionSliderPF, characterActionSliderHolder.transform);
                 characterActionSlider.characterBattleManager = characterBattleManager;

@@ -86,8 +86,14 @@ public class CameraManager : ManagerSingleton<CameraManager>
             }
         }
     }
+    
+    public void SetBattleCamera()
+    {
+        combatVirtualCamera.m_Priority = 11;
+        mainVirtualCamera.m_Priority = 1;
+    }
 
-    public void SetBattleCamera(BattleArea battleArea)
+    public void SetBattleCamera(BattleAreaManager battleArea)
     {
         combatVirtualCamera.m_Priority = 11;
         mainVirtualCamera.m_Priority = 1;

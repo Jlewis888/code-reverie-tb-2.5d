@@ -151,7 +151,7 @@ namespace CodeReverie
                         
                         break;
                     case ItemUseSectionType.Combat:
-                        BattleManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
+                        CombatManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
                         break;
                 }
             }

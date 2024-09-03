@@ -23,6 +23,7 @@ namespace CodeReverie
             interactableType = InteractableType.Gather;
             // slider.maxValue = gatheringTime;
             // slider.gameObject.SetActive(false);
+            removeOnInteractComplete = true;
             
             if (_interactableMessage.IsNullOrWhitespace())
             {
@@ -55,9 +56,12 @@ namespace CodeReverie
             set => _interactableMessage = value;
         }
 
-        public void Interact()
+        public bool removeOnInteractComplete { get; set; }
+
+        public void Interact(Action onComplete)
         {
-            
+            CanInteract = false;
+            onComplete();
         }
 
         public void InteractOnPress(Action onComplete) { }

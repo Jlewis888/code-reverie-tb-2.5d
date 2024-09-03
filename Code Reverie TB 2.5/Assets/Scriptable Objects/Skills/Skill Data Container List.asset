@@ -22,6 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   skillDetailsList:
+  - {fileID: 11400000, guid: 5c1fbb5f4d718a94ba9c69c1fc840ea5, type: 2}
   - {fileID: 11400000, guid: c4f9ef684cc740d478f3a7924dcc15f6, type: 2}
   - {fileID: 11400000, guid: 35c177c4cd74c7d42a5c5e1f62afd260, type: 2}
   - {fileID: 11400000, guid: 2a35e2163d4b12f44bfba19835467eea, type: 2}
@@ -32,7 +33,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c62387ed854e40c4eab3d958d374be0a, type: 2}
   - {fileID: 11400000, guid: 052727b140aa0aa43864468738034d9c, type: 2}
   - {fileID: 11400000, guid: da8b3c7cf33f0da48a04dac0d090fd7f, type: 2}
-  - {fileID: 11400000, guid: 5c1fbb5f4d718a94ba9c69c1fc840ea5, type: 2}
   - {fileID: 11400000, guid: 397a438ec208c674f992aaa81386b418, type: 2}
   - {fileID: 11400000, guid: 0d0e3c6a73b66e241b7e2d2ad2b6b9a7, type: 2}
   - {fileID: 11400000, guid: 905bbe09bdcd35042a308199a7ba7f20, type: 2}

@@ -35,6 +35,11 @@ namespace CodeReverie
                 ConfirmAction();
             }
             
+            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            {
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+            }
+            
             commandMenuNavigation.NavigationInputUpdate();
 
             
@@ -46,18 +51,18 @@ namespace CodeReverie
             if (commandMenuNavigation.SelectedNavigationButton == commandAttackSelect)
             {
                // Debug.Log("Attack Action. Need to Set Target enemy window now");
-                BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Attack;
-                BattleManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
+                CombatManager.Instance.SetSelectableTargets();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandBreakSelect)
             {
                 // Debug.Log("Attack Action. Need to Set Target enemy window now");
-                BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState =
+                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Break;
-                BattleManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
+                CombatManager.Instance.SetSelectableTargets();
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
                 
             }
         }

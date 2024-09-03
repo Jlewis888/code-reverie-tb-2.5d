@@ -21,6 +21,7 @@ namespace CodeReverie
         public TargetCommandMenuManager targetCommandMenuManager;
         public MoveCommandMenuManager moveCommandMenuManager;
 
+        public CommandMenuManager prevCommandMenuManager;
 
         private void Awake()
         {
@@ -61,7 +62,6 @@ namespace CodeReverie
         
         public void ToggleActionMenu()
         {
-            Debug.Log("also is this hitting");
             ToggleCommandMenus(actionCommandSelectMenu.gameObject);
         }
         
@@ -75,14 +75,20 @@ namespace CodeReverie
             ToggleCommandMenus(itemCommandMenuManager.gameObject);
         }
         
-        public void ToggleTargetMenu()
+        public void ToggleTargetMenu(CommandMenuManager commandMenuManager)
         {
+            prevCommandMenuManager = commandMenuManager;
             ToggleCommandMenus(targetCommandMenuManager.gameObject);
         }
         
         public void ToggleMoveActionMenu()
         {
             ToggleCommandMenus(moveCommandMenuManager.gameObject);
+        }
+
+        public void TogglePrevMenu()
+        {
+            ToggleCommandMenus(prevCommandMenuManager.gameObject);
         }
         
     }

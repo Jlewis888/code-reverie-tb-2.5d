@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Beautify.Universal;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -61,6 +62,9 @@ namespace CodeReverie
         {
             inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
             inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic2"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic3"));
             inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem"));
             inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem2"));
         }
@@ -208,7 +212,9 @@ namespace CodeReverie
         public void Init()
         {
             InitializeParty();
-            SetPartyUnits();
+            //SetPartyUnits();
+            //SetCombatPartyUnits();
+            //SetCombatPartyUnitsDebug();
         }
         
         public Character GetAvailableCharacterPartySlot(string id)
@@ -239,6 +245,8 @@ namespace CodeReverie
                     
                     if (character == currentParty[0])
                     {
+                        FindObjectOfType<BeautifySettings>().depthOfFieldTarget =
+                            character.characterController.transform;
                         character.characterController.GetComponent<PlayerAIMovementController>().enabled = false;
                         character.characterController.GetComponent<PlayerMovementController>().enabled = true;
                         CameraManager.Instance.UpdateCamera(character.characterController.transform);
@@ -255,15 +263,55 @@ namespace CodeReverie
                     count++;
                 }
                 
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"), 0);
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"), 1);
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"), 2);
-                currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireballSkill"), 3);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"), 0);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"), 1);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"), 2);
+                // currentParty[0].characterSkills.EquipActionSkill(SkillsManager.Instance.GetSkillById("FireballSkill"), 3);
+                //
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
+                // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
+            }
+        }
+        
+        public void SetCombatPartyUnits()
+        {
+            if (currentParty != null)
+            {
+                int count = 0;
                 
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
-                currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
+                foreach (Character character in currentParty)
+                {
+                    character.SpawnCharacter(Vector3.zero);
+                    
+                    character.characterController.GetComponent<PlayerCombatController>().characterCombatState = CharacterCombatState.Moving;
+                    character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                    character.characterController.GetComponent<PlayerAIMovementController>().enabled = false;
+                    character.characterController.gameObject.SetActive(true);
+                }
+                
+            }
+        }
+        
+        public void SetCombatPartyUnitsDebug()
+        {
+            if (currentParty != null)
+            {
+                int count = 0;
+                
+                foreach (Character character in currentParty)
+                {
+                    character.SpawnCharacter(Vector3.zero);
+                    
+                    character.characterController.GetComponent<PlayerCombatController>().characterCombatState = CharacterCombatState.Moving;
+                    character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                    character.characterController.GetComponent<PlayerAIMovementController>().enabled = false;
+                    character.characterController.gameObject.SetActive(true);
+                    currentParty[count].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
+                }
+                
+                count++;
             }
         }
 

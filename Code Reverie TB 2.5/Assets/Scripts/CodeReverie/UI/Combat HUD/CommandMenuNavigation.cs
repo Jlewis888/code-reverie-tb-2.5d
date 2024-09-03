@@ -136,6 +136,42 @@ namespace CodeReverie
             }
         }
 
+        public void NavigationInputUpdateButtonDown()
+        {
+            if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Combat Vertical"))
+            {
+               
+                //navigationDelayTimer = navigationDelay;
+                if (navigationButtonsIndex + 1 > commandMenuNavigationButtons.Count - 1)
+                {
+                    navigationButtonsIndex = 0;
+                }
+                else
+                {
+                    navigationButtonsIndex++;
+                }
+                    
+                SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+            }
+            else if (GameManager.Instance.playerInput.GetButtonDown("Navigate Combat Vertical"))
+            {
+                
+                
+                //navigationDelayTimer = navigationDelay;
+                if (navigationButtonsIndex == 0)
+                {
+                    navigationButtonsIndex = commandMenuNavigationButtons.Count - 1;
+                }
+                else
+                {
+                    navigationButtonsIndex--;
+                }
+                    
+                SelectedNavigationButton = commandMenuNavigationButtons[navigationButtonsIndex];
+            }
+        }
+        
+
         public void SetFirstItem()
         {
             navigationButtonsIndex = 0;

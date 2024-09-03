@@ -16,6 +16,20 @@ namespace CodeReverie
             interactables = GetComponentsInParent<IInteractable>().OrderBy(x => x.Priority).ToList();
         }
 
+        public bool HasActiveInteractables()
+        {
+
+            foreach (IInteractable interactable in interactables)
+            {
+                if (interactable.CanInteract)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
 
         public void Activate()
         {

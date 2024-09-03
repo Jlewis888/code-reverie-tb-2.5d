@@ -9,6 +9,7 @@ namespace CodeReverie
 {
     public class GearSlotUI : PauseMenuNavigationButton
     {
+        public Character character;
         public GearSlotType gearSlotType;
         public Item item;
         public GameObject highlight;
@@ -28,8 +29,9 @@ namespace CodeReverie
         }
         
         
-        public void Init(Character character)
+        public void Init(Character _character)
         {
+            character = _character;
 
             if (character.characterGear.relicSlots.ContainsKey(gearSlotType))
             {
@@ -65,18 +67,18 @@ namespace CodeReverie
                 return;
             }
 
-            if (item.skillSlots == null)
-            {
-                return;
-            }
-            
+            // if (item.skillSlots == null)
+            // {
+            //     return;
+            // }
+            //
 
-            if (item.skillSlots.Count > 0)
+            if (character.characterSkills.skillSlots[gearSlotType].Count > 0)
             {
                 SkillSlotUI skillSlotUIPF = CanvasManager.Instance.pauseMenuManager.SelectedPauseMenu
                     .GetComponent<EquipmentPauseMenu>().skillSlotUIPF;
 
-                foreach (SkillSlot skillSlot in item.skillSlots)
+                foreach (SkillSlot skillSlot in character.characterSkills.skillSlots[gearSlotType])
                 {
                     SkillSlotUI skillSlotUI = Instantiate(skillSlotUIPF, skillSlotHolder.transform);
                     skillSlotUI.skillSlot = skillSlot;

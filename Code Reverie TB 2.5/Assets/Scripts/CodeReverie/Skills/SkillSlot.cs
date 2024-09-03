@@ -16,6 +16,7 @@ namespace CodeReverie
         public void EquipSkillSlotItem(Item item)
         {
             equippedItem = item;
+            skill = SkillsManager.Instance.CreateSkill(item.info.skillSlotSkillDataContainer);
         }
         
         public void SetCooldownTimer()

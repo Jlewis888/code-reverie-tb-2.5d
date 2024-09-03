@@ -24,6 +24,20 @@ namespace CodeReverie
             base.Awake();
             currentControlScheme = ControlSchemeType.KeyboardMouse;
             playerInput = ReInput.players.GetPlayer(0);
+
+
+            if (SceneManager.GetActiveScene().name != "Title Screen")
+            {
+                playerInput.controllers.maps.SetAllMapsEnabled(false);
+                playerInput.controllers.maps.SetMapsEnabled(true, 0);
+            }
+            else
+            {
+                playerInput.controllers.maps.SetAllMapsEnabled(false);
+                playerInput.controllers.maps.SetMapsEnabled(true, 1);
+            }
+
+           
             
         }
 
@@ -77,9 +91,21 @@ namespace CodeReverie
             }
             else
             {
-                Time.timeScale = 1;
-                playerInput.controllers.maps.SetAllMapsEnabled(false);
-                playerInput.controllers.maps.SetMapsEnabled(true, 0);
+
+                if (CombatManager.Instance != null)
+                {
+                    Time.timeScale = 1;
+                    playerInput.controllers.maps.SetAllMapsEnabled(false);
+                    playerInput.controllers.maps.SetMapsEnabled(true, 2);
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    playerInput.controllers.maps.SetAllMapsEnabled(false);
+                    playerInput.controllers.maps.SetMapsEnabled(true, 0);
+                }
+                
+                
             }
         }
         

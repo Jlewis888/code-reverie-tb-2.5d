@@ -24,6 +24,22 @@ namespace CodeReverie
             //EventManager.Instance.combatEvents.OnPlayerSelectTarget(SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
         }
         
+        private void Update()
+        {
+            
+            if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
+            {
+                ConfirmAction();
+            }
+            
+            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            {
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+            }
+            
+            commandMenuNavigation.NavigationInputUpdate();
+        }
+        
         
         public void SetCommandNavigation()
         {
@@ -74,23 +90,10 @@ namespace CodeReverie
         public void ConfirmAction()
         {
 
-            BattleManager.Instance.SetSelectableTargets();
-            BattleManager.Instance.selectedPlayerCharacter.selectedItem = commandMenuNavigation.SelectedNavigationButton.GetComponent<ItemCommandMenuNavigationButton>().item;
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
+            CombatManager.Instance.SetSelectableTargets();
+            CombatManager.Instance.selectedPlayerCharacter.selectedItem = commandMenuNavigation.SelectedNavigationButton.GetComponent<ItemCommandMenuNavigationButton>().item;
+            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
         }
-        
-        private void Update()
-        {
-            
-            if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
-            {
-                ConfirmAction();
-            }
-            
-            commandMenuNavigation.NavigationInputUpdate();
-        }
-        
-        
         
     }
 }

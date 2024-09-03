@@ -49,7 +49,7 @@ namespace CodeReverie
             
             ClearSliders();
             
-            foreach (CharacterBattleManager characterBattleManager in BattleManager.Instance.allUnits)
+            foreach (CharacterBattleManager characterBattleManager in CombatManager.Instance.allUnits)
             {
                 CharacterActionSlider characterActionSlider = Instantiate(characterActionSliderPF, characterActionSliderHolder.transform);
                 characterActionSlider.characterBattleManager = characterBattleManager;
@@ -90,7 +90,7 @@ namespace CodeReverie
         public void OnPlayerTurn(CharacterBattleManager characterBattleManager)
         {
             EventManager.Instance.combatEvents.OnCombatPause(true);
-            BattleManager.Instance.PauseAllAnimations();
+            CombatManager.Instance.PauseAllAnimations();
             CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
             CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
             CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();

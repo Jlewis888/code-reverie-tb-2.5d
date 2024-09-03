@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Wetlands/Wetlands Area 8.unity
     guid: 15b5f6c4c1ea8884a8977fcc40b78b7c
+  - enabled: 1
+    path: Assets/Scenes/Wetlands/Wetlands Battle Area 1.unity
+    guid: 3c849f4fa6eef4d4392bba87126cecf3
   m_configObjects: {}

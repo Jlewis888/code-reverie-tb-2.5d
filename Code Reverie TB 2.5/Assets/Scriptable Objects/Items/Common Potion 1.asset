@@ -84,4 +84,4 @@ MonoBehaviour:
   onUse: ApplyHeal
   onUseParameters:
   - 150
-  skillDataContainer: {fileID: 0}
+  skillSlotSkillDataContainer: {fileID: 0}

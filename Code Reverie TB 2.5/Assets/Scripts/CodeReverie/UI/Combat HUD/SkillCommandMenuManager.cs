@@ -35,6 +35,11 @@ namespace CodeReverie
                 ConfirmAction();
             }
             
+            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            {
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+            }
+            
             commandMenuNavigation.NavigationInputUpdate();
         }
         
@@ -44,11 +49,11 @@ namespace CodeReverie
             Skill selectedSkill = commandMenuNavigation.SelectedNavigationButton
                 .GetComponent<SkillCommandMenuNavigationButton>().skill;
             
-            if (BattleManager.Instance.selectedPlayerCharacter.currentSkillPoints >= selectedSkill.info.skillPointsCost)
+            if (CombatManager.Instance.selectedPlayerCharacter.currentSkillPoints >= selectedSkill.info.skillPointsCost)
             {
-                BattleManager.Instance.SetSelectableTargets();
-                BattleManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu();
+                CombatManager.Instance.SetSelectableTargets();
+                CombatManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
+                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
             }
             else
             {
@@ -67,7 +72,8 @@ namespace CodeReverie
             commandMenuNavigation.ClearNavigationList();
             
             Clear();
-            foreach (Skill skill in BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character.characterSkills.equippedActionSkills.Values)
+            //foreach (Skill skill in BattleManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character.characterSkills.equippedActionSkills.Values)
+            foreach (Skill skill in CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character.characterSkills.learnedSkills)
             {
 
                 if (skill != null)

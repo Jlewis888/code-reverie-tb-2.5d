@@ -98,4 +98,4 @@ MonoBehaviour:
   gearSlotType: 0
   onUse: 
   onUseParameters: []
-  skillDataContainer: {fileID: 0}
+  skillSlotSkillDataContainer: {fileID: 0}

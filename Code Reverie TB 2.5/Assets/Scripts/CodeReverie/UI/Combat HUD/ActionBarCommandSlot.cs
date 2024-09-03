@@ -124,18 +124,18 @@ namespace CodeReverie
             switch (actionCommandType)
             {
                 case ActionCommandType.Attack:
-                    BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Attack;
-                    BattleManager.Instance.battleManagerState = BattleManagerState.PlayerSelectingTargets;
-                    BattleManager.Instance.SetSelectableTargets();
+                    CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Attack;
+                    CombatManager.Instance.combatManagerState = CombatManagerState.PlayerSelectingTargets;
+                    CombatManager.Instance.SetSelectableTargets();
                     break;
                 
                 case ActionCommandType.Defend:
-                    BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Defend;
+                    CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Defend;
                     break;
                 
                 case ActionCommandType.Skill:
-                    BattleManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
-                    BattleManager.Instance.battleManagerState = BattleManagerState.PlayerSelectingTargets;
+                    CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
+                    CombatManager.Instance.combatManagerState = CombatManagerState.PlayerSelectingTargets;
                     break;
                 
             }

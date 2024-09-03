@@ -25,8 +25,10 @@ namespace CodeReverie
             
             dialogueSpeaker = GetComponent<DialogueSpeaker>();
             interactableType = InteractableType.Dialogue;
+            removeOnInteractComplete = false;
 
-
+            CanInteract = true;
+            
             if (_interactableMessage.IsNullOrWhitespace())
             {
                 _interactableMessage = $"Speak with {dialogueSpeaker.GetComponent<CharacterUnitController>().character.info.characterName}";
@@ -48,9 +50,15 @@ namespace CodeReverie
             set => _interactableMessage = value;
         }
 
-        public void Interact()
+        public bool removeOnInteractComplete { get; set; }
+
+        public void Interact(Action onComplete)
         {
-            
+            Debug.Log("Start Dialogue");
+            EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
+                    
+            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker, storyPath);
+            onComplete();
         }
 
         public void InteractOnPress(Action onComplete)

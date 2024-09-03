@@ -213,7 +213,7 @@ namespace CodeReverie
         {
             
             Character character = SelectedPartySlotNavigationUI.character;
-            character.characterGear.EquipRelic(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
+            character.EquipRelic(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
             pauseMenuNavigation.SelectedNavigationButton.GetComponent<GearSlotUI>().Init(character);
             SetStatMenuPanels();
             equipItemMenuNavigationState = EquipItemMenuNavigationState.Menu;
@@ -223,6 +223,7 @@ namespace CodeReverie
         void ConfirmSkillSelection()
         {
             selectedSkillSlotUI.skillSlot.EquipSkillSlotItem(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
+            SelectedPartySlotNavigationUI.character.characterSkills.SetLearnedSkills();
             SetStatMenuPanels();
             equipItemMenuNavigationState = EquipItemMenuNavigationState.NavigateSkills;
             equipItemPauseMenuNavigationButtonPanel.SetActive(false);

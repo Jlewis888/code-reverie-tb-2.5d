@@ -11,8 +11,9 @@ namespace CodeReverie
 
         public InteractableType interactableType { get; set; }
         public string interactableMessage { get; set; }
+        public bool removeOnInteractComplete { get; set; }
 
-        public void Interact();
+        public void Interact(Action onComplete);
         public void InteractOnPress(Action onComplete);
         public void InteractOnHold(Action onComplete);
         

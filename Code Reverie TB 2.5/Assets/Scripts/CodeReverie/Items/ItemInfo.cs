@@ -37,7 +37,7 @@ namespace CodeReverie
         public string onUse;
         public List<string> onUseParameters;
         public List<SkillSlot> skillSlots;
-        public SkillDataContainer skillDataContainer;
+        public SkillDataContainer skillSlotSkillDataContainer;
         
         private void OnValidate()
         {

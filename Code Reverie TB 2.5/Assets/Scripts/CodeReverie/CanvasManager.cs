@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TransitionsPlus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -43,7 +44,8 @@ namespace CodeReverie
 
 
         public LevelUpPopUp levelUpPopUp;
-        
+        public TransitionAnimator sceneTransitionAnimator;
+        public TransitionAnimator combatTransitionAnimator;
         
         protected override void Awake()
         {

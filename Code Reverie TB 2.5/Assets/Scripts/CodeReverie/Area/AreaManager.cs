@@ -27,25 +27,26 @@ namespace CodeReverie
 
         public Tilemap mapBase;
         public string audioClip;
+        public SceneField combatLocation;
 
         private void Awake()
         {
             instance = this;
             autoSaveDelay = 5f;
             
-            GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
-            GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
+            // GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
+            // GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
         }
 
         private void OnEnable()
         {
             //Debug.Log(EventManager.Instance);
-            EventManager.Instance.playerEvents.onPlayerSpawn += SpawnPlayer;
+            //EventManager.Instance.playerEvents.onPlayerSpawn += SpawnPlayer;
         }
 
         private void OnDisable()
         {
-            EventManager.Instance.playerEvents.onPlayerSpawn -= SpawnPlayer;
+            //EventManager.Instance.playerEvents.onPlayerSpawn -= SpawnPlayer;
         }
         
        
@@ -70,6 +71,10 @@ namespace CodeReverie
             //         break;
             //     }
             // }
+            
+            GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
+            GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
+            PlayerManager.Instance.SetPartyUnits();
 
             if (GameSceneManager.Instance.fromLoadedData)
             {

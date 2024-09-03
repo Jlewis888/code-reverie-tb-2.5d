@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using TransitionsPlus;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeReverie
 {
@@ -23,7 +25,7 @@ namespace CodeReverie
         protected void Awake()
         {
             
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
             //base.Awake();
             playerMovementController = GetComponent<PlayerMovementController>();
             playerCombatController = GetComponent<PlayerCombatController>();
@@ -123,31 +125,34 @@ namespace CodeReverie
                 //         }
                 //     }
                 // }
-                
-                
-                if (!CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Contains(interactable))
+
+                if (interactable.HasActiveInteractables())
                 {
-
-                    if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.isActiveAndEnabled)
+                    if (!CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Contains(interactable))
                     {
-                        CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.AddInteractableButton(interactable);
-                    }
-                    else
-                    {
-                        CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Add(interactable);
-                        interactable.SetQueue();
 
-                        if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Count == 1)
+                        if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.isActiveAndEnabled)
                         {
-                            if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0] != null)
-                            {
-                                CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0].Activate();
-                            }
+                            CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.AddInteractableButton(interactable);
                         }
+                        else
+                        {
+                            CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Add(interactable);
+                            interactable.SetQueue();
+
+                            if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Count == 1)
+                            {
+                                if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0] != null)
+                                {
+                                    CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0].Activate();
+                                }
+                            }
                         
-                        CanvasManager.Instance.hudManager.commandMenu.ToggleInteractiveCommandMenuHolderOn();
+                            CanvasManager.Instance.hudManager.commandMenu.ToggleInteractiveCommandMenuHolderOn();
+                        }
                     }
                 }
+                
             }
 
             if (other.TryGetComponent(out CombatTrigger combatTrigger))
@@ -160,15 +165,32 @@ namespace CodeReverie
                     if (componentTagManager.HasTag(ComponentTag.Enemy))
                     {
                   
-                        if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
-                        {
-                            EventManager.Instance.combatEvents.OnCombatEnter();
-                        }
-                    
+                        // if (CombatManager.Instance.battleManagerState == BattleManagerState.Inactive && CombatManager.Instance.currentBattleArea != null)
+                        // {
+                        //     EventManager.Instance.combatEvents.OnCombatEnter();
+                        // }
+                        //
                     
                     }
                 }
             }
+            
+            // if (other.GetComponent<ComponentTagManager>())
+            // {
+            //
+            //     ComponentTagManager componentTagManager = other.GetComponentInParent<ComponentTagManager>();
+            //         
+            //     if (componentTagManager.HasTag(ComponentTag.Enemy))
+            //     {
+            //       
+            //         // if (CombatManager.Instance.battleManagerState == BattleManagerState.Inactive && CombatManager.Instance.currentBattleArea != null)
+            //         // {
+            //         //     EventManager.Instance.combatEvents.OnCombatEnter();
+            //         // }
+            //         //
+            //         
+            //     }
+            // }
             
             
             if (other.TryGetComponent(out ComponentTagManager tagManager))
@@ -180,16 +202,33 @@ namespace CodeReverie
                     //BattleManager.Instance.currentBattleArea = other.GetComponent<BattleArea>();
                 }
                 
-                // if (tagManager.HasTag(ComponentTag.Enemy))
-                // {
-                //   
-                //     if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
-                //     {
-                //         EventManager.Instance.combatEvents.OnCombatEnter();
-                //     }
-                //     
-                //     
-                // }
+                if (tagManager.HasTag(ComponentTag.Enemy))
+                {
+                  
+                    // if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
+                    // {
+                    //     EventManager.Instance.combatEvents.OnCombatEnter();
+                    // }
+
+
+                    if (AreaManager.instance != null)
+                    {
+                        if (!AreaManager.instance.combatLocation.IsNullOrEmpty)
+                        {
+                            // CanvasManager.Instance.combatTransitionAnimator.gameObject.SetActive(true);
+                            // CanvasManager.Instance.sceneTransitionAnimator.gameObject.SetActive(true);
+
+                            TransitionAnimator.Start(
+                                TransitionType.Smear, // transition type
+                                duration: 1f,
+                                sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
+                                );
+                            
+                            //SceneManager.LoadScene(AreaManager.instance.combatLocation);
+                        }
+                    }
+                    
+                }
             }
             
         }
@@ -253,10 +292,10 @@ namespace CodeReverie
                 if (tagManager.HasTag(ComponentTag.Enemy))
                 {
                   
-                    if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
-                    {
-                        EventManager.Instance.combatEvents.OnCombatEnter();
-                    }
+                    // if (CombatManager.Instance.battleManagerState == BattleManagerState.Inactive && CombatManager.Instance.currentBattleArea != null)
+                    // {
+                    //     EventManager.Instance.combatEvents.OnCombatEnter();
+                    // }
                     
                     
                 }

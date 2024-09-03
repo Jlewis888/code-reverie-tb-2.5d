@@ -36,52 +36,85 @@ namespace CodeReverie
         
         public void AddItem(ItemInfo item, int amount = 1)
         {
-            
-            (bool, int) inventorySlotCheck = ItemInInventory(item);
+
+            if (item.stackable)
+            {
+                (bool, int) inventorySlotCheck = ItemInInventory(item);
                
                
-            if (inventorySlotCheck.Item1)
-            {
-                //inventorySlotCheck.Item2.AddAmount(amount);
-                items[inventorySlotCheck.Item2].AddAmount(amount);
-            }
-            else
-            {
-
-                Item itemToAdd = ItemManager.Instance.CreateItem(item);
-
-                if (itemToAdd != null)
+                if (inventorySlotCheck.Item1)
                 {
-                    itemToAdd.AddAmount(amount);
-                    items.Add(itemToAdd);
+                    //inventorySlotCheck.Item2.AddAmount(amount);
+                    items[inventorySlotCheck.Item2].AddAmount(amount);
                 }
                 else
                 {
-                    Debug.Log("Item Could not be created");
+
+                    Item itemToAdd = ItemManager.Instance.CreateItem(item);
+
+                    if (itemToAdd != null)
+                    {
+                        itemToAdd.AddAmount(amount);
+                        items.Add(itemToAdd);
+                    }
+                    else
+                    {
+                        Debug.Log("Item Could not be created");
+                    }
+                
+                
                 }
-                
-                
             }
+            else
+            {
+               
+                for (int i = 0; i < amount; i++)
+                {
+                    Item itemToAdd = ItemManager.Instance.CreateItem(item);
+
+                    if (itemToAdd != null)
+                    {
+                        itemToAdd.AddAmount(1);
+                        items.Add(itemToAdd);
+                    }
+                    else
+                    {
+                        Debug.Log("Item Could not be created");
+                    }   
+                }
+            }
+            
+            
+            
             
         }
         
         public void AddItem(Item item, int amount = 1)
         {
-            
-            (bool, int) inventorySlotCheck = ItemInInventory(item);
-               
-               
-            if (inventorySlotCheck.Item1)
+            if (item.info.stackable)
             {
-                //inventorySlotCheck.Item2.AddAmount(amount);
-                items[inventorySlotCheck.Item2].AddAmount(amount);
+                (bool, int) inventorySlotCheck = ItemInInventory(item);
+               
+               
+                if (inventorySlotCheck.Item1)
+                {
+                    //inventorySlotCheck.Item2.AddAmount(amount);
+                    items[inventorySlotCheck.Item2].AddAmount(amount);
+                }
+                else
+                {
+                    item.AddAmount(amount);
+                    items.Add(item);
+                }
             }
             else
             {
-                item.AddAmount(amount);
-                items.Add(item);
+                for (int i = 0; i < amount; i++)
+                {
+                    item.AddAmount(1);
+                    items.Add(item);
+                }
             }
-            
         }
         
         
