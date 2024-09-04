@@ -98,7 +98,8 @@ namespace CodeReverie
                     repositionTimer -= Time.deltaTime;
 
                     //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
-                    characterController.Move(moveDir * (8f * Time.fixedDeltaTime));
+                    //characterController.Move(moveDir * (8f * Time.fixedDeltaTime));
+                    characterController.Move(moveDir * (4f * Time.fixedDeltaTime));
 
                     StopMovementOnReachingMaxDistance();
 
@@ -159,7 +160,8 @@ namespace CodeReverie
                                         repositionTimer -= Time.deltaTime;
 
                                         //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
-                                        characterController.Move(moveDir * (8f * Time.fixedDeltaTime));
+                                        //characterController.Move(moveDir * (4f * Time.fixedDeltaTime));
+                                        characterController.Move(moveDir * (1f * Time.fixedDeltaTime));
 
                                         StopMovementOnReachingMaxDistance();
 
@@ -180,7 +182,8 @@ namespace CodeReverie
 
                                         //rb.MovePosition(rb.position + moveDir * (5f * Time.fixedDeltaTime));
 
-                                        characterController.Move(moveDir * (4f * Time.fixedDeltaTime));
+                                        //characterController.Move(moveDir * (4f * Time.fixedDeltaTime));
+                                        characterController.Move(moveDir * (1f * Time.fixedDeltaTime));
                                         StopMovementOnReachingMaxDistance();
                                         if (repositionTimer <= 0)
                                         {
@@ -418,6 +421,10 @@ namespace CodeReverie
                                 break;
                         }
                     }
+                } 
+                else if (CombatManager.Instance.combatManagerState == CombatManagerState.PostBattle)
+                {
+                    GetComponent<AnimationManager>().ChangeAnimationState("idle");
                 }
                 
                 // if (CombatManager.Instance.pause)

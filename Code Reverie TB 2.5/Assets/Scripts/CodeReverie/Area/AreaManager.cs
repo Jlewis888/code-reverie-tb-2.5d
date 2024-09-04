@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
+using TransitionsPlus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -36,7 +38,22 @@ namespace CodeReverie
             
             // GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             // GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
+            // areaManagerData.characterList =
+            //     GetComponentsInChildren<CharacterUnitController>().ToList().Select(x => x.character).ToList();
+            //
+            //
+            // int instanceID = GetInstanceID();
         }
+        
+#if UNITY_EDITOR     
+        [Button("Set Character IDs")]
+        public void SetCharacterIDs()
+        {
+            //TODO MAKE SURE ALL IS UNIQUE
+            GetComponentsInChildren<CharacterUnitController>().ToList().ForEach(x => x.SetInstanceID());
+        }
+#endif
+    
 
         private void OnEnable()
         {
@@ -58,8 +75,8 @@ namespace CodeReverie
             
             //SpawnPlayerCharacterUnits();
            
-            //CanvasManager.Instance.hudManager.gameObject.SetActive(true);
-            // EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.hudManager);
+            //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.gameObject.SetActive(true);
+            // EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.screenSpaceCanvasManager.hudManager);
 
             
             // foreach (AreaEntrance areaEntrance in areaEntrances)
@@ -74,7 +91,28 @@ namespace CodeReverie
             
             GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
+
             PlayerManager.Instance.SetPartyUnits();
+            
+            if (PlayerManager.Instance.combatConfigDetails != null)
+            {
+                TransitionAnimator.Start(
+                    TransitionType.Wipe, // transition type
+                    duration: 1f,
+                    invert: true
+                );
+                
+                
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(false);
+                CameraManager.Instance.UnsetBattleCamera();
+                CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
+                Destroy(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x => x.characterInstanceID == PlayerManager.Instance.combatConfigDetails.characterInstanceID).gameObject);
+                
+                PlayerManager.Instance.SetPartyReturnPosition();
+                PlayerManager.Instance.combatConfigDetails = null;
+            } 
+            
+            
 
             if (GameSceneManager.Instance.fromLoadedData)
             {

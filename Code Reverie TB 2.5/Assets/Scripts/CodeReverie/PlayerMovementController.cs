@@ -47,11 +47,11 @@ namespace CodeReverie
             // moveInput.x = GameManager.Instance.playerInput.GetAxis("Move Horizontal");
             // moveInput.z = GameManager.Instance.playerInput.GetAxis("Move Vertical");
             direction = moveInput.normalized;
-
+            
             activeMoveSpeed = moveSpeed * speedClamp;
             
             playerVelocity.y += gravityValue * Time.deltaTime;
-
+            
             // if (direction.magnitude > 0)
             // {
             //     rb.MovePosition(rb.position + moveInput * moveSpeed * Time.deltaTime);
@@ -74,18 +74,18 @@ namespace CodeReverie
                         activeMoveSpeed = 0;
                     
                         PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("idle");
-                        characterController.Move(playerVelocity * Time.deltaTime);
+                        //characterController.Move(playerVelocity * Time.deltaTime);
                         break;
                 
                     case CharacterMovementState.Moving:
-
+            
                         activeMoveSpeed = moveSpeed;
                     
                         if (direction.magnitude != 0)
                         {
                             //rb.MovePosition(rb.position + moveInput * (activeMoveSpeed * Time.fixedDeltaTime));
                             Move(moveInput);
-
+            
                             if (MathF.Abs(moveInput.z) > MathF.Abs(moveInput.x))
                             {
                                 if (moveInput.z > 0)
@@ -101,7 +101,7 @@ namespace CodeReverie
                                     characterDirection = CharacterDirection.Down;
                                     //characterUnit.animationManager.ChangeAnimationState("fullbody_front_run");
                                     //PlayerManager.Instance.currentParty[0].characterController.GetComponent<AnimationManager>().ChangeAnimationState("run_down");
-
+            
                                 }
                             }
                             else if (MathF.Abs(moveInput.z) < MathF.Abs(moveInput.x))
@@ -110,18 +110,18 @@ namespace CodeReverie
                                 {
                                     //todo update
                                     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
-
+            
                                 }
                                 else if (moveInput.x > 0)
                                 {
                                     //todo update
                                     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
                                 }
-
+            
                                 
                                 characterDirection = CharacterDirection.Side;
                             }
-
+            
                             switch (characterDirection)
                             {
                                 case CharacterDirection.Up:

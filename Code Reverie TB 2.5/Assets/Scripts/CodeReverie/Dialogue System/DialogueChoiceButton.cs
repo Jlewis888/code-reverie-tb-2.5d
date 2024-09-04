@@ -42,7 +42,7 @@ namespace CodeReverie
             if (endDialogueButton)
             {
                 
-                EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.hudManager);
+                EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.screenSpaceCanvasManager.hudManager);
                 EventManager.Instance.playerEvents.onDialogueEnd(speaker);
                 
                 CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);

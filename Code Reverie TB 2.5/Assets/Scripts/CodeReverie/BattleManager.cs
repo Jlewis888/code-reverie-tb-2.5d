@@ -92,7 +92,7 @@ namespace CodeReverie
         // {
         //     
         //     //return;
-        //     CanvasManager.Instance.hudManager.combatHudManager.gameObject.SetActive(true);
+        //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(true);
         //     battleManagerState = BattleManagerState.Initiate;
         //     pause = true;
         //     combatQueue = new Queue<CharacterBattleManager>();
@@ -113,7 +113,7 @@ namespace CodeReverie
         //     
         //     DetermineOrderOfTurns();
         //     SetOrderOfTurnsLists();
-        //     CanvasManager.Instance.hudManager.combatHudManager.Init();
+        //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.Init();
         //     battleManagerState = BattleManagerState.PreBattle;
         //     CameraManager.Instance.SetBattleCamera(currentBattleArea);
         //     //currentBattleArea.areaCollider.isTrigger = false;
@@ -133,8 +133,8 @@ namespace CodeReverie
         //     playerUnits = new List<CharacterBattleManager>();
         //     enemyUnits = new List<CharacterBattleManager>();
         //     PlayerManager.Instance.UnsetBattle();
-        //     //CanvasManager.Instance.hudManager.combatHudManager.actionBarManager.gameObject.SetActive(false);
-        //     CanvasManager.Instance.hudManager.combatHudManager.gameObject.SetActive(false);
+        //     //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.actionBarManager.gameObject.SetActive(false);
+        //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(false);
         //     CameraManager.Instance.UnsetBattleCamera();
         //     CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
         //     
@@ -321,31 +321,31 @@ namespace CodeReverie
         //             selectedPlayerCharacter.selectedTargets = selectedTargets;
         //             // selectedPlayerCharacter.SetActionRange();
         //             selectedPlayerCharacter.SetAttackActionTargetPosition();
-        //             CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+        //             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
         //             break;
         //         case CharacterBattleActionState.Skill:
         //             selectedPlayerCharacter.GetComponent<AnimationManager>().ChangeAnimationState("cast");
         //             //selectedPlayerCharacter.SetActionRange();
         //             selectedPlayerCharacter.selectedTargets = selectedTargets;
         //             selectedPlayerCharacter.SetAttackActionTargetPosition();
-        //             CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+        //             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
         //             selectedPlayerCharacter.currentSkillPoints -= selectedPlayerCharacter.selectedSkill.info.skillPointsCost;
         //             break;
         //         case CharacterBattleActionState.Defend:
-        //             CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+        //             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
         //             // selectedPlayerCharacter.SetActionRange();
         //             // selectedPlayerCharacter.SetSkillCast();
         //             selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
         //             break;
         //         case CharacterBattleActionState.Item:
-        //             CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+        //             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
         //             selectedPlayerCharacter.selectedTargets = selectedTargets;
         //             selectedPlayerCharacter.SetAttackActionTargetPosition();
         //             selectedPlayerCharacter.battleState = CharacterBattleState.Action;
         //             break;
         //         case CharacterBattleActionState.Move:
         //             selectedPlayerCharacter.targetPosition = movePlayerObject.transform.position;
-        //             CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+        //             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
         //             selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
         //             break;
         //         

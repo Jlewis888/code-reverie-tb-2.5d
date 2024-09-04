@@ -47,7 +47,7 @@ namespace CodeReverie
         {
             if (interactables.Count <= 0)
             {
-                CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuPromptOn();
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuPromptOn();
             }
             
             if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
@@ -193,7 +193,7 @@ namespace CodeReverie
                        
                        if (iInteractables.Count <= 0)
                        {
-                           CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuPromptOn();
+                           CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuPromptOn();
                        }
                    }
                });

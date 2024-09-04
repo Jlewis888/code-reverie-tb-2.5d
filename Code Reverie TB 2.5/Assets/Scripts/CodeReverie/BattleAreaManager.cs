@@ -53,7 +53,7 @@ namespace CodeReverie
         //
         // public void SetPreBattleConfigurations()
         // {
-        //     CanvasManager.Instance.hudManager.combatHudManager.gameObject.SetActive(true);
+        //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(true);
         //     pause = true;
         //     combatQueue = new Queue<CharacterBattleManager>();
         //     GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
@@ -69,7 +69,7 @@ namespace CodeReverie
         //     DetermineOrderOfTurns();
         //     SetOrderOfTurnsLists();
         //     SetInitialCombatPositions();
-        //     CanvasManager.Instance.hudManager.combatHudManager.Init();
+        //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.Init();
         //     battleAreaManagerState = BattleAreaManagerState.PreBattle;
         //     CameraManager.Instance.SetBattleCamera(this);
         // }

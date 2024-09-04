@@ -59,11 +59,19 @@ namespace CodeReverie
             onPlayerAttackEnd?.Invoke();
         }
         
-        public Action onPlayerWin;
+        public Action onPlayerVictory;
         
-        public void OnPlayerWin()
+        public void OnPlayerVictory()
         {
-            onPlayerWin?.Invoke();
+            onPlayerVictory?.Invoke();
+        }
+        
+        
+        public Action onPlayerDefeat;
+        
+        public void OnPlayerDefeat()
+        {
+            onPlayerDefeat?.Invoke();
         }
         
         
@@ -134,7 +142,7 @@ namespace CodeReverie
         public void OnCharacterDeath(CharacterBattleManager characterBattleManager)
         {
             onCharacterDeath?.Invoke(characterBattleManager);
-            CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} defeated");
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.notificationCenter.NotificationTrigger($"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} defeated");
         }
 
         public Action<CharacterUnitController> onEnemyDeath;

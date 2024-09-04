@@ -1,11 +1,15 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 namespace CodeReverie
 {
+    [Serializable]
     public class CharacterUnitController : SerializedMonoBehaviour
     {
+       
+        [SerializeField]public string characterInstanceID;
         public CharacterDataContainer characterInfo;
         public Character character;
         public CharacterUnit characterUnit;
@@ -32,6 +36,17 @@ namespace CodeReverie
         private void OnDisable()
         {
             EventManager.Instance.generalEvents.characterUnitManagerReceiver -= CharacterUnitManagerReceiver;
+        }
+
+        private void Reset()
+        {
+            SetInstanceID();
+        }
+
+        public void SetInstanceID()
+        {
+            characterInstanceID = Guid.NewGuid().ToString();
+            EditorUtility.SetDirty(this);
         }
 
 

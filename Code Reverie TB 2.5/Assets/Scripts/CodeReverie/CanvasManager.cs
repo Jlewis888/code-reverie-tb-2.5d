@@ -12,8 +12,10 @@ namespace CodeReverie
     public class CanvasManager : ManagerSingleton<CanvasManager>
     {
         //public GameObject gameMenu;
+        public OverlayCanvasManager overlayCanvas;
+        public ScreenSpaceCanvasManager screenSpaceCanvasManager;
         public List<MenuManager> menuManagers = new List<MenuManager>();
-        public HudManager hudManager;
+        //public HudManager hudManager;
         public DialogueManager dialogueManager;
         public VendorMenuManager vendorMenuManager;
         public SystemMenuManager systemMenuManager;
@@ -44,8 +46,7 @@ namespace CodeReverie
 
 
         public LevelUpPopUp levelUpPopUp;
-        public TransitionAnimator sceneTransitionAnimator;
-        public TransitionAnimator combatTransitionAnimator;
+        public GameObject victoryPopup;
         
         protected override void Awake()
         {
@@ -63,7 +64,7 @@ namespace CodeReverie
                 menuManager.SetListeners();
             }
             
-            hudManager.partyHudPanelManager.SetListeners();
+            screenSpaceCanvasManager.hudManager.partyHudPanelManager.SetListeners();
             loadDataConfirmationPopup.gameObject.SetActive(false);
             saveDataConfirmationPopup.gameObject.SetActive(false);
             
@@ -94,6 +95,7 @@ namespace CodeReverie
             EventManager.Instance.generalEvents.closeToolTip += CloseToolTips;
             EventManager.Instance.playerEvents.onLevelUp += OpenLevelUpPopup;
             EventManager.Instance.generalEvents.onGamePause += TogglePauseMenu;
+            EventManager.Instance.combatEvents.onPlayerVictory += OpenVictoryPopup;
         }
 
         private void OnDisable()
@@ -103,6 +105,7 @@ namespace CodeReverie
             EventManager.Instance.playerEvents.onLevelUp -= OpenLevelUpPopup;
             
             EventManager.Instance.generalEvents.onGamePause -= TogglePauseMenu;
+            EventManager.Instance.combatEvents.onPlayerVictory -= OpenVictoryPopup;
         }
 
         private void Start()
@@ -199,7 +202,7 @@ namespace CodeReverie
             }
             else
             {
-                EventManager.Instance.generalEvents.OpenMenuManager(hudManager);
+                EventManager.Instance.generalEvents.OpenMenuManager(screenSpaceCanvasManager.hudManager);
             }
         }
 
@@ -258,15 +261,21 @@ namespace CodeReverie
         public void OpenLevelUpPopup()
         {
 
-            if (hudManager.gameObject.activeInHierarchy)
-            {
-                levelUpPopUp.gameObject.SetActive(true);
-            }
+            // if (screenSpaceCanvasManager.hudManager.gameObject.activeInHierarchy)
+            // {
+            //     levelUpPopUp.gameObject.SetActive(true);
+            // }
             
             
         }
-        
-        
+
+        public void OpenVictoryPopup()
+        {
+            if (CombatManager.Instance != null)
+            {
+                victoryPopup.SetActive(true);
+            }
+        }
         
         
         // public void SetActiveUiPanel()

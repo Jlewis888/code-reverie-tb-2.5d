@@ -39,7 +39,7 @@ namespace CodeReverie
             if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
             {
                 Debug.Log("Go to previous menu");
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
             }
             
             commandMenuNavigation.NavigationInputUpdate();

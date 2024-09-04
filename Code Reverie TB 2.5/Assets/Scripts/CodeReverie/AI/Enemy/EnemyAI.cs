@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace CodeReverie
         public GameObject attackCirclePF;
         public Vector3 battlePosition;
         public bool inCombat;
+        public List<CharacterDataContainer> enemyList;
         
         public enum State
         {
@@ -93,7 +95,7 @@ namespace CodeReverie
             if (characterController == GetComponent<CharacterUnitController>())
             {
                 Debug.Log("yas");
-                attackIndicatorsManager.CloseAllIndicators();
+                //attackIndicatorsManager.CloseAllIndicators();
             }
         }
         

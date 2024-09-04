@@ -44,7 +44,7 @@ namespace CodeReverie
             Item item = new Item(itemInfo);
             PlayerManager.Instance.inventory.AddItem(item);
             EventManager.Instance.playerEvents.OnItemPickup(itemInfo.id, 1);
-            CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{item.info.itemName} acquired");
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.notificationCenter.NotificationTrigger($"{item.info.itemName} acquired");
         }
         
         public int Priority { get; }
@@ -70,12 +70,12 @@ namespace CodeReverie
         {
             if (CanInteract)
             {
-                CanvasManager.Instance.hudManager.interactionSlider.gameObject.SetActive(true);
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.gameObject.SetActive(true);
                 //slider.gameObject.SetActive(true);
                 gatheringTimer += Time.deltaTime;
                 //slider.value = gatheringTimer;
-                CanvasManager.Instance.hudManager.interactionSlider.maxValue = gatheringTime;
-                CanvasManager.Instance.hudManager.interactionSlider.value = gatheringTimer;
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.maxValue = gatheringTime;
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.value = gatheringTimer;
 
                 if (gatheringTimer >= gatheringTime)
                 {
@@ -104,8 +104,8 @@ namespace CodeReverie
             //slider.gameObject.SetActive(false);
 
 
-            CanvasManager.Instance.hudManager.interactionSlider.value = 0;
-            CanvasManager.Instance.hudManager.interactionSlider.gameObject.SetActive(false);
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.value = 0;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.gameObject.SetActive(false);
         }
     }
 }

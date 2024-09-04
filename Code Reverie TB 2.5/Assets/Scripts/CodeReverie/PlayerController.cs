@@ -128,27 +128,27 @@ namespace CodeReverie
 
                 if (interactable.HasActiveInteractables())
                 {
-                    if (!CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Contains(interactable))
+                    if (!CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Contains(interactable))
                     {
 
-                        if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.isActiveAndEnabled)
+                        if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.isActiveAndEnabled)
                         {
-                            CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.AddInteractableButton(interactable);
+                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.AddInteractableButton(interactable);
                         }
                         else
                         {
-                            CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Add(interactable);
+                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Add(interactable);
                             interactable.SetQueue();
 
-                            if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Count == 1)
+                            if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Count == 1)
                             {
-                                if (CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0] != null)
+                                if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0] != null)
                                 {
-                                    CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0].Activate();
+                                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0].Activate();
                                 }
                             }
                         
-                            CanvasManager.Instance.hudManager.commandMenu.ToggleInteractiveCommandMenuHolderOn();
+                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleInteractiveCommandMenuHolderOn();
                         }
                     }
                 }
@@ -211,18 +211,31 @@ namespace CodeReverie
                     // }
 
 
-                    if (AreaManager.instance != null)
+                    if (AreaManager.instance != null && other.GetComponent<EnemyAI>() != null)
                     {
                         if (!AreaManager.instance.combatLocation.IsNullOrEmpty)
                         {
                             // CanvasManager.Instance.combatTransitionAnimator.gameObject.SetActive(true);
                             // CanvasManager.Instance.sceneTransitionAnimator.gameObject.SetActive(true);
 
-                            TransitionAnimator.Start(
-                                TransitionType.Smear, // transition type
-                                duration: 1f,
-                                sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
+
+                            if (other.GetComponent<EnemyAI>().enemyList != null)
+                            {
+                                PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
+                                    SceneManager.GetActiveScene().name,
+                                    other.GetComponent<CharacterUnitController>().characterInstanceID,
+                                    transform.position,
+                                    other.GetComponent<EnemyAI>().enemyList.Count > 0 ? other.GetComponent<EnemyAI>().enemyList : new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
+                                    );
+                                
+                                TransitionAnimator.Start(
+                                    TransitionType.Smear, // transition type
+                                    duration: 1f,
+                                    sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
                                 );
+                            }
+                            
+                            
                             
                             //SceneManager.LoadScene(AreaManager.instance.combatLocation);
                         }
@@ -240,7 +253,7 @@ namespace CodeReverie
             {
                 // PlayerManager.Instance.interactables.Remove(interactable);
                 // interactable.Deactivate();
-                CanvasManager.Instance.hudManager.commandMenu.interactiveCommandMenuHolder.RemoveInteractableButton(
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.RemoveInteractableButton(
                     interactable);
             }
             

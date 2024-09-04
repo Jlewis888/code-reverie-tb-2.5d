@@ -26,7 +26,7 @@ namespace CodeReverie
         private void OnEnable()
         {
             
-            CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
             EventManager.Instance.combatEvents.onPlayerTurn += OnPlayerTurn;
             EventManager.Instance.combatEvents.onActionSelected += OnActionSelected;
             
@@ -91,12 +91,12 @@ namespace CodeReverie
         {
             EventManager.Instance.combatEvents.OnCombatPause(true);
             CombatManager.Instance.PauseAllAnimations();
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
             CameraManager.Instance.SetSelectedPlayerWeight(characterBattleManager, 10f);
-            CanvasManager.Instance.hudManager.commandMenu.SetCharacterSkillDetails();
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.SetCharacterSkillDetails();
 
         }
         
@@ -104,7 +104,7 @@ namespace CodeReverie
         public void OnActionSelected()
         {
             EventManager.Instance.combatEvents.OnCombatPause(false);
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.characterBattleManager = null;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = null;
         }
         
     }

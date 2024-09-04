@@ -37,7 +37,7 @@ namespace CodeReverie
             
             if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
             {
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
             }
             
             commandMenuNavigation.NavigationInputUpdate();
@@ -54,7 +54,7 @@ namespace CodeReverie
                 CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Attack;
                 CombatManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandBreakSelect)
             {
@@ -62,7 +62,7 @@ namespace CodeReverie
                 CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
                     CharacterBattleActionState.Break;
                 CombatManager.Instance.SetSelectableTargets();
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
                 
             }
         }

@@ -44,11 +44,11 @@ namespace CodeReverie
         {
             if (CanInteract)
             {
-                CanvasManager.Instance.hudManager.interactionSlider.gameObject.SetActive(true);
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.gameObject.SetActive(true);
                 
                 holdTimer += Time.deltaTime;
-                CanvasManager.Instance.hudManager.interactionSlider.maxValue = holdTime;
-                CanvasManager.Instance.hudManager.interactionSlider.value = holdTimer;
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.maxValue = holdTime;
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.value = holdTimer;
 
                 if (holdTimer >= holdTime)
                 {
@@ -78,8 +78,8 @@ namespace CodeReverie
         {
             holdTimer = 0;
 
-            CanvasManager.Instance.hudManager.interactionSlider.value = 0;
-            CanvasManager.Instance.hudManager.interactionSlider.gameObject.SetActive(false);
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.value = 0;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.interactionSlider.gameObject.SetActive(false);
         }
     }
 }

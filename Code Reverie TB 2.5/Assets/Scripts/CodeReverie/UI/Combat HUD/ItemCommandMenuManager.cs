@@ -34,7 +34,7 @@ namespace CodeReverie
             
             if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
             {
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
             }
             
             commandMenuNavigation.NavigationInputUpdate();
@@ -92,7 +92,7 @@ namespace CodeReverie
 
             CombatManager.Instance.SetSelectableTargets();
             CombatManager.Instance.selectedPlayerCharacter.selectedItem = commandMenuNavigation.SelectedNavigationButton.GetComponent<ItemCommandMenuNavigationButton>().item;
-            CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
         }
         
     }

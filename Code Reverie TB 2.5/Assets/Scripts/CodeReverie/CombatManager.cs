@@ -30,23 +30,35 @@ namespace CodeReverie
         public int targetIndex;
         public Queue<CharacterBattleManager> combatQueue;
         public MovePlayerObject movePlayerObject;
+        //public CombatDetailsConfig combatDetailsConfig;
+        public CombatConfigDetails combatConfigDetails;
+        public string defaultAudioClip;
         
         private void Awake()
         {
             Instance = this;
             enemies = GetComponentsInChildren<CharacterBattleManager>().ToList();
+            //combatDetailsConfig = PlayerManager.Instance.combatDetailsConfig;
+            combatConfigDetails = PlayerManager.Instance.combatConfigDetails;
+            defaultAudioClip = "LOOP_Elegant Enemies";
             // EventManager.Instance.combatEvents.onCombatPause += SetPauseTimer;
             // EventManager.Instance.combatEvents.onPlayerTurn += SetSelectedCharacter;
             // EventManager.Instance.combatEvents.onEnemyDeath += AllEnemyDeathCheck;
             // EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
             //EventManager.Instance.combatEvents.onCombatEnter += SetEnemyPositions;
-           
+            
+            if (!string.IsNullOrEmpty(defaultAudioClip))
+            {
+                SoundManager.Instance.PlayMusic(defaultAudioClip);
+            }
+
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.combatEvents.onCombatPause -= SetPauseTimer;
             EventManager.Instance.combatEvents.onPlayerTurn -= SetSelectedCharacter;
+            EventManager.Instance.combatEvents.onPlayerDeath -= AllPlayerDeathCheck;
             EventManager.Instance.combatEvents.onEnemyDeath -= AllEnemyDeathCheck;
             EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
         }
@@ -55,6 +67,7 @@ namespace CodeReverie
         {
             EventManager.Instance.combatEvents.onCombatPause += SetPauseTimer;
             EventManager.Instance.combatEvents.onPlayerTurn += SetSelectedCharacter;
+            EventManager.Instance.combatEvents.onPlayerDeath += AllPlayerDeathCheck;
             EventManager.Instance.combatEvents.onEnemyDeath += AllEnemyDeathCheck;
             EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
             //SetEnemyPositionsTest();
@@ -70,6 +83,22 @@ namespace CodeReverie
 
         private void Update()
         {
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                
+                TransitionAnimator transitionAnimator = TransitionAnimator.Start(
+                    TransitionType.DoubleWipe, // transition type
+                    duration: 1f,
+                    rotation: 90f
+                );
+
+                transitionAnimator.onTransitionEnd.AddListener(TestFunction);
+
+               
+                //UnsetBattle();
+            }
+
             switch (combatManagerState)
             {
                
@@ -86,10 +115,17 @@ namespace CodeReverie
             }
         }
 
+        void TestFunction()
+        {
+            //return;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.gameObject.SetActive(false);
+            CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.SetActive(true);
+        }
+
         public void SetPreBattleConfigurations()
         {
             CameraManager.Instance.SetBattleCamera();
-            CanvasManager.Instance.hudManager.combatHudManager.gameObject.SetActive(true);
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(true);
             pause = true;
             combatQueue = new Queue<CharacterBattleManager>();
             GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
@@ -100,20 +136,27 @@ namespace CodeReverie
             playerUnits = PlayerManager.Instance.GetCharacterBattleManagers();
             allUnits.AddRange(playerUnits);
             
-            enemyUnits = GetComponentsInChildren<CharacterBattleManager>().ToList();
+            // enemyUnits = GetComponentsInChildren<CharacterBattleManager>().ToList();
+            InstantiateEnemyUnits();
             allUnits.AddRange(enemyUnits);
             
             DetermineOrderOfTurns();
             SetOrderOfTurnsLists();
             SetInitialCombatPositions();
-            CanvasManager.Instance.hudManager.combatHudManager.Init();
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.Init();
             combatManagerState = CombatManagerState.PreBattle;
             
         }
 
         public void InstantiateEnemyUnits()
         {
-            
+            foreach (CharacterDataContainer characterDataContainer in combatConfigDetails.enemyList)
+            {
+                Character character = new Character(characterDataContainer);
+                character.SpawnCharacter(Vector3.zero);
+                character.characterController.gameObject.SetActive(true);
+                enemyUnits.Add(character.characterController.GetComponent<CharacterBattleManager>());
+            }
         }
 
         public void InstantiatePlayerUnits()
@@ -156,7 +199,7 @@ namespace CodeReverie
                 }
             }
             
-            EventManager.Instance.combatEvents.OnPlayerWin();
+            EventManager.Instance.combatEvents.OnPlayerVictory();
             Debug.Log("All Enemies Dead");
             //UnsetBattle();
             combatManagerState = CombatManagerState.PostBattle;
@@ -165,11 +208,52 @@ namespace CodeReverie
             {
                 Debug.Log("Set character inactive");
                 character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
+                character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
                 character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
             }
             
             
         }
+        
+        public void AllPlayerDeathCheck(CharacterUnitController characterController)
+        {
+            for (int i = 0; i < playerUnits.Count; i++)
+            {
+                if (playerUnits[i].GetComponent<Health>().CurrentHealth >= 1)
+                {
+                    return;
+                }
+            }
+            
+            
+            EventManager.Instance.combatEvents.OnPlayerDefeat();
+            Debug.Log("All Player Characters are Dead");
+            //UnsetBattle();
+            combatManagerState = CombatManagerState.PostBattle;
+            
+            // TransitionAnimator transitionAnimator = TransitionAnimator.Start(
+            //     TransitionType.DoubleWipe, // transition type
+            //     duration: 1f,
+            //     rotation: 90f
+            // );
+            //
+            // transitionAnimator.onTransitionEnd += () =>
+            // {
+            //     CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.SetActive(true);
+            // };
+
+
+            // foreach (Character character in PlayerManager.Instance.currentParty)
+            // {
+            //     Debug.Log("Set character inactive");
+            //     character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
+            //     character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
+            //     character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
+            // }
+
+
+        }
+        
         
         public void OnPlayerSelectTarget(CharacterBattleManager characterBattleManager)
         {
@@ -309,31 +393,31 @@ namespace CodeReverie
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     // selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
-                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     break;
                 case CharacterBattleActionState.Skill:
                     selectedPlayerCharacter.GetComponent<AnimationManager>().ChangeAnimationState("cast");
                     //selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
-                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.currentSkillPoints -= selectedPlayerCharacter.selectedSkill.info.skillPointsCost;
                     break;
                 case CharacterBattleActionState.Defend:
-                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     // selectedPlayerCharacter.SetActionRange();
                     // selectedPlayerCharacter.SetSkillCast();
                     selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
                 case CharacterBattleActionState.Item:
-                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     selectedPlayerCharacter.battleState = CharacterBattleState.Action;
                     break;
                 case CharacterBattleActionState.Move:
                     selectedPlayerCharacter.targetPosition = movePlayerObject.transform.position;
-                    CanvasManager.Instance.hudManager.commandMenu.ToggleCommandMenuHolderOff();
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
                 
@@ -358,6 +442,20 @@ namespace CodeReverie
             CameraManager.Instance.ResetTargetGroupSetting();
             //CameraManager.Instance.UpdateCamera(currentBattleArea.transform);
             EventManager.Instance.combatEvents.OnActionSelected();
+        }
+        
+        public void UnsetBattle()
+        {
+            
+            // CameraManager.Instance.UnsetBattleCamera();
+            // CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
+            TransitionAnimator.Start(
+                TransitionType.Fade, // transition type
+                duration: 1f,
+                sceneNameToLoad: PlayerManager.Instance.combatConfigDetails.returnSceneName
+            );
+            
+            
         }
         
         public bool CheckIfCharactersInBattlePositions()

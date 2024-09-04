@@ -47,7 +47,7 @@ namespace CodeReverie
             
             if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
             {
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
             }
 
             //commandMenuNavigation.NavigationInputUpdate();

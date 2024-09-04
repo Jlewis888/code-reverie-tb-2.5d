@@ -36,6 +36,8 @@ namespace CodeReverie
         public Dictionary<int, GearSlot> combatItemSlots = new Dictionary<int, GearSlot>();
         public List<Interactable> interactables = new List<Interactable>();
         public Dictionary<int, int> accountExperienceMap= new Dictionary<int, int>();
+        public CombatConfigDetails combatConfigDetails;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -107,8 +109,10 @@ namespace CodeReverie
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
-                inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+                SetPartyReturnPosition();
+                
+                // inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
+                // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
                 //Experience = 10000;
                 // AddCharacterToAvailablePartyPool("Cecil");
                 // AddCharacterToActiveParty("Cecil");
@@ -315,6 +319,26 @@ namespace CodeReverie
             }
         }
 
+        public void SetPartyReturnPosition()
+        {
+            if (combatConfigDetails != null)
+            {
+                int count = 0;
+                foreach (Character character in currentParty)
+                {
+                    //character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                    character.characterController.transform.position = combatConfigDetails.characterReturnPosition;
+
+                    // if (count == 0)
+                    // {
+                    //     character.characterController.GetComponent<PlayerMovementController>().enabled = true;
+                    // }
+                    //
+                    // count++;
+                }
+            } 
+        }
+
         public void EnableCombatMode()
         {
             
@@ -414,7 +438,7 @@ namespace CodeReverie
             }
             
             
-            CanvasManager.Instance.hudManager.notificationCenter.NotificationTrigger($"{enemy.character.info.experienceToGive} gained");
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.notificationCenter.NotificationTrigger($"{enemy.character.info.experienceToGive} gained");
         }
         
         public void AddCharacterToActiveParty(string characterID)

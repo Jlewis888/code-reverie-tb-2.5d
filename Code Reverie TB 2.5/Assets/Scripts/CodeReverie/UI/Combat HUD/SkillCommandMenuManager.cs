@@ -37,7 +37,7 @@ namespace CodeReverie
             
             if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
             {
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
             }
             
             commandMenuNavigation.NavigationInputUpdate();
@@ -53,7 +53,7 @@ namespace CodeReverie
             {
                 CombatManager.Instance.SetSelectableTargets();
                 CombatManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
-                CanvasManager.Instance.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
             }
             else
             {
