@@ -42,7 +42,7 @@ namespace CodeReverie
             menuNavigation.Add(settingsButton);
             menuNavigation.Add(quitGameButton);
             
-            menuNavigation.SetFirstItem();
+            
         }
 
         private void Start()
@@ -54,7 +54,15 @@ namespace CodeReverie
             //     continueGameButton.gameObject.SetActive(false);
             //     pauseMenuNavigationButtons.Remove(continueGameButton);
             // }
-            
+
+
+            if (!ES3.FileExists($"{0}/SaveFile.es3"))
+            {
+                continueGameButton.gameObject.SetActive(false);
+                menuNavigation.pauseMenuNavigationButtons.Remove(continueGameButton);
+            }
+
+
             // menuOptionsHolder.SetActive(false);
             GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 1);
@@ -69,7 +77,7 @@ namespace CodeReverie
             
             SetActiveMenuPanel(welcomePanel);
             SoundManager.Instance.PlayMusic("Tears of Apathy");
-            
+            menuNavigation.SetFirstItem();
             //SelectedNavigationButton = pauseMenuNavigationButtons[navigationButtonsIndex];
         }
 

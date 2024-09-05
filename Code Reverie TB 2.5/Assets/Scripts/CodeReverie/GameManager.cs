@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace CodeReverie
 {
     [DefaultExecutionOrder(-120)]
-    public class GameManager : ManagerSingleton<GameManager>
+    public class GameManager : ManagerSingleton<GameManager>, IDataPersistence
     {
 
         public Player playerInput;
@@ -108,6 +108,15 @@ namespace CodeReverie
                 
             }
         }
-        
+
+        public void LoadData(string dataSlot)
+        {
+            
+        }
+
+        public void SaveData(string dataSlot)
+        {
+            
+        }
     }
 }

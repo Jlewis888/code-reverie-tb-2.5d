@@ -97,9 +97,9 @@ namespace CodeReverie
 
             }
             
-            ES3.Save("myKey", "", $"{0}/SaveFile.es3");
-                
-            ES3.DeleteKey("myKey", $"{0}/SaveFile.es3");
+            // ES3.Save("myKey", "", $"{0}/SaveFile.es3");
+            //     
+            // ES3.DeleteKey("myKey", $"{0}/SaveFile.es3");
 
             LoadGame(0);
         }
