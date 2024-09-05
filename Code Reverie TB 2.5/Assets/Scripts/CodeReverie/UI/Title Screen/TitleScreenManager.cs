@@ -157,9 +157,10 @@ namespace CodeReverie
 
         public void NewGame()
         {
+            GameManager.Instance.newGame = true;
             SoundManager.Instance.PlayButtonClick1();
             DataPersistenceManager.Instance.NewGame();
-            GameSceneManager.Instance.fromLoadedData = true;
+            //GameSceneManager.Instance.fromLoadedData = true;
             // SceneTransitionManager.Instance.isTransitioningScenes = true;
             SceneManager.LoadScene(newGameScene);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Sirenix.OdinInspector;
+using TransitionsPlus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,14 +19,26 @@ namespace CodeReverie
             
             if (other.gameObject.GetComponentInParent<ComponentTagManager>().HasTag(ComponentTag.Player) && other.gameObject == PlayerManager.Instance.currentParty[0].characterController.gameObject)
             {
-
+                
+                
                 if (!sceneToLoad.IsNullOrEmpty)
                 {
+                    
+                    other.GetComponent<PlayerMovementController>().enabled = false;
+                    
+                    
                     GameSceneManager.Instance.isTransitioningScenes = true;
                     GameSceneManager.Instance.SetTransitionName(sceneTransitionName);
                 
-                    CanvasManager.Instance.uiFade.FadeToBlack();
-                    StartCoroutine(LoadSceneRoutine());
+                    // CanvasManager.Instance.uiFade.FadeToBlack();
+                    // StartCoroutine(LoadSceneRoutine());
+                    
+                    TransitionAnimator.Start(
+                        TransitionType.Fade, // transition type
+                        duration: 1f,
+                        sceneNameToLoad: sceneToLoad
+                    );
+                    
                 }
                 
                 Debug.Log("Load New Area");

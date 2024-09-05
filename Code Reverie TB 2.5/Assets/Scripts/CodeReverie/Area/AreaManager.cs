@@ -17,6 +17,7 @@ namespace CodeReverie
         public AreaType areaType;
         public Transform defaultAreaSpawnPoint;
         public Transform areaSpawnPoint;
+        public Collider areaCameraConfiner;
 
         public int spawnPointIndex;
         public List<Transform> spawnPoints;
@@ -35,6 +36,8 @@ namespace CodeReverie
         {
             instance = this;
             autoSaveDelay = 5f;
+            
+            
             
             // GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             // GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
@@ -93,9 +96,13 @@ namespace CodeReverie
             GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
 
             PlayerManager.Instance.SetPartyUnits();
+            CameraManager.Instance.SetCameraConfiner(areaCameraConfiner);
             
             if (PlayerManager.Instance.combatConfigDetails != null)
             {
+                CanvasManager.Instance.victoryPopup.SetActive(false);
+                
+                
                 TransitionAnimator.Start(
                     TransitionType.Wipe, // transition type
                     duration: 1f,
@@ -123,6 +130,9 @@ namespace CodeReverie
             {
                 SoundManager.Instance.PlayMusic(audioClip);
             }
+            
+            
+            GameManager.Instance.newGame = false;
             
         }
 

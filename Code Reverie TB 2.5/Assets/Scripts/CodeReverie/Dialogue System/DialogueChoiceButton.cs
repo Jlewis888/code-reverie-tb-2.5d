@@ -43,7 +43,7 @@ namespace CodeReverie
             {
                 
                 EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.screenSpaceCanvasManager.hudManager);
-                EventManager.Instance.playerEvents.onDialogueEnd(speaker);
+                EventManager.Instance.playerEvents.OnDialogueEnd(speaker);
                 
                 CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
                 CameraManager.Instance.ToggleMainCamera();

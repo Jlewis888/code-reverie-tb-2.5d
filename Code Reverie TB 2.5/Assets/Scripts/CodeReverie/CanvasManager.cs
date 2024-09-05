@@ -53,6 +53,7 @@ namespace CodeReverie
             base.Awake();
 
             menuManagers = GetComponentsInChildren<MenuManager>(true).ToList();
+            menuManagers.Add(screenSpaceCanvasManager.hudManager);
 
             tooltips = new List<Tooltip>();
             

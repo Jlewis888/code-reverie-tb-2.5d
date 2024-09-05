@@ -87,13 +87,7 @@ namespace CodeReverie
             if (Input.GetKeyDown(KeyCode.P))
             {
                 
-                TransitionAnimator transitionAnimator = TransitionAnimator.Start(
-                    TransitionType.DoubleWipe, // transition type
-                    duration: 1f,
-                    rotation: 90f
-                );
-
-                transitionAnimator.onTransitionEnd.AddListener(TestFunction);
+                
 
                
                 //UnsetBattle();
@@ -115,11 +109,11 @@ namespace CodeReverie
             }
         }
 
-        void TestFunction()
+        void SetGameOverScreen()
         {
             //return;
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.gameObject.SetActive(false);
-            CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.SetActive(true);
+            CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.gameObject.SetActive(true);
         }
 
         public void SetPreBattleConfigurations()
@@ -191,16 +185,17 @@ namespace CodeReverie
         
         public void AllEnemyDeathCheck(CharacterUnitController characterController)
         {
-            for (int i = 0; i < enemyUnits.Count; i++)
+            
+            foreach (CharacterBattleManager characterBattleManager in enemyUnits)
             {
-                if (enemyUnits[i].GetComponent<Health>().CurrentHealth >= 1)
+                if (characterBattleManager.GetComponent<CharacterUnitController>().character.characterState !=
+                    CharacterState.Dead)
                 {
                     return;
                 }
             }
             
             EventManager.Instance.combatEvents.OnPlayerVictory();
-            Debug.Log("All Enemies Dead");
             //UnsetBattle();
             combatManagerState = CombatManagerState.PostBattle;
 
@@ -212,18 +207,29 @@ namespace CodeReverie
                 character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
             }
             
+            TransitionAnimator.Start(
+                TransitionType.Fade, // transition type
+                duration: 1f,
+                playDelay: 3f,
+                sceneNameToLoad: PlayerManager.Instance.combatConfigDetails.returnSceneName
+            );
+
+            
             
         }
         
         public void AllPlayerDeathCheck(CharacterUnitController characterController)
         {
-            for (int i = 0; i < playerUnits.Count; i++)
+            
+            foreach (CharacterBattleManager characterBattleManager in playerUnits)
             {
-                if (playerUnits[i].GetComponent<Health>().CurrentHealth >= 1)
+                if (characterBattleManager.GetComponent<CharacterUnitController>().character.characterState !=
+                    CharacterState.Dead)
                 {
                     return;
                 }
             }
+            
             
             
             EventManager.Instance.combatEvents.OnPlayerDefeat();
@@ -231,18 +237,15 @@ namespace CodeReverie
             //UnsetBattle();
             combatManagerState = CombatManagerState.PostBattle;
             
-            // TransitionAnimator transitionAnimator = TransitionAnimator.Start(
-            //     TransitionType.DoubleWipe, // transition type
-            //     duration: 1f,
-            //     rotation: 90f
-            // );
-            //
-            // transitionAnimator.onTransitionEnd += () =>
-            // {
-            //     CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.SetActive(true);
-            // };
+            TransitionAnimator transitionAnimator = TransitionAnimator.Start(
+                TransitionType.DoubleWipe, // transition type
+                duration: 1f,
+                rotation: 90f,
+                playDelay: 3f
+            );
 
-
+            transitionAnimator.onTransitionEnd.AddListener(SetGameOverScreen);
+            
             // foreach (Character character in PlayerManager.Instance.currentParty)
             // {
             //     Debug.Log("Set character inactive");

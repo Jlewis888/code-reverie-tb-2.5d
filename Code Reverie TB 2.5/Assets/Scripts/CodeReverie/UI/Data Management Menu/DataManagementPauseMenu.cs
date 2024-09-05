@@ -55,6 +55,10 @@ namespace CodeReverie
                     pauseMenuNavigation.NavigationInputUpdate();
                     break;
                 case DataManagementMenuState.Save:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
+                    }
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
                         savePanel.SetActive(false);
@@ -65,6 +69,10 @@ namespace CodeReverie
                     saveMenuNavigation.NavigationInputUpdate();
                     break;
                 case DataManagementMenuState.Load:
+                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                    {
+                        Confirm();
+                    }
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
                         savePanel.SetActive(false);
@@ -83,25 +91,39 @@ namespace CodeReverie
         
         public void Confirm()
         {
-            if (pauseMenuNavigation.SelectedNavigationButton == saveButton)
+
+            switch (dataManagementMenuState)
             {
-                saveMenuNavigation.pauseMenuNavigationButtons = saveButtonHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
-                saveMenuNavigation.SetFirstItem();
-                savePanel.SetActive(true);
-                loadPanel.SetActive(false);
-                dataManagementMenuState = DataManagementMenuState.Save;
-            }
+                case DataManagementMenuState.Menu:
+                    if (pauseMenuNavigation.SelectedNavigationButton == saveButton)
+                    {
+                        saveMenuNavigation.pauseMenuNavigationButtons = saveButtonHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+                        saveMenuNavigation.SetFirstItem();
+                        savePanel.SetActive(true);
+                        loadPanel.SetActive(false);
+                        dataManagementMenuState = DataManagementMenuState.Save;
+                    }
             
-            if (pauseMenuNavigation.SelectedNavigationButton == loadButton)
-            {
+                    if (pauseMenuNavigation.SelectedNavigationButton == loadButton)
+                    {
                 
-                loadMenuNavigation.pauseMenuNavigationButtons = loadButtonHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
-                loadMenuNavigation.SetFirstItem();
+                        loadMenuNavigation.pauseMenuNavigationButtons = loadButtonHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+                        loadMenuNavigation.SetFirstItem();
                 
-                savePanel.SetActive(false);
-                loadPanel.SetActive(true);
-                dataManagementMenuState = DataManagementMenuState.Load;
+                        savePanel.SetActive(false);
+                        loadPanel.SetActive(true);
+                        dataManagementMenuState = DataManagementMenuState.Load;
+                    }
+                    break;
+                case DataManagementMenuState.Save:
+                    saveMenuNavigation.SelectedNavigationButton.GetComponent<SaveSlotButton>().SaveGame();
+                    break;
+                case DataManagementMenuState.Load:
+                    loadMenuNavigation.SelectedNavigationButton.GetComponent<LoadSlotButton>().LoadGame();
+                    break;
             }
+
+            
         }
         
        

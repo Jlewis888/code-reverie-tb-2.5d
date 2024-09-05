@@ -675,8 +675,8 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 60023b1be60347641ad2c49d69638221, type: 3}
     m_SceneName: Persistent Data
   newGameScene:
-    m_SceneAsset: {fileID: 102900000, guid: 34994bdacb4ceed41a77087062d18e3e, type: 3}
-    m_SceneName: Wetlands Area 0
+    m_SceneAsset: {fileID: 102900000, guid: 1506b0597108e8746828c83892226ad8, type: 3}
+    m_SceneName: Wetlands Area 1
 --- !u!114 &421504761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4085,6 +4085,7 @@ MonoBehaviour:
     - Name: menuNavigation
       Entry: 6
       Data: 
+  loadGameMenuState: 0
 --- !u!1 &1449856445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3795109811234514310, guid: ea6479734764dcb43b5025864f5e2a0a,

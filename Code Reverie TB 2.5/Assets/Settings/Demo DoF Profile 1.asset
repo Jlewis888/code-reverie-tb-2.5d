@@ -581,7 +581,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   depthOfFieldTransparentLayerMask:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       serializedVersion: 2
       m_Bits: 128
@@ -630,8 +630,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 8
   depthOfFieldMaxBrightness:
-    m_OverrideState: 0
-    m_Value: 1000
+    m_OverrideState: 1
+    m_Value: 1
   depthOfFieldMaxBlurRadius:
     m_OverrideState: 0
     m_Value: 1000
@@ -639,10 +639,10 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   depthOfFieldMaxDistance:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   depthOfFieldFilterMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   eyeAdaptation:
     m_OverrideState: 0

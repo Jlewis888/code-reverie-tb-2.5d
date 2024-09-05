@@ -255,30 +255,19 @@ namespace CodeReverie
 
             if (GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
             {
+                GetComponent<CharacterUnitController>().character.characterState = CharacterState.Dead;
                 if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
                 {
                     EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterUnitController>()); 
                 }
             
-            
-                if (CompareTag("Player"))
+             
+                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
                 {
                     EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterUnitController>());
-                    
-                    
-                    // PlayerManager.Instance.SwapCharacterOnDeath();
-                    //
-                    //
-                    //
-                    // if (PlayerManager.Instance.AllPartyMembersDeathCheck())
-                    // {
-                    //     Debug.Log("All Party Members have died");
-                    // }
-                    
-                    
                 }
             
-                GetComponent<CharacterUnitController>().character.characterState = CharacterState.Dead;
+                
                 GetComponent<AnimationManager>().ChangeAnimationState("death");
                 EventManager.Instance.combatEvents.OnCharacterDeath(GetComponent<CharacterBattleManager>());
                 EventManager.Instance.combatEvents.OnDeath(GetComponent<CharacterUnitController>().character.info.id);

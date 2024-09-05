@@ -6,6 +6,6 @@ namespace CodeReverie
     public class ScreenSpaceCanvasManager : SerializedMonoBehaviour
     {
         public HudManager hudManager;
-        public GameObject gameOverPanel;
+        public GameOverScreenManager gameOverPanel;
     }
 }

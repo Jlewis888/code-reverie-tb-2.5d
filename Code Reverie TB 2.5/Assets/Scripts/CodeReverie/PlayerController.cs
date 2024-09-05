@@ -221,6 +221,9 @@ namespace CodeReverie
 
                             if (other.GetComponent<EnemyAI>().enemyList != null)
                             {
+                                GetComponent<PlayerMovementController>().enabled = false;
+                                
+                                
                                 PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
                                     SceneManager.GetActiveScene().name,
                                     other.GetComponent<CharacterUnitController>().characterInstanceID,

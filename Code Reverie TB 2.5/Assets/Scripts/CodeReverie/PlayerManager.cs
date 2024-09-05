@@ -37,6 +37,7 @@ namespace CodeReverie
         public List<Interactable> interactables = new List<Interactable>();
         public Dictionary<int, int> accountExperienceMap= new Dictionary<int, int>();
         public CombatConfigDetails combatConfigDetails;
+        public Vector3 characterOnSaveLoadPosition;
         
         protected override void Awake()
         {
@@ -62,13 +63,13 @@ namespace CodeReverie
 
         private void Start()
         {
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic2"));
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic3"));
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem"));
-            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem2"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic2"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic3"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem"));
+            // inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem2"));
         }
 
         private void OnEnable()
@@ -92,15 +93,27 @@ namespace CodeReverie
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (DataPersistenceManager.Instance.debugging)
+         
+            if (SceneManager.GetActiveScene().name != "Title Screen")
             {
-                SetNewGameData();
-                Init();
-                DataPersistenceManager.Instance.debugging = false;
-            }
-            if (GameSceneManager.Instance.fromLoadedData)
-            {
-                Init();
+                if (GameManager.Instance.newGame)
+                {
+                    SetNewGameData();
+                    Init();
+                }
+                else
+                {
+                    if (DataPersistenceManager.Instance.debugging)
+                    {
+                        SetNewGameData();
+                        Init();
+                        DataPersistenceManager.Instance.debugging = false;
+                    }
+                    if (GameSceneManager.Instance.fromLoadedData)
+                    {
+                        Init();
+                    }
+                }
             }
         }
 
@@ -244,13 +257,33 @@ namespace CodeReverie
                 
                 foreach (Character character in currentParty)
                 {
-                    character.SpawnCharacter(AreaManager.instance.defaultAreaSpawnPoint != null ? AreaManager.instance.defaultAreaSpawnPoint.position : Vector3.zero);
+                    Vector3 spawnLocation = AreaManager.instance.defaultAreaSpawnPoint != null
+                        ? AreaManager.instance.defaultAreaSpawnPoint.position
+                        : Vector3.zero;
+                    
+                    if (!GameManager.Instance.newGame)
+                    {
+                        spawnLocation = characterOnSaveLoadPosition;
+                    }
+                    
+                    character.SpawnCharacter(spawnLocation);
                     
                     
                     if (character == currentParty[0])
                     {
-                        FindObjectOfType<BeautifySettings>().depthOfFieldTarget =
-                            character.characterController.transform;
+                        BeautifySettings beautifySettings = FindObjectOfType<BeautifySettings>();
+
+                        if (beautifySettings != null)
+                        {
+                            // FindObjectOfType<BeautifySettings>().depthOfFieldTarget =
+                            //     character.characterController.transform;
+                            
+                            beautifySettings.depthOfFieldTarget =
+                                character.characterController.transform;
+                        }
+                        
+                        
+                        
                         character.characterController.GetComponent<PlayerAIMovementController>().enabled = false;
                         character.characterController.GetComponent<PlayerMovementController>().enabled = true;
                         CameraManager.Instance.UpdateCamera(character.characterController.transform);
@@ -262,7 +295,13 @@ namespace CodeReverie
                         character.characterController.GetComponent<PlayerAIMovementController>().followTarget =
                             currentParty[count - 1].characterController.gameObject;
                     }
-                    
+
+                    if (!GameManager.Instance.newGame)
+                    {
+                        
+                    }
+                   
+
                     character.characterController.gameObject.SetActive(true);
                     count++;
                 }
@@ -337,6 +376,14 @@ namespace CodeReverie
                     // count++;
                 }
             } 
+        }
+
+        public void SetPartyPosition(Vector3 pos)
+        {
+            foreach (Character character in currentParty)
+            {
+                character.characterController.transform.position = pos;
+            }
         }
 
         public void EnableCombatMode()
@@ -529,10 +576,9 @@ namespace CodeReverie
         {
             if (ES3.FileExists(dataSlot))
             {
-                Debug.Log("yo");
                 if (ES3.KeyExists("availableCharacters", dataSlot))
                 {
-                    Debug.Log("Available Charactes exist");
+                   
                     availableCharacters = new List<Character>();
                     //ES3.LoadInto("availableCharacters", dataSlot, availableCharacters);
                     availableCharacters = ES3.Load<List<Character>>("availableCharacters", dataSlot);
@@ -638,9 +684,19 @@ namespace CodeReverie
                 {
                     skillPoints = 0;
                 }
+                
+                if (ES3.KeyExists("characterOnSaveLoadPosition", dataSlot))
+                {
+                    characterOnSaveLoadPosition = ES3.Load<Vector3>("characterOnSaveLoadPosition", dataSlot);
+                }
+                else
+                {
+                    characterOnSaveLoadPosition = Vector3.zero;
+                }
             }
             else
             {
+                Debug.Log("New Load");
                 SetNewGameData();
             }
         }
@@ -655,6 +711,10 @@ namespace CodeReverie
             ES3.Save("currentLevel", currentLevel, dataSlot);
             ES3.Save("currentExp", currentExp, dataSlot);
             ES3.Save("skillPoints", skillPoints, dataSlot);
+
+            characterOnSaveLoadPosition = currentParty[0].characterController.transform.position;
+            
+            ES3.Save("characterOnSaveLoadPosition", characterOnSaveLoadPosition, dataSlot);
         }
 
         public void SetNewGameData()
@@ -662,22 +722,22 @@ namespace CodeReverie
             Debug.Log("Set New Game Data");
             availableCharacters = new List<Character>();
             AddCharacterToAvailablePartyPool("Fullbody");
-             AddCharacterToAvailablePartyPool("Cecil");
-             AddCharacterToAvailablePartyPool("Arcalia");
-            AddCharacterToAvailablePartyPool("Cecil");
-            AddCharacterToAvailablePartyPool("Arcalia");
+            // AddCharacterToAvailablePartyPool("Cecil");
+            // AddCharacterToAvailablePartyPool("Arcalia");
             inventory = new PlayerInventory();
             
             //activeParty = new Party();
             currentParty = new List<Character>();
             
             currentParty.Add(availableCharacters[0]);
-            currentParty.Add(availableCharacters[1]);
-            currentParty.Add(availableCharacters[2]);
+            // currentParty.Add(availableCharacters[1]);
+            // currentParty.Add(availableCharacters[2]);
             
             currentLevel = 1;
             currentExp = 0;
             skillPoints = 0;
+            
+            //characterOnSaveLoadPosition = Vector3.zero;
         }
 
         

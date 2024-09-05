@@ -61,6 +61,7 @@ namespace CodeReverie
         public void Interact(Action onComplete)
         {
             CanInteract = false;
+            AddItemToInventory();
             onComplete();
         }
 

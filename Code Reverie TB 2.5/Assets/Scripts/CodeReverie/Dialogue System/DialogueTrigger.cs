@@ -29,6 +29,11 @@ namespace CodeReverie
 
             CanInteract = true;
             
+            
+        }
+
+        private void Start()
+        {
             if (_interactableMessage.IsNullOrWhitespace())
             {
                 _interactableMessage = $"Speak with {dialogueSpeaker.GetComponent<CharacterUnitController>().character.info.characterName}";

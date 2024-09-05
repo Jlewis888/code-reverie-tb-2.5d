@@ -13,23 +13,23 @@ namespace CodeReverie
 
         public void SetQuestIcons()
         {
-            if (startQuestIconActive)
-            {
-                startQuestIcon.SetActive(true);
-                completeQuestIcon.SetActive(false);
-            }
-            
-            if (completeQuestIconActive)
-            {
-                startQuestIcon.SetActive(false);
-                completeQuestIcon.SetActive(true);
-            }
-            
-            if (!startQuestIconActive && !completeQuestIconActive)
-            {
-                startQuestIcon.SetActive(false);
-                completeQuestIcon.SetActive(false);
-            }
+            // if (startQuestIconActive)
+            // {
+            //     startQuestIcon.SetActive(true);
+            //     completeQuestIcon.SetActive(false);
+            // }
+            //
+            // if (completeQuestIconActive)
+            // {
+            //     startQuestIcon.SetActive(false);
+            //     completeQuestIcon.SetActive(true);
+            // }
+            //
+            // if (!startQuestIconActive && !completeQuestIconActive)
+            // {
+            //     startQuestIcon.SetActive(false);
+            //     completeQuestIcon.SetActive(false);
+            // }
         }
         
         public void SetIcons(bool setStartQuestIcon, bool setCompleteQuestIcon)

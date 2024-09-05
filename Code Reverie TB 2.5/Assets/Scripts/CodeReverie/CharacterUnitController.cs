@@ -45,8 +45,11 @@ namespace CodeReverie
 
         public void SetInstanceID()
         {
+#if UNITY_EDITOR
             characterInstanceID = Guid.NewGuid().ToString();
+
             EditorUtility.SetDirty(this);
+#endif
         }
 
 
