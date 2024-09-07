@@ -34,6 +34,7 @@ namespace CodeReverie
         public CombatConfigDetails combatConfigDetails;
         public string defaultAudioClip;
         
+        
         private void Awake()
         {
             Instance = this;
@@ -71,14 +72,16 @@ namespace CodeReverie
             EventManager.Instance.combatEvents.onEnemyDeath += AllEnemyDeathCheck;
             EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
             //SetEnemyPositionsTest();
+
+            SetPreBattleConfigurations();
             
             TransitionAnimator.Start(
                 TransitionType.Wipe, // transition type
                 duration: 1f,
                 invert: true
                 //cellsDivisions: 1
-            );
-            SetPreBattleConfigurations();
+            ).onTransitionEnd.AddListener(PreBattleConfigurationExtended);
+            
         }
 
         private void Update()
@@ -137,9 +140,13 @@ namespace CodeReverie
             DetermineOrderOfTurns();
             SetOrderOfTurnsLists();
             SetInitialCombatPositions();
+        }
+
+        public void PreBattleConfigurationExtended()
+        {
+            
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.Init();
             combatManagerState = CombatManagerState.PreBattle;
-            
         }
 
         public void InstantiateEnemyUnits()

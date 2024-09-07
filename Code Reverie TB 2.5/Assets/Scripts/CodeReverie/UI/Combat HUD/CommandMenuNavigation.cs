@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeReverie
 {
@@ -11,6 +12,7 @@ namespace CodeReverie
         public int navigationButtonsIndex;
         public float navigationDelay = 0.35f;
         public float navigationDelayTimer;
+        public ScrollRect scrollRect;
         public Action callBack;
 
 
@@ -28,6 +30,15 @@ namespace CodeReverie
             {
                 if (selectedNavigationButton == value)
                 {
+                    if (scrollRect != null)
+                    {
+                        if (selectedNavigationButton != null)
+                        {
+                            scrollRect.GetComponent<ScrollRectExtension>().SnapTo(SelectedNavigationButton.GetComponent<RectTransform>());
+                        }
+                        
+                        
+                    }
                     return;
                 }
 
@@ -37,6 +48,15 @@ namespace CodeReverie
                 
                 
                 selectedNavigationButton.selector.SetActive(true);
+
+                if (scrollRect != null)
+                {
+                    if (selectedNavigationButton != null)
+                    {
+                        scrollRect.GetComponent<ScrollRectExtension>().SnapTo(SelectedNavigationButton.GetComponent<RectTransform>());
+                    }
+
+                }
                 
                 OnSelectedNavigationButtonChange();
 

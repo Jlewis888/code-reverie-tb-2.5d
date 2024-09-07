@@ -23,6 +23,7 @@ namespace CodeReverie
             commandMenuNavigation.Add(commandSkillsSelect);
             commandMenuNavigation.Add(commandItemsSelect);
             commandMenuNavigation.Add(commandMoveSelect);
+            commandMenuNavigation.scrollRect = scrollRect;
 
         }
 

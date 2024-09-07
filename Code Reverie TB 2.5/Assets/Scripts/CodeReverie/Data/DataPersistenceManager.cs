@@ -92,7 +92,7 @@ namespace CodeReverie
 
             if (ES3.FileExists($"{0}/SaveFile.es3"))
             {
-                
+                //TODO Not sure I Need to delete anymore. TO check on
                 ES3.DeleteFile($"{0}/SaveFile.es3");
 
             }

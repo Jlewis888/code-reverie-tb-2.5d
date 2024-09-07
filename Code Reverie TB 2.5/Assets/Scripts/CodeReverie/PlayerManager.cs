@@ -162,68 +162,68 @@ namespace CodeReverie
                 // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
             }
             
-            if (GameManager.Instance.playerInput.GetButtonDown("Interact"))
-            {
-                if (interactables.Count > 0)
-                {
-                    
-                    if (interactables[0] != null)
-                    {
-                        if (interactables[0].interactableQueue.Count > 0)
-                        {
-                            interactables[0].interactableQueue.Peek().InteractOnPress(() =>
-                            {
-                                interactables[0].interactableQueue.Dequeue();
-
-                                if (interactables[0].interactableQueue.Count < 1)
-                                {
-                                    interactables[0].Deactivate();
-                                    interactables.Remove(interactables[0]);
-                                }
-                            });
-                            
-                        }
-                    }
-                }
-            } 
-            else if (GameManager.Instance.playerInput.GetButton("Interact"))
-            {
-                if (interactables.Count > 0)
-                {
-                    if (interactables[0] != null)
-                    {
-                        if (interactables[0].interactableQueue.Count > 0)
-                        {
-                            interactables[0].interactableQueue.Peek().InteractOnHold(() =>
-                            {
-                                interactables[0].interactableQueue.Dequeue();
-                                
-                                
-                                if (interactables[0].interactableQueue.Count < 1)
-                                {
-                                    interactables[0].Deactivate();
-                                    interactables.Remove(interactables[0]);
-                                }
-                            });
-                            
-                        }
-                    }
-                } 
-            } 
-            else if (GameManager.Instance.playerInput.GetButtonUp("Interact"))
-            {
-                if (interactables.Count > 0)
-                {
-                    if (interactables[0] != null)
-                    {
-                        if (interactables[0].interactableQueue.Count > 0)
-                        {
-                            interactables[0].interactableQueue.Peek().InteractOnPressUp(() => { });
-                            
-                        }
-                    }
-                } 
-            }
+            // if (GameManager.Instance.playerInput.GetButtonDown("Interact"))
+            // {
+            //     if (interactables.Count > 0)
+            //     {
+            //         
+            //         if (interactables[0] != null)
+            //         {
+            //             if (interactables[0].interactableQueue.Count > 0)
+            //             {
+            //                 interactables[0].interactableQueue.Peek().InteractOnPress(() =>
+            //                 {
+            //                     interactables[0].interactableQueue.Dequeue();
+            //
+            //                     if (interactables[0].interactableQueue.Count < 1)
+            //                     {
+            //                         interactables[0].Deactivate();
+            //                         interactables.Remove(interactables[0]);
+            //                     }
+            //                 });
+            //                 
+            //             }
+            //         }
+            //     }
+            // } 
+            // else if (GameManager.Instance.playerInput.GetButton("Interact"))
+            // {
+            //     if (interactables.Count > 0)
+            //     {
+            //         if (interactables[0] != null)
+            //         {
+            //             if (interactables[0].interactableQueue.Count > 0)
+            //             {
+            //                 interactables[0].interactableQueue.Peek().InteractOnHold(() =>
+            //                 {
+            //                     interactables[0].interactableQueue.Dequeue();
+            //                     
+            //                     
+            //                     if (interactables[0].interactableQueue.Count < 1)
+            //                     {
+            //                         interactables[0].Deactivate();
+            //                         interactables.Remove(interactables[0]);
+            //                     }
+            //                 });
+            //                 
+            //             }
+            //         }
+            //     } 
+            // } 
+            // else if (GameManager.Instance.playerInput.GetButtonUp("Interact"))
+            // {
+            //     if (interactables.Count > 0)
+            //     {
+            //         if (interactables[0] != null)
+            //         {
+            //             if (interactables[0].interactableQueue.Count > 0)
+            //             {
+            //                 interactables[0].interactableQueue.Peek().InteractOnPressUp(() => { });
+            //                 
+            //             }
+            //         }
+            //     } 
+            // }
         }
 
         public void Init()
@@ -738,6 +738,24 @@ namespace CodeReverie
             skillPoints = 0;
             
             //characterOnSaveLoadPosition = Vector3.zero;
+            
+            
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("Common Potion 1"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic2"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic3"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem"));
+            inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem2"));
+            
+            
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BattleOrdersSkill"));
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BlazeBeaconSkill"));
+            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("HellfireBarrageSkill"));
         }
 
         

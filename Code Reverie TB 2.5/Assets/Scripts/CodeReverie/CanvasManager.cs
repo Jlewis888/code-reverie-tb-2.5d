@@ -207,6 +207,12 @@ namespace CodeReverie
             }
         }
 
+        public void ToggleSettingsMenu()
+        {
+            EventManager.Instance.generalEvents.OpenMenuManager(pauseMenuManager);
+            
+        }
+
         public void OpenToolTip(TooltipData tooltipData)
         {
             switch (tooltipData.toolTipType)

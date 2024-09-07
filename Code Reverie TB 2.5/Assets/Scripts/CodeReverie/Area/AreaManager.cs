@@ -117,14 +117,19 @@ namespace CodeReverie
                 
                 PlayerManager.Instance.SetPartyReturnPosition();
                 PlayerManager.Instance.combatConfigDetails = null;
-            } 
-            
-            
+            }
 
-            if (GameSceneManager.Instance.fromLoadedData)
+
+
+            if (GameManager.Instance.newGame)
             {
                 DataPersistenceManager.Instance.AutoSave();
             }
+            
+            // if (GameSceneManager.Instance.fromLoadedData)
+            // {
+            //     DataPersistenceManager.Instance.AutoSave();
+            // }
 
             if (!string.IsNullOrEmpty(audioClip))
             {

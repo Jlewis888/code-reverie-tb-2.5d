@@ -98,7 +98,10 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: iInteractable
+      Entry: 6
+      Data: 
   selector: {fileID: 1522910826458482117}
   nameText: {fileID: 7633596233317329410}
   icon: {fileID: 0}

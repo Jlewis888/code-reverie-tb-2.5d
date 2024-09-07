@@ -39,7 +39,14 @@ namespace CodeReverie
                     {
                         Confirm();
                     }
-            
+
+                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    {
+                        gameObject.SetActive(false);
+                        TitleScreenManager.Instance.titleScreenState = TitleScreenState.Menu;
+                        TitleScreenManager.Instance.SetActiveMenuPanel(TitleScreenManager.Instance.welcomePanel);
+                    }
+
                     menuNavigation.NavigationInputUpdate();
                     break;
             }

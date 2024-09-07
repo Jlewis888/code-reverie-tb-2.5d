@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeReverie
 {
@@ -36,9 +37,13 @@ namespace CodeReverie
             EventManager.Instance.generalEvents.onPauseMenuNavigationStateChange += OnPauseMenuNavigationStateChange;
             EventManager.Instance.generalEvents.toggleCharacterSidePanelUI += ToggleCharacterSidePanelUI;
             
+            
+            
             //pauseMenuNavigation.SetFirstItem();
             
             List<PauseMenu> pauseMenus = transform.GetComponentsInChildren<PauseMenu>(true).ToList();
+            
+            
 
             foreach (PauseMenu pauseMenu in pauseMenus)
             {
@@ -52,6 +57,14 @@ namespace CodeReverie
                 
                 pauseMenu.SetListeners();
             }
+            
+            if (SceneManager.GetActiveScene().name == "Title Screen")
+            {
+                EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.System);
+                return;
+            }
+            
+            
             characterSidePanel.SetActive(true);
             currentPartyMenuManager.SetParty();
         }

@@ -104,7 +104,7 @@ public class CameraManager : ManagerSingleton<CameraManager>
         
     }
 
-    public void AddToTargetGroup(Transform targetTransform, float weight = 1f, float radius = 2f)
+    public void AddToTargetGroup(Transform targetTransform, float weight = 2f, float radius = 2f)
     {
         combatTargetGroup.AddMember(targetTransform, weight, radius);
         //combatTargetGroup.m_Targets[0].
@@ -157,7 +157,7 @@ public class CameraManager : ManagerSingleton<CameraManager>
         for (int i = 0; i < combatTargetGroup.m_Targets.Length; i++)
         {
             combatTargetGroup.m_Targets[i].weight = 1f;
-            combatTargetGroup.m_Targets[i].radius = 1f;
+            combatTargetGroup.m_Targets[i].radius = 2f;
         }
     }
 

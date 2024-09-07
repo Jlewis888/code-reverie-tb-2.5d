@@ -9,6 +9,7 @@ namespace CodeReverie
 {
     public class TitleScreenManager : MenuManager
     {
+        public static TitleScreenManager Instance;
         public MenuNavigation menuNavigation;
         public TitleScreenState titleScreenState;
         public GameObject titleGameObject;
@@ -30,6 +31,7 @@ namespace CodeReverie
 
         private void Awake()
         {
+            Instance = this;
             if (SceneManager.GetActiveScene().name == "Title Screen")
             {
                 SceneManager.LoadSceneAsync(persistentData, LoadSceneMode.Additive);
@@ -185,7 +187,8 @@ namespace CodeReverie
         {
             SoundManager.Instance.PlayButtonClick1();
             titleScreenState = TitleScreenState.Settings;
-            SetActiveMenuPanel(settingsPanel);
+            CanvasManager.Instance.ToggleSettingsMenu();
+            //SetActiveMenuPanel(settingsPanel);
         }
 
         public void Quit()

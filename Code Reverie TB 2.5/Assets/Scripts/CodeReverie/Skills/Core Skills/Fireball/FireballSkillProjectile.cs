@@ -32,7 +32,12 @@ namespace CodeReverie
         
         private void Update()
         {
-            transform.position += transform.forward * Time.deltaTime * speed;
+            // transform.position += transform.forward * Time.deltaTime * speed;
+            
+            transform.position = Vector3.MoveTowards(transform.position,
+                target.transform.position,
+                speed * Time.deltaTime);
+            
             
             if (Vector3.Distance(transform.position, target.transform.position) <= 1f)
             {
@@ -43,6 +48,7 @@ namespace CodeReverie
                 var exp = Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
                 Destroy(exp, DestroyExplosion);
                 EventManager.Instance.combatEvents.OnSkillComplete(source);
+                source.EndTurn();
                 Destroy(gameObject);
             }
         }

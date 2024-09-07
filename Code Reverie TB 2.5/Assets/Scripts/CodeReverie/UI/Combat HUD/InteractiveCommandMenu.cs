@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace CodeReverie
@@ -13,10 +14,14 @@ namespace CodeReverie
         public GameObject interactableMenuNavigationButtonHolder;
         public List<Interactable> interactables = new List<Interactable>();
         public List<IInteractable> iInteractables = new List<IInteractable>();
+        public CommandMenuUIScrollToSelection commandMenuUIScrollToSelection;
+        public ScrollRect scroll;
 
         private void Awake()
         {
             commandMenuNavigation = new CommandMenuNavigation();
+            commandMenuNavigation.scrollRect = scroll;
+            //commandMenuNavigation.callBack = scroll.GetComponent<ScrollRectExtension>().SnapTo(commandMenuNavigation.SelectedNavigationButton.GetComponent<RectTransform>());
             // commandMenus = new List<GameObject>();
             // commandMenus.Add(commandSelectMenuManager.gameObject);
         }
@@ -54,6 +59,19 @@ namespace CodeReverie
             {
                 ConfirmAction();
             }
+            
+            
+            // if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Combat Vertical"))
+            // {
+            //     commandMenuUIScrollToSelection.Move(MoveDirection.Down);
+            //     commandMenuUIScrollToSelection.UpdateVerticalScrollPosition(MoveDirection.Down);
+            // }
+            // else if (GameManager.Instance.playerInput.GetButtonDown("Navigate Combat Vertical"))
+            // {
+            //     commandMenuUIScrollToSelection.Move(MoveDirection.Up);
+            //     commandMenuUIScrollToSelection.UpdateVerticalScrollPosition(MoveDirection.Up);
+            // }
+            
             
             commandMenuNavigation.NavigationInputUpdateButtonDown();
         }

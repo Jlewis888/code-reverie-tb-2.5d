@@ -16,12 +16,14 @@ namespace CodeReverie
         public List<AudioClip> swordHit1;
         public Dictionary<string, AudioClipManager> audioClipManagers;
 
+        
+        
         protected override void Awake()
         {
             base.Awake();
-            ChangeMasterVolume(0.5f);
-            ChangeEffectsVolume(0.25f);
-            ChangeMusicVolume(0.25f);
+            ChangeMasterVolume(2f);
+            ChangeEffectsVolume(5f);
+            ChangeMusicVolume(5f);
             Initialize();
             audioClipManagers = new Dictionary<string, AudioClipManager>();
         }
@@ -144,22 +146,53 @@ namespace CodeReverie
         {
             effectsSource.PlayOneShot(pistolShot1);
         }
+
+        public float MasterVolume
+        {
+            get { return AudioListener.volume; }
+            set
+            {
+                ChangeMasterVolume(value);
+            }
+        }
+        
+        public float MusicVolume
+        {
+            get { return musicSource.volume; }
+            set
+            {
+                ChangeMusicVolume(value);
+            }
+        }
+        
+        public float EffectsVolume
+        {
+            get { return effectsSource.volume; }
+            set
+            {
+                ChangeEffectsVolume(value);
+            }
+        }
         
     
         public void ChangeMasterVolume(float value)
         {
-            AudioListener.volume = value;
+            float normalizedValue = value / 10;
+            
+            AudioListener.volume = normalizedValue;
         }
     
         public void ChangeMusicVolume(float value)
         {
-            musicSource.volume = value;
+            float normalizedValue = value / 10;
+            musicSource.volume = normalizedValue;
         }
     
 
         public void ChangeEffectsVolume(float value)
         {
-            effectsSource.volume = value;
+            float normalizedValue = value / 10;
+            effectsSource.volume = normalizedValue;
         }
         
         

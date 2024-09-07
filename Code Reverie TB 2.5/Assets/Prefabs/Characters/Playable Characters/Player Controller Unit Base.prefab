@@ -226,6 +226,7 @@ MonoBehaviour:
     - Name: character
       Entry: 6
       Data: 
+  characterInstanceID: 
   characterInfo: {fileID: 0}
   characterUnit: {fileID: 0}
   canAttack: 0
@@ -289,6 +290,7 @@ MonoBehaviour:
   characterController: {fileID: 0}
   battleState: 0
   characterBattleActionState: 0
+  prevCharacterBattleActionState: 0
   characterTimelineGaugeState: 0
   battlePosition: {fileID: 0}
   selectedTargets: []
@@ -430,6 +432,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   currentAnimation: 
   currentAnimationSpeed: 0
+  pausedAnimation: 
+  pausedAnimationSpeed: 0
+  animationsPaused: 0
 --- !u!114 &9165936234528072040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,6 +733,7 @@ GameObject:
   - component: {fileID: 641085188473357019}
   - component: {fileID: 1585713923221433528}
   - component: {fileID: 4718724242311690908}
+  - component: {fileID: 2854976125132885201}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -850,6 +856,27 @@ MonoBehaviour:
       Data: 
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+--- !u!114 &2854976125132885201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8537880336221126786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb80fdfae2d44e18e52edc2efc1a48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &8784794717369207757
 GameObject:
   m_ObjectHideFlags: 0

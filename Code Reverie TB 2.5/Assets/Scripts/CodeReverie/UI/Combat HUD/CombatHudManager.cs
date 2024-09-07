@@ -95,7 +95,7 @@ namespace CodeReverie
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
-            CameraManager.Instance.SetSelectedPlayerWeight(characterBattleManager, 10f);
+            CameraManager.Instance.SetSelectedPlayerWeight(characterBattleManager, 10f, 1.3f);
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.SetCharacterSkillDetails();
 
         }

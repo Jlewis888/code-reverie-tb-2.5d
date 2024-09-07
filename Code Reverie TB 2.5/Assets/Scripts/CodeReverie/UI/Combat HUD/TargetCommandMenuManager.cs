@@ -18,6 +18,8 @@ namespace CodeReverie
             {
                 SetCommandNavigation();
             }
+            
+            
         }
         
         
@@ -55,6 +57,8 @@ namespace CodeReverie
                 CameraManager.Instance.SetSelectedPlayerWeight(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager, 1000f, 2f);
                 EventManager.Instance.combatEvents.OnPlayerSelectTarget(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
             };
+            
+            commandMenuNavigation.scrollRect = scrollRect;
         }
 
         public void SetInitialEnemyNavigationButtons()

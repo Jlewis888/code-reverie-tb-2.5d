@@ -24,11 +24,12 @@ namespace CodeReverie
             saveMenuNavigation = new MenuNavigation();
             loadMenuNavigation = new MenuNavigation();
             pauseMenuNavigation.pauseMenuNavigationButtons = pauseMenuNavigationHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
-            pauseMenuNavigation.SetFirstItem();
+            // pauseMenuNavigation.SetFirstItem();
         }
 
         private void OnEnable()
         {
+            pauseMenuNavigation.SetFirstItem();
             savePanel.SetActive(false);
             loadPanel.SetActive(false);
             //pauseMenuNavigation.SetFirstItem();

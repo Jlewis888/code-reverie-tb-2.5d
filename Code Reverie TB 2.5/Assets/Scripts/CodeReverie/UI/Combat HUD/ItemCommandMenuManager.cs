@@ -14,6 +14,8 @@ namespace CodeReverie
             {
                 SetCommandNavigation();
             }
+            
+            
 
         }
         
@@ -44,6 +46,7 @@ namespace CodeReverie
         public void SetCommandNavigation()
         {
             commandMenuNavigation = new CommandMenuNavigation();
+            commandMenuNavigation.scrollRect = scrollRect;
         }
         
         public void Clear()

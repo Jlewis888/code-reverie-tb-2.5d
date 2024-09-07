@@ -16,6 +16,8 @@ namespace CodeReverie
             {
                 SetCommandNavigation();
             }
+            
+            
 
         }
         
@@ -51,6 +53,7 @@ namespace CodeReverie
             
             if (CombatManager.Instance.selectedPlayerCharacter.currentSkillPoints >= selectedSkill.info.skillPointsCost)
             {
+                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
                 CombatManager.Instance.SetSelectableTargets();
                 CombatManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
                 CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
@@ -102,6 +105,7 @@ namespace CodeReverie
         public void SetCommandNavigation()
         {
             commandMenuNavigation = new CommandMenuNavigation();
+            commandMenuNavigation.scrollRect = scrollRect;
         }
         
     }

@@ -17,18 +17,18 @@ namespace CodeReverie
 
         private void Update()
         {
-            // if (GameManager.instance.playerInput.GetButtonDown("Navigate Up"))
-            // {
-            //     Move(MoveDirection.Up);
-            //     UpdateVerticalScrollPosition(MoveDirection.Up);
-            //   
-            // }
-            // if (GameManager.instance.playerInput.GetButtonDown("Navigate Down"))
-            // {
-            //    
-            //     Move(MoveDirection.Down);
-            //     UpdateVerticalScrollPosition(MoveDirection.Down);
-            // }
+            if (GameManager.Instance.playerInput.GetButtonDown("Navigate Up"))
+            {
+                Move(MoveDirection.Up);
+                UpdateVerticalScrollPosition(MoveDirection.Up);
+              
+            }
+            if (GameManager.Instance.playerInput.GetButtonDown("Navigate Down"))
+            {
+               
+                Move(MoveDirection.Down);
+                UpdateVerticalScrollPosition(MoveDirection.Down);
+            }
         }
 
 
