@@ -995,10 +995,28 @@ namespace CodeReverie
             
             characterBattleActionState = CharacterBattleActionState.Idle;
             GetComponent<AnimationManager>().ChangeAnimationState("attack");
-            List<DamageTypes> damageTypes = new List<DamageTypes>();
-            damageTypes.Add(DamageTypes.Physical);
-            DamageProfile damage = new DamageProfile(this, selectedTargets[0].GetComponent<Health>(), damageTypes);
+            
             DequeueAction();
+        }
+
+        public void HitTarget()
+        {
+            if (Vector3.Distance(
+                    new Vector3(transform.position.x, 0, transform.position.z),
+                    new Vector3(selectedTargets[0].transform.position.x, 0,
+                        selectedTargets[0].transform.position.z)) <=
+                actionRange)
+            {
+                Debug.Log("Target hit");
+                
+                List<DamageTypes> damageTypes = new List<DamageTypes>();
+                damageTypes.Add(DamageTypes.Physical);
+                DamageProfile damage = new DamageProfile(this, selectedTargets[0].GetComponent<Health>(), damageTypes);
+            }
+            else
+            {
+                Debug.Log("Target Missed");
+            }
         }
 
         public void Break()

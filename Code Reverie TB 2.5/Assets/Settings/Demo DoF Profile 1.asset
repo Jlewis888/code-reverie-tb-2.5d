@@ -531,10 +531,10 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 2
   depthOfFieldAutofocusMinDistance:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 10
   depthOfFieldAutofocusMaxDistance:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 10000
   depthOfFieldTargetFallback:
     m_OverrideState: 0
@@ -558,55 +558,55 @@ MonoBehaviour:
     m_Value: 10
   depthOfFieldCameraSettings:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   depthOfFieldFocalLength:
     m_OverrideState: 1
-    m_Value: 0.275
+    m_Value: 0.267
   depthOfFieldAperture:
     m_OverrideState: 1
     m_Value: 50
   depthOfFieldFocalLengthReal:
-    m_OverrideState: 0
-    m_Value: 50
+    m_OverrideState: 1
+    m_Value: 91
   depthOfFieldFStop:
-    m_OverrideState: 0
-    m_Value: 2
+    m_OverrideState: 1
+    m_Value: 1.2
   depthOfFieldImageSensorHeight:
-    m_OverrideState: 0
-    m_Value: 24
+    m_OverrideState: 1
+    m_Value: 33.1
   depthOfFieldFocusSpeed:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 1.2
   depthOfFieldTransparentSupport:
     m_OverrideState: 0
     m_Value: 0
   depthOfFieldTransparentLayerMask:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       serializedVersion: 2
       m_Bits: 128
   depthOfFieldTransparentDoubleSided:
-    m_OverrideState: 0
-    m_Value: 0
-  depthOfFieldAlphaTestSupport:
     m_OverrideState: 1
     m_Value: 1
+  depthOfFieldAlphaTestSupport:
+    m_OverrideState: 0
+    m_Value: 1
   depthOfFieldAlphaTestLayerMask:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       serializedVersion: 2
       m_Bits: 128
   depthOfFieldAlphaTestDoubleSided:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   depthOfFieldForegroundBlur:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   depthOfFieldForegroundBlurHQ:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   depthOfFieldForegroundBlurHQSpread:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 12
   depthOfFieldForegroundDistance:
     m_OverrideState: 1
@@ -615,14 +615,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   depthOfFieldBokehComposition:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   depthOfFieldBokehThreshold:
-    m_OverrideState: 0
-    m_Value: 0.7
+    m_OverrideState: 1
+    m_Value: 3
   depthOfFieldBokehIntensity:
     m_OverrideState: 0
-    m_Value: 2
+    m_Value: 5
   depthOfFieldDownsampling:
     m_OverrideState: 1
     m_Value: 1

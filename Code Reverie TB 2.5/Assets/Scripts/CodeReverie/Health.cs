@@ -269,6 +269,8 @@ namespace CodeReverie
             
                 
                 GetComponent<AnimationManager>().ChangeAnimationState("death");
+                // var main = GetComponent<ParticleSystem>().main;
+                // main.duration = 5f;
                 EventManager.Instance.combatEvents.OnCharacterDeath(GetComponent<CharacterBattleManager>());
                 EventManager.Instance.combatEvents.OnDeath(GetComponent<CharacterUnitController>().character.info.id);
                 
