@@ -53,13 +53,16 @@ MonoBehaviour:
   skillName: Flame Ward
   skillDescription: ' Creates a protective barrier around allies, reducing damage
     taken by a percentage.'
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

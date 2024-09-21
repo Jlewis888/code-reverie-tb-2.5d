@@ -53,13 +53,16 @@ MonoBehaviour:
   skillName: Heatwave Harmony
   skillDescription: Increases the attack speed and movement speed of allies for a
     duration.
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

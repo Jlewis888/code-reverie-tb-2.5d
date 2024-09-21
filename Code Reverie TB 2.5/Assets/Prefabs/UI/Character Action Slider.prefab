@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1232210320741149174}
   - component: {fileID: 6744009269470655181}
   - component: {fileID: 6412647822422989000}
-  m_Layer: 5
+  - component: {fileID: -1409978140272295946}
+  m_Layer: 11
   m_Name: Character Action Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -115,9 +116,29 @@ MonoBehaviour:
   characterPortrait: {fileID: 1618098415187355340}
   sliderIconHolder: {fileID: 6519317362662277329}
   sliderIcon: {fileID: 0}
-  fillTime: 0
-  speed: 0
-  pauseTimer: 0
+--- !u!223 &-1409978140272295946
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993352023319896798}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1798073178033729293
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +151,7 @@ GameObject:
   - component: {fileID: 7007964195582849708}
   - component: {fileID: 8806546110625025222}
   - component: {fileID: 2746962736418168883}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,10 +173,10 @@ RectTransform:
   - {fileID: 7658375939876671509}
   m_Father: {fileID: 3944044738917516797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 28.729, y: 28.314}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7007964195582849708
 CanvasRenderer:
@@ -185,7 +206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 806dd3e73c1633d42829cfa167960b0d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e6b943cf25dd584fbb8e632ebb83acc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -219,7 +240,7 @@ GameObject:
   - component: {fileID: 7658375939876671509}
   - component: {fileID: 5234870928540983954}
   - component: {fileID: 1618098415187355340}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Chacter Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 3.3, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5234870928540983954
@@ -294,7 +315,7 @@ GameObject:
   - component: {fileID: 3944044738917516797}
   - component: {fileID: 4116450337633869112}
   - component: {fileID: 8692120328205331750}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +332,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5327182716957738816}
   m_Father: {fileID: 2054736207595789323}
@@ -336,7 +357,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6519317362662277329}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -349,7 +370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 806dd3e73c1633d42829cfa167960b0d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e6b943cf25dd584fbb8e632ebb83acc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -370,7 +391,7 @@ GameObject:
   - component: {fileID: 2054736207595789323}
   - component: {fileID: 684561592080099909}
   - component: {fileID: 1860721971669076723}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2449584737110151864}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

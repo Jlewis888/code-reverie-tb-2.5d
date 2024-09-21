@@ -86,9 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 3
   focusMode:
     m_OverrideState: 1
@@ -134,6 +134,238 @@ MonoBehaviour:
     m_Value: 0
   m_LimitManualRangeNearBlur:
     m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-2923864034591702645
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9822fb62dea4645881af069b30bdf2, type: 3}
+  m_Name: Beautify
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+  compareMode:
+    m_OverrideState: 0
+    m_Value: 1
+  compareLineAngle:
+    m_OverrideState: 0
+    m_Value: 1.4
+  compareLineWidth:
+    m_OverrideState: 0
+    m_Value: 0.002
+  compareSameSide:
+    m_OverrideState: 0
+    m_Value: 1
+  comparePanning:
+    m_OverrideState: 0
+    m_Value: 0.25
+  sharpen:
+    m_OverrideState: 1
+    m_Value: 2
+  sharpenMinDepth:
+    m_OverrideState: 0
+    m_Value: 0
+  sharpenMaxDepth:
+    m_OverrideState: 0
+    m_Value: 0.999
+  sharpenMinMaxDepthFallOff:
+    m_OverrideState: 0
+    m_Value: 0
+  sharpenDepthThreshold:
+    m_OverrideState: 0
+    m_Value: 0.035
+  sharpenRelaxation:
+    m_OverrideState: 0
+    m_Value: 0.08
+  sharpenClamp:
+    m_OverrideState: 0
+    m_Value: 0.45
+  sharpenMotionSensibility:
+    m_OverrideState: 0
+    m_Value: 0.5
+  ditherStrength:
+    m_OverrideState: 0
+    m_Value: 0.006
+  tonemap:
+    m_OverrideState: 1
+    m_Value: 0
+  tonemapExposure:
+    m_OverrideState: 0
+    m_Value: 1
+  tonemapAGXGamma:
+    m_OverrideState: 0
+    m_Value: 2.5
+  saturate:
+    m_OverrideState: 0
+    m_Value: 0.5
+  brightness:
+    m_OverrideState: 0
+    m_Value: 1.05
+  contrast:
+    m_OverrideState: 0
+    m_Value: 1.02
+  hardlightIntensity:
+    m_OverrideState: 0
+    m_Value: 0.5
+  hardlightBlend:
+    m_OverrideState: 0
+    m_Value: 0
+  daltonize:
+    m_OverrideState: 0
+    m_Value: 0
+  lut:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  lutIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+  depthOfField:
+    m_OverrideState: 1
+    m_Value: 1
+  depthOfFieldFocusMode:
+    m_OverrideState: 1
+    m_Value: 2
+  depthOfFieldAutofocusMinDistance:
+    m_OverrideState: 0
+    m_Value: 0
+  depthOfFieldAutofocusMaxDistance:
+    m_OverrideState: 0
+    m_Value: 10000
+  depthOfFieldAutofocusViewportPoint:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  depthOfFieldAutofocusDistanceShift:
+    m_OverrideState: 0
+    m_Value: 0
+  depthOfFieldAutofocusLayerMask:
+    m_OverrideState: 0
+    m_Value:
+      serializedVersion: 2
+      m_Bits: 4294967295
+  depthOfFieldDistance:
+    m_OverrideState: 1
+    m_Value: 13.16
+  depthOfFieldCameraSettings:
+    m_OverrideState: 1
+    m_Value: 1
+  depthOfFieldFocalLength:
+    m_OverrideState: 1
+    m_Value: 0.5
+  depthOfFieldAperture:
+    m_OverrideState: 1
+    m_Value: 50
+  depthOfFieldFocalLengthReal:
+    m_OverrideState: 1
+    m_Value: 181
+  depthOfFieldFStop:
+    m_OverrideState: 1
+    m_Value: 3
+  depthOfFieldImageSensorHeight:
+    m_OverrideState: 1
+    m_Value: 23.5
+  depthOfFieldFocusSpeed:
+    m_OverrideState: 1
+    m_Value: 1
+  depthOfFieldForegroundBlur:
+    m_OverrideState: 1
+    m_Value: 1
+  depthOfFieldForegroundBlurHQ:
+    m_OverrideState: 1
+    m_Value: 0
+  depthOfFieldForegroundBlurHQSpread:
+    m_OverrideState: 0
+    m_Value: 4
+  depthOfFieldForegroundDistance:
+    m_OverrideState: 1
+    m_Value: 5.37
+  depthOfFieldBokeh:
+    m_OverrideState: 1
+    m_Value: 1
+  depthOfFieldBokehThreshold:
+    m_OverrideState: 1
+    m_Value: 1.01
+  depthOfFieldBokehIntensity:
+    m_OverrideState: 1
+    m_Value: 2
+  depthOfFieldBokehComposition:
+    m_OverrideState: 1
+    m_Value: 1
+  depthOfFieldDownsampling:
+    m_OverrideState: 1
+    m_Value: 2
+  depthOfFieldMaxSamples:
+    m_OverrideState: 1
+    m_Value: 6
+  depthOfFieldMaxBrightness:
+    m_OverrideState: 1
+    m_Value: 1000
+  depthOfFieldMaxDistance:
+    m_OverrideState: 1
+    m_Value: 1
+  vignettingOuterRing:
+    m_OverrideState: 0
+    m_Value: 0
+  vignettingInnerRing:
+    m_OverrideState: 0
+    m_Value: 0
+  vignettingFade:
+    m_OverrideState: 0
+    m_Value: 0
+  vignettingCircularShape:
+    m_OverrideState: 0
+    m_Value: 0
+  vignettingAspectRatio:
+    m_OverrideState: 0
+    m_Value: 1
+  vignettingBlink:
+    m_OverrideState: 0
+    m_Value: 0
+  vignettingBlinkStyle:
+    m_OverrideState: 0
+    m_Value: 0
+  vignettingCenter:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  vignettingColor:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  vignettingMask:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  pixelateSize:
+    m_OverrideState: 0
+    m_Value: 1
+  frostIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+  frostSpread:
+    m_OverrideState: 0
+    m_Value: 1.2
+  frostDistortion:
+    m_OverrideState: 0
+    m_Value: 0.25
+  frostTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  frostDistortTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  frostTintColor:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  blurIntensity:
+    m_OverrideState: 0
     m_Value: 0
 --- !u!114 &-2920939066572013791
 MonoBehaviour:
@@ -182,6 +414,7 @@ MonoBehaviour:
   - {fileID: -8255604252607718153}
   - {fileID: -2920939066572013791}
   - {fileID: -6134828803783743665}
+  - {fileID: -2923864034591702645}
 --- !u!114 &4597954262147628213
 MonoBehaviour:
   m_ObjectHideFlags: 3

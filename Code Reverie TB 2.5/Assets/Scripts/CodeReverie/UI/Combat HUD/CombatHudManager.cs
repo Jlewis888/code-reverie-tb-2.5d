@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ namespace CodeReverie
         //public CommandMenu commandMenu;
         public GameObject characterActionSliderHolder;
         public CharacterActionSlider characterActionSliderPF;
+        public List<CharacterActionSlider> characterActionSliders;
         
         private void Awake()
         {
@@ -41,7 +43,18 @@ namespace CodeReverie
 
         private void Update()
         {
-            
+            if (CombatManager.Instance != null)
+            {
+                if (!CombatManager.Instance.pause)
+                {
+                    characterActionSliders.Sort((x,y) => y.slider.value.CompareTo(x.slider.value));
+
+                    for (int i = 0; i < characterActionSliders.Count; i++)
+                    {
+                        characterActionSliders[i].UpdateCanvasOrder(characterActionSliders.Count - i);
+                    }
+                }
+            }
         }
         
         public void Init()
@@ -53,8 +66,11 @@ namespace CodeReverie
             {
                 CharacterActionSlider characterActionSlider = Instantiate(characterActionSliderPF, characterActionSliderHolder.transform);
                 characterActionSlider.characterBattleManager = characterBattleManager;
+                characterActionSlider.name =
+                    $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Slider";
                 characterActionSlider.SetSliderIconPosition();
                 characterActionSlider.Init();
+                characterActionSliders.Add(characterActionSlider);
             }
             
             if (PlayerManager.Instance.currentParty != null)

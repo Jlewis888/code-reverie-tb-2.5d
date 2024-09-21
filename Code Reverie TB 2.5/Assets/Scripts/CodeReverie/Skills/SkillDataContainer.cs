@@ -29,6 +29,9 @@ namespace CodeReverie
         public string skillDescription;
         
         [TabGroup("Skill Details")]
+        public bool baseSkill;
+        
+        [TabGroup("Skill Details")]
         public SkillType skillType = SkillType.None;
         
         [TabGroup("Skill Details")]
@@ -39,10 +42,17 @@ namespace CodeReverie
         
         [TabGroup("Skill Details")]
         public int skillPointsCost;
+        
+        [TabGroup("Skill Details")]
+        public int resonancePointsCost;
 
         [TabGroup("Skill Details")] public float skillRange = 1f;
         [TabGroup("Skill Details")] public SkillCastTime skillCastTime = SkillCastTime.Medium;
         [TabGroup("Skill Details")] public TargetType targetType;
+        
+        [TabGroup("Resonance Skills", TextColor = "yellow")]
+        public List<SkillDataContainer> resonanceSkillsList = new List<SkillDataContainer>();
+        
         
         [TabGroup("Modifiers", TextColor = "blue")]
         public List<SkillModifierDataContainer> skillModifierDetailsList = new List<SkillModifierDataContainer>();
@@ -67,6 +77,9 @@ namespace CodeReverie
 
         [TabGroup("Animations")] public List<SkillEventListener> skillEventListeners = new List<SkillEventListener>();
 
+        
+        
+        
         protected virtual void OnValidate()
         {
 #if UNITY_EDITOR

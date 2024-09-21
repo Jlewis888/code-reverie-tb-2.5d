@@ -73,7 +73,7 @@ MonoBehaviour:
   weaponInfo: {fileID: 0}
   gearSetType: 0
   isInteractivePickup: 1
-  combatItem: 0
+  combatItem: 1
   consumeOnUse: 1
   craftable: 0
   canUseInMenu: 1

@@ -201,5 +201,21 @@ namespace CodeReverie
 
             return (false, -1);
         }
+
+        public bool HasCombatItem()
+        {
+            
+            foreach (Item item in items)
+            {
+                
+                if (item.info.combatItem)
+                {
+                    return true;
+                }
+                
+            }
+            
+            return false;
+        }
     }
 }

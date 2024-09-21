@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Beautify.Universal;
+using BeautifyHDRP;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -722,16 +722,16 @@ namespace CodeReverie
             Debug.Log("Set New Game Data");
             availableCharacters = new List<Character>();
             AddCharacterToAvailablePartyPool("Fullbody");
-            // AddCharacterToAvailablePartyPool("Cecil");
-            // AddCharacterToAvailablePartyPool("Arcalia");
+            AddCharacterToAvailablePartyPool("Cecil");
+            AddCharacterToAvailablePartyPool("Arcalia");
             inventory = new PlayerInventory();
             
             //activeParty = new Party();
             currentParty = new List<Character>();
             
             currentParty.Add(availableCharacters[0]);
-            // currentParty.Add(availableCharacters[1]);
-            // currentParty.Add(availableCharacters[2]);
+            currentParty.Add(availableCharacters[1]);
+            currentParty.Add(availableCharacters[2]);
             
             currentLevel = 1;
             currentExp = 0;

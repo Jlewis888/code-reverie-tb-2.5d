@@ -76,13 +76,16 @@ MonoBehaviour:
   skillId: FireBlastSkill
   skillName: FireBlast
   skillDescription: 
+  baseSkill: 0
   skillType: 0
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 4458741695297324379, guid: 345e3b008d158834695c56043c0e649f,

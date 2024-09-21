@@ -52,13 +52,16 @@ MonoBehaviour:
   skillId: PhoenixRallySkill
   skillName: Phoenix Rally
   skillDescription: Instantly revives a downed ally with a burst of restorative flames
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

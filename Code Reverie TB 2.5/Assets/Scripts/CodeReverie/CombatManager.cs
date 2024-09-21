@@ -390,6 +390,27 @@ namespace CodeReverie
                 case CharacterBattleActionState.Skill:
                     selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive);
                     break;
+                case CharacterBattleActionState.Item:
+
+                    switch (selectedPlayerCharacter.selectedItem.info.targetType)
+                    {
+                        case TargetType.All:
+                        case TargetType.SingleTarget:
+                            selectableTargets = allUnits.FindAll(x => x.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive);
+                            break;
+                        case TargetType.SingleAlly:
+                        case TargetType.AllAllies:
+                            selectableTargets = playerUnits.FindAll(x => x.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive);
+                            break;
+                        case TargetType.SingleEnemy:
+                        case TargetType.AllEnemies:
+                            selectableTargets = enemyUnits.FindAll(x => x.GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive);
+                            break;
+                        case TargetType.Self:
+                            selectableTargets.Add(selectedPlayerCharacter);
+                            break;
+                    }
+                    break;
             }
         }
         
@@ -412,6 +433,7 @@ namespace CodeReverie
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.currentSkillPoints -= selectedPlayerCharacter.selectedSkill.info.skillPointsCost;
+                    selectedPlayerCharacter.GetComponent<CharacterUnitController>().character.RemoveResonancePoints(selectedPlayerCharacter.selectedSkill.info.resonancePointsCost);
                     break;
                 case CharacterBattleActionState.Defend:
                     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
@@ -423,7 +445,7 @@ namespace CodeReverie
                     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.selectedTargets = selectedTargets;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
-                    selectedPlayerCharacter.battleState = CharacterBattleState.Action;
+                    selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
                 case CharacterBattleActionState.Move:
                     selectedPlayerCharacter.targetPosition = movePlayerObject.transform.position;

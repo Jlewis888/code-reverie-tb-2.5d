@@ -41,6 +41,18 @@ namespace CodeReverie
             {
                 CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
             }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                commandMenuNavigation.SelectedNavigationButton
+                    .GetComponent<SkillCommandMenuNavigationButton>().SetNextSkill();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                commandMenuNavigation.SelectedNavigationButton
+                    .GetComponent<SkillCommandMenuNavigationButton>().SetPrevSkill();
+            }
             
             commandMenuNavigation.NavigationInputUpdate();
         }
@@ -53,10 +65,16 @@ namespace CodeReverie
             
             if (CombatManager.Instance.selectedPlayerCharacter.currentSkillPoints >= selectedSkill.info.skillPointsCost)
             {
-                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
-                CombatManager.Instance.SetSelectableTargets();
-                CombatManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
-                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+
+                if (CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character
+                        .availableResonancePoints >= selectedSkill.info.resonancePointsCost)
+                {
+                    CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
+                    CombatManager.Instance.SetSelectableTargets();
+                    CombatManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+                }
+                
             }
             else
             {
@@ -84,9 +102,11 @@ namespace CodeReverie
                     SkillCommandMenuNavigationButton skillCommandMenuNavigationButton =
                         Instantiate(skillCommandMenuNavigationButtonPF, skillCommandMenuNavigationButtonHolder.transform);
 
-
-                    skillCommandMenuNavigationButton.skill = skill;
-                    skillCommandMenuNavigationButton.nameText.text = skill.info.skillName;
+                    skillCommandMenuNavigationButton.baseSkill = skill;
+                    skillCommandMenuNavigationButton.Init();
+                    
+                    // skillCommandMenuNavigationButton.skill = skill;
+                    // skillCommandMenuNavigationButton.nameText.text = skill.info.skillName;
                     commandMenuNavigation.Add(skillCommandMenuNavigationButton);
                 }
                 

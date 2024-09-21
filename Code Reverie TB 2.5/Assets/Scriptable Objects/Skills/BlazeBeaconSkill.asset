@@ -53,13 +53,16 @@ MonoBehaviour:
   skillName: Blaze Beacon
   skillDescription: Amplifies all supportive fire effects and provides a significant
     buff to the team's resistance and attack when activated.
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

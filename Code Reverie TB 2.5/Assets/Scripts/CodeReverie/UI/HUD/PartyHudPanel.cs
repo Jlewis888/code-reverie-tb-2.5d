@@ -59,7 +59,7 @@ namespace CodeReverie
 
         public void SetSkillPointsBurstUI()
         {
-            int availableBurstPoints = character.availableSkillBurstPoints;
+            int availableBurstPoints = character.availableResonancePoints;
             
             foreach (SkillBurstPointsUI skillBurstPointsUi in skillBurstPointsUis)
             {

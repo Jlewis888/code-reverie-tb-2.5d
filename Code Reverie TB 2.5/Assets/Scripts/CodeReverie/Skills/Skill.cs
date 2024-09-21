@@ -14,6 +14,7 @@ namespace CodeReverie
         public string skillID;
         public CharacterBattleManager source;
         public MeleeSkillObject meleeSkillObject;
+        public List<Skill> resonanceSkills = new List<Skill>();
         
         
         // public CharacterUnit source;
@@ -30,6 +31,14 @@ namespace CodeReverie
         {
             info = skillDetails;
             skillID = info.id;
+
+
+            foreach (SkillDataContainer skillDataContainer in info.resonanceSkillsList)
+            {
+                resonanceSkills.Add(SkillsManager.Instance.CreateSkill(skillDataContainer));
+            }
+            
+            
         }
         
         public virtual void UseSkill()

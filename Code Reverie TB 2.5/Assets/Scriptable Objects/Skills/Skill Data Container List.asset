@@ -22,6 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   skillDetailsList:
+  - {fileID: 11400000, guid: 367066a7cad182442a4b5e1fbea7b931, type: 2}
   - {fileID: 11400000, guid: 5c1fbb5f4d718a94ba9c69c1fc840ea5, type: 2}
   - {fileID: 11400000, guid: c4f9ef684cc740d478f3a7924dcc15f6, type: 2}
   - {fileID: 11400000, guid: 35c177c4cd74c7d42a5c5e1f62afd260, type: 2}

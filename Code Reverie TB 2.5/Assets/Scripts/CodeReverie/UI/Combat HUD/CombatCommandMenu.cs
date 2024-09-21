@@ -39,7 +39,12 @@ namespace CodeReverie
             ToggleCommandAction();
         }
 
-        
+        private void OnDisable()
+        {
+            ToggleActionMenu();
+        }
+
+
         public void ToggleCommandMenus(GameObject menu)
         {
             foreach (GameObject commandMenu in commandMenus)

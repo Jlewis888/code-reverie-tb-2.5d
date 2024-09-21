@@ -52,13 +52,16 @@ MonoBehaviour:
   skillId: BlazingDartSkill
   skillName: Blazing Dart
   skillDescription: A fast, high-damage projectile targeting a single enemy.
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

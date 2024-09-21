@@ -29,8 +29,8 @@ namespace CodeReverie
         public int currentLevel = 1;
         public float currentExp = 0;
         public int skillPoints = 0;
-        public int maxSkillBurstPoints = 5;
-        public int availableSkillBurstPoints = 0;
+        public int maxResonancetPoints = 5;
+        public int availableResonancePoints = 0;
 
         public Character(CharacterDataContainer info)
         {
@@ -187,21 +187,21 @@ namespace CodeReverie
             return false;
         }
 
-        public void AddSkillBurstPoints(int amount = 1)
+        public void AddResonancePoints(int amount = 1)
         {
-            availableSkillBurstPoints += amount;
-            if (availableSkillBurstPoints > maxSkillBurstPoints)
+            availableResonancePoints += amount;
+            if (availableResonancePoints > maxResonancetPoints)
             {
-                availableSkillBurstPoints = maxSkillBurstPoints;
+                availableResonancePoints = maxResonancetPoints;
             }
         }
         
-        public void RemoveSkillBurstPoints(int amount = 1)
+        public void RemoveResonancePoints(int amount = 1)
         {
-            availableSkillBurstPoints -= amount;
-            if (availableSkillBurstPoints < 0)
+            availableResonancePoints -= amount;
+            if (availableResonancePoints < 0)
             {
-                availableSkillBurstPoints = 0;
+                availableResonancePoints = 0;
             }
         }
 

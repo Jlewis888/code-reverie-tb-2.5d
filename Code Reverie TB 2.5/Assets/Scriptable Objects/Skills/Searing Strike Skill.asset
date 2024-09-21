@@ -52,13 +52,16 @@ MonoBehaviour:
   skillId: SearingStrikeSkill
   skillName: Searing Strike
   skillDescription: A powerful melee attack that ignites the target.
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1762717683277262119}
   - component: {fileID: 1219768065876802051}
   - component: {fileID: 5322671431541768766}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 15.4, y: 6.6}
+  m_AnchoredPosition: {x: 15.400002, y: 6.6}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1219768065876802051
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7125065736602465219}
   - component: {fileID: 6886313207903226759}
   - component: {fileID: 6666734971432326719}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Burst Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7336204018602180679}
   - component: {fileID: 2418666750490027476}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Skill Points Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 4209042887584871196}
   - component: {fileID: 8962617561275953774}
   - component: {fileID: 7757907532960852022}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 8900060195043541174}
   - component: {fileID: 7306521757135350823}
   - component: {fileID: 8410952667769288050}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Panel (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 9022051775897956772}
   - component: {fileID: 3016351395985016820}
   - component: {fileID: 6358314411379656374}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Party Hud Panel Type 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1272409137968468845}
   - component: {fileID: 5863621259083802278}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Resonance Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 9193088877242642270}
   - component: {fileID: 1314025551505707314}
   - component: {fileID: 3696747287582882746}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 4263282132761713217}
   - component: {fileID: 3110015256291528319}
   - component: {fileID: 1137612410499089887}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Panel (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 4612034479370638657}
   - component: {fileID: 3330639192811050929}
   - component: {fileID: 4850566250990485240}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +968,7 @@ GameObject:
   - component: {fileID: 4194631217398546400}
   - component: {fileID: 4467617992384310712}
   - component: {fileID: 2519971028526970692}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Burst Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1066,7 +1066,7 @@ GameObject:
   - component: {fileID: 5555697817706954213}
   - component: {fileID: 9203082282625423506}
   - component: {fileID: 8494703583749594731}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 0db18338880df3847bafa08473728581, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 7147308720861251565}
   - component: {fileID: 4034411961950633812}
   - component: {fileID: 4345393744778152733}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Panel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1219,7 +1219,7 @@ GameObject:
   - component: {fileID: 3251359592521821642}
   - component: {fileID: 6427195695483036355}
   - component: {fileID: 9175569956036948575}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Panel (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 1744190024482153824}
   - component: {fileID: 8310334774268111484}
   - component: {fileID: 4938028609465268686}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1371,7 +1371,7 @@ GameObject:
   - component: {fileID: 579153387163116554}
   - component: {fileID: 8376706388814986140}
   - component: {fileID: 8162100575409586988}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1505,7 @@ GameObject:
   - component: {fileID: 806005119436360455}
   - component: {fileID: 362262733527239087}
   - component: {fileID: 2023085128320204546}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Character Portrait Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,7 +1582,7 @@ GameObject:
   - component: {fileID: 4308580056837049644}
   - component: {fileID: 621679550039032255}
   - component: {fileID: 3075845281348342568}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1659,7 +1659,7 @@ GameObject:
   - component: {fileID: 6266469908358836321}
   - component: {fileID: 5848082235135665579}
   - component: {fileID: 1429344627390464894}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Panel (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1737,7 +1737,7 @@ GameObject:
   - component: {fileID: 1399697370811946445}
   - component: {fileID: 5042043685926332959}
   - component: {fileID: 5761047844769794931}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 0db18338880df3847bafa08473728581, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 4111524911366096296}
   - component: {fileID: 8365325130161645315}
   - component: {fileID: 1159710246391513347}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Burst Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1911,7 +1911,7 @@ GameObject:
   - component: {fileID: 2311593314553896008}
   - component: {fileID: 7504076188898257168}
   - component: {fileID: 1533058468165979953}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 0db18338880df3847bafa08473728581, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1987,7 +1987,7 @@ GameObject:
   - component: {fileID: 2957543426064403593}
   - component: {fileID: 4995025391817201001}
   - component: {fileID: 7709202553987264942}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Burst Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2085,7 +2085,7 @@ GameObject:
   - component: {fileID: 5195762173090213369}
   - component: {fileID: 8335150613802313970}
   - component: {fileID: 5614545271520770188}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2160,7 +2160,7 @@ GameObject:
   - component: {fileID: 2329027990892350196}
   - component: {fileID: 8604192273826279339}
   - component: {fileID: 1010882235820476439}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,7 +2294,7 @@ GameObject:
   - component: {fileID: 5594141795453274337}
   - component: {fileID: 8603584179101241495}
   - component: {fileID: 8677969085644453515}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2369,7 +2369,7 @@ GameObject:
   - component: {fileID: 2665876661480818281}
   - component: {fileID: 2829015684111647271}
   - component: {fileID: 9159587660309534518}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2444,7 +2444,7 @@ GameObject:
   - component: {fileID: 7842358461250233820}
   - component: {fileID: 3465167577613151577}
   - component: {fileID: 4033724004065480250}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2520,7 +2520,7 @@ GameObject:
   - component: {fileID: 1451123227070021369}
   - component: {fileID: 6997170495837914745}
   - component: {fileID: 7154965289244887670}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Burst Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2618,7 +2618,7 @@ GameObject:
   - component: {fileID: 5356209897556418467}
   - component: {fileID: 3960346269907094949}
   - component: {fileID: 9171795832981384954}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2693,7 +2693,7 @@ GameObject:
   - component: {fileID: 8453609076856962954}
   - component: {fileID: 7102993081237023613}
   - component: {fileID: 440210240105472071}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2768,7 +2768,7 @@ GameObject:
   - component: {fileID: 5513982182918073090}
   - component: {fileID: 7971641174031279702}
   - component: {fileID: 7433831216844346311}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2843,7 +2843,7 @@ GameObject:
   - component: {fileID: 6390865644327975379}
   - component: {fileID: 2002695807812446463}
   - component: {fileID: 2769633328425805801}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2889,7 +2889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 0db18338880df3847bafa08473728581, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2918,7 +2918,7 @@ GameObject:
   - component: {fileID: 3844884285913962396}
   - component: {fileID: 1627949524562750330}
   - component: {fileID: 5245451387392075340}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2993,7 +2993,7 @@ GameObject:
   - component: {fileID: 6211620627360953086}
   - component: {fileID: 6948832240865600604}
   - component: {fileID: 4517608774630396244}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3039,7 +3039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 0db18338880df3847bafa08473728581, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -3067,7 +3067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7597711651102103007}
   - component: {fileID: 4042766874393339488}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Health Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

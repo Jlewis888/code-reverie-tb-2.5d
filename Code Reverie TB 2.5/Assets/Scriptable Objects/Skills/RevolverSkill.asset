@@ -76,13 +76,16 @@ MonoBehaviour:
   skillId: RevolverSkill
   skillName: Revolver Skill
   skillDescription: 
+  baseSkill: 0
   skillType: 0
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 6186891313667908791, guid: 323b55ffac1795d4585c06c7668d7f82,

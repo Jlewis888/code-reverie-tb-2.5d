@@ -42,6 +42,7 @@ namespace CodeReverie
         public SkillCastTime skillCastTime;
         public GameObject castObjectHolder;
         public float distanceFromCenter;
+        public float staminaGauge;
 
 
         private void Awake()
@@ -68,6 +69,7 @@ namespace CodeReverie
 
             skillPointsMax = 100;
             currentSkillPoints = 100;
+            staminaGauge = 5f;
         }
 
         private void Start()
@@ -128,8 +130,13 @@ namespace CodeReverie
                         {
                             case CharacterTimelineGaugeState.StartTurnPhase:
 
-                                GetComponent<CharacterUnitController>().character.AddSkillBurstPoints();
+                                GetComponent<CharacterUnitController>().character.AddResonancePoints();
                                 characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
+                                
+                                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                                {
+                                    AutoTurnPicks();
+                                }
 
                                 break;
                             case CharacterTimelineGaugeState.WaitPhase:
@@ -203,10 +210,10 @@ namespace CodeReverie
                                                 
                                                 //FaceNearestEnemy();
                                                 
-                                                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                                                {
-                                                    AutoTurnPicks();
-                                                }
+                                                // if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                                                // {
+                                                //     AutoTurnPicks();
+                                                // }
 
                                                 battleState = CharacterBattleState.Waiting;
                                             }
@@ -229,7 +236,9 @@ namespace CodeReverie
                                                 switch (skillCastTime)
                                                 {
                                                     case SkillCastTime.Instant:
-                                                        cooldownTimer = actionPhaseCooldown;
+                                                        //cooldownTimer = actionPhaseCooldown;
+                                                        cooldownTimer += Time.deltaTime;
+                                                        
                                                         break;
                                                     case SkillCastTime.Short:
                                                         //cooldownTimer += Time.deltaTime * (1 + GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Haste)); 
@@ -250,10 +259,10 @@ namespace CodeReverie
                                                 {
                                                     case CharacterBattleActionState.Attack:
                                                     case CharacterBattleActionState.Defend:
+                                                    case CharacterBattleActionState.Item:
                                                         break;
 
                                                     case CharacterBattleActionState.Skill:
-                                                    case CharacterBattleActionState.Item:
                                                         CombatManager.Instance.combatQueue.Enqueue(this);
                                                         break;
                                                 }
@@ -299,6 +308,7 @@ namespace CodeReverie
                                                 case CharacterBattleActionState.Break:
                                                 case CharacterBattleActionState.Move:
                                                 case CharacterBattleActionState.Defend:
+                                                case CharacterBattleActionState.Item:
                                                     //Debug.Log($"{name}: Change to MoveToCombatActionPosition"); 
                                                     battleState = CharacterBattleState.MoveToCombatActionPosition;
                                                     break;
@@ -1116,8 +1126,10 @@ namespace CodeReverie
         {
             if (selectedItem != null)
             {
+                Debug.Log("Use IOtem lol lol lol");
                 characterBattleActionState = CharacterBattleActionState.Idle;
-                selectedItem.UseCombatItem(selectedTargets[0]);
+                //selectedItem.UseCombatItem(selectedTargets[0]);
+                selectedItem.UseItem(ItemUseSectionType.Combat, this);
             }
         }
 

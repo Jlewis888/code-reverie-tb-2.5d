@@ -52,13 +52,16 @@ MonoBehaviour:
   skillId: WaterSkill
   skillName: Water Skill
   skillDescription: Skill that does fire
+  baseSkill: 0
   skillType: 10
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 0}

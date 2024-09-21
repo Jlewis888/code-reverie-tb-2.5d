@@ -76,9 +76,13 @@ namespace CodeReverie
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandItemsSelect)
             {
-                CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState =
-                    CharacterBattleActionState.Item;
-                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleItemMenu();
+
+                if (PlayerManager.Instance.inventory.HasCombatItem())
+                {
+                    CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Item;
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleItemMenu();
+                }
+                
             }
             else if (commandMenuNavigation.SelectedNavigationButton == commandMoveSelect)
             {

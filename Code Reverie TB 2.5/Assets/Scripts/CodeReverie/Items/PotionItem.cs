@@ -10,7 +10,7 @@ namespace CodeReverie
         public override void UseItem()
         {
             base.UseItem();
-            PlayerManager.Instance.currentParty[0].characterController.GetComponent<Health>().ApplyHeal(100);
+            //PlayerManager.Instance.currentParty[0].characterController.GetComponent<Health>().ApplyHeal(100);
         }
 
         public override void UseMenuItemOnCharacter(CharacterBattleManager characterBattleManager)

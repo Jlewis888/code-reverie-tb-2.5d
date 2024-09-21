@@ -82,6 +82,13 @@ namespace CodeReverie
             onPlayerSelectTarget?.Invoke(characterBattleManager);
         }
         
+        public Action<CharacterBattleManager> onPlayerSelectTargetEnd;
+
+        public void OnPlayerSelectTargetEnd(CharacterBattleManager characterBattleManager)
+        {
+            onPlayerSelectTargetEnd?.Invoke(characterBattleManager);
+        }
+        
         
         public Action onCombatAnimationEnd;
 

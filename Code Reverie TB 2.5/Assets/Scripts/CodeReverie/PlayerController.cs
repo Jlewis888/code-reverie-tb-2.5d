@@ -209,18 +209,24 @@ namespace CodeReverie
                     // {
                     //     EventManager.Instance.combatEvents.OnCombatEnter();
                     // }
+                    
+                    
 
 
                     if (AreaManager.instance != null && other.GetComponent<EnemyAI>() != null)
                     {
+                        
+                        // Destroy(other.gameObject);
+                        
                         if (!AreaManager.instance.combatLocation.IsNullOrEmpty)
                         {
                             // CanvasManager.Instance.combatTransitionAnimator.gameObject.SetActive(true);
                             // CanvasManager.Instance.sceneTransitionAnimator.gameObject.SetActive(true);
-
+                            
 
                             if (other.GetComponent<EnemyAI>().enemyList != null)
                             {
+                                
                                 GetComponent<PlayerMovementController>().enabled = false;
                                 
                                 
@@ -237,10 +243,32 @@ namespace CodeReverie
                                     sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
                                 );
                             }
+                            else
+                            {
+                                GetComponent<PlayerMovementController>().enabled = false;
+                                
+                                
+                                PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
+                                    SceneManager.GetActiveScene().name,
+                                    other.GetComponent<CharacterUnitController>().characterInstanceID,
+                                    transform.position,
+                                    new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
+                                );
+                                
+                                TransitionAnimator.Start(
+                                    TransitionType.Smear, // transition type
+                                    duration: 1f,
+                                    sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
+                                );
+                            }
                             
                             
                             
                             //SceneManager.LoadScene(AreaManager.instance.combatLocation);
+                        }
+                        else
+                        {
+                            Destroy(other.gameObject);
                         }
                     }
                     

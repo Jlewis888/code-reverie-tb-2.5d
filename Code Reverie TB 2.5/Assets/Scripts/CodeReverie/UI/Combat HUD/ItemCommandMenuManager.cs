@@ -76,10 +76,7 @@ namespace CodeReverie
                 
                 if (item.info.combatItem)
                 {
-                    ItemCommandMenuNavigationButton itemCommandMenuNavigationButton =
-                        Instantiate(itemCommandMenuNavigationButtonPF, commandMenuNavigationButtonHolder.transform);
-
-
+                    ItemCommandMenuNavigationButton itemCommandMenuNavigationButton = Instantiate(itemCommandMenuNavigationButtonPF, commandMenuNavigationButtonHolder.transform);
                     itemCommandMenuNavigationButton.item = item;
                     itemCommandMenuNavigationButton.nameText.text = item.info.itemName;
                     itemCommandMenuNavigationButton.itemCountText.text = item.amount.ToString();
@@ -92,9 +89,8 @@ namespace CodeReverie
         
         public void ConfirmAction()
         {
-
-            CombatManager.Instance.SetSelectableTargets();
             CombatManager.Instance.selectedPlayerCharacter.selectedItem = commandMenuNavigation.SelectedNavigationButton.GetComponent<ItemCommandMenuNavigationButton>().item;
+            CombatManager.Instance.SetSelectableTargets();
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
         }
         

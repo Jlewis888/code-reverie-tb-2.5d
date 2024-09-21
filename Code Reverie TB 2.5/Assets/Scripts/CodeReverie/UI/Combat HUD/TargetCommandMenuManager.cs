@@ -27,6 +27,7 @@ namespace CodeReverie
         {
             SetTargetableEnemyNavigationButtons();
             commandMenuNavigation.SetFirstItem();
+            Debug.Log("here");
             EventManager.Instance.combatEvents.OnPlayerSelectTarget(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
         }
 
@@ -41,6 +42,7 @@ namespace CodeReverie
             if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
             {
                 Debug.Log("Go to previous menu");
+                EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
                 CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
             }
             
@@ -117,6 +119,7 @@ namespace CodeReverie
         public void ConfirmAction()
         {
             //EventManager.Instance.combatEvents.OnPlayerSelectTarget(SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
+            EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
             CombatManager.Instance.ConfirmAction();
         }
         

@@ -24,7 +24,7 @@ namespace CodeReverie
             effectsVolumeSlider.value = SoundManager.Instance.EffectsVolume * 10;
             
             
-            Screen.SetResolution(640, 480, true);
+            //Screen.SetResolution(640, 480, true);
         }
         
         private void Start()

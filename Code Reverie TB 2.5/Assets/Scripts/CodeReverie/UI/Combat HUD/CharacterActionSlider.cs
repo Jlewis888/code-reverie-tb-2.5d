@@ -24,16 +24,22 @@ namespace CodeReverie
         private void OnEnable()
         {
             EventManager.Instance.combatEvents.onCharacterDeath += OnCharacterDeath;
+            EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
+            EventManager.Instance.combatEvents.onPlayerSelectTargetEnd += ScaleToNormal;
         }
 
         private void OnDisable()
         {
             EventManager.Instance.combatEvents.onCharacterDeath -= OnCharacterDeath;
+            EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
+            EventManager.Instance.combatEvents.onPlayerSelectTargetEnd -= ScaleToNormal;
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.combatEvents.onCharacterDeath -= OnCharacterDeath;
+            EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
+            EventManager.Instance.combatEvents.onPlayerSelectTargetEnd -= ScaleToNormal;
         }
 
 
@@ -42,12 +48,16 @@ namespace CodeReverie
             slider.maxValue = characterBattleManager.actionPhaseCooldown;
             slider.value = characterBattleManager.cooldownTimer;
 
-            if (GetComponent<CharacterUnitController>() != null)
+            if (characterBattleManager != null)
             {
-                if (GetComponent<CharacterUnitController>().character != null)
+                if (characterBattleManager.GetComponent<CharacterUnitController>() != null)
                 {
-                    characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character
-                        .GetCharacterPortrait();
+                    if (characterBattleManager.GetComponent<CharacterUnitController>().character != null)
+                    {
+                        Debug.Log("dfhafdjlashfkjdsahfkdsahfgdsajghdfhgda");
+                        characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character
+                            .GetCharacterPortrait();
+                    }
                 }
             }
 
@@ -83,6 +93,35 @@ namespace CodeReverie
             {
                 Destroy(gameObject);
             }
+        }
+
+        public void OnPlayerSelectTarget(CharacterBattleManager characterBattleManager)
+        {
+            if (this.characterBattleManager == characterBattleManager)
+            {
+                UpdateCanvasOrder(1);
+                sliderIconHolder.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            }
+            else
+            {
+                UpdateCanvasOrder(0);
+                ScaleToNormal(null);
+            }
+        }
+
+        public void ScaleToNormal(CharacterBattleManager characterBattleManager)
+        {
+            UpdateCanvasOrder(0);
+            sliderIconHolder.transform.localScale = Vector3.one;
+            
+            
+        }
+
+        public void UpdateCanvasOrder(int order)
+        {
+            GetComponent<Canvas>().sortingOrder = order;
+            GetComponent<Canvas>().enabled = false;
+            GetComponent<Canvas>().enabled = true;
         }
         
     }

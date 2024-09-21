@@ -22,6 +22,7 @@ namespace CodeReverie
         protected override void Awake()
         {
             base.Awake();
+            Screen.SetResolution(1920, 1080, true);
             currentControlScheme = ControlSchemeType.KeyboardMouse;
             playerInput = ReInput.players.GetPlayer(0);
 

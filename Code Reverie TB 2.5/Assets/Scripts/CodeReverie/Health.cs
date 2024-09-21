@@ -240,7 +240,9 @@ namespace CodeReverie
         public void ApplyHeal(float amount)
         {
             Debug.Log("Does this work here");
-            //throw new System.NotImplementedException();
+            Debug.Log($"{name}: Healed for {amount}");
+            
+            
             CurrentHealth += amount;
 
             if (CurrentHealth > MaxHealth)

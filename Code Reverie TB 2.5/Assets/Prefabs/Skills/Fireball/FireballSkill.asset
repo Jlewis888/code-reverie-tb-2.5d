@@ -52,13 +52,17 @@ MonoBehaviour:
   skillId: FireballSkill
   skillName: Fireball
   skillDescription: 
+  baseSkill: 1
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 10
+  resonancePointsCost: 0
   skillRange: 5
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList:
+  - {fileID: 11400000, guid: 367066a7cad182442a4b5e1fbea7b931, type: 2}
   skillModifierDetailsList: []
   skillDamageTypes: 02000000
   skillGameObject: {fileID: -4553976241607122116, guid: 3f51b55e5edd6d7419a774da0581c7ed,

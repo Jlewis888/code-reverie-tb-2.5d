@@ -38,7 +38,7 @@ namespace CodeReverie
             }
         }
         
-        public virtual void UseItem(ItemUseSectionType itemUseSectionType)
+        public virtual void UseItem(ItemUseSectionType itemUseSectionType, CharacterBattleManager characterBattleManager = null)
         {
             if (String.IsNullOrEmpty(info.onUse))
             {
@@ -47,6 +47,7 @@ namespace CodeReverie
 
             object[] onUseParameters = info.onUseParameters.ToArray();
             onUseParameters = onUseParameters.Append(itemUseSectionType).ToArray();
+            onUseParameters = onUseParameters.Append(characterBattleManager).ToArray();
             
             
             Type thisType = this.GetType();
@@ -62,6 +63,7 @@ namespace CodeReverie
                 RemoveAmount(1);
             }
         }
+        
         
         
         public virtual void UseMenuItem()
@@ -121,7 +123,7 @@ namespace CodeReverie
         //     }
         // }
         
-        public void ApplyHeal(string healAmount, ItemUseSectionType itemUseSectionType)
+        public void ApplyHeal(string healAmount, ItemUseSectionType itemUseSectionType, CharacterBattleManager characterBattleManager = null)
         {
             
             
@@ -151,7 +153,13 @@ namespace CodeReverie
                         
                         break;
                     case ItemUseSectionType.Combat:
-                        CombatManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
+
+                        if (characterBattleManager != null)
+                        {
+                            characterBattleManager.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
+                        }
+                        
+                        //CombatManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
                         break;
                 }
             }

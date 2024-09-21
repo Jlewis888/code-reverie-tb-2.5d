@@ -52,13 +52,16 @@ MonoBehaviour:
   skillId: InfernalVortexSkill
   skillName: Infernal Vortex
   skillDescription: Creates a vortex at a targeted location for a few seconds
+  baseSkill: 0
   skillType: 2
   archetypeCategory: 0
   actionPointsCost: 1
   skillPointsCost: 5
+  resonancePointsCost: 0
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
   skillGameObject: {fileID: 7773825517806978079, guid: 657af3b1a9b8cd3429bbd6cb725ec673,
