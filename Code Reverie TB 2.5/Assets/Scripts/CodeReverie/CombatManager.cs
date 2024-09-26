@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using TransitionsPlus;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace CodeReverie
@@ -350,6 +351,7 @@ namespace CodeReverie
                 foreach (CharacterBattleManager characterBattleManager in allUnits)
                 {
                     characterBattleManager.GetComponent<AnimationManager>().ResumeAnimation();
+                    characterBattleManager.GetComponent<NavMeshAgent>().isStopped = false;
                 }
             }
         }
@@ -359,6 +361,7 @@ namespace CodeReverie
             foreach (CharacterBattleManager characterBattleManager in allUnits)
             {
                 characterBattleManager.GetComponent<AnimationManager>().PauseAnimation();
+                characterBattleManager.GetComponent<NavMeshAgent>().isStopped = true;
             }
         }
         

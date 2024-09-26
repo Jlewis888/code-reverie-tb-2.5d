@@ -61,6 +61,10 @@ namespace CodeReverie
                 }
             }
 
+            // var rotation = sliderIconHolder.transform.rotation;
+            // rotation.z = 90f;
+            // sliderIconHolder.transform.rotation = rotation;
+
         }
         
         private void Update()
