@@ -27,7 +27,6 @@ namespace CodeReverie
         {
             SetTargetableEnemyNavigationButtons();
             commandMenuNavigation.SetFirstItem();
-            Debug.Log("here");
             EventManager.Instance.combatEvents.OnPlayerSelectTarget(commandMenuNavigation.SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
         }
 

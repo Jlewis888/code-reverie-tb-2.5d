@@ -9,6 +9,7 @@
         PostBattle,
         PlayerWin,
         PlayerLost,
-        PlayerSelectingTargets
+        TargetSelect,
+        PlayerMove
     }
 }

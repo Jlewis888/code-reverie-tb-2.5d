@@ -747,15 +747,26 @@ namespace CodeReverie
             inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericGluttonyRelic3"));
             inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem"));
             inventory.AddItem(ItemManager.Instance.GetItemDetails("GenericSkillItem2"));
+
+
+            foreach (Character character in currentParty)
+            {
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BattleOrdersSkill"));
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BlazeBeaconSkill"));
+                character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("HellfireBarrageSkill"));
+            }
             
-            
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BattleOrdersSkill"));
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BlazeBeaconSkill"));
-            currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("HellfireBarrageSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BattleOrdersSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BlazeBeaconSkill"));
+            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("HellfireBarrageSkill"));
         }
 
         

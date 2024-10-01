@@ -54,7 +54,6 @@ namespace CodeReverie
                 {
                     if (characterBattleManager.GetComponent<CharacterUnitController>().character != null)
                     {
-                        Debug.Log("dfhafdjlashfkjdsahfkdsahfgdsajghdfhgda");
                         characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character
                             .GetCharacterPortrait();
                     }

@@ -125,7 +125,7 @@ namespace CodeReverie
             {
                 case ActionCommandType.Attack:
                     CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Attack;
-                    CombatManager.Instance.combatManagerState = CombatManagerState.PlayerSelectingTargets;
+                    CombatManager.Instance.combatManagerState = CombatManagerState.TargetSelect;
                     CombatManager.Instance.SetSelectableTargets();
                     break;
                 
@@ -135,7 +135,7 @@ namespace CodeReverie
                 
                 case ActionCommandType.Skill:
                     CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
-                    CombatManager.Instance.combatManagerState = CombatManagerState.PlayerSelectingTargets;
+                    CombatManager.Instance.combatManagerState = CombatManagerState.TargetSelect;
                     break;
                 
             }

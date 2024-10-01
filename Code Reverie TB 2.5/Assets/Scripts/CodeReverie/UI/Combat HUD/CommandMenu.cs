@@ -17,12 +17,12 @@ namespace CodeReverie
         private void OnEnable()
         {
             ToggleCommandMenuHolderOff();
-            EventManager.Instance.combatEvents.onPlayerTurn += ToggleCommandMenuHolderOn;
+            //EventManager.Instance.combatEvents.onPlayerTurn += ToggleCommandMenuHolderOn;
         }
 
         private void OnDisable()
         {
-            EventManager.Instance.combatEvents.onPlayerTurn -= ToggleCommandMenuHolderOn;
+            //EventManager.Instance.combatEvents.onPlayerTurn -= ToggleCommandMenuHolderOn;
         }
 
 

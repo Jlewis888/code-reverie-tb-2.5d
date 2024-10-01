@@ -236,6 +236,7 @@ MonoBehaviour:
   castObjectHolder: {fileID: 0}
   distanceFromCenter: 0
   staminaGauge: 0
+  agent: {fileID: 0}
 --- !u!114 &5604871668217135019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +447,7 @@ GameObject:
   - component: {fileID: 3990595381786118107}
   - component: {fileID: 7374948781806403847}
   - component: {fileID: 8363777133279205499}
+  - component: {fileID: 5459085286541108687}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -537,6 +539,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &5459085286541108687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3908153447903888954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb80fdfae2d44e18e52edc2efc1a48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &4136974437530875910
 GameObject:
   m_ObjectHideFlags: 0

@@ -133,13 +133,13 @@ public class CameraManager : ManagerSingleton<CameraManager>
 
     public void SetCombatFollowTarget(Transform transform)
     {
-        combatVirtualCamera.m_Follow = transform;
+        //combatVirtualCamera.m_Follow = transform;
         combatVirtualCamera.LookAt = transform;
     }
     
     public void ResetCombatFollowTarget()
     {
-        combatVirtualCamera.m_Follow = combatTargetGroup.transform;
+        //combatVirtualCamera.m_Follow = combatTargetGroup.transform;
         combatVirtualCamera.LookAt = combatTargetGroup.transform;
     }
 

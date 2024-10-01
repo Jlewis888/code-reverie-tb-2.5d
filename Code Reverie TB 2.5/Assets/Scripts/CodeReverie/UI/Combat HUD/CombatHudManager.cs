@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CodeReverie
@@ -17,6 +18,8 @@ namespace CodeReverie
         public GameObject characterActionSliderHolder;
         public CharacterActionSlider characterActionSliderPF;
         public List<CharacterActionSlider> characterActionSliders;
+        public CommandWheelPanelManager commandWheelPanelManager;
+        public TargetInfoPanel targetInfoPanel;
         
         private void Awake()
         {
@@ -27,17 +30,20 @@ namespace CodeReverie
 
         private void OnEnable()
         {
-            
+            targetInfoPanel.gameObject.SetActive(false);
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
             EventManager.Instance.combatEvents.onPlayerTurn += OnPlayerTurn;
             EventManager.Instance.combatEvents.onActionSelected += OnActionSelected;
-            
+            EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
+
         }
 
         private void OnDisable()
         {
             EventManager.Instance.combatEvents.onEnemyDamageTaken -= EnableEnemyHealthPanel;
             EventManager.Instance.combatEvents.onPlayerTurn -= OnPlayerTurn;
+            
+            EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
         }
 
 
@@ -119,9 +125,50 @@ namespace CodeReverie
         
         public void OnActionSelected()
         {
+            targetInfoPanel.gameObject.SetActive(false);
             EventManager.Instance.combatEvents.OnCombatPause(false);
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = null;
+            
         }
-        
+
+        public void OnPlayerSelectTarget(CharacterBattleManager characterBattleManager)
+        {
+            
+            targetInfoPanel.gameObject.SetActive(true);
+            
+            targetInfoPanel.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>()
+                .character.GetCharacterPortrait();
+
+            targetInfoPanel.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>()
+                .character.info.characterName;
+            
+            targetInfoPanel.targetCharacterPortrait.sprite = characterBattleManager.selectedTargets[0]
+                .GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+
+            switch (characterBattleManager.characterBattleActionState)
+            {
+                case CharacterBattleActionState.Attack:
+                    targetInfoPanel.targetCharacterActionName.text = "Attack";
+                    break;
+                case CharacterBattleActionState.Defend:
+                    targetInfoPanel.targetCharacterActionName.text = "Defend";
+                    break;
+
+                case CharacterBattleActionState.Skill:
+                    targetInfoPanel.targetCharacterActionName.text = characterBattleManager.selectedSkill.info.skillName;
+                    break;
+
+                case CharacterBattleActionState.Item:
+                    targetInfoPanel.targetCharacterActionName.text = characterBattleManager.selectedItem.info.itemName;
+                    break;
+                case CharacterBattleActionState.Break:
+                    targetInfoPanel.targetCharacterActionName.text = "Break";
+                    break;
+            }
+
+            
+
+        }
+
     }
 }

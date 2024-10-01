@@ -27,6 +27,13 @@ namespace CodeReverie
             onPlayerTurn?.Invoke(characterBattleManager);
         }
         
+        public Action onPlayerTurnEnd;
+        
+        public void OnPlayerTurnEnd()
+        {
+            onPlayerTurnEnd?.Invoke();
+        }
+        
         
         public Action onActionSelected;
         
@@ -215,6 +222,36 @@ namespace CodeReverie
         public void OnSkillComplete(CharacterBattleManager characterBattleManager)
         {
             onSkillComplete?.Invoke(characterBattleManager);
+        }
+        
+        public Action onActionCommandWheelSelect;
+
+        public void OnActionCommandWheelSelect()
+        {
+            onActionCommandWheelSelect?.Invoke();
+        }
+        
+        
+        public Action onSkillCommandWheelSelect;
+
+        public void OnSkillCommandWheelSelect()
+        {
+            onSkillCommandWheelSelect?.Invoke();
+        }
+        
+        public Action onItemCommandWheelSelect;
+
+        public void OnItemCommandWheelSelect()
+        {
+            onItemCommandWheelSelect?.Invoke();
+        }
+        
+        
+        public Action onPrevCommandWheelSelect;
+
+        public void OnPrevCommandWheelSelect()
+        {
+            onPrevCommandWheelSelect?.Invoke();
         }
 
     }
