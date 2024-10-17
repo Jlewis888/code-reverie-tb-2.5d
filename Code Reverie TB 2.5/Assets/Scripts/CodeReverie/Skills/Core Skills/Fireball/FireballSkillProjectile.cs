@@ -44,7 +44,7 @@ namespace CodeReverie
                 Debug.Log("THis is complete");
                 List<DamageTypes> damageTypes = new List<DamageTypes>();
                 damageTypes.Add(DamageTypes.Fire);
-                DamageProfile damage = new DamageProfile(source, source.selectedTargets[0].GetComponent<Health>(), damageTypes);
+                DamageProfile damage = new DamageProfile(source, source.target.GetComponent<Health>(), damageTypes);
                 var exp = Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
                 Destroy(exp, DestroyExplosion);
                 EventManager.Instance.combatEvents.OnSkillComplete(source);

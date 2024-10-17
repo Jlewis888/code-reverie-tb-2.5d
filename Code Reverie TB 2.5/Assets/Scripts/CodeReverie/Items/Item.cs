@@ -156,7 +156,7 @@ namespace CodeReverie
 
                         if (characterBattleManager != null)
                         {
-                            characterBattleManager.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);
+                            characterBattleManager.target.GetComponent<Health>().ApplyHeal(x);
                         }
                         
                         //CombatManager.Instance.selectedPlayerCharacter.selectedTargets[0].GetComponent<Health>().ApplyHeal(x);

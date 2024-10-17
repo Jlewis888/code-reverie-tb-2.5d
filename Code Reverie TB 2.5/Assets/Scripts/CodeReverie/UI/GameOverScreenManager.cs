@@ -1,6 +1,7 @@
 ﻿using System;
 using TransitionsPlus;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 namespace CodeReverie
 {
@@ -36,7 +37,31 @@ namespace CodeReverie
 
         private void Update()
         {
+            
+            if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+            {
+                Confirm();
+            }
+            
             pauseMenuNavigation.NavigationInputUpdate();
+        }
+
+        public void Confirm()
+        {
+            if (pauseMenuNavigation.SelectedNavigationButton == retryFromLastBattleButton)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            
+            if (pauseMenuNavigation.SelectedNavigationButton == lastSavePointButton)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            
+            if (pauseMenuNavigation.SelectedNavigationButton == returnToTitleScreenButton)
+            {
+                SceneManager.LoadScene("Title Screen");
+            }
         }
     }
 }

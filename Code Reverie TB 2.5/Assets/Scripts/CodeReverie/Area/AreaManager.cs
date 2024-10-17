@@ -269,5 +269,16 @@ namespace CodeReverie
         {
             
         }
+
+        public void TriggerDialogue(TextAsset dialogueTextAsset, CharacterDataContainer dialogueSpeaker, String storyPath = "")
+        {
+            EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
+            EventManager.Instance.playerEvents.OnDialogueStart(dialogueTextAsset, dialogueSpeaker, storyPath);
+        }
+
+        public void TestSignal(string test)
+        {
+            Debug.Log("This is a test signal");
+        }
     }
 }

@@ -87,10 +87,16 @@ namespace CodeReverie
             onActionBarSet?.Invoke();
         }
 
-        public Action<TextAsset, DialogueSpeaker, String> onDialogueStart;
+        //public Action<TextAsset, DialogueSpeaker, String> onDialogueStart;
+        public Action<TextAsset, CharacterDataContainer, String> onDialogueStart;
 
 
-        public void OnDialogueStart(TextAsset inkJSON, DialogueSpeaker dialogueSpeaker, string storyPath)
+        // public void OnDialogueStart(TextAsset inkJSON, DialogueSpeaker dialogueSpeaker, string storyPath)
+        // {
+        //     onDialogueStart?.Invoke(inkJSON, dialogueSpeaker, storyPath);
+        // }
+        
+        public void OnDialogueStart(TextAsset inkJSON, CharacterDataContainer dialogueSpeaker, string storyPath)
         {
             onDialogueStart?.Invoke(inkJSON, dialogueSpeaker, storyPath);
         }

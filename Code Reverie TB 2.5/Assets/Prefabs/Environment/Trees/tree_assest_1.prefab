@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6988547219229787827}
   - component: {fileID: 278163925677524926}
   - component: {fileID: -3094536643674643649}
+  - component: {fileID: 5881928168204556539}
   m_Layer: 0
   m_Name: tree_assest_1
   m_TagString: Untagged
@@ -248,6 +249,22 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!208 &5881928168204556539
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806715994327973022}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.04, y: 0.255, z: 0.04}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.1}
+  m_TimeToStationary: 0.5
 --- !u!1 &4786865158884231821
 GameObject:
   m_ObjectHideFlags: 0

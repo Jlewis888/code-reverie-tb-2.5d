@@ -59,9 +59,6 @@ namespace CodeReverie
             enemyPathfinding = GetComponent<EnemyPathfinding>();
         }
         
-        
-        
-
         // private void OnEnable()
         // {
         //     if (!debugging)
@@ -94,7 +91,7 @@ namespace CodeReverie
             
             if (characterController == GetComponent<CharacterUnitController>())
             {
-                Debug.Log("yas");
+                Debug.Log("On Enemy Death");
                 //attackIndicatorsManager.CloseAllIndicators();
             }
         }

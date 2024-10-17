@@ -142,7 +142,7 @@ namespace CodeReverie
             targetInfoPanel.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>()
                 .character.info.characterName;
             
-            targetInfoPanel.targetCharacterPortrait.sprite = characterBattleManager.selectedTargets[0]
+            targetInfoPanel.targetCharacterPortrait.sprite = characterBattleManager.target
                 .GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
 
             switch (characterBattleManager.characterBattleActionState)

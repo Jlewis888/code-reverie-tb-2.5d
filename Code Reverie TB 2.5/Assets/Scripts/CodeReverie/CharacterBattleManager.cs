@@ -18,7 +18,8 @@ namespace CodeReverie
         public CharacterBattleActionState prevCharacterBattleActionState;
         public CharacterTimelineGaugeState characterTimelineGaugeState;
         public BattlePosition battlePosition;
-        public List<CharacterBattleManager> selectedTargets;
+        public CharacterBattleManager target;
+        //public List<CharacterBattleManager> selectedTargets;
         public Vector3 targetPosition;
         public Vector3 targetMovePosition;
 
@@ -36,8 +37,8 @@ namespace CodeReverie
         public float moveSpeed;
         public Skill selectedSkill;
         public Item selectedItem;
-        public int actionPointsMax;
-        public int currentActionPoints;
+        // public int actionPointsMax;
+        // public int currentActionPoints;
         public int skillPointsMax;
         public int currentSkillPoints;
         public float actionRange;
@@ -139,14 +140,15 @@ namespace CodeReverie
                         {
                             if (!IsAgentMoving())
                             {
+                                agent.SetDestination(GetPosition());
                                 Debug.Log("Agent has stopped moving");
                                 FaceNearestEnemy();
                                 
-                                
-                                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                                {
-                                    AutoTurnPicks();
-                                }
+                                //
+                                // if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                                // {
+                                //     AutoTurnPicks();
+                                // }
                                 
                                 battleState = CharacterBattleState.Waiting;
                                 characterTimelineGaugeState = CharacterTimelineGaugeState.StartTurnPhase;
@@ -262,6 +264,7 @@ namespace CodeReverie
                                             
                                             if (!IsAgentMoving())
                                             {
+                                                agent.SetDestination(GetPosition());
                                                 battleState = CharacterBattleState.Waiting;
                                             }
                                             
@@ -414,14 +417,24 @@ namespace CodeReverie
                                                     //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                     //     battleState = CharacterBattleState.Action;
                                                     // }
+
+                                                    bool distance = Vector3.Distance(
+                                                                        new Vector3(transform.position.x, 0,
+                                                                            transform.position.z),
+                                                                        new Vector3(targetPosition.x, 0,
+                                                                            targetPosition.z)) <=
+                                                                    0.001f;
                                                     
                                                     agent.SetDestination(targetPosition);
                                             
-                                                    if (!IsAgentMoving())
+                                                    //if (!IsAgentMoving() || distance)
+                                                    if (distance)
                                                     {
                                                         GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                         battleState = CharacterBattleState.Action;
                                                     }
+                                                    
+                                                    
 
                                                     break;
 
@@ -432,14 +445,14 @@ namespace CodeReverie
 
                                                     // //rb.MovePosition(GetPosition() + direction * 2f * Time.fixedDeltaTime);
                                                     // transform.position = Vector3.MoveTowards(GetPosition(),
-                                                    //     selectedTargets[0].transform.position,
+                                                    //     target.transform.position,
                                                     //     4f * Time.fixedDeltaTime);
                                                     //
-                                                    // if (selectedTargets[0].transform.position.x < GetPosition().x)
+                                                    // if (target.transform.position.x < GetPosition().x)
                                                     // {
                                                     //     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
                                                     // } 
-                                                    // else if (selectedTargets[0].transform.position.x > GetPosition().x)
+                                                    // else if (target.transform.position.x > GetPosition().x)
                                                     // {
                                                     //     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
                                                     // }
@@ -447,18 +460,29 @@ namespace CodeReverie
                                                     //
                                                     // if (Vector3.Distance(
                                                     //         new Vector3(transform.position.x, 0, transform.position.z),
-                                                    //         new Vector3(selectedTargets[0].transform.position.x, 0,
-                                                    //             selectedTargets[0].transform.position.z)) <=
+                                                    //         new Vector3(target.transform.position.x, 0,
+                                                    //             target.transform.position.z)) <=
                                                     //     actionRange)
                                                     // {
                                                     //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                     //     battleState = CharacterBattleState.Action;
                                                     // }
                                                     
-                                                    agent.SetDestination(targetPosition);
+                                                    //agent.SetDestination(targetPosition);
+                                                    agent.SetDestination(target.transform.position);
                                             
-                                                    if (!IsAgentMoving())
+                                                    // if (!IsAgentMoving())
+                                                    // {
+                                                    //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
+                                                    //     battleState = CharacterBattleState.Action;
+                                                    // }
+                                                    
+                                                    if (Vector3.Distance(
+                                                            new Vector3(transform.position.x, 0, transform.position.z),
+                                                            new Vector3(target.transform.position.x, 0, target.transform.position.z)) <=
+                                                        actionRange)
                                                     {
+                                                        agent.SetDestination(transform.position);
                                                         GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                         battleState = CharacterBattleState.Action;
                                                     }
@@ -599,13 +623,14 @@ namespace CodeReverie
             int randomNum = 0;
             characterBattleActionState = CharacterBattleActionState.Attack;
 
-            selectedTargets = new List<CharacterBattleManager>();
+            //selectedTargets = new List<CharacterBattleManager>();
             SetSkillCast();
             switch (characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
                     randomNum = Random.Range(0, CombatManager.Instance.playerUnits.Count);
-                    selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
+                    target = CombatManager.Instance.playerUnits[randomNum];
+                    //selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
                     SetAttackActionTargetPosition();
                     break;
 
@@ -618,19 +643,22 @@ namespace CodeReverie
 
                 case CharacterBattleActionState.Skill:
                     randomNum = Random.Range(0, CombatManager.Instance.playerUnits.Count);
-                    selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
+                    target = CombatManager.Instance.playerUnits[randomNum];
+                    //selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
 
                     SetAttackActionTargetPosition();
                     break;
 
                 case CharacterBattleActionState.Item:
                     randomNum = Random.Range(0, CombatManager.Instance.playerUnits.Count);
-                    selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
+                    target = CombatManager.Instance.playerUnits[randomNum];
+                    //selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
                     SetAttackActionTargetPosition();
                     break;
                 case CharacterBattleActionState.Break:
                     randomNum = Random.Range(0, CombatManager.Instance.playerUnits.Count);
-                    selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
+                    target = CombatManager.Instance.playerUnits[randomNum];
+                    //selectedTargets.Add(CombatManager.Instance.playerUnits[randomNum]);
                     SetAttackActionTargetPosition();
                     break;
                 // case CharacterBattleActionState.Move:
@@ -712,11 +740,11 @@ namespace CodeReverie
         {
             //Debug.Log($"{name}: Attacked"); 
             
-            if (selectedTargets[0].transform.position.x < GetPosition().x)
+            if (target.transform.position.x < GetPosition().x)
             {
                 GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
             } 
-            else if (selectedTargets[0].transform.position.x > GetPosition().x)
+            else if (target.transform.position.x > GetPosition().x)
             {
                 GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
             }
@@ -731,15 +759,15 @@ namespace CodeReverie
         {
             if (Vector3.Distance(
                     new Vector3(transform.position.x, 0, transform.position.z),
-                    new Vector3(selectedTargets[0].transform.position.x, 0,
-                        selectedTargets[0].transform.position.z)) <=
+                    new Vector3(target.transform.position.x, 0,
+                        target.transform.position.z)) <=
                 actionRange)
             {
                 Debug.Log("Target hit");
                 
                 List<DamageTypes> damageTypes = new List<DamageTypes>();
                 damageTypes.Add(DamageTypes.Physical);
-                DamageProfile damage = new DamageProfile(this, selectedTargets[0].GetComponent<Health>(), damageTypes);
+                DamageProfile damage = new DamageProfile(this, target.GetComponent<Health>(), damageTypes);
             }
             else
             {
@@ -750,11 +778,11 @@ namespace CodeReverie
         public void Break()
         {
             
-            if (selectedTargets[0].transform.position.x < GetPosition().x)
+            if (target.transform.position.x < GetPosition().x)
             {
                 GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
             } 
-            else if (selectedTargets[0].transform.position.x > GetPosition().x)
+            else if (target.transform.position.x > GetPosition().x)
             {
                 GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
             }
@@ -764,7 +792,7 @@ namespace CodeReverie
             List<DamageTypes> damageTypes = new List<DamageTypes>();
             damageTypes.Add(DamageTypes.Physical);
             DamageProfile damage =
-                new DamageProfile(this, selectedTargets[0].GetComponent<Health>(), damageTypes, true);
+                new DamageProfile(this, target.GetComponent<Health>(), damageTypes, true);
             DequeueAction();
         }
 
@@ -845,7 +873,7 @@ namespace CodeReverie
             if (selectedItem != null)
             {
                 characterBattleActionState = CharacterBattleActionState.Idle;
-                //selectedItem.UseCombatItem(selectedTargets[0]);
+                //selectedItem.UseCombatItem(target);
                 selectedItem.UseItem(ItemUseSectionType.Combat, this);
             }
         }
@@ -932,8 +960,8 @@ namespace CodeReverie
 
         public void SetAttackActionTargetPosition()
         {
-            //targetPosition = selectedTargets[0].battlePosition.combatActionPosition;
-            targetPosition = selectedTargets[0].transform.position;
+            //targetPosition = target.battlePosition.combatActionPosition;
+            targetPosition = target.transform.position;
             if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
             {
                 battleState = CharacterBattleState.WaitingAction;
@@ -1046,7 +1074,7 @@ namespace CodeReverie
             CameraManager.Instance.combatVirtualCamera.m_Follow = transform;
             
             Vector3 targetDirection =
-                selectedTargets[0].transform.position - transform.position;
+                target.transform.position - transform.position;
             
             float speed = 3f;
             float singleStep = speed * Time.deltaTime;

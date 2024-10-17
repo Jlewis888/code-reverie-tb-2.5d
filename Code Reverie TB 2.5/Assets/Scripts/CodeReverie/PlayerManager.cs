@@ -98,6 +98,7 @@ namespace CodeReverie
             {
                 if (GameManager.Instance.newGame)
                 {
+                    Debug.Log("here 1");
                     SetNewGameData();
                     Init();
                 }
@@ -105,15 +106,19 @@ namespace CodeReverie
                 {
                     if (DataPersistenceManager.Instance.debugging)
                     {
+                        Debug.Log("here 2");
                         SetNewGameData();
                         Init();
                         DataPersistenceManager.Instance.debugging = false;
                     }
                     if (GameSceneManager.Instance.fromLoadedData)
                     {
+                        Debug.Log("here 3");
                         Init();
                     }
                 }
+                
+                DataPersistenceManager.Instance.debugging = false;
             }
         }
 
@@ -241,7 +246,7 @@ namespace CodeReverie
 
         public void InitializeParty()
         {
-            
+            Debug.Log("Init party");
             foreach (Character partySlot in availableCharacters)
             {
                 partySlot.Init();
@@ -574,6 +579,9 @@ namespace CodeReverie
 
         public void LoadData(string dataSlot)
         {
+            
+            Debug.Log("Loadinf this data shit nah mean");
+            
             if (ES3.FileExists(dataSlot))
             {
                 if (ES3.KeyExists("availableCharacters", dataSlot))

@@ -62,7 +62,7 @@ namespace CodeReverie
             Debug.Log("Start Dialogue");
             EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
                     
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker, storyPath);
+            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
             onComplete();
         }
 
@@ -70,7 +70,7 @@ namespace CodeReverie
         {
             EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
                     
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker, storyPath);
+            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
             onComplete();
         }
         public void InteractOnHold(Action onComplete) { }

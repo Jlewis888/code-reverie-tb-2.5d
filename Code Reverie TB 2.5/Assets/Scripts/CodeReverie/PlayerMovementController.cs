@@ -64,12 +64,13 @@ namespace CodeReverie
             //     rb.MovePosition(rb.position + moveInput * moveSpeed * Time.deltaTime);
             // }
             
-            MoveNavMesh();
+            
             
         }
 
         private void FixedUpdate()
         {
+            MoveNavMesh();
             //  if (PlayerManager.Instance.currentParty != null)
             // {
             //     switch (characterMovementState)

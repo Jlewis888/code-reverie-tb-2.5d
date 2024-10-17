@@ -20,7 +20,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2475
   stringTagMap:
     MotionVector: User
     RenderType: TransparentCutout
@@ -68,7 +68,7 @@ Material:
     - _CullModeForward: 0
     - _DepthOffsetEnable: 0
     - _DissolveAlphaClipAmount: 0.5
-    - _DissolveAmount: 0
+    - _DissolveAmount: 0.43
     - _DissolveAmount2: 0
     - _Dissolve_Scale: 158
     - _DoubleSidedEnable: 1

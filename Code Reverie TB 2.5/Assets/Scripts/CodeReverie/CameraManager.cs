@@ -24,9 +24,6 @@ public class CameraManager : ManagerSingleton<CameraManager>
     public bool screenShake = false;
     public float screenShakeTimer;
     
-    
-    
-    
     protected override void Awake()
     {
         base.Awake();

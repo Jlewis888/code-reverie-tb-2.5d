@@ -12,7 +12,8 @@ namespace CodeReverie
         public Slider healthSlider;
         public Slider skillPointsSlider;
         public Image characterPortrait;
-        
+        public TMP_Text healthText;
+        public TMP_Text skillPointsText;
         
         
         private void Update()
@@ -32,8 +33,10 @@ namespace CodeReverie
             
             if (character != null)
             {
-                healthSlider.value = character.characterController.GetComponent<Health>().CurrentHealth;
-                healthSlider.maxValue = character.characterController.GetComponent<Health>().MaxHealth;
+                healthSlider.value = character.currentHealth;
+                healthSlider.maxValue = new CharacterStats(character).GetStat(StatAttribute.Health);
+
+                healthText.text = $"{character.currentHealth.ToString()}/{new CharacterStats(character).GetStat(StatAttribute.Health)}";
                     
                 skillPointsSlider.value = character.characterController.GetComponent<CharacterBattleManager>().currentSkillPoints;
                 skillPointsSlider.maxValue = character.characterController.GetComponent<CharacterBattleManager>().skillPointsMax;

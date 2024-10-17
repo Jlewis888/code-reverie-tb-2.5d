@@ -12,6 +12,7 @@ namespace CodeReverie
         public CharacterState characterState;
         
         public CharacterSkills characterSkills;
+        public CharacterStats characterStats;
         
         public Archetype equippedArchetype;
         public List<Archetype> availableArchetypes = new List<Archetype>();
@@ -23,6 +24,7 @@ namespace CodeReverie
         public CharacterGear characterGear = new CharacterGear();
 
         public float currentHealth;
+        public int currentSkillPoints;
 
         public Dictionary<ArchetypeCategory, int> archetypeLevelMap = new Dictionary<ArchetypeCategory, int>();
         
@@ -75,8 +77,8 @@ namespace CodeReverie
                     archetypeLevelMap.Add((ArchetypeCategory)stat.GetValue(i), 0);
                 }
             }
-            
-            
+
+            currentHealth = new CharacterStats(this).GetStat(StatAttribute.Health);
         }
 
         public void Init()
@@ -92,7 +94,6 @@ namespace CodeReverie
         {
 
             Sprite sprite = info.characterPortrait;
-
 
             if (sprite != null)
             {

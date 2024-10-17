@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using TransitionsPlus;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace CodeReverie
@@ -26,7 +27,8 @@ namespace CodeReverie
         public Dictionary<CharacterBattleManager, int> orderOfTurnsMap;
         public bool pause;
         public CharacterBattleManager selectedPlayerCharacter;
-        public List<CharacterBattleManager> selectedTargets;
+        public CharacterBattleManager selectedTarget;
+        //public List<CharacterBattleManager> selectedTargets;
         public List<CharacterBattleManager> selectableTargets;
         public int targetIndex;
         public Queue<CharacterBattleManager> combatQueue;
@@ -94,7 +96,7 @@ namespace CodeReverie
             {
                 
                 
-
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                
                 //UnsetBattle();
             }
@@ -227,7 +229,10 @@ namespace CodeReverie
 
         public void SetPreBattleConfigurations()
         {
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.gameObject.SetActive(true);
+            CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.gameObject.SetActive(false);
             CameraManager.Instance.SetBattleCamera();
+            
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(true);
             pause = true;
             combatQueue = new Queue<CharacterBattleManager>();
@@ -242,6 +247,14 @@ namespace CodeReverie
             // enemyUnits = GetComponentsInChildren<CharacterBattleManager>().ToList();
             InstantiateEnemyUnits();
             allUnits.AddRange(enemyUnits);
+
+            foreach (CharacterBattleManager characterBattleManager in allUnits)
+            {
+                Character character = characterBattleManager.GetComponent<CharacterUnitController>().character;
+                character.RemoveResonancePoints(1000);
+                character.characterState = CharacterState.Alive;
+                characterBattleManager.GetComponent<Health>().CurrentHealth = character.currentHealth;
+            }
             
             DetermineOrderOfTurns();
             SetOrderOfTurnsLists();
@@ -318,6 +331,8 @@ namespace CodeReverie
                 character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
                 character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
                 character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
+
+                //character.currentHealth = character.characterController.GetComponent<Health>().CurrentHealth;
             }
             
             TransitionAnimator.Start(
@@ -374,8 +389,10 @@ namespace CodeReverie
         public void OnPlayerSelectTarget(CharacterBattleManager characterBattleManager)
         {
             
-            selectedTargets = new List<CharacterBattleManager>();
-            selectedTargets.Add(characterBattleManager);
+            // selectedTargets = new List<CharacterBattleManager>();
+            // selectedTargets.Add(characterBattleManager);
+
+            selectedTarget = characterBattleManager;
             
             foreach (CharacterBattleManager selectableTargetcharacterBattleManager in selectableTargets)
             {
@@ -533,7 +550,7 @@ namespace CodeReverie
             {
                 case CharacterBattleActionState.Attack:
                 case CharacterBattleActionState.Break:
-                    selectedPlayerCharacter.selectedTargets = selectedTargets;
+                    selectedPlayerCharacter.target = selectedTarget;
                     // selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
@@ -541,7 +558,7 @@ namespace CodeReverie
                 case CharacterBattleActionState.Skill:
                     selectedPlayerCharacter.GetComponent<AnimationManager>().ChangeAnimationState("cast");
                     //selectedPlayerCharacter.SetActionRange();
-                    selectedPlayerCharacter.selectedTargets = selectedTargets;
+                    selectedPlayerCharacter.target = selectedTarget;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
                     selectedPlayerCharacter.currentSkillPoints -= selectedPlayerCharacter.selectedSkill.info.skillPointsCost;
@@ -555,7 +572,7 @@ namespace CodeReverie
                     break;
                 case CharacterBattleActionState.Item:
                     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
-                    selectedPlayerCharacter.selectedTargets = selectedTargets;
+                    selectedPlayerCharacter.target = selectedTarget;
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
                     selectedPlayerCharacter.battleState = CharacterBattleState.WaitingAction;
                     break;
@@ -579,7 +596,8 @@ namespace CodeReverie
                 characterBattleManager.namePanel.gameObject.SetActive(false);
             }
 
-            selectedTargets = new List<CharacterBattleManager>();
+            selectedTarget = null;
+            //selectedTargets = new List<CharacterBattleManager>();
             selectableTargets = new List<CharacterBattleManager>();
                         
             combatManagerState = CombatManagerState.Battle;

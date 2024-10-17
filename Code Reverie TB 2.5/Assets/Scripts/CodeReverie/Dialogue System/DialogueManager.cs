@@ -177,6 +177,37 @@ namespace CodeReverie
                 }
             }
         }
+        
+        public void EnterDialogueMode(TextAsset inkJSON, CharacterDataContainer dialogueSpeaker, String storyPath = "")
+        {
+            
+            //speaker = dialogueSpeaker;
+            speakerPortrait.sprite = dialogueSpeaker.characterSprite;
+            dialogueName.text = dialogueSpeaker.characterName;
+            
+            //CameraManager.Instance.UpdateCamera(speaker.transform);
+            CameraManager.Instance.ToggleDialogueCamera();
+            
+            
+            ClearDialogueOptions();
+            
+            
+            currentStory = new Story(inkJSON.text);
+
+            if (!string.IsNullOrEmpty(storyPath))
+            {
+                currentStory.ChoosePathString(storyPath);
+            }
+
+            
+            
+            //currentStory.ChoosePathString("chosen");
+            
+            isDialogueActive = true;
+            dialogueTextPanel.SetActive(true);
+            
+            ContinueDialogue();
+        }
 
         public void EnterDialogueMode(TextAsset inkJSON, DialogueSpeaker dialogueSpeaker, String storyPath = "")
         {

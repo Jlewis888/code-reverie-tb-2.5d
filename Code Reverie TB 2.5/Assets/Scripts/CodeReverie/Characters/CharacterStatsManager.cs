@@ -51,8 +51,13 @@ namespace CodeReverie
             if (Input.GetKeyDown(KeyCode.O))
             {
                 Debug.Log(GetStat(StatAttribute.Atk));
-                //tempStats.Add(GenerateTempStatId(), new StatModifier(StatAttribute.Atk, 10, 10, true));
+
+                CharacterStats characterStats = new CharacterStats(GetComponent<CharacterUnitController>().character);
+
+                Debug.Log(characterStats.GetStat(StatAttribute.Atk));
                 
+                //tempStats.Add(GenerateTempStatId(), new StatModifier(StatAttribute.Atk, 10, 10, true));
+
                 //statModifiers.Add(new StatModifier(StatAttribute.Atk, 10, 10, true));
             }
         }

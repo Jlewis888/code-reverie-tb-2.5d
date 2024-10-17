@@ -47,6 +47,8 @@ namespace CodeReverie
         {
             currentGameScene = SceneManager.GetActiveScene().name;
             fromLoadedData = false;
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.gameObject.SetActive(true);
+            CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.gameObject.SetActive(false);
         }
         
         

@@ -15,7 +15,10 @@ namespace CodeReverie
         public Image characterPortrait;
         public TMP_Text nameText;
         public List<SkillBurstPointsUI> skillBurstPointsUis = new List<SkillBurstPointsUI>();
-
+        public TMP_Text healthText;
+        public TMP_Text skillPointsText;
+        
+        
         private void Awake()
         {
             skillBurstPointsUis = GetComponentsInChildren<SkillBurstPointsUI>().ToList();
@@ -40,7 +43,9 @@ namespace CodeReverie
             {
                 healthSlider.value = character.characterController.GetComponent<Health>().CurrentHealth;
                 healthSlider.maxValue = character.characterController.GetComponent<Health>().MaxHealth;
-                    
+                  
+                healthText.text = $"{character.currentHealth.ToString()}/{character.characterController.GetComponent<Health>().MaxHealth}";
+                
                 skillPointsSlider.value = character.characterController.GetComponent<CharacterBattleManager>().currentSkillPoints;
                 skillPointsSlider.maxValue = character.characterController.GetComponent<CharacterBattleManager>().skillPointsMax;
                 

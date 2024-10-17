@@ -57,7 +57,7 @@ namespace CodeReverie
             
             fireballSkillProjectile.source = characterUnitSource;
             fireballSkillProjectile.transform.localScale = Vector3.one * 2;
-            fireballSkillProjectile.target = characterUnitSource.selectedTargets[0].gameObject;
+            fireballSkillProjectile.target = characterUnitSource.target.gameObject;
             fireballSkillProjectile.Init();
             fireballSkillProjectile.gameObject.SetActive(true);
             

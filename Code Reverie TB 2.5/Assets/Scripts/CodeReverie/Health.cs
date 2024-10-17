@@ -108,18 +108,18 @@ namespace CodeReverie
         
         public void SetHealth()
         {
-            if (TryGetComponent(out CharacterStatsManager characterStatsManager))
-            {
-                MaxHealth = characterStatsManager.GetStat(StatAttribute.Health);
-            }
-
-            if (TryGetComponent(out CharacterUnitController characterController))
-            {
-                healthBarCount = characterController.character.info.healthBarCount;
-            }
-            
-
-            CurrentHealth = MaxHealth;
+            // if (TryGetComponent(out CharacterStatsManager characterStatsManager))
+            // {
+            //     MaxHealth = characterStatsManager.GetStat(StatAttribute.Health);
+            // }
+            //
+            // if (TryGetComponent(out CharacterUnitController characterController))
+            // {
+            //     healthBarCount = characterController.character.info.healthBarCount;
+            // }
+            //
+            //
+            // CurrentHealth = MaxHealth;
         }
 
 
