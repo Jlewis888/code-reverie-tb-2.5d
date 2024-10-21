@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666fd792853649a3bf1afe7b8aa135f2, type: 3}
+  m_Name: Dialogue Graph Test Name
+  m_EditorClassIdentifier: 
+  dialogueNodes:
+  - rid: 2964190324920680448
+  - rid: 2964190324920680458
+  - rid: 2964190324920680462
+  - rid: 2964190324920680463
+  - rid: 2964190324920680468
+  - rid: 2964190324920680470
+  connections:
+  - rid: 2964190324920680464
+  - rid: 2964190324920680465
+  - rid: 2964190324920680467
+  - rid: 2964190324920680469
+  - rid: 2964190324920680471
+  gameObject: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 2964190324920680448
+      type: {class: StartNode, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        GUID: fb9892e3-7ec0-465c-99c5-6844267f3884
+        EntyPoint: 0
+        typeName: CodeReverie.StartNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        speaker: {fileID: 11400000, guid: f2025b533c26df94daf53013f1489ada, type: 2}
+        dialogueText: Hello World
+    - rid: 2964190324920680458
+      type: {class: BranchNode, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        GUID: f0de2a3a-7be3-4b7d-810e-db8ab4c313e8
+        EntyPoint: 0
+        typeName: CodeReverie.BranchNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+    - rid: 2964190324920680462
+      type: {class: ChoiceNode, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        GUID: 157ed0b3-2945-4dbe-9f61-f4468590be9d
+        EntyPoint: 0
+        typeName: CodeReverie.ChoiceNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        speaker: {fileID: 11400000, guid: 0ea7de866c51b5a46b95ccdb7ecd8d96, type: 2}
+        dialogueText: Something something. ttotreopksdagfdjkmnolpfdsaJKNIMLHfdsaejokimnlh
+        text: Choice One
+    - rid: 2964190324920680463
+      type: {class: ChoiceNode, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        GUID: 0d3d77c0-868a-4aa0-bca9-a95aebcd19b6
+        EntyPoint: 0
+        typeName: CodeReverie.ChoiceNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        speaker: {fileID: 11400000, guid: 0ea7de866c51b5a46b95ccdb7ecd8d96, type: 2}
+        dialogueText: Something something
+        text: Choice Two
+    - rid: 2964190324920680464
+      type: {class: DialogueGraphConnection, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        inputPort:
+          nodeId: 157ed0b3-2945-4dbe-9f61-f4468590be9d
+          portIndex: 1
+        outputPort:
+          nodeId: f0de2a3a-7be3-4b7d-810e-db8ab4c313e8
+          portIndex: 0
+    - rid: 2964190324920680465
+      type: {class: DialogueGraphConnection, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        inputPort:
+          nodeId: 0d3d77c0-868a-4aa0-bca9-a95aebcd19b6
+          portIndex: 1
+        outputPort:
+          nodeId: f0de2a3a-7be3-4b7d-810e-db8ab4c313e8
+          portIndex: 0
+    - rid: 2964190324920680467
+      type: {class: DialogueGraphConnection, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        inputPort:
+          nodeId: f0de2a3a-7be3-4b7d-810e-db8ab4c313e8
+          portIndex: 1
+        outputPort:
+          nodeId: fb9892e3-7ec0-465c-99c5-6844267f3884
+          portIndex: 0
+    - rid: 2964190324920680468
+      type: {class: EndNode, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        GUID: 3387236f-6960-4b85-b2ef-f94eb196f1ac
+        EntyPoint: 0
+        typeName: CodeReverie.EndNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+    - rid: 2964190324920680469
+      type: {class: DialogueGraphConnection, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        inputPort:
+          nodeId: 3387236f-6960-4b85-b2ef-f94eb196f1ac
+          portIndex: 0
+        outputPort:
+          nodeId: 157ed0b3-2945-4dbe-9f61-f4468590be9d
+          portIndex: 0
+    - rid: 2964190324920680470
+      type: {class: EndNode, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        GUID: b0cdbaf3-e2d2-45c9-a34d-3d47294eef5a
+        EntyPoint: 0
+        typeName: CodeReverie.EndNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+    - rid: 2964190324920680471
+      type: {class: DialogueGraphConnection, ns: CodeReverie, asm: Assembly-CSharp}
+      data:
+        inputPort:
+          nodeId: b0cdbaf3-e2d2-45c9-a34d-3d47294eef5a
+          portIndex: 0
+        outputPort:
+          nodeId: 0d3d77c0-868a-4aa0-bca9-a95aebcd19b6
+          portIndex: 0

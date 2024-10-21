@@ -1,34 +1,18 @@
-﻿using System;
-using UnityEngine;
-
-namespace CodeReverie
+﻿namespace CodeReverie
 {
-    [Serializable]
-    public class DialogueNode
+    [NodeInfo("Dialogue", "", "Process/Dialogue")]
+    public class DialogueNode : DialogueGraphNode
     {
-        public string GUID;
-        public string id => GUID;
+        [ExposedProperty] 
+        public CharacterDataContainer speaker;
         
-        public bool EntyPoint = false;
-        //public string DialogueText;
-        public string typeName;
-        private Rect _position;
-        public Rect position => _position;
+        [ExposedProperty]
+        public string dialogueText;
 
-        public DialogueNode()
-        {
-            NewGUID();
-        }
 
-        void NewGUID()
+        public override void Execute(DialogueGraphAsset dialogueGraphAsset)
         {
-            GUID = Guid.NewGuid().ToString();
+            CanvasManager.Instance.dialogueManager.Dialogue(speaker, dialogueText);
         }
-
-        public void SetPosition(Rect position)
-        {
-            _position = position;
-        }
-        
     }
 }

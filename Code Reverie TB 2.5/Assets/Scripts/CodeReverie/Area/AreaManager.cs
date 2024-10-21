@@ -95,7 +95,19 @@ namespace CodeReverie
             GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
 
-            PlayerManager.Instance.SetPartyUnits();
+            
+
+            if (!GameManager.Instance.newGame)
+            {
+                PlayerManager.Instance.SetPartyUnits(PlayerManager.Instance.characterOnSaveLoadPosition);
+            }
+            else
+            {
+                PlayerManager.Instance.SetPartyUnits(defaultAreaSpawnPoint != null ? defaultAreaSpawnPoint.position : Vector3.zero);
+            }
+            
+            
+            
             CameraManager.Instance.SetCameraConfiner(areaCameraConfiner);
             
             if (PlayerManager.Instance.combatConfigDetails != null)
@@ -265,20 +277,6 @@ namespace CodeReverie
         //     }
         // }
 
-        public void StartConvo()
-        {
-            
-        }
-
-        public void TriggerDialogue(TextAsset dialogueTextAsset, CharacterDataContainer dialogueSpeaker, String storyPath = "")
-        {
-            EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueTextAsset, dialogueSpeaker, storyPath);
-        }
-
-        public void TestSignal(string test)
-        {
-            Debug.Log("This is a test signal");
-        }
+        
     }
 }

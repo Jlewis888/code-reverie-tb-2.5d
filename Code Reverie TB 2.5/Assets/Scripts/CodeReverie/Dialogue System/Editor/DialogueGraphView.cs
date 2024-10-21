@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,29 +12,33 @@ namespace CodeReverie
     {
 
         private SerializedObject _serializedObject;
-        private DialogueEditorWindow _dialogueEditorWindow;
+        private DialogueGraphEditorWindow _dialogueGraphEditorWindow;
         private DialogueGraphAsset _dialogueGraphAsset;
-        public DialogueEditorWindow dialogueEditorWindow => _dialogueEditorWindow;
-        public List<DialogueEditorNode> dialogueEditorNodes;
-        public Dictionary<string, DialogueEditorNode> nodeDictionary;
+        public DialogueGraphEditorWindow dialogueGraphEditorWindow => _dialogueGraphEditorWindow;
+        public List<DialogueGraphEditorNode> dialogueEditorNodes;
+        public Dictionary<string, DialogueGraphEditorNode> nodeDictionary;
+        public Dictionary<Edge, DialogueGraphConnection> connectionDictionary;
+        
+        
         private NodeSearchWindow _nodeSearchWindow;
         
-        public DialogueGraphView(SerializedObject serializedObject, DialogueEditorWindow dialogueEditorWindow)
+        public DialogueGraphView(SerializedObject serializedObject, DialogueGraphEditorWindow dialogueGraphEditorWindow)
         {
             _serializedObject = serializedObject;
             _dialogueGraphAsset = (DialogueGraphAsset)serializedObject.targetObject;
+            connectionDictionary = new Dictionary<Edge, DialogueGraphConnection>();
             
-            _dialogueEditorWindow = dialogueEditorWindow;
+            _dialogueGraphEditorWindow = dialogueGraphEditorWindow;
 
-            dialogueEditorNodes = new List<DialogueEditorNode>();
-            nodeDictionary = new Dictionary<string, DialogueEditorNode>();
+            dialogueEditorNodes = new List<DialogueGraphEditorNode>();
+            nodeDictionary = new Dictionary<string, DialogueGraphEditorNode>();
             _nodeSearchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
             _nodeSearchWindow.dialogueGraph = this;
 
             this.nodeCreationRequest = ShowSearchWindow;
             
             styleSheets.Add(Resources.Load<StyleSheet>("NarrativeGraph"));
-            
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
@@ -51,10 +56,28 @@ namespace CodeReverie
             //AddSearchWindow(dialogueEditorWindow);
 
             DrawNodes();
+            DrawConnections();
 
             graphViewChanged += OnGraphViewChangedEvent;
 
         }
+
+        
+
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
+            var compatiblePorts = new List<Port>();
+            var startPortView = startPort;
+            ports.ForEach(port =>
+            {
+                var portView = port;
+                if (startPortView != portView && startPortView.node != portView.node)
+                    compatiblePorts.Add(port);
+            });
+            
+            return compatiblePorts;
+        }
+
 
         private GraphViewChange OnGraphViewChangedEvent(GraphViewChange graphviewchange)
         {
@@ -64,7 +87,7 @@ namespace CodeReverie
                 
                 Undo.RecordObject(_serializedObject.targetObject, "Moved Elements");
                 
-                foreach (DialogueEditorNode dialogueEditorNode in graphviewchange.movedElements.OfType<DialogueEditorNode>().ToList())
+                foreach (DialogueGraphEditorNode dialogueEditorNode in graphviewchange.movedElements.OfType<DialogueGraphEditorNode>().ToList())
                 {
                     dialogueEditorNode.SavePosition();
                 }
@@ -75,8 +98,8 @@ namespace CodeReverie
             if (graphviewchange.elementsToRemove != null)
             {
                 
-                Undo.RecordObject(_serializedObject.targetObject, "Removed Nodes");
-                List<DialogueEditorNode> nodes = graphviewchange.elementsToRemove.OfType<DialogueEditorNode>().ToList();
+                Undo.RecordObject(_serializedObject.targetObject, "Removed Stuff");
+                List<DialogueGraphEditorNode> nodes = graphviewchange.elementsToRemove.OfType<DialogueGraphEditorNode>().ToList();
 
 
                 if (nodes.Count > 0)
@@ -88,20 +111,49 @@ namespace CodeReverie
                         RemoveNode(nodes[i]);
                     }
                 }
+
+                foreach (Edge edge in graphviewchange.elementsToRemove.OfType<Edge>())
+                {
+                    RemoveConnection(edge);
+                }
                 
-                
-                
+            }
+
+            if (graphviewchange.edgesToCreate != null)
+            {
+                Undo.RecordObject(_serializedObject.targetObject, "Add Connection");
+                foreach (Edge edge in graphviewchange.edgesToCreate)
+                {
+                    CreateEdge(edge);
+                }
             }
 
 
             return graphviewchange;
         }
 
-        private void RemoveNode(DialogueEditorNode node)
+        private void CreateEdge(Edge edge)
+        {
+            DialogueGraphEditorNode dialogueGraphEditorNodeInput = (DialogueGraphEditorNode)edge.input.node;
+
+            int inputIndex = dialogueGraphEditorNodeInput.Ports.IndexOf(edge.input);
+            
+            DialogueGraphEditorNode dialogueGraphEditorNodeOutput = (DialogueGraphEditorNode)edge.output.node;
+            
+            int outputIndex = dialogueGraphEditorNodeOutput.Ports.IndexOf(edge.output);
+
+            DialogueGraphConnection graphConnection = new DialogueGraphConnection(dialogueGraphEditorNodeInput.graphNode.id, inputIndex,
+                dialogueGraphEditorNodeOutput.graphNode.id, outputIndex);
+            
+            _dialogueGraphAsset.Connections.Add(graphConnection);
+            
+        }
+
+        private void RemoveNode(DialogueGraphEditorNode node)
         {
             //Undo.RecordObject(_serializedObject.targetObject, "Removed Node");
-            _dialogueGraphAsset.DialogueNodes.Remove(node.Node);
-            nodeDictionary.Remove(node.Node.id);
+            _dialogueGraphAsset.DialogueNodes.Remove(node.graphNode);
+            nodeDictionary.Remove(node.graphNode.id);
             dialogueEditorNodes.Remove(node);
             _serializedObject.Update();
 
@@ -109,10 +161,69 @@ namespace CodeReverie
 
         private void DrawNodes()
         {
-            foreach (DialogueNode dialogueNode in _dialogueGraphAsset.DialogueNodes)
+            foreach (DialogueGraphNode dialogueNode in _dialogueGraphAsset.DialogueNodes)
             {
                 AddNodeToGraph(dialogueNode);
             }
+            
+            Bind();
+        }
+        
+        private void DrawConnections()
+        {
+            if (_dialogueGraphAsset.Connections == null)
+            {
+                return;
+            }
+
+            foreach (DialogueGraphConnection connection in _dialogueGraphAsset.Connections)
+            {
+                DrawConnection(connection);
+            }
+        }
+
+        private void DrawConnection(DialogueGraphConnection graphConnection)
+        {
+            DialogueGraphEditorNode inputNode = GetNode(graphConnection.inputPort.nodeId);
+            DialogueGraphEditorNode outputNode = GetNode(graphConnection.outputPort.nodeId);
+            if (inputNode == null)
+            {
+                return;
+            }
+            
+            if (outputNode == null)
+            {
+                return;
+            }
+
+            Port inPort = inputNode.Ports[graphConnection.inputPort.portIndex];
+            Port outPort = outputNode.Ports[graphConnection.outputPort.portIndex];
+
+            Edge edge = inPort.ConnectTo(outPort);
+            AddElement(edge);
+            connectionDictionary.Add(edge, graphConnection);
+        }
+
+        private void RemoveConnection(Edge edge)
+        {
+            Debug.Log("Remove Connection");
+            if (connectionDictionary.TryGetValue(edge, out DialogueGraphConnection connection))
+            {
+                Debug.Log("Remove Connection Here");
+                
+                _dialogueGraphAsset.Connections.Remove(connection);
+                connectionDictionary.Remove(edge);
+            }
+            
+        }
+
+        private DialogueGraphEditorNode GetNode(string nodeId)
+        {
+            DialogueGraphEditorNode node = null;
+
+            nodeDictionary.TryGetValue(nodeId, out node);
+
+            return node;
         }
 
         private void ShowSearchWindow(NodeCreationContext obj)
@@ -130,27 +241,34 @@ namespace CodeReverie
         //         SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), _searchWindowBak);
         // }
 
-        public void Add(DialogueNode node)
+        public void Add(DialogueGraphNode graphNode)
         {
             Undo.RecordObject(_serializedObject.targetObject, "Added Node");
-            _dialogueGraphAsset.DialogueNodes.Add(node);
+            _dialogueGraphAsset.DialogueNodes.Add(graphNode);
             _serializedObject.Update();
-            AddNodeToGraph(node);
+            AddNodeToGraph(graphNode);
+            Bind();
 
         }
 
-        private void AddNodeToGraph(DialogueNode node)
+        private void AddNodeToGraph(DialogueGraphNode graphNode)
         {
-            node.typeName = node.GetType().AssemblyQualifiedName;
-            DialogueEditorNode editorNode = new DialogueEditorNode(node);
-            editorNode.SetPosition(node.position);
+            graphNode.typeName = graphNode.GetType().AssemblyQualifiedName;
+            DialogueGraphEditorNode graphEditorNode = new DialogueGraphEditorNode(graphNode, _serializedObject);
+            graphEditorNode.SetPosition(graphNode.position);
             
-            dialogueEditorNodes.Add(editorNode);
-            nodeDictionary.Add(node.id, editorNode);
+            dialogueEditorNodes.Add(graphEditorNode);
+            nodeDictionary.Add(graphNode.id, graphEditorNode);
             
             
-            AddElement(editorNode);
+            AddElement(graphEditorNode);
 
+        }
+
+        private void Bind()
+        {
+            _serializedObject.Update();
+            this.Bind(_serializedObject);
         }
     }
 }

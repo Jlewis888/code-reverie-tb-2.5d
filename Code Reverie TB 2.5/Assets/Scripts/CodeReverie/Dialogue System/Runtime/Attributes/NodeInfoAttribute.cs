@@ -22,11 +22,18 @@ namespace CodeReverie
         
         internal string Category { get; }
 
-        public NodeInfoAttribute(string name = "", string description = "", string menuItem = "")
+        internal bool HasFlowInput { get; }
+        internal bool HasFlowOutput { get; }
+        internal bool HasMultiOutput { get; }
+
+        public NodeInfoAttribute(string name = "", string description = "", string category = "", bool hasFlowInput = true, bool hasFlowOutput = true, bool hasMultiOutput = false)
         {
             Name = name;
             Description = description;
-            Category = menuItem;
+            Category = category;
+            HasFlowInput = hasFlowInput;
+            HasFlowOutput = hasFlowOutput;
+            HasMultiOutput = hasMultiOutput;
         }
         
         

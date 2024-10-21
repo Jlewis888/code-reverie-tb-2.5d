@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeReverie
 {
-    public class DialogueEditorWindow : EditorWindow
+    public class DialogueGraphEditorWindow : EditorWindow
     {
         [SerializeField]
         private DialogueGraphAsset _dialogueGraphAsset;
@@ -19,7 +19,7 @@ namespace CodeReverie
 
         public static void Open(DialogueGraphAsset targetAsset)
         {
-            DialogueEditorWindow[] windows = Resources.FindObjectsOfTypeAll<DialogueEditorWindow>();
+            DialogueGraphEditorWindow[] windows = Resources.FindObjectsOfTypeAll<DialogueGraphEditorWindow>();
 
             foreach (var window in windows)
             {
@@ -30,12 +30,23 @@ namespace CodeReverie
                 }
             }
 
-            DialogueEditorWindow dialogueEditorWindow =
-                CreateWindow<DialogueEditorWindow>(typeof(DialogueEditorWindow), typeof(SceneView));
+            DialogueGraphEditorWindow dialogueGraphEditorWindow =
+                CreateWindow<DialogueGraphEditorWindow>(typeof(DialogueGraphEditorWindow), typeof(SceneView));
 
+            
+            var icon = (Texture2D)EditorGUIUtility.ObjectContent(targetAsset, targetAsset.GetType()).image;
 
-            dialogueEditorWindow.titleContent = new GUIContent($"{targetAsset.name}", EditorGUIUtility.ObjectContent(null, typeof(DialogueGraphAsset)).image);
-            dialogueEditorWindow.Load(targetAsset);
+            // // Change the blank file icon to a Unity-logo file icon
+            // if (icon == EditorGUIUtility.FindTexture("d_DefaultAsset Icon"))
+            // {
+            //     
+            //     icon = EditorGUIUtility.FindTexture("ScriptableObject Icon");
+            // }
+            // Debug.Log(icon);
+            // Debug.Log(targetAsset.GetType());
+
+            dialogueGraphEditorWindow.titleContent = new GUIContent($"{targetAsset.name}", icon);
+            dialogueGraphEditorWindow.Load(targetAsset);
 
         }
 

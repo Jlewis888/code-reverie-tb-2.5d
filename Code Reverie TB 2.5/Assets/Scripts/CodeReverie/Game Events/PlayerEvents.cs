@@ -88,7 +88,7 @@ namespace CodeReverie
         }
 
         //public Action<TextAsset, DialogueSpeaker, String> onDialogueStart;
-        public Action<TextAsset, CharacterDataContainer, String> onDialogueStart;
+        public Action<DialogueGraphAsset> onDialogueStart;
 
 
         // public void OnDialogueStart(TextAsset inkJSON, DialogueSpeaker dialogueSpeaker, string storyPath)
@@ -96,9 +96,9 @@ namespace CodeReverie
         //     onDialogueStart?.Invoke(inkJSON, dialogueSpeaker, storyPath);
         // }
         
-        public void OnDialogueStart(TextAsset inkJSON, CharacterDataContainer dialogueSpeaker, string storyPath)
+        public void OnDialogueStart(DialogueGraphAsset dialogueGraphAsset)
         {
-            onDialogueStart?.Invoke(inkJSON, dialogueSpeaker, storyPath);
+            onDialogueStart?.Invoke(dialogueGraphAsset);
         }
         
         public Action<DialogueSpeaker> onDialogueEnd;

@@ -10,6 +10,7 @@ namespace CodeReverie
     {
         private const int priority = 3;
         public DialogueSpeaker dialogueSpeaker;
+        public DialogueGraphAsset dialogueGraphAsset;
         public bool playerInRange;
         public bool instantTrigger;
         public string storyPath;
@@ -62,7 +63,8 @@ namespace CodeReverie
             Debug.Log("Start Dialogue");
             EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
                     
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
+            //EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
+            EventManager.Instance.playerEvents.OnDialogueStart(dialogueGraphAsset);
             onComplete();
         }
 
@@ -70,7 +72,8 @@ namespace CodeReverie
         {
             EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
                     
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
+            //EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
+            EventManager.Instance.playerEvents.OnDialogueStart(dialogueGraphAsset);
             onComplete();
         }
         public void InteractOnHold(Action onComplete) { }

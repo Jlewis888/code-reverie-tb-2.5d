@@ -16,7 +16,7 @@ namespace CodeReverie
 
             if (asset.GetType() == typeof(DialogueGraphAsset))
             {
-                DialogueEditorWindow.Open((DialogueGraphAsset)asset);
+                DialogueGraphEditorWindow.Open((DialogueGraphAsset)asset);
                 return true;
             }
             
@@ -27,7 +27,7 @@ namespace CodeReverie
         {
             if (GUILayout.Button("Open"))
             {
-                DialogueEditorWindow.Open((DialogueGraphAsset)target);
+                DialogueGraphEditorWindow.Open((DialogueGraphAsset)target);
             }
         }
     }

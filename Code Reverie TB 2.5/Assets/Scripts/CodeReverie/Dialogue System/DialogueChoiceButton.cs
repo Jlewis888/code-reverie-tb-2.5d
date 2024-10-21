@@ -9,6 +9,7 @@ namespace CodeReverie
 {
     public class DialogueChoiceButton : SerializedMonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        public ChoiceNode choiceNode;
         private Button button;
         public TMP_Text dialogueText;
         public int choiceIndex;
@@ -38,43 +39,42 @@ namespace CodeReverie
 
         public void SelectDialogueChoice()
         {
-
-            if (endDialogueButton)
-            {
-                
-                EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.screenSpaceCanvasManager.hudManager);
-                EventManager.Instance.playerEvents.OnDialogueEnd(speaker);
-                
-                CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
-                CameraManager.Instance.ToggleMainCamera();
-                
-                return;
-            }
+            // if (endDialogueButton)
+            // {
+            //     
+            //     EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.screenSpaceCanvasManager.hudManager);
+            //     EventManager.Instance.playerEvents.OnDialogueEnd(speaker);
+            //     
+            //     CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
+            //     CameraManager.Instance.ToggleMainCamera();
+            //     
+            //     return;
+            // }
             
             
-            if (CanvasManager.Instance.dialogueManager.CanContinue)
-            {
+            // if (CanvasManager.Instance.dialogueManager.CanContinue)
+            // {
+            //
+            //     if (continueButton)
+            //     {
+            //         if (CanvasManager.Instance.dialogueManager.currentChoiceCount == 0)
+            //         {
+            //             CanvasManager.Instance.dialogueManager.ContinueDialogue();
+            //         }
+            //     }
+            //     else
+            //     {
+            //         CanvasManager.Instance.dialogueManager.MakeChoice(choiceIndex);
+            //         
+            //     }
+            //
+            //    
+            // }
 
-                if (continueButton)
-                {
-                    if (CanvasManager.Instance.dialogueManager.currentChoiceCount == 0)
-                    {
-                        CanvasManager.Instance.dialogueManager.ContinueDialogue();
-                    }
-                }
-                else
-                {
-                    CanvasManager.Instance.dialogueManager.MakeChoice(choiceIndex);
-                    
-                }
-
-               
-            }
-
-            if (vendorButton)
-            {
-                CanvasManager.Instance.OpenVendorMenu();
-            }
+            // if (vendorButton)
+            // {
+            //     CanvasManager.Instance.OpenVendorMenu();
+            // }
             
             
         }

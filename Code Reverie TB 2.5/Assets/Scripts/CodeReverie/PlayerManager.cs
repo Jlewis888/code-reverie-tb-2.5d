@@ -323,6 +323,59 @@ namespace CodeReverie
             }
         }
         
+        public void SetPartyUnits(Vector3 spawnLocation)
+        {
+            
+            if (currentParty != null)
+            {
+                int count = 0;
+                
+                foreach (Character character in currentParty)
+                {
+                    character.SpawnCharacter(spawnLocation);
+                    
+                    
+                    if (character == currentParty[0])
+                    {
+                        BeautifySettings beautifySettings = FindObjectOfType<BeautifySettings>();
+
+                        if (beautifySettings != null)
+                        {
+                            // FindObjectOfType<BeautifySettings>().depthOfFieldTarget =
+                            //     character.characterController.transform;
+                            
+                            beautifySettings.depthOfFieldTarget =
+                                character.characterController.transform;
+                        }
+                        
+                        
+                        
+                        character.characterController.GetComponent<PlayerAIMovementController>().enabled = false;
+                        character.characterController.GetComponent<PlayerMovementController>().enabled = true;
+                        CameraManager.Instance.UpdateCamera(character.characterController.transform);
+                    }
+                    else
+                    {
+                        
+                        character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                        character.characterController.GetComponent<PlayerAIMovementController>().followTarget =
+                            currentParty[count - 1].characterController.gameObject;
+                    }
+
+                    if (!GameManager.Instance.newGame)
+                    {
+                        
+                    }
+                   
+
+                    character.characterController.gameObject.SetActive(true);
+                    count++;
+                }
+            }
+        }
+        
+        
+        
         public void SetCombatPartyUnits()
         {
             if (currentParty != null)
@@ -367,21 +420,10 @@ namespace CodeReverie
         {
             if (combatConfigDetails != null)
             {
-                int count = 0;
-                foreach (Character character in currentParty)
-                {
-                    //character.characterController.GetComponent<PlayerMovementController>().enabled = false;
-                    character.characterController.transform.position = combatConfigDetails.characterReturnPosition;
-
-                    // if (count == 0)
-                    // {
-                    //     character.characterController.GetComponent<PlayerMovementController>().enabled = true;
-                    // }
-                    //
-                    // count++;
-                }
+                SetPartyPosition(combatConfigDetails.characterReturnPosition);
             } 
         }
+        
 
         public void SetPartyPosition(Vector3 pos)
         {

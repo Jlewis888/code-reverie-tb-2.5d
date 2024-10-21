@@ -134,15 +134,15 @@ namespace CodeReverie
         {
             //Editor window-based mouse position
             var mousePosition = dialogueGraph.ChangeCoordinatesTo(dialogueGraph,
-                context.screenMousePosition - dialogueGraph.dialogueEditorWindow.position.position);
+                context.screenMousePosition - dialogueGraph.dialogueGraphEditorWindow.position.position);
             var graphMousePosition = dialogueGraph.contentViewContainer.WorldToLocal(mousePosition);
 
             SearchContextElement element = (SearchContextElement)SearchTreeEntry.userData;
 
-            DialogueNode node = (DialogueNode)element.target;
-            node.SetPosition(new Rect(graphMousePosition, new Vector2()));
-            dialogueGraph.Add(node);
-            
+            DialogueGraphNode graphNode = (DialogueGraphNode)element.target;
+            graphNode.SetPosition(new Rect(graphMousePosition, new Vector2()));
+            dialogueGraph.Add(graphNode);
+            return true;
             
             // switch (SearchTreeEntry.userData)
             // {
@@ -154,7 +154,7 @@ namespace CodeReverie
             //         _graphViewBak.CreateCommentBlock(rect);
             //         return true;
             // }
-             return false;
+            // return false;
         }
         
     }
