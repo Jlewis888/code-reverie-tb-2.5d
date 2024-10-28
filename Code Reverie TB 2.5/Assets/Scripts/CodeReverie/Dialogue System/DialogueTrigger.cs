@@ -1,8 +1,9 @@
-﻿using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
+using Unity.Behavior;
 using UnityEngine;
+using Action = System.Action;
 
 namespace CodeReverie
 {
@@ -11,6 +12,7 @@ namespace CodeReverie
         private const int priority = 3;
         public DialogueSpeaker dialogueSpeaker;
         public DialogueGraphAsset dialogueGraphAsset;
+        public BehaviorGraph behaviorGraph;
         public bool playerInRange;
         public bool instantTrigger;
         public string storyPath;
@@ -64,7 +66,7 @@ namespace CodeReverie
             EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
                     
             //EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueGraphAsset);
+            EventManager.Instance.playerEvents.OnDialogueStart(behaviorGraph);
             onComplete();
         }
 
@@ -73,7 +75,7 @@ namespace CodeReverie
             EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
                     
             //EventManager.Instance.playerEvents.OnDialogueStart(dialogueSpeaker.dialogueTextAsset, dialogueSpeaker.GetComponent<CharacterUnitController>().character.info, storyPath);
-            EventManager.Instance.playerEvents.OnDialogueStart(dialogueGraphAsset);
+            EventManager.Instance.playerEvents.OnDialogueStart(behaviorGraph);
             onComplete();
         }
         public void InteractOnHold(Action onComplete) { }

@@ -36,17 +36,16 @@ MonoBehaviour:
     - AllIn1VfxTexDemoAssembly
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
-    - Cinemachine
     - Crest
     - Crest.Examples
     - DamageNumbersPro
     - Enviro3.Runtime
-    - GaiaCore
     - IEVO.uGUIDirectedNavigation.Runtime
     - Ink-Libraries
+    - SerializableGUID
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
-  autoUpdateReferences: 1
+  autoUpdateReferences: 0
   addAllPrefabsToManager: 1
   collectDependenciesDepth: 4
   collectDependenciesTimeout: 10

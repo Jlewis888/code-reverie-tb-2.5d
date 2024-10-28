@@ -12,6 +12,7 @@ namespace CodeReverie
         public Action<MenuManager> openMenuManager;
         public Action onGameRestart;
         public Action<bool> toggleCharacterSidePanelUI;
+        public Action<string> onStartCutscene;
 
 
         public void OnGamePause(bool pause)
@@ -112,6 +113,11 @@ namespace CodeReverie
         public void OnSkillSlotSelect(SkillSlotUI skillSlotUI)
         {
             onSkillSlotSelect?.Invoke(skillSlotUI);
+        }
+
+        public void OnStartCutscene(string cutsceneName)
+        {
+            onStartCutscene?.Invoke(cutsceneName);
         }
         
     }

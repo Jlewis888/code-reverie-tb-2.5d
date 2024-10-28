@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityString;
 using Ink.Runtime;
 using Sirenix.OdinInspector;
 using TMPro;
+using Unity.Behavior;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +37,7 @@ namespace CodeReverie
         private Coroutine activeCoroutine;
 
         private bool canContinue = false;
+        public bool continueDialogue = false;
         public bool canCompleteText = true;
         public bool completeText = false;
         public bool canEndDialogue = false;
@@ -72,28 +76,30 @@ namespace CodeReverie
             // if (isDialogueActive)
             // {
                 
-                if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
-                {
-
-                    if (canCompleteText)
-                    {
-                        completeText = true;
-                    }
-
-                    if (canEndDialogue && currentNode is EndNode)
-                    {
-                        currentNode.Execute(graphInstance);
-                    }
-                    
-                    if (activeDialogueChoiceButton != null && dialogueChoiceButtons.Count > 0 && dialogueChoiceHolder.activeInHierarchy)
-                    {
-                       // activeDialogueChoiceButton.SelectDialogueChoice();
-                       currentNode = activeDialogueChoiceButton.choiceNode;
-                       activeDialogueChoiceButton.choiceNode.Execute(graphInstance);
-                       activeDialogueChoiceButton = null;
-                       dialogueChoiceHolder.SetActive(false);
-                    }
-                }
+                // if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
+                // {
+                //    
+                //     return;
+                //     
+                //     if (canCompleteText)
+                //     {
+                //         completeText = true;
+                //     }
+                //
+                //     if (canEndDialogue && currentNode is EndNode)
+                //     {
+                //         currentNode.Execute(graphInstance);
+                //     }
+                //     
+                //     if (activeDialogueChoiceButton != null && dialogueChoiceButtons.Count > 0 && dialogueChoiceHolder.activeInHierarchy)
+                //     {
+                //        // activeDialogueChoiceButton.SelectDialogueChoice();
+                //        currentNode = activeDialogueChoiceButton.choiceNode;
+                //        activeDialogueChoiceButton.choiceNode.Execute(graphInstance);
+                //        activeDialogueChoiceButton = null;
+                //        dialogueChoiceHolder.SetActive(false);
+                //     }
+                // }
 
                 if (navigationDelayTimer <= 0 && dialogueChoiceButtons.Count > 0 && dialogueChoiceHolder.activeInHierarchy) 
                 {
@@ -188,13 +194,98 @@ namespace CodeReverie
                 }
             }
         }
+
+        public void CompleteDialogueText()
+        {
+            if (canCompleteText)
+            {
+                completeText = true;
+            }
+        }
+
+        public void Continue()
+        {
+            if (canContinue)
+            {
+                continueDialogue = true;
+            }
+        }
+
+        public void OnConfirmAction()
+        {
+            
+
+            // if (canEndDialogue && currentNode is EndNode)
+            // {
+            //     currentNode.Execute(graphInstance);
+            // }
+            //         
+            // if (activeDialogueChoiceButton != null && dialogueChoiceButtons.Count > 0 && dialogueChoiceHolder.activeInHierarchy)
+            // {
+            //     // activeDialogueChoiceButton.SelectDialogueChoice();
+            //     currentNode = activeDialogueChoiceButton.choiceNode;
+            //     activeDialogueChoiceButton.choiceNode.Execute(graphInstance);
+            //     activeDialogueChoiceButton = null;
+            //     dialogueChoiceHolder.SetActive(false);
+            // }
+        }
+
+        public (bool, int) ConfirmChoice()
+        {
+            bool choiceSelected = false;
+            int choiceIndex = -1;
+            
+            
+            if (activeDialogueChoiceButton != null && dialogueChoiceButtons.Count > 0 && dialogueChoiceHolder.activeInHierarchy)
+            {
+                // activeDialogueChoiceButton.SelectDialogueChoice();
+                // currentNode = activeDialogueChoiceButton.choiceNode;
+                // activeDialogueChoiceButton.choiceNode.Execute(graphInstance);
+                
+                choiceSelected = true;
+                choiceIndex = activeDialogueChoiceButton.choiceIndex;
+                
+                
+            }
+            return (choiceSelected, choiceIndex);
+        }
+
+        public void ChoiceSelected()
+        {
+            activeDialogueChoiceButton = null;
+            dialogueChoiceHolder.SetActive(false);
+        }
+        
+        public void EnterDialogueMode(BehaviorGraph behaviorGraph)
+        {
+
+            //Unsupported.SmartReset(GetComponent<BehaviorGraphAgent>());
+            
+            DestroyImmediate(gameObject.GetComponent<BehaviorGraphAgent>());
+            gameObject.AddComponent<BehaviorGraphAgent>();
+            //
+            GetComponent<BehaviorGraphAgent>().Graph = behaviorGraph;
+            GetComponent<BehaviorGraphAgent>().Init();
+
+            // if (GetComponent<BehaviorGraphAgent>().Graph != behaviorGraph || GetComponent<BehaviorGraphAgent>().Graph == null)
+            // {
+            //     GetComponent<BehaviorGraphAgent>().Graph = behaviorGraph;
+            //     GetComponent<BehaviorGraphAgent>().Init();
+            // }
+            
+            
+           
+            
+            isDialogueActive = true;
+            dialogueTextPanel.SetActive(true);
+        }
+        
         
         public void EnterDialogueMode(DialogueGraphAsset dialogueGraphAsset)
         {
             graphInstance = Instantiate(dialogueGraphAsset);
             ExecuteAsset();
-            
-            currentNode.Execute(graphInstance);
+            //currentNode.Execute(graphInstance);
             
             // DialogueGraphNode startNode = graphInstance.GetStartNode();
             // currentNode = startNode;
@@ -285,6 +376,7 @@ namespace CodeReverie
             //continueIcon.SetActive(false);
             ClearDialogueOptions();
             canContinue = false;
+            continueDialogue = false;
         
             canCompleteText = false;
             completeText = false;
@@ -303,7 +395,7 @@ namespace CodeReverie
             }
             //continueIcon.SetActive(true);
             
-            SetNextNode();
+            //SetNextNode();
             
             
             
@@ -411,9 +503,42 @@ namespace CodeReverie
                     
                     index++;
                 }
-                dialogueChoiceHolder.SetActive(true);
-                SetFirstItem();
-                NavigateChoices();
+                DisplayChoices();
+            }
+        }
+
+        public void AddChoice(string choice)
+        {
+            DialogueChoiceButton dialogueChoiceButton = Instantiate(dialogueChoiceButtonPF, dialogueChoiceHolder.transform);
+            dialogueChoiceButton.dialogueText.text = choice;
+            dialogueChoiceButton.choiceIndex = dialogueChoiceButtons.Count;
+            dialogueChoiceButtons.Add(dialogueChoiceButton);
+        }
+
+        public void DisplayChoices()
+        {
+            dialogueChoiceHolder.SetActive(true);
+            SetFirstItem();
+            NavigateChoices();
+        }
+        
+        public void DisplayChoices(List<string> choices)
+        {
+           
+
+            if (choices.Count > 0)
+            {
+                int index = 0;
+                foreach (string choice in choices)
+                {
+                    DialogueChoiceButton dialogueChoiceButton = Instantiate(dialogueChoiceButtonPF, dialogueChoiceHolder.transform);
+                    dialogueChoiceButton.dialogueText.text = choice;
+                    dialogueChoiceButton.choiceIndex = index;
+                    dialogueChoiceButtons.Add(dialogueChoiceButton);
+                    
+                    index++;
+                }
+                DisplayChoices();
             }
         }
 

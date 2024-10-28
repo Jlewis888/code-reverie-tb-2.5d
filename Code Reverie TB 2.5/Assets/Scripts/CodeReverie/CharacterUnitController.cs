@@ -68,11 +68,11 @@ namespace CodeReverie
                     case "SelectedPlayerCharacter":
                         Debug.Log("Does this hit");
                         GetComponent<PlayerMovementController>().enabled = true;
-                        CameraManager.Instance.mainVirtualCamera.m_Follow = transform;
+                        CameraManager.Instance.mainVirtualCamera.Follow = transform;
                         break;
                     case "InactivePartyCharacter":
                        
-                        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
                         GetComponent<PlayerMovementController>().enabled = false;
                         break;
                 }

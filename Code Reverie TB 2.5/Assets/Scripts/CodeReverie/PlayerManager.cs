@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BeautifyHDRP;
+using TransitionsPlus;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -348,11 +349,9 @@ namespace CodeReverie
                                 character.characterController.transform;
                         }
                         
-                        
-                        
                         character.characterController.GetComponent<PlayerAIMovementController>().enabled = false;
                         character.characterController.GetComponent<PlayerMovementController>().enabled = true;
-                        CameraManager.Instance.UpdateCamera(character.characterController.transform);
+                        //CameraManager.Instance.UpdateCamera(character.characterController.transform);
                     }
                     else
                     {
@@ -616,6 +615,17 @@ namespace CodeReverie
             }
             
         }
+
+        public void StartCombat(CombatConfigDetails combatConfigDetails, string sceneNameToLoad)
+        {
+            this.combatConfigDetails = combatConfigDetails;
+                                
+            TransitionAnimator.Start(
+                TransitionType.Smear, // transition type
+                duration: 1f,
+                sceneNameToLoad: sceneNameToLoad
+            );
+        }
         
         
 
@@ -762,7 +772,19 @@ namespace CodeReverie
             ES3.Save("currentExp", currentExp, dataSlot);
             ES3.Save("skillPoints", skillPoints, dataSlot);
 
-            characterOnSaveLoadPosition = currentParty[0].characterController.transform.position;
+
+            if (currentParty.Count > 0)
+            {
+
+                if (currentParty[0].characterController != null)
+                {
+                    characterOnSaveLoadPosition = currentParty[0].characterController.transform.position;
+                }
+                
+                
+            }
+            
+           
             
             ES3.Save("characterOnSaveLoadPosition", characterOnSaveLoadPosition, dataSlot);
         }

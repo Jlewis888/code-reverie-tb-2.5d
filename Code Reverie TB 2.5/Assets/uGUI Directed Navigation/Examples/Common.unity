@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -104,7 +100,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +113,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -151,9 +147,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1318983736}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -311,14 +307,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -331,16 +330,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -353,16 +356,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -375,16 +382,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -397,6 +408,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &14180188
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -415,10 +427,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 792458817}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -534,14 +546,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -554,16 +569,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -576,16 +595,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -598,16 +621,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -620,6 +647,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &15828656
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -638,10 +666,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 813192058}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -757,14 +785,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -777,16 +808,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -799,16 +834,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -821,16 +860,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -843,6 +886,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &36498970
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -861,10 +905,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 59864278}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -899,9 +943,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1664034061}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -978,9 +1022,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1057,9 +1101,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 36498971}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1136,9 +1180,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101995287}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1296,14 +1340,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1316,16 +1363,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1338,16 +1389,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1360,16 +1415,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1382,6 +1441,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &68507156
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1400,10 +1460,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1290071724}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1438,9 +1498,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1129829602}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1598,14 +1658,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1618,16 +1681,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1640,16 +1707,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1662,16 +1733,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1684,6 +1759,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &79451438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1702,10 +1778,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 318359856}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1741,10 +1817,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 232887680}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1942,14 +2018,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1962,16 +2041,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -1984,16 +2067,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -2006,16 +2093,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -2028,6 +2119,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &101995286
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2046,10 +2138,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 63149039}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2165,14 +2257,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -2185,16 +2280,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -2207,16 +2306,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -2229,16 +2332,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -2251,6 +2358,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &109314351
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2269,10 +2377,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 530683095}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2305,9 +2413,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 184820858}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2342,9 +2450,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 470910100}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2419,9 +2527,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2457,10 +2565,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 728082142}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2625,7 +2733,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2639,6 +2749,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 915817139}
   - {fileID: 163909830}
@@ -2659,7 +2770,6 @@ RectTransform:
   - {fileID: 1356887020}
   - {fileID: 1970603559}
   m_Father: {fileID: 1655887515}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2692,9 +2802,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2729,9 +2839,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2804,9 +2914,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592745162}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2881,9 +2991,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 184820858}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2918,9 +3028,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2997,9 +3107,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 87761084}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3076,9 +3186,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 595469665}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3167,9 +3277,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3203,12 +3321,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241098320}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &255699154
 GameObject:
@@ -3238,9 +3357,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1769563296}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3317,9 +3436,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3390,9 +3509,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 184820858}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3428,10 +3547,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2044445338}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -3548,9 +3667,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 684094922}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3627,9 +3746,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 79451439}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3688,7 +3807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 336868749}
   m_Layer: 0
-  m_Name: DirectedNavigation [Automatic]
+  m_Name: 'DirectedNavigation [Automatic]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3701,14 +3820,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336868748}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1204585458}
   - {fileID: 1602197186}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &344725704
 GameObject:
@@ -3736,9 +3856,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 184820858}
-  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3774,10 +3894,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1830004987}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -3894,9 +4014,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3973,9 +4093,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1356887020}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4052,9 +4172,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4131,9 +4251,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1639936835}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4208,6 +4328,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1416874979}
   - {fileID: 1284713968}
@@ -4217,7 +4338,6 @@ RectTransform:
   - {fileID: 232805761}
   - {fileID: 1821373485}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4252,9 +4372,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1932941484}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4329,9 +4449,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4447,14 +4567,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4467,16 +4590,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4489,16 +4616,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4511,16 +4642,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4533,6 +4668,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &463363767
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4551,10 +4687,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2109929617}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4590,10 +4726,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 176395137}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4711,10 +4847,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1945031951}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4912,14 +5048,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4932,16 +5071,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4954,16 +5097,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4976,16 +5123,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -4998,6 +5149,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &488316847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5016,10 +5168,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1092471888}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5052,9 +5204,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 184820858}
-  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5089,9 +5241,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1378819309}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5168,9 +5320,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1159311440}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5247,9 +5399,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 109314352}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5326,9 +5478,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 805339657}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5486,14 +5638,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5506,16 +5661,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5528,16 +5687,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5550,16 +5713,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5572,6 +5739,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &567665571
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5590,10 +5758,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1601919861}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5629,10 +5797,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1377615004}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5749,9 +5917,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1314023578}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5909,14 +6077,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5929,16 +6100,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5951,16 +6126,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5973,16 +6152,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -5995,6 +6178,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &582686954
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6013,10 +6197,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 675210962}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6052,10 +6236,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 240713986}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -6172,9 +6356,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1577245407}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6252,10 +6436,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1441150106}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6373,10 +6557,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 844254942}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -6491,9 +6675,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6609,14 +6793,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6629,16 +6816,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6651,16 +6842,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6673,16 +6868,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6695,6 +6894,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &666197681
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6713,10 +6913,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1590424081}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6751,9 +6951,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 582686955}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6911,14 +7111,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6931,16 +7134,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6953,16 +7160,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6975,16 +7186,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -6997,6 +7212,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &684094921
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7015,10 +7231,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 311620726}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7053,9 +7269,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1059934365}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7132,9 +7348,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 180463349}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7211,9 +7427,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7286,9 +7502,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7361,9 +7577,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 14180189}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7521,14 +7737,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7541,16 +7760,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7563,16 +7786,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7585,16 +7812,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7607,6 +7838,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &805339656
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7625,10 +7857,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 556455870}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7744,14 +7976,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7764,16 +7999,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7786,16 +8025,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7808,16 +8051,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -7830,6 +8077,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &807614596
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7848,10 +8096,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1307256417}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7886,9 +8134,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 15828657}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7965,9 +8213,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1579571744}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8044,9 +8292,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1313742071}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8121,9 +8369,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8158,9 +8406,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 979619406}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8237,9 +8485,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 649584422}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8316,9 +8564,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2007717862}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8397,10 +8645,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1806797316}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8422,14 +8670,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8442,16 +8693,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8464,16 +8719,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8486,16 +8745,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8508,6 +8771,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!114 &864660109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8616,9 +8880,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8651,6 +8915,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1622520303}
   - {fileID: 741017518}
@@ -8660,7 +8925,6 @@ RectTransform:
   - {fileID: 351621791}
   - {fileID: 974599523}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8695,9 +8959,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1166369971}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8855,14 +9119,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8875,16 +9142,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8897,16 +9168,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8919,16 +9194,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -8941,6 +9220,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &925409912
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8959,10 +9239,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1663247321}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9078,14 +9358,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9098,16 +9381,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9120,16 +9407,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9142,16 +9433,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9164,6 +9459,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &930709800
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9182,10 +9478,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1534464380}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9202,7 +9498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941465622}
   m_Layer: 0
-  m_Name: DirectedNavigation [Mixed]
+  m_Name: 'DirectedNavigation [Mixed]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9215,14 +9511,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941465621}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1705779265}
   - {fileID: 1301494422}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961071709
 GameObject:
@@ -9253,10 +9550,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1246751419}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9373,9 +9670,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9448,9 +9745,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9608,14 +9905,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9628,16 +9928,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9650,16 +9954,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9672,16 +9980,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -9694,6 +10006,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &979619405
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9712,10 +10025,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 839494466}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9751,10 +10064,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1860730047}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9871,9 +10184,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1312244151}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10031,14 +10344,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10051,16 +10367,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10073,16 +10393,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10095,16 +10419,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10117,6 +10445,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1059934364
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10135,10 +10464,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 691076850}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10173,9 +10502,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 488316848}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10253,10 +10582,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 69266231}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -10373,9 +10702,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1613302284}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10533,14 +10862,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10553,16 +10885,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10575,16 +10911,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10597,16 +10937,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10619,6 +10963,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1159311439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10637,10 +10982,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 528185817}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10756,14 +11101,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10776,16 +11124,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10798,16 +11150,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10820,16 +11176,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10842,6 +11202,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1166369970
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10860,10 +11221,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 919010765}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -10979,14 +11340,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -10999,16 +11363,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -11021,16 +11389,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -11043,16 +11415,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -11065,6 +11441,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1180065095
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11083,10 +11460,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2096500059}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11118,12 +11495,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204585457}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 336868749}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1204585459
 MonoBehaviour:
@@ -11137,6 +11515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -11186,6 +11565,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 283176043}
   - {fileID: 87761084}
@@ -11198,7 +11578,6 @@ RectTransform:
   - {fileID: 344835609}
   - {fileID: 1718405039}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11259,9 +11638,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11336,6 +11715,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 733948201}
   - {fileID: 212805153}
@@ -11345,7 +11725,6 @@ RectTransform:
   - {fileID: 50767390}
   - {fileID: 1323991972}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11380,9 +11759,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1664834037}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11459,9 +11838,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 961071710}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11538,9 +11917,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11613,9 +11992,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11688,9 +12067,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 68507157}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11768,6 +12147,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1232527637}
   - {fileID: 448883846}
@@ -11788,7 +12168,6 @@ RectTransform:
   - {fileID: 14180189}
   - {fileID: 864660107}
   m_Father: {fileID: 941465622}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11852,7 +12231,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -11883,6 +12264,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1159311440}
   - {fileID: 2081407274}
@@ -11895,7 +12277,6 @@ RectTransform:
   - {fileID: 567665572}
   - {fileID: 1313742071}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11956,9 +12337,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 807614597}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12116,14 +12497,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12136,16 +12520,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12158,16 +12546,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12180,16 +12572,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12202,6 +12598,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1312244150
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12220,10 +12617,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1018280987}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -12339,14 +12736,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12359,16 +12759,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12381,16 +12785,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12403,16 +12811,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12425,6 +12837,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1313742070
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12443,10 +12856,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 821772138}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12562,14 +12975,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12582,16 +12998,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12604,16 +13024,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12626,16 +13050,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12648,6 +13076,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1314023577
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12666,10 +13095,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 579929282}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12785,14 +13214,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12805,16 +13237,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12827,16 +13263,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12849,16 +13289,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -12871,6 +13315,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1318983735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12889,10 +13334,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4001377}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12927,9 +13372,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1232527637}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13007,10 +13452,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1454200589}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13128,10 +13573,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 390248139}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13248,9 +13693,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1943528245}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13327,9 +13772,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 576488028}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13487,14 +13932,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -13507,16 +13955,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -13529,16 +13981,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -13551,16 +14007,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -13573,6 +14033,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1378819308
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13591,10 +14052,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 514328993}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -13629,9 +14090,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13705,10 +14166,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1516365763}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -13825,9 +14286,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 630280909}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13904,9 +14365,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1347992179}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13983,9 +14444,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1618498728}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14062,9 +14523,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1436252180}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14141,9 +14602,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14216,9 +14677,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 930709801}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14293,9 +14754,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14330,9 +14791,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14490,14 +14951,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14510,16 +14974,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14532,16 +15000,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14554,16 +15026,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14576,6 +15052,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1577245406
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14594,10 +15071,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 621590770}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14634,10 +15111,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 819771291}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14659,14 +15136,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14679,16 +15159,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14701,16 +15185,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14723,16 +15211,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -14745,6 +15237,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!114 &1579571746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14855,9 +15348,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 666197682}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -15015,14 +15508,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15035,16 +15531,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15057,16 +15557,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15079,16 +15583,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15101,6 +15609,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1592745161
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15119,10 +15628,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 226736152}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15157,9 +15666,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 567665572}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -15237,6 +15746,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 442897477}
   - {fileID: 653170787}
@@ -15257,7 +15767,6 @@ RectTransform:
   - {fileID: 1592745162}
   - {fileID: 1579571744}
   m_Father: {fileID: 336868749}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15321,7 +15830,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -15354,10 +15865,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1137536048}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -15555,14 +16066,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15575,16 +16089,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15597,16 +16115,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15619,16 +16141,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15641,6 +16167,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1614314212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15659,10 +16186,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1670996433}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -15778,14 +16305,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15798,16 +16328,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15820,16 +16354,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15842,16 +16380,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -15864,6 +16406,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1618498727
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15882,10 +16425,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1458178864}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15920,9 +16463,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15995,9 +16538,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 915817139}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16151,14 +16694,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16171,16 +16717,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16193,16 +16743,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16215,16 +16769,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16237,6 +16795,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1639936834
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16255,10 +16814,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 420141192}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -16295,6 +16854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -16324,12 +16884,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645754973}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1655887515}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1646380948
 GameObject:
@@ -16359,9 +16920,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1781736686}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16433,14 +16994,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655887514}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1645754976}
   - {fileID: 184820858}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663247320
 GameObject:
@@ -16470,9 +17032,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 925409913}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16550,10 +17112,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 40177802}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16751,14 +17313,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16771,16 +17336,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16793,16 +17362,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16815,16 +17388,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -16837,6 +17414,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1664834036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16855,10 +17433,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1238530992}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -16893,9 +17471,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1614314213}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16969,12 +17547,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705779264}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941465622}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1705779266
 MonoBehaviour:
@@ -16988,6 +17567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -17039,10 +17619,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1770406895}
   m_Father: {fileID: 1219743782}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -17157,9 +17737,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17275,14 +17855,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17295,16 +17878,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 1
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17317,16 +17904,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17339,16 +17930,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17361,6 +17956,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1766475574
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17379,10 +17975,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1966351024}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17418,10 +18014,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 255699155}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17538,9 +18134,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1718405039}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17698,14 +18294,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17718,16 +18317,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17740,16 +18343,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17762,16 +18369,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17784,6 +18395,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1781736685
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17802,10 +18414,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1646380949}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17921,14 +18533,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17941,16 +18556,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17963,16 +18582,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -17985,16 +18608,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18007,6 +18634,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1794193001
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18025,10 +18653,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1923736518}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18063,9 +18691,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 864660107}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18142,9 +18770,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18221,9 +18849,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 344835609}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18300,9 +18928,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012378169}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18377,9 +19005,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18414,9 +19042,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794193002}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18574,14 +19202,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18594,16 +19225,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18616,16 +19251,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18638,16 +19277,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18660,6 +19303,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1932941483
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18678,10 +19322,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 448000614}
   m_Father: {fileID: 2063999085}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -18797,14 +19441,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18817,16 +19464,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18839,16 +19490,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18861,16 +19516,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 3
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -18883,6 +19542,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &1943528244
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18901,10 +19561,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1361732951}
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18939,9 +19599,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 487259880}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19018,9 +19678,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 442897477}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19093,9 +19753,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1766475575}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19173,10 +19833,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1977443684}
   m_Father: {fileID: 184820858}
-  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19293,9 +19953,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1970603559}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19372,9 +20032,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2081407274}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19449,9 +20109,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301494422}
-  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19567,14 +20227,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -19587,16 +20250,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -19609,16 +20276,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -19631,16 +20302,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -19653,6 +20328,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &2007717861
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19671,10 +20347,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 862941770}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -19709,9 +20385,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 283176043}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19787,6 +20463,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 15828657}
   - {fileID: 36498971}
@@ -19799,7 +20476,6 @@ RectTransform:
   - {fileID: 1614314213}
   - {fileID: 1639936835}
   m_Father: {fileID: 1602197186}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19941,14 +20617,17 @@ MonoBehaviour:
   m_Active: 1
   m_ConfigLeft:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -19961,16 +20640,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigRight:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -19983,16 +20666,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigUp:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -20005,16 +20692,20 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
   m_ConfigDown:
     m_Type: 1
+    m_wrapAround: 0
     m_UseEdges: 0
-    m_Automatic:
-      m_Directivity: 0
+    m_Omnidirectional: 0
+    m_Directivity: 0
+    m_Anchor:
+      m_Type: 0
+      m_Shift: {x: 0, y: 0, z: 0}
+      m_RectTransform: {fileID: 0}
     m_Sector:
       m_MinAngle: -25
-      m_MinAngleLimit: -90
       m_MaxAngle: 25
-      m_MaxAngleLimit: 90
       m_Radius: 500
     m_Rectangle:
       m_Verts:
@@ -20027,6 +20718,7 @@ MonoBehaviour:
     m_SelectableList:
       m_SelectableList:
       - {fileID: 0}
+      m_UseListOrder: 0
 --- !u!222 &2081407273
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20045,10 +20737,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1979141968}
   m_Father: {fileID: 1302860738}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20083,9 +20775,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1180065096}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20162,9 +20854,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 463363768}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20213,3 +20905,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109929616}
   m_CullTransparentMesh: 0
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 241098323}
+  - {fileID: 1655887515}
+  - {fileID: 336868749}
+  - {fileID: 941465622}

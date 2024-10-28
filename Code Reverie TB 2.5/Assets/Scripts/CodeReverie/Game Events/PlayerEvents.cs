@@ -1,5 +1,7 @@
 ﻿using System;
+using Unity.Behavior;
 using UnityEngine;
+using Action = System.Action;
 
 namespace CodeReverie
 {
@@ -88,7 +90,8 @@ namespace CodeReverie
         }
 
         //public Action<TextAsset, DialogueSpeaker, String> onDialogueStart;
-        public Action<DialogueGraphAsset> onDialogueStart;
+        //public Action<DialogueGraphAsset> onDialogueStart;
+        public Action<BehaviorGraph> onDialogueStart;
 
 
         // public void OnDialogueStart(TextAsset inkJSON, DialogueSpeaker dialogueSpeaker, string storyPath)
@@ -96,10 +99,16 @@ namespace CodeReverie
         //     onDialogueStart?.Invoke(inkJSON, dialogueSpeaker, storyPath);
         // }
         
-        public void OnDialogueStart(DialogueGraphAsset dialogueGraphAsset)
+        // public void OnDialogueStart(DialogueGraphAsset dialogueGraphAsset)
+        // {
+        //     onDialogueStart?.Invoke(dialogueGraphAsset);
+        // }
+        
+        public void OnDialogueStart(BehaviorGraph dialogueGraphAsset)
         {
             onDialogueStart?.Invoke(dialogueGraphAsset);
         }
+        
         
         public Action<DialogueSpeaker> onDialogueEnd;
 
@@ -108,6 +117,15 @@ namespace CodeReverie
         {
             onDialogueEnd?.Invoke(dialogueSpeaker);
         }
+        
+        public Action<int> onDialogueChoice;
+
+
+        public void OnDialogueChoice(int index)
+        {
+            onDialogueChoice?.Invoke(index);
+        }
+        
         
 
         public Action onDodgeStart;

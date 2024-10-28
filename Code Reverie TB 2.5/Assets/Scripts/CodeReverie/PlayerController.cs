@@ -25,7 +25,7 @@ namespace CodeReverie
         protected void Awake()
         {
             
-            //DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this);
             //base.Awake();
             playerMovementController = GetComponent<PlayerMovementController>();
             playerCombatController = GetComponent<PlayerCombatController>();
@@ -231,10 +231,10 @@ namespace CodeReverie
                                 
                                 
                                 PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
-                                    SceneManager.GetActiveScene().name,
-                                    other.GetComponent<CharacterUnitController>().characterInstanceID,
-                                    transform.position,
-                                    other.GetComponent<EnemyAI>().enemyList.Count > 0 ? other.GetComponent<EnemyAI>().enemyList : new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
+                                    returnSceneName: SceneManager.GetActiveScene().name,
+                                    characterInstanceID: other.GetComponent<CharacterUnitController>().characterInstanceID,
+                                    characterReturnPosition: transform.position,
+                                    enemyList: other.GetComponent<EnemyAI>().enemyList.Count > 0 ? other.GetComponent<EnemyAI>().enemyList : new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
                                     );
                                 
                                 TransitionAnimator.Start(
@@ -249,10 +249,10 @@ namespace CodeReverie
                                 
                                 
                                 PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
-                                    SceneManager.GetActiveScene().name,
-                                    other.GetComponent<CharacterUnitController>().characterInstanceID,
-                                    transform.position,
-                                    new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
+                                    returnSceneName: SceneManager.GetActiveScene().name,
+                                    characterInstanceID: other.GetComponent<CharacterUnitController>().characterInstanceID,
+                                    characterReturnPosition: transform.position,
+                                    enemyList: new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
                                 );
                                 
                                 TransitionAnimator.Start(

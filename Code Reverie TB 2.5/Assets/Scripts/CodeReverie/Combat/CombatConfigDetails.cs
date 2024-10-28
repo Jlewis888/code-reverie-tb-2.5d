@@ -14,7 +14,7 @@ namespace CodeReverie
         
 
 
-        public CombatConfigDetails(string returnSceneName, string characterInstanceID, Vector3 characterReturnPosition, List<CharacterDataContainer> enemyList)
+        public CombatConfigDetails(string returnSceneName = "", string characterInstanceID = "", Vector3 characterReturnPosition = default, List<CharacterDataContainer> enemyList = null)
         {
             this.returnSceneName = returnSceneName;
             this.characterInstanceID = characterInstanceID;

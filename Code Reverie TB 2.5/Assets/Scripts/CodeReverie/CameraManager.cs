@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using CodeReverie;
+using Unity.Cinemachine;
 using UnityEngine;
 
 [DefaultExecutionOrder(-115)]
@@ -12,12 +12,12 @@ public class CameraManager : ManagerSingleton<CameraManager>
 
     public Camera mainCamera;
     public Camera mapCamera;
-    public List<CinemachineVirtualCamera> virtualCameras = new List<CinemachineVirtualCamera>();
-    public CinemachineVirtualCamera mainVirtualCamera;
-    public CinemachineVirtualCamera inventoryVirtualCamera;
-    public CinemachineVirtualCamera skillVirtualCamera;
-    public CinemachineVirtualCamera dialogueVirtualCamera;
-    public CinemachineVirtualCamera combatVirtualCamera;
+    public List<CinemachineCamera> virtualCameras = new List<CinemachineCamera>();
+    public CinemachineCamera mainVirtualCamera;
+    public CinemachineCamera inventoryVirtualCamera;
+    public CinemachineCamera skillVirtualCamera;
+    public CinemachineCamera dialogueVirtualCamera;
+    public CinemachineCamera combatVirtualCamera;
     public CinemachineTargetGroup combatTargetGroup;
     private CinemachineImpulseSource impulseSource;
     public float impulseForce = 1f;
@@ -69,31 +69,31 @@ public class CameraManager : ManagerSingleton<CameraManager>
         }
     }
 
-    public void SetPriorityCamera(CinemachineVirtualCamera camera)
+    public void SetPriorityCamera(CinemachineCamera camera)
     {
-        foreach (CinemachineVirtualCamera virtualCamera in virtualCameras)
+        foreach (CinemachineCamera virtualCamera in virtualCameras)
         {
             if (camera == virtualCamera)
             {
-                virtualCamera.m_Priority = 10;
+                virtualCamera.Priority = 10;
             }
             else
             {
-                virtualCamera.m_Priority = 1;
+                virtualCamera.Priority = 1;
             }
         }
     }
     
     public void SetBattleCamera()
     {
-        combatVirtualCamera.m_Priority = 11;
-        mainVirtualCamera.m_Priority = 1;
+        combatVirtualCamera.Priority = 11;
+        mainVirtualCamera.Priority = 1;
     }
 
     public void SetBattleCamera(BattleAreaManager battleArea)
     {
-        combatVirtualCamera.m_Priority = 11;
-        mainVirtualCamera.m_Priority = 1;
+        combatVirtualCamera.Priority = 11;
+        mainVirtualCamera.Priority = 1;
     }
 
     public void SetTargetGroup(List<CharacterBattleManager> characterBattleManager)
@@ -113,17 +113,17 @@ public class CameraManager : ManagerSingleton<CameraManager>
         
         for (int i = 0; i < combatTargetGroup.m_Targets.Length; i++)
         {
-            if (combatTargetGroup.m_Targets[i].target == characterBattleManager.transform)
+            if (combatTargetGroup.Targets[i].Object == characterBattleManager.transform)
             {
                 
                 //int member = combatTargetGroup.FindMember(characterBattleManager.transform);
-                combatTargetGroup.m_Targets[i].weight = weight;
-                combatTargetGroup.m_Targets[i].radius = radius;
+                combatTargetGroup.Targets[i].Weight = weight;
+                combatTargetGroup.Targets[i].Radius = radius;
             }
             else
             {
-                combatTargetGroup.m_Targets[i].weight = 1f;
-                combatTargetGroup.m_Targets[i].radius = 2f;
+                combatTargetGroup.Targets[i].Weight = 1f;
+                combatTargetGroup.Targets[i].Radius = 2f;
             }
         }
     }
@@ -143,8 +143,8 @@ public class CameraManager : ManagerSingleton<CameraManager>
     public void SetCharacterWeight(CharacterBattleManager characterBattleManager, float weight, float radius = 1f)
     {
         int member = combatTargetGroup.FindMember(characterBattleManager.transform);
-        combatTargetGroup.m_Targets[member].weight = weight;
-        combatTargetGroup.m_Targets[member].radius = radius;
+        combatTargetGroup.Targets[member].Weight = weight;
+        combatTargetGroup.Targets[member].Radius = radius;
     }
     
     
@@ -153,8 +153,8 @@ public class CameraManager : ManagerSingleton<CameraManager>
     {
         for (int i = 0; i < combatTargetGroup.m_Targets.Length; i++)
         {
-            combatTargetGroup.m_Targets[i].weight = 1f;
-            combatTargetGroup.m_Targets[i].radius = 2f;
+            combatTargetGroup.Targets[i].Weight= 1f;
+            combatTargetGroup.Targets[i].Radius = 2f;
         }
     }
 
@@ -169,10 +169,10 @@ public class CameraManager : ManagerSingleton<CameraManager>
         
         // battleVirtualCamera.m_Follow = null;
         // battleVirtualCamera.LookAt = null;
-        // battleVirtualCamera.m_Priority = 1;
+        // battleVirtualCamera.Priority = 1;
         //mainVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset.y = 0f;
-        mainVirtualCamera.m_Priority = 10;
-        combatVirtualCamera.m_Priority = 1;
+        mainVirtualCamera.Priority = 10;
+        combatVirtualCamera.Priority = 1;
         ClearTargetGroup();
 
     }
@@ -202,17 +202,17 @@ public class CameraManager : ManagerSingleton<CameraManager>
     
     public void SetCameraConfiner(PolygonCollider2D collider2D)
     {
-        mainVirtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = collider2D;
+        mainVirtualCamera.GetComponent<CinemachineConfiner2D>().BoundingShape2D = collider2D;
     }
     
     public void SetCameraConfiner(Collider collider)
     {
-        mainVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingVolume = collider;
+        mainVirtualCamera.GetComponent<CinemachineConfiner3D>().BoundingVolume = collider;
     }
 
     public void UpdateCamera(Transform transform)
     {
-        mainVirtualCamera.m_Follow = transform;
+        mainVirtualCamera.Follow = transform;
         mainVirtualCamera.LookAt = null;
         //
         // inventoryVirtualCamera.m_Follow = transform;
@@ -231,7 +231,7 @@ public class CameraManager : ManagerSingleton<CameraManager>
         {
             impulseSource.GenerateImpulseWithForce(impulseForce);
             screenShake = true;
-            screenShakeTimer = impulseSource.m_ImpulseDefinition.m_ImpulseDuration;
+            screenShakeTimer = impulseSource.ImpulseDefinition.ImpulseDuration;
         }
     }
     
@@ -239,7 +239,7 @@ public class CameraManager : ManagerSingleton<CameraManager>
     {
         impulseSource.GenerateImpulseWithForce(3f);
         screenShake = true;
-        screenShakeTimer = impulseSource.m_ImpulseDefinition.m_ImpulseDuration;
+        screenShakeTimer = impulseSource.ImpulseDefinition.ImpulseDuration;
     }
     
     public void ScreenShake(DamageProfile damageProfile)

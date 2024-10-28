@@ -27,11 +27,13 @@ MonoBehaviour:
   characterID: Miniboss Slime
   characterName: 
   characterType: 2
-  characterUnitPF: {fileID: 5267411699627973295, guid: dd785c91ff4bf0f4d98e3047d686a64d, type: 3}
+  characterUnitPF: {fileID: 5267411699627973295, guid: dd785c91ff4bf0f4d98e3047d686a64d,
+    type: 3}
   experienceToGive: 5000
   attackRange: 1
   baseStats: {fileID: 11400000, guid: 89693adcacb77f14a86942b6b7ee13ed, type: 2}
   healthBarCount: 5
   archetypes: []
-  lootTableDataContainer: {fileID: 11400000, guid: 0a6fea150a47e7c498433518e9c7ad02, type: 2}
+  lootTableDataContainer: {fileID: 11400000, guid: 0a6fea150a47e7c498433518e9c7ad02,
+    type: 2}
   vendorInventory: {fileID: 0}

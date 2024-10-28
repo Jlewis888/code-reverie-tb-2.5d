@@ -12,7 +12,7 @@ namespace CodeReverie
     public class AreaManager : SerializedMonoBehaviour
     {
         public static AreaManager instance;
-        public AreaManagerData areaManagerData;
+        public AreaManagerConfig areaManagerConfig;
 
         public AreaType areaType;
         public Transform defaultAreaSpawnPoint;
@@ -31,14 +31,21 @@ namespace CodeReverie
         public Tilemap mapBase;
         public string audioClip;
         public SceneField combatLocation;
+        public SceneField persistentData;
 
         private void Awake()
         {
+
+            // if (persistentData != null)
+            // {
+            //     SceneManager.LoadSceneAsync(persistentData, LoadSceneMode.Additive);
+            // }
+            
+            
             instance = this;
             autoSaveDelay = 5f;
-            
-            
-            
+
+
             // GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             // GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
             // areaManagerData.characterList =
@@ -46,9 +53,15 @@ namespace CodeReverie
             //
             //
             // int instanceID = GetInstanceID();
+            
+            
+            GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
+            GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
+            
+            CameraManager.Instance.SetCameraConfiner(areaCameraConfiner);
         }
-        
-#if UNITY_EDITOR     
+
+#if UNITY_EDITOR
         [Button("Set Character IDs")]
         public void SetCharacterIDs()
         {
@@ -56,32 +69,32 @@ namespace CodeReverie
             GetComponentsInChildren<CharacterUnitController>().ToList().ForEach(x => x.SetInstanceID());
         }
 #endif
-    
+
 
         private void OnEnable()
         {
             //Debug.Log(EventManager.Instance);
             //EventManager.Instance.playerEvents.onPlayerSpawn += SpawnPlayer;
+            
         }
 
         private void OnDisable()
         {
             //EventManager.Instance.playerEvents.onPlayerSpawn -= SpawnPlayer;
         }
-        
-       
+
 
         private void Start()
         {
             //CameraManager.Instance.SetCameraConfiner(areaCameraConfiner);
-            
-            
+
+
             //SpawnPlayerCharacterUnits();
-           
+
             //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.gameObject.SetActive(true);
             // EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.screenSpaceCanvasManager.hudManager);
 
-            
+
             // foreach (AreaEntrance areaEntrance in areaEntrances)
             // {
             //     if (areaEntrance.transitionName == SceneTransitionManager.Instance.SceneTransitionName)
@@ -92,65 +105,24 @@ namespace CodeReverie
             //     }
             // }
             
-            GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
-            GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 0);
-
             
-
-            if (!GameManager.Instance.newGame)
+            
+            
+            if (areaManagerConfig != null)
             {
-                PlayerManager.Instance.SetPartyUnits(PlayerManager.Instance.characterOnSaveLoadPosition);
+                if (areaManagerConfig.hasCutsceneOnStart)
+                {
+                    EventManager.Instance.generalEvents.OnStartCutscene(areaManagerConfig.cutsceneOnStart);
+                }
+                else
+                {
+                    Init();
+                }
             }
             else
             {
-                PlayerManager.Instance.SetPartyUnits(defaultAreaSpawnPoint != null ? defaultAreaSpawnPoint.position : Vector3.zero);
+                Init();
             }
-            
-            
-            
-            CameraManager.Instance.SetCameraConfiner(areaCameraConfiner);
-            
-            if (PlayerManager.Instance.combatConfigDetails != null)
-            {
-                CanvasManager.Instance.victoryPopup.SetActive(false);
-                
-                
-                TransitionAnimator.Start(
-                    TransitionType.Wipe, // transition type
-                    duration: 1f,
-                    invert: true
-                );
-                
-                
-                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(false);
-                CameraManager.Instance.UnsetBattleCamera();
-                CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController.transform);
-                Destroy(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x => x.characterInstanceID == PlayerManager.Instance.combatConfigDetails.characterInstanceID).gameObject);
-                
-                PlayerManager.Instance.SetPartyReturnPosition();
-                PlayerManager.Instance.combatConfigDetails = null;
-            }
-
-
-
-            if (GameManager.Instance.newGame)
-            {
-                DataPersistenceManager.Instance.AutoSave();
-            }
-            
-            // if (GameSceneManager.Instance.fromLoadedData)
-            // {
-            //     DataPersistenceManager.Instance.AutoSave();
-            // }
-
-            if (!string.IsNullOrEmpty(audioClip))
-            {
-                SoundManager.Instance.PlayMusic(audioClip);
-            }
-            
-            
-            GameManager.Instance.newGame = false;
-            
         }
 
         private void Update()
@@ -165,20 +137,33 @@ namespace CodeReverie
             }
         }
 
+        public void Init()
+        {
+            
 
-        // public void SpawnPlayerCharacterUnits()
-        // {
-        //     int count = 0;
-        //     foreach (Character playerCharacterManager in PlayerManager.Instance.currentParty)
-        //     {
-        //         //playerCharacterManager.InstantiateCharacterUnit(spawnPoints[count]);
-        //
-        //         count++;
-        //     }
-        //     
-        //     PlayerManager.Instance.SetParty();
-        // }
 
+            if (GameManager.Instance.newGame)
+            {
+                DataPersistenceManager.Instance.AutoSave();
+            }
+
+            // if (GameSceneManager.Instance.fromLoadedData)
+            // {
+            //     DataPersistenceManager.Instance.AutoSave();
+            // }
+
+            if (!string.IsNullOrEmpty(audioClip))
+            {
+                SoundManager.Instance.PlayMusic(audioClip);
+            }
+
+
+            GameManager.Instance.newGame = false;
+
+
+            
+        }
+        
         public void AutoSaveScene()
         {
             if (!sceneAutoSaved)
@@ -187,31 +172,53 @@ namespace CodeReverie
                 {
                     sceneAutoSaved = true;
                     DataPersistenceManager.Instance.AutoSave();
-                    
                 }
-            } 
+            }
         }
-        
-        
-        public void SpawnPlayerCharacterUnits()
+
+
+        public void SpawnPlayerParty()
         {
+            if (!GameManager.Instance.newGame)
+            {
+                PlayerManager.Instance.SetPartyUnits(PlayerManager.Instance.characterOnSaveLoadPosition);
+            }
+            else
+            {
+                PlayerManager.Instance.SetPartyUnits(defaultAreaSpawnPoint != null
+                    ? defaultAreaSpawnPoint.position
+                    : Vector3.zero);
+                
+            }
+
             
-            // int count = 0;
-            // foreach (Character playerCharacterManager in PlayerManager.Instance.currentParty)
-            // {
-            //     
-            //     CharacterManager.Instance.InstantiateCharacterUnit(playerCharacterManager.info.id, areaSpawnPoint);
-            //    
-            //     if (count != 0)
-            //     {
-            //         playerCharacterManager.characterUnit.gameObject.SetActive(false);
-            //     }
-            //     
-            //
-            //     count++;
-            // }
-            //
-            // PlayerManager.Instance.SetParty();
+            if (PlayerManager.Instance.combatConfigDetails != null)
+            {
+                CanvasManager.Instance.victoryPopup.SetActive(false);
+
+
+                TransitionAnimator.Start(
+                    TransitionType.Wipe, // transition type
+                    duration: 1f,
+                    invert: true
+                );
+
+
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject
+                    .SetActive(false);
+                CameraManager.Instance.UnsetBattleCamera();
+                CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController
+                    .transform);
+                Destroy(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x =>
+                        x.characterInstanceID == PlayerManager.Instance.combatConfigDetails.characterInstanceID)
+                    .gameObject);
+
+                PlayerManager.Instance.SetPartyReturnPosition();
+                PlayerManager.Instance.combatConfigDetails = null;
+            }
+            
+            CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController
+                .transform);
         }
 
         public void SpawnPlayer()
@@ -276,7 +283,5 @@ namespace CodeReverie
         //         
         //     }
         // }
-
-        
     }
 }

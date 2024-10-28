@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.Behavior;
 using UnityEngine;
 
 namespace CodeReverie
@@ -9,9 +10,10 @@ namespace CodeReverie
     {
         [SerializeField] 
         private DialogueGraphAsset _dialogueGraphAsset;
-        
         private DialogueGraphAsset graphInstance;
 
+        [SerializeField] private BehaviorGraph behaviorGraph;
+        
         private DialogueGraphNode currentNode;
         private DialogueGraphNode nextNode;
 
@@ -26,8 +28,7 @@ namespace CodeReverie
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 EventManager.Instance.generalEvents.OpenMenuManager(CanvasManager.Instance.dialogueManager);
-                EventManager.Instance.playerEvents.OnDialogueStart(_dialogueGraphAsset);
-                Debug.Log("Testting");
+                EventManager.Instance.playerEvents.OnDialogueStart(behaviorGraph);
                 //ProcessNextNode();
             }
         }

@@ -6,18 +6,18 @@ using UnityEngine;
 
 namespace CodeReverie
 {
-    [CreateAssetMenu(fileName = "GlobalAreaManagerData", menuName = "Scriptable Objects/Area Management/Global Area Manager Data List", order = 1)]
-    public class GlobalAreaManagerDataList : SerializedScriptableObject
+    [CreateAssetMenu(fileName = "GlobalAreaManagerConfig", menuName = "Scriptable Objects/Area Management/Global Area Manager Config List", order = 1)]
+    public class GlobalAreaManagerConfigList : SerializedScriptableObject
     {
 
-        public List<AreaManagerData> areaManagerDataList = new List<AreaManagerData>();
+        public List<AreaManagerConfig> areaManagerConfigList = new List<AreaManagerConfig>();
         
         
 #if UNITY_EDITOR     
         [Button("Update")]
         public void Update()
         {
-            areaManagerDataList = AssetDatabase.FindAssets("t:AreaManagerData", null).Select(guid => AssetDatabase.LoadAssetAtPath<AreaManagerData>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
+            areaManagerConfigList = AssetDatabase.FindAssets("t:AreaManagerConfig", null).Select(guid => AssetDatabase.LoadAssetAtPath<AreaManagerConfig>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
         }
 #endif
     }

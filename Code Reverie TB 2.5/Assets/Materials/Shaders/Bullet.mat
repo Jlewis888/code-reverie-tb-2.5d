@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 7
+  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bullet
-  m_Shader: {fileID: -6465566751694194690, guid: b735d2c8c5148d948af23e973123633c, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b735d2c8c5148d948af23e973123633c,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -57,3 +58,4 @@ Material:
     m_Colors:
     - _Color: {r: 25.197752, g: 1.7590874, b: 2.2440214, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

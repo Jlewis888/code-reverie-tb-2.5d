@@ -124,6 +124,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -209,10 +212,13 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7a036dd2f611f444b812f726a61ab5a1, type: 2}
+  - {fileID: 2100000, guid: b6091de683d8a014080e269e09e88445, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -270,6 +276,11 @@ MonoBehaviour:
       Data: 
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  dissolveTest: 0
+  visualEffect: {fileID: 0}
+  refreshRate: 0
+  dissolveRate: 0
+  _dissolveAmount: 1745
 --- !u!1 &3810323714467418030
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +391,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -717,6 +731,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -741,7 +758,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -868,10 +886,10 @@ MonoBehaviour:
     - Name: characterState
       Entry: 3
       Data: 0
-    - Name: level
-      Entry: 3
-      Data: 0
     - Name: characterSkills
+      Entry: 6
+      Data: 
+    - Name: characterStats
       Entry: 6
       Data: 
     - Name: equippedArchetype
@@ -889,12 +907,31 @@ MonoBehaviour:
     - Name: currentHealth
       Entry: 4
       Data: 0
+    - Name: currentSkillPoints
+      Entry: 3
+      Data: 0
     - Name: archetypeLevelMap
       Entry: 6
       Data: 
+    - Name: currentLevel
+      Entry: 3
+      Data: 0
+    - Name: currentExp
+      Entry: 4
+      Data: 0
+    - Name: skillPoints
+      Entry: 3
+      Data: 0
+    - Name: maxResonancetPoints
+      Entry: 3
+      Data: 0
+    - Name: availableResonancePoints
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
+  characterInstanceID: 
   characterInfo: {fileID: 0}
   characterUnit: {fileID: 0}
   canAttack: 0
@@ -907,6 +944,7 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8443499873492076108}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -930,13 +968,14 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.21133333}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
 --- !u!50 &8555059412927054959
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -947,8 +986,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1082,9 +1121,12 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   dialogueSpeaker: {fileID: 0}
+  dialogueGraphAsset: {fileID: 0}
+  behaviorGraph: {fileID: 0}
   playerInRange: 0
   instantTrigger: 0
   storyPath: LocateCecil
+  _interactableMessage: 
 --- !u!1 &8521076496872565770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,9 +1182,12 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   dialogueSpeaker: {fileID: 0}
+  dialogueGraphAsset: {fileID: 0}
+  behaviorGraph: {fileID: 0}
   playerInRange: 0
   instantTrigger: 0
   storyPath: LocateCecil
+  _interactableMessage: 
 --- !u!58 &4001662164826576429
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1151,6 +1196,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8521076496872565770}
   m_Enabled: 0
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1174,9 +1220,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 0.4
 --- !u!1 &8649538586119898717
 GameObject:

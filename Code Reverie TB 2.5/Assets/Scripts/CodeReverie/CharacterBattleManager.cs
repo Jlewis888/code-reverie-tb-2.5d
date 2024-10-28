@@ -1071,7 +1071,7 @@ namespace CodeReverie
 
         public IEnumerator Rotate(Action onComplete)
         {
-            CameraManager.Instance.combatVirtualCamera.m_Follow = transform;
+            CameraManager.Instance.combatVirtualCamera.Follow = transform;
             
             Vector3 targetDirection =
                 target.transform.position - transform.position;
