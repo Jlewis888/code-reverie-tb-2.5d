@@ -80,20 +80,20 @@ namespace CodeReverie
                     
                     
                     //skillSlot = PlayerManager.Instance.currentParty[0].characterSkills.equippedSkills[slotSkillType];
-                    skillSlot = PlayerManager.Instance.currentParty[0].equippedArchetype.skills.equippedSkills[slotSkillType];
-            
-            
-                    if (skillSlot != null && skillSlot.skill != null)
-                    {
-                        skillImage.sprite = skillSlot.skill.GetSpriteIcon();
-                        //skillCooldown = skillSlot.skill.info.cooldown;
-                    }
-                    else
-                    {
-                        skillImage.sprite = null;
-                        cooldownText.gameObject.SetActive(false);
-                        cooldownImage.fillAmount = 0;
-                    }
+                    // skillSlot = PlayerManager.Instance.currentParty[0].equippedArchetype.archetypeSkills.equippedSkills[slotSkillType];
+                    //
+                    //
+                    // if (skillSlot != null && skillSlot.skill != null)
+                    // {
+                    //     skillImage.sprite = skillSlot.skill.GetSpriteIcon();
+                    //     //skillCooldown = skillSlot.skill.info.cooldown;
+                    // }
+                    // else
+                    // {
+                    //     skillImage.sprite = null;
+                    //     cooldownText.gameObject.SetActive(false);
+                    //     cooldownImage.fillAmount = 0;
+                    // }
                 }
             }
             

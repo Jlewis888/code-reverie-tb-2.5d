@@ -36,13 +36,13 @@ namespace CodeReverie
         public void UnlinkNodes(ArchetypeDataContainer archetypeDataContainer)
         {
 
-            foreach (ArchetypeSkillNodeDataContainer archetypeSkillNodeDataContainer in archetypeDataContainer.archetypeSkillNodeDataContainers)
-            {
-                if (!linkedSkillNodes.Contains(archetypeSkillNodeDataContainer))
-                {
-                    archetypeSkillNodeDataContainer.linkedSkillNodes.Remove(this);
-                }
-            }
+            // foreach (ArchetypeSkillNodeDataContainer archetypeSkillNodeDataContainer in archetypeDataContainer.archetypeSkillNodeDataContainers)
+            // {
+            //     if (!linkedSkillNodes.Contains(archetypeSkillNodeDataContainer))
+            //     {
+            //         archetypeSkillNodeDataContainer.linkedSkillNodes.Remove(this);
+            //     }
+            // }
             
         }
         

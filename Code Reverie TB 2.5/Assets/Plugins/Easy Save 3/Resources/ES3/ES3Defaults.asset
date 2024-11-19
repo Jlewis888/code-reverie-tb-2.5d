@@ -43,6 +43,12 @@ MonoBehaviour:
     - IEVO.uGUIDirectedNavigation.Runtime
     - Ink-Libraries
     - SerializableGUID
+    - Timeline.Samples.Annotation
+    - Timeline.Samples.Text
+    - Timeline.Samples.TimeDilation
+    - Timeline.Samples.Tween
+    - Timeline.Samples.Utilities
+    - Timeline.Samples.Video
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 0

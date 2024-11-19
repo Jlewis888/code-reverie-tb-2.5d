@@ -114,6 +114,13 @@ namespace CodeReverie
         {
             onSkillSlotSelect?.Invoke(skillSlotUI);
         }
+        
+        public Action<LearnSkillPauseMenuNavigationButton> onLearnSkillSlotSelect;
+
+        public void OnLearnSkillSlotSelect(LearnSkillPauseMenuNavigationButton skillSlotUI)
+        {
+            onLearnSkillSlotSelect?.Invoke(skillSlotUI);
+        }
 
         public void OnStartCutscene(string cutsceneName)
         {

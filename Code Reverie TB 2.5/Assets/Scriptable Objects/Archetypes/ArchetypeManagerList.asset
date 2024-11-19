@@ -22,29 +22,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   archetypeDataContainers:
-  - {fileID: 11400000, guid: 825ff02ebd283ae43abb70e88d6c1067, type: 2}
-  - {fileID: 11400000, guid: 731ae9ce69dc81c46a6754eac04608db, type: 2}
-  - {fileID: 11400000, guid: a569da26585864747b0846b8d063de34, type: 2}
-  - {fileID: 11400000, guid: aaa56b6bd653eff448f3dd2d722ea5a3, type: 2}
-  - {fileID: 11400000, guid: e15a6a2cbd8ff3d498b4d45fef3886f7, type: 2}
-  - {fileID: 11400000, guid: 01d2855de3498bc4d8cf08207a834038, type: 2}
-  - {fileID: 11400000, guid: 45adabe0abfed1549bc8f8c15e42f1f2, type: 2}
-  - {fileID: 11400000, guid: 0d53bdd60d27a684fb3a622be5ee9388, type: 2}
-  - {fileID: 11400000, guid: 596ae4b957277b64182b37edd21c0c41, type: 2}
-  - {fileID: 11400000, guid: b7e95704d5ef0754f9c26b1b1c4d2c27, type: 2}
-  - {fileID: 11400000, guid: feefa9dcfde8290419069cbdbb8d3639, type: 2}
-  - {fileID: 11400000, guid: 9c086fafe308b664a809aea25e27774a, type: 2}
-  - {fileID: 11400000, guid: f4a4f6425bd3d254eafe462d36c5c646, type: 2}
-  - {fileID: 11400000, guid: afd696aedb95a4440b92661e160c4c9e, type: 2}
-  - {fileID: 11400000, guid: 9bc24fd523963374fb0735c4780223cb, type: 2}
-  - {fileID: 11400000, guid: 715fd0ece1249c04c8d7b41c09b25b51, type: 2}
-  - {fileID: 11400000, guid: d38f1226b048c8e488b497410991436a, type: 2}
-  - {fileID: 11400000, guid: b088ac2b48bc5ce48983151be9e2100a, type: 2}
   - {fileID: 11400000, guid: b68e729cfc0c6bd4b9c6676499a12dce, type: 2}
   - {fileID: 11400000, guid: 3e21b6dd3ddd56d4b9d3e39ab41f0b90, type: 2}
   - {fileID: 11400000, guid: e42d88e5a18e0164cbf1de2789bb6fe0, type: 2}
   - {fileID: 11400000, guid: 4619f9db20b27b743bcd39332a93d20b, type: 2}
   - {fileID: 11400000, guid: d0db44a73f68df94ba273cf26d0b6dcf, type: 2}
-  - {fileID: 11400000, guid: 799f6d3d256a3d243925505812267194, type: 2}
-  - {fileID: 11400000, guid: 43b6b91d46328fa4689ed7a12abe1c7a, type: 2}
-  - {fileID: 11400000, guid: e9691af086ec1734688621f9260b333b, type: 2}
+  - {fileID: 11400000, guid: 403bc2701f0feec4fb4e938477ad3d81, type: 2}

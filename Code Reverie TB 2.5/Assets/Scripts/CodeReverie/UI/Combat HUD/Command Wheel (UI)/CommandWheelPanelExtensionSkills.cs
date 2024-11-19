@@ -43,8 +43,15 @@ namespace CodeReverie
         {
             Clear();
             
-            skills = new List<Skill>(CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>()
+            skills = new List<Skill>();
+            
+            skills.AddRange(CombatManager.Instance.selectedPlayerCharacter
+                .GetComponent<CharacterUnitController>()
+                .character.equippedArchetype.learnedSkills);
+            
+            skills.AddRange(CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>()
                 .character.characterSkills.learnedSkills);
+            
 
             characterSkills = new List<Skill>(CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>()
                 .character.characterSkills.learnedSkills);

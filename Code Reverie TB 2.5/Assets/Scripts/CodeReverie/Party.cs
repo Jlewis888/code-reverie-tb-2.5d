@@ -85,29 +85,29 @@ namespace CodeReverie
                 
                 
 
-                foreach (SkillSlot skillSlot in partySlot.character.EquippedArchetype.skills.equippedSkills.Values)
-                {
-
-                    if (skillSlot != null)
-                    {
-                        if (skillSlot.skill != null)
-                        {
-                            skillSlot.skill.SetSkillInfo();
-                        }
-                    }
-                   
-                }
-                
-                
-                foreach (Skill skill in partySlot.character.EquippedArchetype.skills.equippedPassivesSkills)
-                {
-
-                    if (skill != null)
-                    {
-                        skill.SetSkillInfo();
-                    }
-                   
-                }
+                // foreach (SkillSlot skillSlot in partySlot.character.EquippedArchetype.archetypeSkills.equippedSkills.Values)
+                // {
+                //
+                //     if (skillSlot != null)
+                //     {
+                //         if (skillSlot.skill != null)
+                //         {
+                //             skillSlot.skill.SetSkillInfo();
+                //         }
+                //     }
+                //    
+                // }
+                //
+                //
+                // foreach (Skill skill in partySlot.character.EquippedArchetype.archetypeSkills.equippedPassivesSkills)
+                // {
+                //
+                //     if (skill != null)
+                //     {
+                //         skill.SetSkillInfo();
+                //     }
+                //    
+                // }
                
             }
 

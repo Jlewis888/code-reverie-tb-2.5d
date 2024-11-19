@@ -28,7 +28,7 @@
         PoisonDamage,
         PiercingDamage,
         Haste, //Lust
-        Initiative //Sloth
-        
+        Initiative, //Sloth
+        Focus
     }
 }

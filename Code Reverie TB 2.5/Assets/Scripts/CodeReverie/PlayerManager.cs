@@ -59,7 +59,9 @@ namespace CodeReverie
             {
                 accountExperienceMap.Add(i + 1, (int)(accountExperienceMap[i] * 1.7));
             }
-           
+
+            combatConfigDetails = null;
+
         }
 
         private void Start()
@@ -99,7 +101,7 @@ namespace CodeReverie
             {
                 if (GameManager.Instance.newGame)
                 {
-                    Debug.Log("here 1");
+                
                     SetNewGameData();
                     Init();
                 }
@@ -107,14 +109,14 @@ namespace CodeReverie
                 {
                     if (DataPersistenceManager.Instance.debugging)
                     {
-                        Debug.Log("here 2");
+                    
                         SetNewGameData();
                         Init();
                         DataPersistenceManager.Instance.debugging = false;
                     }
                     if (GameSceneManager.Instance.fromLoadedData)
                     {
-                        Debug.Log("here 3");
+                   
                         Init();
                     }
                 }
@@ -326,7 +328,7 @@ namespace CodeReverie
         
         public void SetPartyUnits(Vector3 spawnLocation)
         {
-            
+           
             if (currentParty != null)
             {
                 int count = 0;

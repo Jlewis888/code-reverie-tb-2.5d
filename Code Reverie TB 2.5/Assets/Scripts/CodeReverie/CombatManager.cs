@@ -96,7 +96,7 @@ namespace CodeReverie
             {
                 
                 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                
                 //UnsetBattle();
             }

@@ -15,6 +15,7 @@ namespace CodeReverie
         public Dictionary<int, Skill> equippedPassivesSkills = new Dictionary<int, Skill>();
         
         public List<Skill> learnedSkills = new List<Skill>();
+        public List<Skill> learnedArchetypeSkills = new List<Skill>();
         
         
         

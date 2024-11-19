@@ -7,101 +7,149 @@ namespace CodeReverie
     public class Archetype
     {
         public ArchetypeDataContainer info;
-        public ArchetypeSkills skills;
-       
+        public List<Skill> learnedSkills = new List<Skill>();
+        public Dictionary<int, int> skillsLevelMap = new Dictionary<int, int>();
+        public List<ArchetypeSkillContainer> skillsLevel1 = new List<ArchetypeSkillContainer>();
+        public List<ArchetypeSkillContainer> skillsLevel2 = new List<ArchetypeSkillContainer>();
+        public List<ArchetypeSkillContainer> skillsLevel3 = new List<ArchetypeSkillContainer>();
+        public List<ArchetypeSkillContainer> skillsLevel4 = new List<ArchetypeSkillContainer>();
+
+        public int pointsUsed;
+        
+        
         public Archetype(ArchetypeDataContainer info)
         {
             this.info = info;
 
-            skills = new ArchetypeSkills();
-            
+            //archetypeSkills = new ArchetypeSkills();
+            learnedSkills = new List<Skill>();
 
-            EquipBaseSkills();
-        }
+            SetSkillsLevelMapToDefault();
 
-
-        public void EquipBaseSkill(SkillType skillType)
-        {
-            if (info.baseSkills.ContainsKey(skillType) && info.baseSkills[skillType] != null)
+            foreach (SkillDataContainer skillDataContainer in info.skillsLevel1)
             {
-                skills.equippedSkills[skillType] = new SkillSlot();
-                skills.equippedSkills[skillType].skill = SkillsManager.Instance.CreateSkill(info.baseSkills[skillType]);
+                ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
+                
+                archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
+                archetypeSkillContainer.skillLevel = 1;
+                skillsLevel1.Add(archetypeSkillContainer);
             }
-        }
-
-
-        public void EquipBaseSkills()
-        {
-            EquipBaseSkill(SkillType.Basic);
-            EquipBaseSkill(SkillType.Dodge);
-            EquipBaseSkill(SkillType.Action);
-            EquipBaseSkill(SkillType.AlchemicBurst);
-        }
-        
-       
-
-        public void SetSkillData()
-        {
-            foreach (var skillSlot in skills.equippedSkills.Values)
+            
+            foreach (SkillDataContainer skillDataContainer in info.skillsLevel2)
             {
-                if (skillSlot != null)
+                ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
+                
+                archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
+                archetypeSkillContainer.skillLevel = 2;
+                skillsLevel2.Add(archetypeSkillContainer);
+            }
+            
+            foreach (SkillDataContainer skillDataContainer in info.skillsLevel3)
+            {
+                ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
+                
+                archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
+                archetypeSkillContainer.skillLevel = 3;
+                skillsLevel3.Add(archetypeSkillContainer);
+            }
+            
+            foreach (SkillDataContainer skillDataContainer in info.skillsLevel4)
+            {
+                ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
+                
+                archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
+                archetypeSkillContainer.skillLevel = 4;
+                skillsLevel4.Add(archetypeSkillContainer);
+            }
+            
+        }
+
+        public void SetSkillsLevelMapToDefault()
+        {
+            skillsLevelMap = new Dictionary<int, int>();
+            
+            skillsLevelMap.Add(1, 0);
+            skillsLevelMap.Add(2, 0);
+            skillsLevelMap.Add(3, 0);
+            skillsLevelMap.Add(4, 0);
+        }
+
+        public void SetLearnedArchetypeSkill()
+        {
+
+            learnedSkills = new List<Skill>();
+            skillsLevelMap = new Dictionary<int, int>();
+
+            SetSkillsLevelMapToDefault();
+            
+            foreach (ArchetypeSkillContainer archetypeSkillContainer in skillsLevel1)
+            {
+                if (archetypeSkillContainer.hasLearned)
                 {
-                    if (skillSlot.skill != null)
+                    learnedSkills.Add(archetypeSkillContainer.skill);
+
+                    if (skillsLevelMap.ContainsKey(1))
                     {
-                        skillSlot.skill.info = SkillsManager.Instance.GetSkillById(skillSlot.skill.skillID);
+                        skillsLevelMap[1] += 1;
+                    }
+                    else
+                    {
+                        skillsLevelMap.Add(1, 1);
                     }
                 }
             }
             
-            foreach (var skillSlot in skills.equippedPassivesSkills)
+            foreach (ArchetypeSkillContainer archetypeSkillContainer in skillsLevel2)
             {
-                if (skillSlot != null)
+                if (archetypeSkillContainer.hasLearned)
                 {
-                    skillSlot.info = SkillsManager.Instance.GetSkillById(skillSlot.skillID);
+                    learnedSkills.Add(archetypeSkillContainer.skill);
+                    
+                    if (skillsLevelMap.ContainsKey(2))
+                    {
+                        skillsLevelMap[2] += 1;
+                    }
+                    else
+                    {
+                        skillsLevelMap.Add(2, 1);
+                    }
+                }
+            }
+            
+            foreach (ArchetypeSkillContainer archetypeSkillContainer in skillsLevel3)
+            {
+                if (archetypeSkillContainer.hasLearned)
+                {
+                    learnedSkills.Add(archetypeSkillContainer.skill);
+                    
+                    if (skillsLevelMap.ContainsKey(3))
+                    {
+                        skillsLevelMap[3] += 1;
+                    }
+                    else
+                    {
+                        skillsLevelMap.Add(3, 1);
+                    }
+                }
+            }
+            
+            foreach (ArchetypeSkillContainer archetypeSkillContainer in skillsLevel4)
+            {
+                if (archetypeSkillContainer.hasLearned)
+                {
+                    learnedSkills.Add(archetypeSkillContainer.skill);
+                    
+                    if (skillsLevelMap.ContainsKey(4))
+                    {
+                        skillsLevelMap[4] += 1;
+                    }
+                    else
+                    {
+                        skillsLevelMap.Add(4, 1);
+                    }
                 }
             }
         }
-
-        // public bool CanAssignLinkSkillNodesPoint(ArchetypeSkillNode archetypeSkillNode)
-        // {
-        //     int totalAssignedPoints = 0;
-        //     bool canAssign = false;
-        //     bool continueLoop = true;
-        //     
-        //     
-        //     info.skillNodeLinks.ForEach(skillNodeLink =>
-        //     {
-        //         skillNodeLink.linkedArchetypeSkillNodes.ForEach(linkedSkillNodeContainer =>
-        //         {
-        //             if (archetypeSkillNode.skillNodeDataContainer.id == linkedSkillNodeContainer.skillNodeDataContainer.id)
-        //             {
-        //                 totalAssignedPoints = skillNodeLink.TotalAssignedPoints();
-        //                 return;
-        //             }
-        //         });
-        //
-        //         if (!continueLoop)
-        //         {
-        //             canAssign = totalAssignedPoints < skillNodeLink.maxAssignedPoints;
-        //             return;
-        //         }
-        //         
-        //     });
-        //     
-        //     
-        //     
-        //
-        //     return canAssign;
-        // }
-
-        // public bool SkillNodeLinkCheck(ArchetypeSkillNode archetypeSkillNode)
-        // {
-        //     bool linked = info.skillNodeLinks.Exists(x => x.linkedArchetypeSkillNodes.Contains(archetypeSkillNode));
-        //     
-        //
-        //     return linked;
-        // }
-        
         
     }
 }

@@ -269,12 +269,12 @@ namespace CodeReverie
         public void SetSkillObject()
         {
             
-            BasicSkill = PlayerManager.Instance.currentParty[0]
-                .EquippedArchetype.skills.equippedSkills[SkillType.Basic].skill;
-            
-            
-            CoreSkill = PlayerManager.Instance.currentParty[0]
-                .EquippedArchetype.skills.equippedSkills[SkillType.Action].skill;
+            // BasicSkill = PlayerManager.Instance.currentParty[0]
+            //     .EquippedArchetype.archetypeSkills.equippedSkills[SkillType.Basic].skill;
+            //
+            //
+            // CoreSkill = PlayerManager.Instance.currentParty[0]
+            //     .EquippedArchetype.archetypeSkills.equippedSkills[SkillType.Action].skill;
         }
         
     }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IEVO.UI.uGUIDirectedNavigation;
 using Ink.Parsed;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace CodeReverie
@@ -29,6 +31,14 @@ namespace CodeReverie
         public EquipSkillPauseMenuNavigationButton equipSkillPauseMenuNavigationButtonPF;
         public MenuNavigation equipSkillPauseMenuNavigation;
         
+        public GameObject learnSkillsPanelContentHolder;
+        public LearnSkillPauseMenuNavigationButton selectedLearnSkillPauseMenuNavigationButton;
+
+        public LearnSkillsPanel skillLevel1;
+        public LearnSkillsPanel skillLevel2;
+        public LearnSkillsPanel skillLevel3;
+        public LearnSkillsPanel skillLevel4;
+        
 
         private void Awake()
         {
@@ -36,14 +46,17 @@ namespace CodeReverie
             equipSkillPauseMenuNavigation = new MenuNavigation();
             skillSlotPauseMenuNavigation = new MenuNavigation();
             
-            pauseMenuNavigation.pauseMenuNavigationButtons = pauseMenuNavigationHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+            //pauseMenuNavigation.pauseMenuNavigationButtons = pauseMenuNavigationHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+            //pauseMenuNavigation.pauseMenuNavigationButtons = GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
             
             pauseMenuNavigation.SetFirstItem();
+            skillsMenuNavigationState = SkillsMenuNavigationState.LearnSkills;
         }
 
 
         private void OnEnable()
         {
+            EventManager.Instance.generalEvents.onLearnSkillSlotSelect += OnSkillSlotSelect;
             SelectedPartySlotNavigationUI = null;
             pauseMenuNavigation.SetFirstItem();
             
@@ -52,17 +65,56 @@ namespace CodeReverie
             //ClearNavigationButtons();
             ClearPartSlotUI();
             SetPartySlotUI();
-            SetNavigationButtons();
-            skillSlotPauseMenuNavigation.SetFirstItem();
+            //SetNavigationButtons();
+            //skillSlotPauseMenuNavigation.SetFirstItem();
             
             partySlotIndex = 0;
             SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
+            
+            
+            SetArchetypeSkills();
+            //pauseMenuNavigation.pauseMenuNavigationButtons = learnSkillsPanelContentHolder.GetComponentsInChildren<PauseMenuNavigationButton>().ToList();
+            
+            List<Selectable> pauseMenuNavigationButtonSelectables = pauseMenuNavigation.pauseMenuNavigationButtons.Select(go => go.GetComponent<Selectable>()) // Get the Selectable component
+                .Where(selectable => selectable != null)    // Filter out nulls
+                .ToList();
+            
+            Debug.Log(pauseMenuNavigation.pauseMenuNavigationButtons.Count);
+
+            foreach (var pauseMenuNavigationButton in pauseMenuNavigation.pauseMenuNavigationButtons)
+            {
+                
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigRight.Type = DirectedNavigationType.Value.SelectableList;
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigLeft.Type = DirectedNavigationType.Value.SelectableList;
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigUp.Type = DirectedNavigationType.Value.SelectableList;
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigDown.Type = DirectedNavigationType.Value.SelectableList;
+                
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigRight.SelectableList.SelectableList =
+                    pauseMenuNavigationButtonSelectables.ToArray();
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigLeft.SelectableList.SelectableList =
+                    pauseMenuNavigationButtonSelectables.ToArray();
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigUp.SelectableList.SelectableList =
+                    pauseMenuNavigationButtonSelectables.ToArray();
+                pauseMenuNavigationButton.GetComponent<DirectedNavigation>().ConfigDown.SelectableList.SelectableList =
+                    pauseMenuNavigationButtonSelectables.ToArray();
+            }
+            
+           
+
+            if (pauseMenuNavigation.pauseMenuNavigationButtons[0].gameObject != null)
+            {
+                Debug.Log(pauseMenuNavigation.pauseMenuNavigationButtons[0].gameObject);
+                EventSystem.current.SetSelectedGameObject(pauseMenuNavigation.pauseMenuNavigationButtons[0].gameObject);
+            }
+            
+            
         }
 
         private void OnDisable()
         {
             ClearPartSlotUI();
             SelectedPartySlotNavigationUI = null;
+            selectedLearnSkillPauseMenuNavigationButton = null;
             //ClearNavigationButtons();
         }
 
@@ -70,36 +122,18 @@ namespace CodeReverie
         {
             switch (skillsMenuNavigationState)
             {
-                
-                // case SkillsMenuNavigationState.Main:
-                //     if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
-                //     {
-                //         Confirm();
-                //     }
-                //     
-                //     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-                //     {
-                //     
-                //         EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
-                //     
-                //     }
-                //     
-                //     
-                //     pauseMenuNavigation.NavigationInputUpdate();
-                //     break;
-                case SkillsMenuNavigationState.SelectSkillSlot:
+                case SkillsMenuNavigationState.LearnSkills:
                     if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
                     {
                         Confirm();
                     }
-
+                    
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
                         //skillsMenuNavigationState = SkillsMenuNavigationState.Main;
                         EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
                     }
-
-
+                    
                     if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
                     {
                         partySlotIndex++;
@@ -123,24 +157,6 @@ namespace CodeReverie
                         SelectedPartySlotNavigationUI = partySlotNavigationUIList[partySlotIndex];
                     }
                     
-                    skillSlotPauseMenuNavigation.NavigationInputUpdate();
-
-                    break;
-                case SkillsMenuNavigationState.EquipSkills:
-                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
-                    {
-                        Confirm();
-                    }
-
-                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-                    {
-                        equipSkillsPanel.SetActive(false);
-                        skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
-                        //SetNavigationButtons();
-                    }
-                    
-                    equipSkillPauseMenuNavigation.NavigationInputUpdate();
-                    
                     break;
             }
         }
@@ -155,22 +171,27 @@ namespace CodeReverie
                 case SkillsMenuNavigationState.SelectSkillSlot:
                     equipSkillsPanel.SetActive(true);
                     skillsMenuNavigationState = SkillsMenuNavigationState.EquipSkills;
-                    SetLearnedSkills(skillSlotPauseMenuNavigation.SelectedNavigationButton.GetComponent<SkillSlotPauseMenuNavigationButton>().skillType);
+                    //SetLearnedSkills(skillSlotPauseMenuNavigation.SelectedNavigationButton.GetComponent<SkillSlotPauseMenuNavigationButton>().skillType);
                     break;
-                case SkillsMenuNavigationState.EquipSkills:
-                    
-                    
-                    
-                    SkillDataContainer skillDataContainer = equipSkillPauseMenuNavigation.SelectedNavigationButton
-                        .GetComponent<EquipSkillPauseMenuNavigationButton>().skill.info;
-                    int skillSlotIndex = skillSlotPauseMenuNavigation.SelectedNavigationButton
-                        .GetComponent<SkillSlotPauseMenuNavigationButton>().skillSlotIndex;
-                    
-                    
-                    EquipActionSkill(skillDataContainer, skillSlotIndex);
-                    equipSkillsPanel.SetActive(false);
-                    skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
-                    //SetNavigationButtons();
+                // case SkillsMenuNavigationState.EquipSkills:
+                //     
+                //     
+                //     
+                //     SkillDataContainer skillDataContainer = equipSkillPauseMenuNavigation.SelectedNavigationButton
+                //         .GetComponent<EquipSkillPauseMenuNavigationButton>().skill.info;
+                //     int skillSlotIndex = skillSlotPauseMenuNavigation.SelectedNavigationButton
+                //         .GetComponent<SkillSlotPauseMenuNavigationButton>().skillSlotIndex;
+                //     
+                //     
+                //     EquipActionSkill(skillDataContainer, skillSlotIndex);
+                //     equipSkillsPanel.SetActive(false);
+                //     skillsMenuNavigationState = SkillsMenuNavigationState.SelectSkillSlot;
+                //     //SetNavigationButtons();
+                //     break;
+                
+                case SkillsMenuNavigationState.LearnSkills:
+                    Debug.Log("Test");
+                    LearnSkill();
                     break;
             }
         }
@@ -199,19 +220,7 @@ namespace CodeReverie
                 partySlotNavigationUIList.Add(partySlotNavigationUI);
             }
         }
-
-        public void SetNavigationButtons()
-        {
-            skillSlotPauseMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
-            
-            foreach (SkillSlotPauseMenuNavigationButton skillSlotPauseMenuNavigationButton in skillSlotPauseMenuNavigationButtons)
-            {
-                skillSlotPauseMenuNavigation.pauseMenuNavigationButtons.Add(skillSlotPauseMenuNavigationButton);
-                
-                skillSlotPauseMenuNavigationButton.SetListeners();
-            }
-        }
-
+        
         public PartySlotNavigationUI SelectedPartySlotNavigationUI
         {
             get { return selectedPartySlotNavigationUI; }
@@ -233,44 +242,86 @@ namespace CodeReverie
                 }
             }
         }
+        
 
-        public void EquipActionSkill(SkillDataContainer skillDataContainer, int index)
-        {
-            Character character = SelectedPartySlotNavigationUI.character;
-            
-            character.characterSkills.EquipActionSkill(skillDataContainer, index);
-            
-            skillSlotPauseMenuNavigation.SelectedNavigationButton
-                .GetComponent<SkillSlotPauseMenuNavigationButton>().Init(character);
-        }
+        // public void SetLearnedSkills(SkillType skillType)
+        // {
+        //     Character character = selectedPartySlotNavigationUI.character;
+        //
+        //     equipSkillPauseMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+        //
+        //     foreach (Transform child in equipSkillsButtonNavigationHolder.transform)
+        //     {
+        //         Destroy(child.gameObject);
+        //     }
+        //     
+        //     
+        //     foreach (Skill skill in character.characterSkills.learnedSkills)
+        //     {
+        //         if (skill.info.skillType == skillType)
+        //         {
+        //             EquipSkillPauseMenuNavigationButton equipSkillPauseMenuNavigationButton =
+        //                 Instantiate(equipSkillPauseMenuNavigationButtonPF, equipSkillsButtonNavigationHolder.transform);
+        //             
+        //             equipSkillPauseMenuNavigationButton.skill = skill;
+        //             equipSkillPauseMenuNavigationButton.nameText.text = skill.info.skillName;
+        //             
+        //             equipSkillPauseMenuNavigation.pauseMenuNavigationButtons.Add(equipSkillPauseMenuNavigationButton);
+        //         }
+        //     }
+        //     
+        //     equipSkillPauseMenuNavigation.SetFirstItem();
+        // }
 
-        public void SetLearnedSkills(SkillType skillType)
+        public void SetArchetypeSkills()
         {
             Character character = selectedPartySlotNavigationUI.character;
 
-            equipSkillPauseMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+            
 
-            foreach (Transform child in equipSkillsButtonNavigationHolder.transform)
+            if (character.equippedArchetype != null)
             {
-                Destroy(child.gameObject);
+                skillLevel1.archetypeSkillContainers = character.equippedArchetype.skillsLevel1;
+                skillLevel2.archetypeSkillContainers = character.equippedArchetype.skillsLevel2;
+                skillLevel3.archetypeSkillContainers = character.equippedArchetype.skillsLevel3;
+                skillLevel4.archetypeSkillContainers = character.equippedArchetype.skillsLevel4; 
+                
+                skillLevel1.SetSkills();
+                skillLevel2.SetSkills();
+                skillLevel3.SetSkills();
+                skillLevel4.SetSkills();
+                
+                
+                pauseMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+            
+                pauseMenuNavigation.pauseMenuNavigationButtons.AddRange(skillLevel1.pauseMenuNavigationButtons);
+                pauseMenuNavigation.pauseMenuNavigationButtons.AddRange(skillLevel2.pauseMenuNavigationButtons);
+                pauseMenuNavigation.pauseMenuNavigationButtons.AddRange(skillLevel3.pauseMenuNavigationButtons);
+                pauseMenuNavigation.pauseMenuNavigationButtons.AddRange(skillLevel4.pauseMenuNavigationButtons);
+              
             }
-            
-            
-            foreach (Skill skill in character.characterSkills.learnedSkills)
+        }
+
+        public void LearnSkill()
+        {
+            Character character = selectedPartySlotNavigationUI.character;
+
+
+            if (selectedLearnSkillPauseMenuNavigationButton != null)
             {
-                if (skill.info.skillType == skillType)
+                if (!selectedLearnSkillPauseMenuNavigationButton.archetypeSkillContainer.hasLearned)
                 {
-                    EquipSkillPauseMenuNavigationButton equipSkillPauseMenuNavigationButton =
-                        Instantiate(equipSkillPauseMenuNavigationButtonPF, equipSkillsButtonNavigationHolder.transform);
-                    
-                    equipSkillPauseMenuNavigationButton.skill = skill;
-                    equipSkillPauseMenuNavigationButton.nameText.text = skill.info.skillName;
-                    
-                    equipSkillPauseMenuNavigation.pauseMenuNavigationButtons.Add(equipSkillPauseMenuNavigationButton);
+                    selectedLearnSkillPauseMenuNavigationButton.archetypeSkillContainer.hasLearned = true;
                 }
             }
-            
-            equipSkillPauseMenuNavigation.SetFirstItem();
+
+            character.equippedArchetype.SetLearnedArchetypeSkill();
+
+        }
+        
+        public void OnSkillSlotSelect(LearnSkillPauseMenuNavigationButton skillSlotUI)
+        {
+            selectedLearnSkillPauseMenuNavigationButton = skillSlotUI;
         }
         
     }

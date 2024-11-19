@@ -46,6 +46,10 @@ namespace CodeReverie
 
         [TabGroup("Base Stats")] public int healthBarCount = 5;
         
+        
+        [TabGroup("Archetypes", TextColor = "red"), HideLabel]
+        public ArchetypeDataContainer primaryArchetype;
+        
         [TabGroup("Archetypes", TextColor = "red"), HideLabel]
         public List<ArchetypeDataContainer> archetypes = new List<ArchetypeDataContainer>() ;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeReverie
 {
@@ -17,7 +18,7 @@ namespace CodeReverie
         public Archetype equippedArchetype;
         public List<Archetype> availableArchetypes = new List<Archetype>();
 
-        //public int availableSkillPoints;
+        public int availableSkillPoints;
         public int usedSkillPoints;
 
 
@@ -36,6 +37,8 @@ namespace CodeReverie
 
         public Character(CharacterDataContainer info)
         {
+            
+            
             this.info = info;
             currentLevel = 1;
 
@@ -46,10 +49,15 @@ namespace CodeReverie
                 //availableArchetypes.Add(new Archetype(archetypeDataContainer));
             }
 
-            if (availableArchetypes.Count > 0)
+            // if (availableArchetypes.Count > 0)
+            // {
+            //     equippedArchetype = availableArchetypes[0];
+            // }
+
+            if (this.info.primaryArchetype != null)
             {
-                equippedArchetype = availableArchetypes[0];
-            } 
+                equippedArchetype = new Archetype(this.info.primaryArchetype);
+            }
             
             characterGear = new CharacterGear();
             
@@ -119,16 +127,16 @@ namespace CodeReverie
 
         public void ArchetypeSkillsToLearn(Archetype archetype, SkillType skillType)
         {
-            if (archetype.skills.equippedSkills.ContainsKey(skillType))
-            {
-                if (archetype.skills.equippedSkills[skillType] != null)
-                {
-                    if (archetype.skills.equippedSkills[skillType].skill != null)
-                    {
-                        characterSkills.learnedSkills.Add(archetype.skills.equippedSkills[skillType].skill);
-                    }
-                }
-            }
+            // if (archetype.archetypeSkills.equippedSkills.ContainsKey(skillType))
+            // {
+            //     if (archetype.archetypeSkills.equippedSkills[skillType] != null)
+            //     {
+            //         if (archetype.archetypeSkills.equippedSkills[skillType].skill != null)
+            //         {
+            //             characterSkills.learnedSkills.Add(archetype.archetypeSkills.equippedSkills[skillType].skill);
+            //         }
+            //     }
+            // }
         }
         
         public int Level
@@ -368,11 +376,18 @@ namespace CodeReverie
         
         public void SpawnCharacter(Vector3 transform)
         {
+
+            if (characterController != null)
+            {
+                Object.Destroy(characterController.gameObject);
+            }
+            
             characterController = GameObject.Instantiate(info.characterUnitPF, transform, Quaternion.identity);
             characterController.gameObject.SetActive(false);
             characterController.character = this;
             characterController.GetComponent<Health>().SetHealth();
         }
+        
 
     }
 }

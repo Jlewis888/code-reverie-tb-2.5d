@@ -135,6 +135,11 @@ namespace CodeReverie
             {
                 autoSaveDelay -= Time.deltaTime;
             }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                SpawnPlayerParty();
+            }
         }
 
         public void Init()
@@ -179,6 +184,7 @@ namespace CodeReverie
 
         public void SpawnPlayerParty()
         {
+            
             if (!GameManager.Instance.newGame)
             {
                 PlayerManager.Instance.SetPartyUnits(PlayerManager.Instance.characterOnSaveLoadPosition);
@@ -188,9 +194,7 @@ namespace CodeReverie
                 PlayerManager.Instance.SetPartyUnits(defaultAreaSpawnPoint != null
                     ? defaultAreaSpawnPoint.position
                     : Vector3.zero);
-                
             }
-
             
             if (PlayerManager.Instance.combatConfigDetails != null)
             {

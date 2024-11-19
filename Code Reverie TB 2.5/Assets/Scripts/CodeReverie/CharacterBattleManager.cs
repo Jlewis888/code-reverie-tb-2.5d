@@ -798,7 +798,7 @@ namespace CodeReverie
 
         public void EndTurn()
         {
-            Debug.Log($"{name}: End Turn");
+            //Debug.Log($"{name}: End Turn");
             characterTimelineGaugeState = CharacterTimelineGaugeState.EndTurnPhase;
         }
 

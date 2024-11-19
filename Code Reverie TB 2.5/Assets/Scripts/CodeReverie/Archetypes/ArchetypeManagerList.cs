@@ -18,9 +18,15 @@ namespace CodeReverie
         [Button("Update")]
         public void UpdateArchetypeDataContainers()
         {
-            //archetypeDataContainers = ScriptableObjectUtilities.FindAllScriptableObjectsOfType<ShopItem>("t:ShopItem", "Assets/Your Folders Go Here");
+            
+           // archetypeDataContainers = new List<ArchetypeDataContainer>();
+        
+            // //archetypeDataContainers = ScriptableObjectUtilities.FindAllScriptableObjectsOfType<ShopItem>("t:ShopItem", "Assets/Your Folders Go Here");
             archetypeDataContainers = AssetDatabase.FindAssets("t:ArchetypeDataContainer", null).Select(guid => AssetDatabase.LoadAssetAtPath<ArchetypeDataContainer>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
-
+       
+            
+            
+            //
             foreach (ArchetypeDataContainer archetypeDataContainer in archetypeDataContainers)
             {
                 archetypeDataContainer.UpdateAssets();

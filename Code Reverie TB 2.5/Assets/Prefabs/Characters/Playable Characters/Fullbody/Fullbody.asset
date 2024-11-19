@@ -33,6 +33,7 @@ MonoBehaviour:
   attackRange: 1
   baseStats: {fileID: 11400000, guid: d90e7e66d32d0a346803e4b2eb5b41da, type: 2}
   healthBarCount: 5
+  primaryArchetype: {fileID: 11400000, guid: 403bc2701f0feec4fb4e938477ad3d81, type: 2}
   archetypes:
   - {fileID: 0}
   - {fileID: 11400000, guid: 4619f9db20b27b743bcd39332a93d20b, type: 2}

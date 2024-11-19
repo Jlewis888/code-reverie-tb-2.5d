@@ -33,6 +33,7 @@ MonoBehaviour:
   attackRange: 1
   baseStats: {fileID: 11400000, guid: 0d52781af8292fa4ea149af7f69c234f, type: 2}
   healthBarCount: 5
+  primaryArchetype: {fileID: 0}
   archetypes:
   - {fileID: 0}
   lootTableDataContainer: {fileID: 0}
