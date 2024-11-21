@@ -42,6 +42,11 @@ MonoBehaviour:
     - Enviro3.Runtime
     - IEVO.uGUIDirectedNavigation.Runtime
     - Ink-Libraries
+    - ProjectDawn.LocalAvoidance
+    - ProjectDawn.Navigation
+    - ProjectDawn.Navigation.Astar
+    - ProjectDawn.Navigation.Hybrid
+    - ProjectDawn.ReciprocalAvoidance
     - SerializableGUID
     - Timeline.Samples.Annotation
     - Timeline.Samples.Text

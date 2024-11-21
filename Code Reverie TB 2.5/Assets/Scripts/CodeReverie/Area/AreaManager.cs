@@ -13,6 +13,7 @@ namespace CodeReverie
     {
         public static AreaManager instance;
         public AreaManagerConfig areaManagerConfig;
+        public bool ignoreAreaManagerConfig;
 
         public AreaType areaType;
         public Transform defaultAreaSpawnPoint;
@@ -110,7 +111,7 @@ namespace CodeReverie
             
             if (areaManagerConfig != null)
             {
-                if (areaManagerConfig.hasCutsceneOnStart)
+                if (areaManagerConfig.hasCutsceneOnStart && !ignoreAreaManagerConfig)
                 {
                     EventManager.Instance.generalEvents.OnStartCutscene(areaManagerConfig.cutsceneOnStart);
                 }

@@ -35,8 +35,8 @@ MonoBehaviour:
   healthBarCount: 5
   primaryArchetype: {fileID: 0}
   archetypes:
-  - {fileID: 11400000, guid: 715fd0ece1249c04c8d7b41c09b25b51, type: 2}
-  - {fileID: 11400000, guid: d38f1226b048c8e488b497410991436a, type: 2}
-  - {fileID: 11400000, guid: b088ac2b48bc5ce48983151be9e2100a, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   lootTableDataContainer: {fileID: 0}
   vendorInventory: {fileID: 0}
