@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ProjectDawn.Navigation.Hybrid;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,7 +29,9 @@ namespace CodeReverie
 
             if (CombatManager.Instance == null)
             {
-                GetComponent<NavMeshAgent>().enabled = false;
+                GetComponent<AgentAuthoring>().enabled = false;
+                GetComponent<AgentNavMeshAuthoring>().enabled = false;
+                GetComponent<AgentCylinderShapeAuthoring>().enabled = false;
             }
         }
 

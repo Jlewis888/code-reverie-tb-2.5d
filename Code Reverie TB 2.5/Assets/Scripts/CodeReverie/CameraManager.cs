@@ -24,8 +24,13 @@ public class CameraManager : ManagerSingleton<CameraManager>
     public bool screenShake = false;
     public float screenShakeTimer;
     
+    public float refreshRate;
+    public float rotationRate;
+    
     protected override void Awake()
     {
+        refreshRate = 0.025f;
+        rotationRate = 1.5f;
         base.Awake();
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
@@ -65,7 +70,14 @@ public class CameraManager : ManagerSingleton<CameraManager>
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            ResetMapCamera();
+            UpdateCamera(PlayerManager.Instance.currentParty[0].characterController
+                .transform);
+            ToggleMainCamera();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ToggleSkillCamera();
         }
     }
 
@@ -86,8 +98,9 @@ public class CameraManager : ManagerSingleton<CameraManager>
     
     public void SetBattleCamera()
     {
-        combatVirtualCamera.Priority = 11;
-        mainVirtualCamera.Priority = 1;
+        SetPriorityCamera(combatVirtualCamera);
+        // combatVirtualCamera.Priority = 11;
+        // mainVirtualCamera.Priority = 1;
     }
 
     public void SetBattleCamera(BattleAreaManager battleArea)
@@ -192,7 +205,51 @@ public class CameraManager : ManagerSingleton<CameraManager>
     public void ToggleSkillCamera()
     {
         SetPriorityCamera(skillVirtualCamera);
+        skillVirtualCamera.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value = -90;
+        
+        skillVirtualCamera.Follow = CombatManager.Instance.selectedSkillPlayerCharacter
+            .transform;
+        skillVirtualCamera.LookAt = CombatManager.Instance.selectedSkillPlayerCharacter
+            .transform;
+
+        //StartCoroutine(RotateSkillCamera(() => {}));
     }
+
+    public IEnumerator RotateSkillCamera(Action onComplete)
+    {
+        float counter = skillVirtualCamera.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value;
+       
+        yield return new WaitForSeconds(0.5f);
+
+        if (counter == 90f)
+        {
+            while (counter > 0)
+            {
+
+                counter -= rotationRate;
+                skillVirtualCamera.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value = counter;
+            
+                yield return new WaitForSeconds(refreshRate);
+            }
+        }
+        else
+        {
+            while (counter < 0)
+            {
+
+                counter += rotationRate;
+                skillVirtualCamera.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value = counter;
+            
+                yield return new WaitForSeconds(refreshRate);
+            }
+        }
+
+        onComplete();
+
+
+
+    }
+    
 
     public void ToggleDialogueCamera()
     {

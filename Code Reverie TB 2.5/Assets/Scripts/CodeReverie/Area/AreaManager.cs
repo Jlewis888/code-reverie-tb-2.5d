@@ -137,16 +137,16 @@ namespace CodeReverie
                 autoSaveDelay -= Time.deltaTime;
             }
 
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                SpawnPlayerParty();
-            }
+            // if (Input.GetKeyDown(KeyCode.P))
+            // {
+            //     SpawnPlayerParty();
+            // }
         }
 
         public void Init()
         {
             
-
+            SpawnPlayerParty();
 
             if (GameManager.Instance.newGame)
             {
@@ -165,8 +165,8 @@ namespace CodeReverie
 
 
             GameManager.Instance.newGame = false;
-
-
+            
+            
             
         }
         
@@ -181,6 +181,10 @@ namespace CodeReverie
                 }
             }
         }
+        
+        //Character Controller
+        //Character Unit Controller
+        //Health
 
 
         public void SpawnPlayerParty()

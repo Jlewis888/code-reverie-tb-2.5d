@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectDawn.Navigation.Hybrid;
 using Sirenix.OdinInspector;
 using TransitionsPlus;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace CodeReverie
         public Dictionary<CharacterBattleManager, int> orderOfTurnsMap;
         public bool pause;
         public CharacterBattleManager selectedPlayerCharacter;
+        public CharacterBattleManager selectedSkillPlayerCharacter;
         public CharacterBattleManager selectedTarget;
         //public List<CharacterBattleManager> selectedTargets;
         public List<CharacterBattleManager> selectableTargets;
@@ -39,13 +41,43 @@ namespace CodeReverie
         public int targetSelectIndex;
         public float navigationDelay = 0.35f;
         public float navigationDelayTimer;
+        public GameObject selectedPlayerCharacterBattleSkillPosition;
+        public List<GameObject> playerCharacterBattleSkillPositions = new List<GameObject>();
+        
+        public GameObject selectedEnemyCharacterBattleSkillPosition;
+        public List<GameObject> enemyCharacterBattleSkillPositions = new List<GameObject>();
+        public List<CharacterBattleManager> selectedSkillTargets;
+        public GameObject skillObjectSpawnPoint1;
+        
+        //DEBUG
+        public bool inDebug;
+        public List<CharacterDataContainer> debugEnemyList = new List<CharacterDataContainer>();
         
         private void Awake()
         {
             Instance = this;
             enemies = GetComponentsInChildren<CharacterBattleManager>().ToList();
-            //combatDetailsConfig = PlayerManager.Instance.combatDetailsConfig;
-            combatConfigDetails = PlayerManager.Instance.combatConfigDetails;
+            
+           
+
+
+            if (inDebug)
+            {
+                combatConfigDetails= new CombatConfigDetails(
+                    returnSceneName: SceneManager.GetActiveScene().name,
+                    characterReturnPosition: Vector3.zero,
+                    enemyList: debugEnemyList
+                );
+            }
+            else
+            {
+                //combatDetailsConfig = PlayerManager.Instance.combatDetailsConfig;
+                combatConfigDetails = PlayerManager.Instance.combatConfigDetails;
+            }
+            
+            
+            
+            
             defaultAudioClip = "LOOP_Elegant Enemies";
             // EventManager.Instance.combatEvents.onCombatPause += SetPauseTimer;
             // EventManager.Instance.combatEvents.onPlayerTurn += SetSelectedCharacter;
@@ -272,6 +304,7 @@ namespace CodeReverie
         {
             foreach (CharacterDataContainer characterDataContainer in combatConfigDetails.enemyList)
             {
+                Debug.Log(characterDataContainer.characterID);
                 Character character = new Character(characterDataContainer);
                 character.SpawnCharacter(Vector3.zero);
                 character.characterController.gameObject.SetActive(true);
@@ -473,7 +506,8 @@ namespace CodeReverie
                 foreach (CharacterBattleManager characterBattleManager in allUnits)
                 {
                     characterBattleManager.GetComponent<AnimationManager>().ResumeAnimation();
-                    characterBattleManager.GetComponent<NavMeshAgent>().isStopped = false;
+                    //characterBattleManager.GetComponent<NavMeshAgent>().isStopped = false;
+                    characterBattleManager.GetComponent<AgentAuthoring>().Stop();
                 }
             }
         }
@@ -483,7 +517,8 @@ namespace CodeReverie
             foreach (CharacterBattleManager characterBattleManager in allUnits)
             {
                 characterBattleManager.GetComponent<AnimationManager>().PauseAnimation();
-                characterBattleManager.GetComponent<NavMeshAgent>().isStopped = true;
+                //characterBattleManager.GetComponent<NavMeshAgent>().isStopped = true;
+                characterBattleManager.GetComponent<AgentAuthoring>().Stop();
             }
         }
         
@@ -639,6 +674,66 @@ namespace CodeReverie
         {
             CameraManager.Instance.SetSelectedPlayerWeight(selectableTargets[targetSelectIndex], 1000f, 2f);
             EventManager.Instance.combatEvents.OnPlayerSelectTarget(selectableTargets[targetSelectIndex]);
+        }
+
+        public void MoveCharactersToSkillPositions(List<CharacterBattleManager> targetCharacterBattleManagers)
+        {
+            
+            selectedSkillPlayerCharacter.transform.position = selectedPlayerCharacterBattleSkillPosition.transform.position;
+            List<CharacterBattleManager> characterBattleManagersToIgnore = new List<CharacterBattleManager>();
+            int count = 0;
+            
+            foreach (CharacterBattleManager characterBattleManager in targetCharacterBattleManagers)
+            {
+                if (count < 3)
+                {
+                    
+                    selectedSkillTargets.Add(characterBattleManager);
+                    targetCharacterBattleManagers[count].skillRecallTargetPosition =
+                        characterBattleManager.transform.position;
+                    
+                    targetCharacterBattleManagers[count].transform.position =
+                        enemyCharacterBattleSkillPositions[count].transform.position;
+                    characterBattleManagersToIgnore.Add(characterBattleManager);
+                }
+                else
+                {
+                    break;
+                }
+
+
+                count++;
+            }
+            
+            
+            characterBattleManagersToIgnore.Add(selectedSkillPlayerCharacter);
+            
+            HideNonTargetedCharacters(characterBattleManagersToIgnore);
+            
+        }
+
+        public void HideNonTargetedCharacters(List<CharacterBattleManager> characterBattleManagers)
+        {
+            foreach (CharacterBattleManager characterBattleManager in allUnits)
+            {
+                if (!characterBattleManagers.Contains(characterBattleManager))
+                {
+                    
+                    characterBattleManager.skillRecallTargetPosition =
+                        characterBattleManager.transform.position;
+                    characterBattleManager.GetComponent<CharacterUnitController>().characterUnit.gameObject.SetActive(false);
+                    
+                }
+            }
+        }
+
+        public void RecallCharacters()
+        {
+            foreach (CharacterBattleManager characterBattleManager in allUnits)
+            {
+                characterBattleManager.transform.position = characterBattleManager.skillRecallTargetPosition;
+                characterBattleManager.GetComponent<CharacterUnitController>().characterUnit.gameObject.SetActive(true);
+            }
         }
         
     }

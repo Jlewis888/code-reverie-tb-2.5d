@@ -802,10 +802,12 @@ namespace CodeReverie
             
             //activeParty = new Party();
             currentParty = new List<Character>();
+
+            foreach (Character character in availableCharacters)
+            {
+                currentParty.Add(character);
+            }
             
-            currentParty.Add(availableCharacters[0]);
-            currentParty.Add(availableCharacters[1]);
-            currentParty.Add(availableCharacters[2]);
             
             currentLevel = 1;
             currentExp = 0;
@@ -833,14 +835,6 @@ namespace CodeReverie
                 character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BlazeBeaconSkill"));
                 character.characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("HellfireBarrageSkill"));
             }
-            
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireBlastSkill"));
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("ArcStrikeSkill"));
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("RevolverSkill"));
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("FireballSkill"));
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BattleOrdersSkill"));
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("BlazeBeaconSkill"));
-            // currentParty[0].characterSkills.LearnSkill(SkillsManager.Instance.GetSkillById("HellfireBarrageSkill"));
         }
 
         

@@ -25,6 +25,8 @@ namespace CodeReverie
                     character = new Character(characterInfo);
                 }
             }
+
+            characterUnit = GetComponentInChildren<CharacterUnit>();
         }
 
 

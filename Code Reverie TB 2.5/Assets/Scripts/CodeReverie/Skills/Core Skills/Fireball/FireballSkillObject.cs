@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CodeReverie
@@ -26,32 +27,45 @@ namespace CodeReverie
             }
             else
             {
-                if (fire)
-                {
-                    Attack();
-                }
+                // if (fire)
+                // {
+                //     Attack();
+                // }
+                
+                Attack();
             }
         }
 
 
         public override void Init()
         {
+            // List<DamageTypes> damageTypes = new List<DamageTypes>();
+            // damageTypes.Add(DamageTypes.Fire);
+            // DamageProfile damage = new DamageProfile(characterUnitSource, characterUnitSource.target.GetComponent<Health>(), damageTypes);
+            // characterUnitSource.EndTurn();
+            // Destroy(gameObject);
+            // return;
+            
+            
             GameObject fireBallCastObject = Instantiate(fireBallCastPF, spawnPoint.transform );
             //fireBallCastObject.transform.position = characterUnitSource.transform.position + characterUnitSource.transform.forward * 2f;
-            
+            timer = 1.5f;
 
-            StartCoroutine(characterUnitSource.Rotate(() =>
-            {
-                timer = 1.5f;
-                fire = true;
-                
-            }));
+            // StartCoroutine(characterUnitSource.Rotate(() =>
+            // {
+            //     timer = 1.5f;
+            //     fire = true;
+            //     
+            // }));
             
             
         }
 
         public override void Attack()
         {
+            
+            
+            
             fire = false;
             FireballSkillProjectile fireballSkillProjectile = Instantiate(fireballSkillProjectilePF, spawnPoint.transform.position, transform.rotation);
             

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectDawn.Navigation.Hybrid;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,9 +22,10 @@ namespace CodeReverie
         public CharacterBattleManager target;
         //public List<CharacterBattleManager> selectedTargets;
         public Vector3 targetPosition;
+        
         public Vector3 targetMovePosition;
-
         public Vector2 targetBattlePosition;
+        public Vector3 skillRecallTargetPosition;
 
         //TODO Remove at some point due to combat no longer being Dynamic
         public bool inCombat;
@@ -48,7 +50,8 @@ namespace CodeReverie
         
         // RADIAL MENU POSITIONING //
         public float staminaGauge;
-        public NavMeshAgent agent;
+        //public NavMeshAgent agent;
+        public AgentAuthoring agent;
 
         private void Awake()
         {
@@ -76,7 +79,8 @@ namespace CodeReverie
             currentSkillPoints = 100;
             staminaGauge = 5f;
             
-            agent = GetComponent<NavMeshAgent>() != null ? GetComponent<NavMeshAgent>() : null;
+            //agent = GetComponent<NavMeshAgent>() != null ? GetComponent<NavMeshAgent>() : null;
+            agent = GetComponent<AgentAuthoring>() != null ? GetComponent<AgentAuthoring>() : null;
         }
 
         private void Start()
@@ -127,11 +131,13 @@ namespace CodeReverie
                     //     battleState = CharacterBattleState.Waiting;
                     //     characterTimelineGaugeState = CharacterTimelineGaugeState.StartTurnPhase;
                     // }
-
+                    
+                    
 
                     if (agent != null)
                     {
-                        if (!agent.hasPath)
+                        //if (!agent.hasPath)
+                        if (!GetComponent<AgentNavMeshAuthoring>().HasEntityPath)
                         {
                             SetRandomTargetMovePosition();
                             agent.SetDestination(targetMovePosition);
@@ -141,7 +147,6 @@ namespace CodeReverie
                             if (!IsAgentMoving())
                             {
                                 agent.SetDestination(GetPosition());
-                                Debug.Log("Agent has stopped moving");
                                 FaceNearestEnemy();
                                 
                                 //
@@ -439,53 +444,26 @@ namespace CodeReverie
                                                     break;
 
                                                 default:
-                                                    //Debug.Log($"{name}: In MoveToCombatActionPosition Default");
-                                                    GetComponent<AnimationManager>().ChangeAnimationState("run");
-
-
-                                                    // //rb.MovePosition(GetPosition() + direction * 2f * Time.fixedDeltaTime);
-                                                    // transform.position = Vector3.MoveTowards(GetPosition(),
-                                                    //     target.transform.position,
-                                                    //     4f * Time.fixedDeltaTime);
-                                                    //
-                                                    // if (target.transform.position.x < GetPosition().x)
-                                                    // {
-                                                    //     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
-                                                    // } 
-                                                    // else if (target.transform.position.x > GetPosition().x)
-                                                    // {
-                                                    //     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
-                                                    // }
-                                                    //
-                                                    //
-                                                    // if (Vector3.Distance(
-                                                    //         new Vector3(transform.position.x, 0, transform.position.z),
-                                                    //         new Vector3(target.transform.position.x, 0,
-                                                    //             target.transform.position.z)) <=
-                                                    //     actionRange)
-                                                    // {
-                                                    //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
-                                                    //     battleState = CharacterBattleState.Action;
-                                                    // }
                                                     
-                                                    //agent.SetDestination(targetPosition);
                                                     agent.SetDestination(target.transform.position);
-                                            
-                                                    // if (!IsAgentMoving())
-                                                    // {
-                                                    //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
-                                                    //     battleState = CharacterBattleState.Action;
-                                                    // }
                                                     
                                                     if (Vector3.Distance(
                                                             new Vector3(transform.position.x, 0, transform.position.z),
-                                                            new Vector3(target.transform.position.x, 0, target.transform.position.z)) <=
+                                                            new Vector3(target.transform.position.x, 0,
+                                                                target.transform.position.z)) <=
                                                         actionRange)
                                                     {
                                                         agent.SetDestination(transform.position);
+                                                        agent.Stop();
                                                         GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                         battleState = CharacterBattleState.Action;
                                                     }
+                                                    else
+                                                    {
+                                                        GetComponent<AnimationManager>().ChangeAnimationState("run");
+                                                    }
+                                                    
+                                                   
 
                                                     break;
                                             }
@@ -826,15 +804,48 @@ namespace CodeReverie
 
         public void UseSkill()
         {
+            GetComponent<AnimationManager>().ChangeAnimationState("idle");
             if (selectedSkill != null)
             {
+                CombatManager.Instance.selectedSkillPlayerCharacter = this;
+                EventManager.Instance.combatEvents.OnCombatPause(true);
+                GetComponent<AnimationManager>().ChangeAnimationState("idle");
+                skillRecallTargetPosition = GetPosition();
+                List<CharacterBattleManager> targetList = new List<CharacterBattleManager>();
+                
+                targetList.Add(target);
+                
+                
+                CombatManager.Instance.MoveCharactersToSkillPositions(targetList);
+                Debug.Log("Set Skill Camera");
+                
+                
+                
                 GetComponent<AnimationManager>().ChangeAnimationState("idle");
                 characterBattleActionState = CharacterBattleActionState.Idle;
                 prevCharacterBattleActionState = CharacterBattleActionState.Skill;
                 EventManager.Instance.combatEvents.OnCombatPause(true);
                 CombatManager.Instance.PauseAnimationsForSkills();
+                CameraManager.Instance.ToggleSkillCamera();
                 selectedSkill.source = this;
                 selectedSkill.UseSkill();
+                
+                
+                StartCoroutine(CameraManager.Instance.RotateSkillCamera(() =>
+                {
+                    
+                    
+                    //TODO Placeholder for animations and skills VFX
+                    // List<DamageTypes> damageTypes = new List<DamageTypes>();
+                    // damageTypes.Add(DamageTypes.Fire);
+                    // DamageProfile damage = new DamageProfile(this, target.GetComponent<Health>(), damageTypes);
+                    // CameraManager.Instance.SetBattleCamera();
+                    // CombatManager.Instance.RecallCharacters();
+                    // CombatManager.Instance.selectedSkillPlayerCharacter = null;
+                    // EndTurn();
+                    //
+                }));
+                
             }
         }
 
@@ -952,8 +963,9 @@ namespace CodeReverie
             {
                 return false;
             }
-            
-            return agent.velocity.sqrMagnitude > 0.01f && !agent.isStopped;
+
+            return agent.DefaultLocomotion.Acceleration == 0;
+            //return agent.velocity.sqrMagnitude > 0.01f && !agent.isStopped;
         }
         
         

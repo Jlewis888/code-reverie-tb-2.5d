@@ -44,13 +44,23 @@ namespace CodeReverie
             Clear();
             
             skills = new List<Skill>();
+
+
+            if (CombatManager.Instance.selectedPlayerCharacter
+                    .GetComponent<CharacterUnitController>()
+                    .character.equippedArchetype != null)
+            {
+                skills.AddRange(CombatManager.Instance.selectedPlayerCharacter
+                    .GetComponent<CharacterUnitController>()
+                    .character.equippedArchetype.learnedSkills);
+            }
             
-            skills.AddRange(CombatManager.Instance.selectedPlayerCharacter
-                .GetComponent<CharacterUnitController>()
-                .character.equippedArchetype.learnedSkills);
+            
             
             skills.AddRange(CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>()
                 .character.characterSkills.learnedSkills);
+            
+            Debug.Log(skills.Count);
             
 
             characterSkills = new List<Skill>(CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>()
@@ -83,6 +93,7 @@ namespace CodeReverie
 
             for (int i = 0; i < wheelCount; i++)
             {
+                Debug.Log("Is this getting hit?");
                 CommandWheel commandWheel = Instantiate(commandWheelPF, commandWheelContainer.transform);
 
                 commandWheel.gameObject.AddComponent<CommandWheelExtensionSkill>();

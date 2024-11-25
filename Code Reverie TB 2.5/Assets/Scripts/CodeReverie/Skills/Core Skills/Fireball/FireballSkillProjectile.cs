@@ -41,7 +41,7 @@ namespace CodeReverie
             
             if (Vector3.Distance(transform.position, target.transform.position) <= 1f)
             {
-                Debug.Log("THis is complete");
+                
                 List<DamageTypes> damageTypes = new List<DamageTypes>();
                 damageTypes.Add(DamageTypes.Fire);
                 DamageProfile damage = new DamageProfile(source, source.target.GetComponent<Health>(), damageTypes);

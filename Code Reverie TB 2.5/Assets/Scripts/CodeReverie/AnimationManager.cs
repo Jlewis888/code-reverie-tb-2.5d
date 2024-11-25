@@ -36,10 +36,15 @@ namespace CodeReverie
            
             
             
-            //Debug.Log($"{name}: Animation Changed to {newAnimation}");
+            Debug.Log($"{name}: Animation Changed to {newAnimation}");
+            //animator.StopPlayback();
             animator.Play(newAnimation);
+
+            
             currentAnimation = newAnimation;
             currentAnimationSpeed = animator.speed;
+            
+            
         }
 
         public void PauseAnimation()

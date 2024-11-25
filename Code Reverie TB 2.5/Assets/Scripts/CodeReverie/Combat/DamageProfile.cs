@@ -26,6 +26,17 @@ namespace CodeReverie
             
             ApplyDamage();
         }
+        
+        public DamageProfile(CharacterBattleManager damageSource, CharacterBattleManager damageTarget, List<DamageTypes> damageTypes, bool isBreak = false)
+        {
+            this.damageSource = damageSource;
+            this.damageTarget = damageTarget.GetComponent<Health>();
+            this.damageTypes = damageTypes;
+            isCrit = false;
+            this.isBreak = isBreak;
+            
+            ApplyDamage();
+        }
 
         public void ApplyDamage()
         {

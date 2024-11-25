@@ -88,7 +88,7 @@ MonoBehaviour:
   resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 
-  skillGameObject: {fileID: 4458741695297324379, guid: 345e3b008d158834695c56043c0e649f,
+  skillGameObject: {fileID: 2322904651092921232, guid: 345e3b008d158834695c56043c0e649f,
     type: 3}
   initialAnimation: basic_attack_1a
   castAnimation: cast_1
