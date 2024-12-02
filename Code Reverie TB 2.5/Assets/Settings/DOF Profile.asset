@@ -414,11 +414,6 @@ MonoBehaviour:
   m_Name: DOF Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 7910108691737995278}
-  - {fileID: 4597954262147628213}
-  - {fileID: -7279535134696473225}
-  - {fileID: -8255604252607718153}
-  - {fileID: -2920939066572013791}
   - {fileID: -6134828803783743665}
   - {fileID: -2923864034591702645}
 --- !u!114 &4597954262147628213

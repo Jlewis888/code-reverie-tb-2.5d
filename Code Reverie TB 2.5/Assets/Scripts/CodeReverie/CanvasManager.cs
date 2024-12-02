@@ -46,7 +46,7 @@ namespace CodeReverie
 
 
         public LevelUpPopUp levelUpPopUp;
-        public GameObject victoryPopup;
+        public CombatVictoryPanel combatVictoryPanel;
         
         protected override void Awake()
         {
@@ -280,7 +280,9 @@ namespace CodeReverie
         {
             if (CombatManager.Instance != null)
             {
-                victoryPopup.SetActive(true);
+                screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(false);
+                combatVictoryPanel.gameObject.SetActive(true);
+                
             }
         }
         

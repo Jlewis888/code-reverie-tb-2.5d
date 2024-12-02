@@ -32,6 +32,8 @@ namespace ProjectDawn.Navigation.Hybrid
 
             var manager = world.EntityManager;
             manager.DestroyEntity(m_Entity);
+
+            m_Entity = Entity.Null;
         }
 
         void OnEnable()

@@ -586,7 +586,6 @@ namespace CodeReverie
                         {
                             if (x != null)
                             {
-                                Debug.Log("Test");
                                 return x.info.characterID == characterID;
                             }
 

@@ -17,5 +17,7 @@ namespace CodeReverie
         
         public abstract void Init();
         public abstract void Attack();
+
+        public abstract void OnSkillEnd();
     }
 }

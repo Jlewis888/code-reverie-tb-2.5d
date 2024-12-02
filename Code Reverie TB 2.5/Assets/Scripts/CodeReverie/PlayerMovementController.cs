@@ -184,7 +184,7 @@ namespace CodeReverie
             {
                 //todo Add Active move speed again
                 //Vector3 newPosition = transform.position + moveInput * (activeMoveSpeed * Time.fixedDeltaTime);
-                Vector3 newPosition = transform.position + moveInput * (moveSpeed * Time.fixedDeltaTime);
+                Vector3 newPosition = transform.position + moveInput.normalized * (moveSpeed * Time.fixedDeltaTime);
 
                 NavMeshHit hit;
 

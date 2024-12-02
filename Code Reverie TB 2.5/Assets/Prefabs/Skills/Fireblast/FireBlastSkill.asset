@@ -85,6 +85,8 @@ MonoBehaviour:
   skillRange: 1
   skillCastTime: 3
   targetType: 0
+  skillDamageTargetType: 1
+  aoeRadius: 3
   resonanceSkillsList: []
   skillModifierDetailsList: []
   skillDamageTypes: 

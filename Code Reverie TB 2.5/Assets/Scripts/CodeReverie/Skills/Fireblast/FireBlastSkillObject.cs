@@ -14,10 +14,12 @@ namespace CodeReverie
         public bool isExplosionParticleSystemPlaying;
         public float applyDamageTimer;
         public bool damageApplied;
+        public float skillEndTimer;
         
         private void Awake()
         {
             applyDamageTimer = 2f;
+            skillEndTimer = 4f;
         }
 
         private void Update()
@@ -38,6 +40,15 @@ namespace CodeReverie
                     Attack();
                 }
                 
+            }
+
+            if (skillEndTimer > 0)
+            {
+                skillEndTimer -= Time.deltaTime;
+            }
+            else
+            {
+                OnSkillEnd();
             }
             
             
@@ -73,7 +84,15 @@ namespace CodeReverie
             
             
         }
-        
+
+        public override void OnSkillEnd()
+        {
+
+            CombatManager.Instance.combatManagerState = CombatManagerState.OnSkillUseEnd;
+           
+            DestroyObject();
+        }
+
 
         public void DestroyObject()
         {

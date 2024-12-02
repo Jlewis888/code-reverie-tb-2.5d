@@ -55,6 +55,7 @@ namespace CodeReverie
         public void ToggleCombatHudManager()
         {
             combatHudManager.gameObject.SetActive(true);
+            commandMenu.gameObject.SetActive(false);
         }
         
         

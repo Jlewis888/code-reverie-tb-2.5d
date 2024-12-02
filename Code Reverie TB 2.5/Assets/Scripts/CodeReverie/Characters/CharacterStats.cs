@@ -11,11 +11,13 @@ namespace CodeReverie
         public bool ignoreStats;
         public bool shouldUseModifiers = false;
 
-        public List<StatModifierObject> statModifierProviders;
+        //public List<StatModifier> statModifiers;
+        public List<StatModifier> tempStatModifiers = new List<StatModifier>();
 
         public CharacterStats(Character character)
         {
             this.character = character;
+            tempStatModifiers = new List<StatModifier>();
         }
         
 
@@ -172,6 +174,14 @@ namespace CodeReverie
                     total += teamStatModifier.stat.statValue;
                 }
             }
+
+            foreach (StatModifier statModifier in tempStatModifiers)
+            {
+                if (statModifier.stat.statAttribute == statAttribute && statModifier.stat.statType == StatType.Additive)
+                {
+                    total += statModifier.stat.statValue;
+                }
+            }
             
             
             foreach (Stat stat in stats)
@@ -296,6 +306,14 @@ namespace CodeReverie
                 }
             }
             
+            foreach (StatModifier statModifier in tempStatModifiers)
+            {
+                if (statModifier.stat.statAttribute == statAttribute && statModifier.stat.statType == StatType.Percentage)
+                {
+                    total += statModifier.stat.statValue;
+                }
+            }
+            
             
             foreach (Stat stat in stats)
             {
@@ -314,6 +332,31 @@ namespace CodeReverie
         {
             //baseStatsList[stat] += statValue;
         }
+
+        public void UpdateTempStats()
+        {
+
+            List<StatModifier> safeStatModifiers = new List<StatModifier>();
+            
+            foreach (StatModifier statModifier in tempStatModifiers)
+            {
+                statModifier.duration -= 1;
+
+                if (statModifier.duration > 0)
+                {
+                    safeStatModifiers.Add(statModifier);
+                }
+            }
+
+            tempStatModifiers = safeStatModifiers;
+
+        }
+
+        public void ResetTempStats()
+        {
+            tempStatModifiers = new List<StatModifier>();
+        }
+        
 
         public string GenerateTempStatId()
         {

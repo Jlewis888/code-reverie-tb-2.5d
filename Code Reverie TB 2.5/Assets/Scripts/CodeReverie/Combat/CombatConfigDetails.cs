@@ -11,6 +11,9 @@ namespace CodeReverie
         public string characterInstanceID;
         public Vector3 characterReturnPosition;
         public List<CharacterDataContainer> enemyList;
+        public float expToGive;
+        public int archetypePointsToGive;
+        public int lumiesToGive;
         
 
 
@@ -20,6 +23,16 @@ namespace CodeReverie
             this.characterInstanceID = characterInstanceID;
             this.enemyList = enemyList;
             this.characterReturnPosition = characterReturnPosition;
+            
+            SetExpToGive();
+        }
+
+        public void SetExpToGive()
+        {
+            foreach (CharacterDataContainer characterDataContainer in enemyList)
+            {
+                expToGive += characterDataContainer.experienceToGive;
+            }
         }
         
     }

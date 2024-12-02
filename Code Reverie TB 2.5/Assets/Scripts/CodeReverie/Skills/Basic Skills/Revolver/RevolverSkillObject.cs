@@ -18,8 +18,13 @@ namespace CodeReverie
             Debug.Log("Fire Revolver Projectiles");
             FireProjectileShot();
         }
-        
-        
+
+        public override void OnSkillEnd()
+        {
+            throw new NotImplementedException();
+        }
+
+
         public void FireProjectileShot()
         {
             Projectile projectile = Instantiate(projectilePF, firePoint.position, firePoint.rotation);

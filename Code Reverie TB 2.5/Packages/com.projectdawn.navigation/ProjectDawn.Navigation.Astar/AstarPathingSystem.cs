@@ -122,8 +122,8 @@ namespace ProjectDawn.Navigation.Astar
             Profiler.EndSample();
 
             // Handle state machine link traversal
-            foreach (var (managedLinkInfo, managedState, transform, body, shape, entity) in
-                SystemAPI.Query<AstarLinkTraversalStateMachine, ManagedState, RefRW<LocalTransform>, RefRW<AgentBody>, RefRO<AgentShape>>()
+            foreach (var (managedLinkInfo, managedState, transform, body, shape, offmeshLinkMovement, entity) in
+                SystemAPI.Query<AstarLinkTraversalStateMachine, ManagedState, RefRW<LocalTransform>, RefRW<AgentBody>, RefRO<AgentShape>, EnabledRefRW<AgentOffMeshLinkMovementDisabled>>()
                 .WithAll<LinkTraversal>()
                 .WithEntityAccess())
             {
@@ -153,7 +153,9 @@ namespace ProjectDawn.Navigation.Astar
                     managedLinkInfo.coroutine = null;
                 }
 
-                if (JobManagedOffMeshLinkTransition.MoveNext(entity, managedState, ref transform.ValueRW, ref movementPlane, ref movementControl, ref movementSettings, ref managedLinkInfo.link, managedLinkInfo, SystemAPI.Time.DeltaTime))
+                if (JobManagedOffMeshLinkTransition.MoveNext(
+                    entity, managedState, ref transform.ValueRW, ref movementPlane, ref movementControl, ref movementSettings,
+                    ref managedLinkInfo.link, managedLinkInfo, offmeshLinkMovement, SystemAPI.Time.DeltaTime))
                 {
                     body.ValueRW.Force = math.normalizesafe(managedLinkInfo.context.movementControl.targetPoint - transform.ValueRO.Position);
                 }

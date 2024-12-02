@@ -68,7 +68,7 @@ namespace CodeReverie
                 switch (message)
                 {
                     case "SelectedPlayerCharacter":
-                        Debug.Log("Does this hit");
+                        //Debug.Log("Does this hit");
                         GetComponent<PlayerMovementController>().enabled = true;
                         CameraManager.Instance.mainVirtualCamera.Follow = transform;
                         break;

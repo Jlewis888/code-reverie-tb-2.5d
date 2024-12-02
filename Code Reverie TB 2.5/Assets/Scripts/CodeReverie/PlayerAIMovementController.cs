@@ -14,6 +14,12 @@ namespace CodeReverie
 
         private void Update()
         {
+            
+            
+        }
+
+        private void FixedUpdate()
+        {
             float moveSpeed = followTarget.GetComponent<PlayerMovementController>().moveSpeed;
             FaceFollowTarget();
             
@@ -48,9 +54,8 @@ namespace CodeReverie
                 
                 
             }
-            
         }
-        
+
         public void FaceFollowTarget()
         {
             if (transform.position.x > followTarget.transform.position.x)

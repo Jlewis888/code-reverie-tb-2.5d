@@ -78,5 +78,10 @@ namespace CodeReverie
             Destroy(gameObject);
             
         }
+
+        public override void OnSkillEnd()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

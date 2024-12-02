@@ -3,6 +3,7 @@ using Unity.Mathematics;
 
 namespace ProjectDawn.Navigation
 {
+    [System.Serializable]
     /// <summary>
     /// Agent's locomotion that moves towards destination with arrival.
     /// </summary>

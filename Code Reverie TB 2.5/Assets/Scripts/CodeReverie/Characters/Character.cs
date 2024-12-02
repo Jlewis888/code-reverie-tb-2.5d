@@ -86,7 +86,9 @@ namespace CodeReverie
                 }
             }
 
-            currentHealth = new CharacterStats(this).GetStat(StatAttribute.Health);
+            characterStats = new CharacterStats(this);
+
+            currentHealth = characterStats.GetStat(StatAttribute.Health);
         }
 
         public void Init()

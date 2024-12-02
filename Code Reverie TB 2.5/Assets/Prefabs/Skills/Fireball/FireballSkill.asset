@@ -61,6 +61,8 @@ MonoBehaviour:
   skillRange: 5
   skillCastTime: 3
   targetType: 0
+  skillDamageTargetType: 0
+  aoeRadius: 3
   resonanceSkillsList:
   - {fileID: 11400000, guid: 367066a7cad182442a4b5e1fbea7b931, type: 2}
   skillModifierDetailsList: []

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this package will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## [4.0.9] - 2024-11-12
+- Added AGENTS_NAVIGATION_FAKE_ASSEMBLY_REFERENCE for faking depedency on ecs/collection assembly reference
+- Fixed compatibility with the A* Pathfinding Project package version 5.2.5
+- Added AgentAstarPathingAuthoring from A* Pathfinding Project to work with subscenes
+
 ## [4.0.8] - 2024-10-06
 - Added Hybrid game object and entity connection. As result in dots hierarchy you can select runtime mode and see actualy entity connected to it
 - Fixed compatibility with the A* Pathfinding Project package version 5.2.

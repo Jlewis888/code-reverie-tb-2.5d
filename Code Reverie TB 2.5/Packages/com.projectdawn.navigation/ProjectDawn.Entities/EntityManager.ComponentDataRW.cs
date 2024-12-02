@@ -1,3 +1,4 @@
+#if !AGENTS_NAVIGATION_FAKE_ASSEMBLY_REFERENCE
 using System;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
@@ -62,3 +63,4 @@ namespace Unity.Entities
         }
     }
 }
+#endif

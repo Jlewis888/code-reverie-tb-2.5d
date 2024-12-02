@@ -140,7 +140,7 @@ namespace CodeReverie
                     
                     if (CheckIfCharactersInBattlePositions())
                     {
-                        Debug.Log("this is now true");
+                        
                         pause = false;
                         combatManagerState = CombatManagerState.Battle;
                     }
@@ -238,9 +238,12 @@ namespace CodeReverie
                 case CombatManagerState.PlayerMove:
                     if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
                     {
-                        // EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
-                        // combatManagerState = CombatManagerState.Battle;
-                        // ConfirmAction();
+                        //EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
+                        //combatManagerState = CombatManagerState.Battle;
+                        selectedPlayerCharacter.characterBattleActionState =
+                            CharacterBattleActionState.Move;
+                        movePlayerObject.gameObject.SetActive(false);
+                        ConfirmAction();
                     }
             
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
@@ -248,6 +251,14 @@ namespace CodeReverie
                         EventManager.Instance.combatEvents.OnPrevCommandWheelSelect();
                         combatManagerState = CombatManagerState.Battle;
                     }
+                    break;
+                case CombatManagerState.OnSkillUseEnd:
+                    CameraManager.Instance.SetBattleCamera();
+                    RecallCharacters();
+                    //Debug.LogError(selectedSkillPlayerCharacter);
+                    selectedSkillPlayerCharacter.EndTurn();
+                    selectedSkillPlayerCharacter = null;
+                    combatManagerState = CombatManagerState.Battle;
                     break;
             }
         }
@@ -265,7 +276,8 @@ namespace CodeReverie
             CanvasManager.Instance.screenSpaceCanvasManager.gameOverPanel.gameObject.SetActive(false);
             CameraManager.Instance.SetBattleCamera();
             
-            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(true);
+            //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.gameObject.SetActive(true);
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.ToggleCombatHudManager();
             pause = true;
             combatQueue = new Queue<CharacterBattleManager>();
             GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
@@ -304,7 +316,7 @@ namespace CodeReverie
         {
             foreach (CharacterDataContainer characterDataContainer in combatConfigDetails.enemyList)
             {
-                Debug.Log(characterDataContainer.characterID);
+               
                 Character character = new Character(characterDataContainer);
                 character.SpawnCharacter(Vector3.zero);
                 character.characterController.gameObject.SetActive(true);
@@ -355,25 +367,25 @@ namespace CodeReverie
             }
             
             EventManager.Instance.combatEvents.OnPlayerVictory();
-            //UnsetBattle();
+            //UnsetBattle();//
             combatManagerState = CombatManagerState.PostBattle;
 
-            foreach (Character character in PlayerManager.Instance.currentParty)
-            {
-                Debug.Log("Set character inactive");
-                character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
-                character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
-                character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
-
-                //character.currentHealth = character.characterController.GetComponent<Health>().CurrentHealth;
-            }
-            
-            TransitionAnimator.Start(
-                TransitionType.Fade, // transition type
-                duration: 1f,
-                playDelay: 3f,
-                sceneNameToLoad: PlayerManager.Instance.combatConfigDetails.returnSceneName
-            );
+            // foreach (Character character in PlayerManager.Instance.currentParty)
+            // {
+            //     Debug.Log("Set character inactive");
+            //     character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
+            //     character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
+            //     character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
+            //
+            //     //character.currentHealth = character.characterController.GetComponent<Health>().CurrentHealth;
+            // }
+            //
+            // TransitionAnimator.Start(
+            //     TransitionType.Fade, // transition type
+            //     duration: 1f,
+            //     playDelay: 3f,
+            //     sceneNameToLoad: PlayerManager.Instance.combatConfigDetails.returnSceneName
+            // );
 
             
             

@@ -13,5 +13,10 @@ namespace CodeReverie
         {
             //throw new System.NotImplementedException();
         }
+
+        public override void OnSkillEnd()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

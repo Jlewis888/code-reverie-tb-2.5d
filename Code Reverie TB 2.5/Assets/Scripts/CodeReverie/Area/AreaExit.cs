@@ -41,7 +41,7 @@ namespace CodeReverie
                     
                 }
                 
-                Debug.Log("Load New Area");
+                //Debug.Log("Load New Area");
 
             }
         }

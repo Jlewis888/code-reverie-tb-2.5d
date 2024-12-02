@@ -71,8 +71,8 @@ namespace CodeReverie
 
             if (characterBattleManager != null)
             {
-                GetComponent<Animator>().runtimeAnimatorController = characterBattleManager.GetComponent<Animator>().runtimeAnimatorController;
-                GetComponent<AnimationManager>().animator = GetComponent<Animator>();
+                // GetComponent<Animator>().runtimeAnimatorController = characterBattleManager.GetComponent<Animator>().runtimeAnimatorController;
+                // GetComponent<AnimationManager>().animator = GetComponent<Animator>();
                 
                 transform.position = characterBattleManager.transform.position + characterBattleManager.transform.right * 1.5f;
                 centerObject = characterBattleManager.gameObject;

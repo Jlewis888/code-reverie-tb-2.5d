@@ -128,14 +128,14 @@ namespace CodeReverie
 
         private void Update()
         {
-            if (autoSaveDelay <= 0)
-            {
-                AutoSaveScene();
-            }
-            else
-            {
-                autoSaveDelay -= Time.deltaTime;
-            }
+            // if (autoSaveDelay <= 0)
+            // {
+            //     AutoSaveScene();
+            // }
+            // else
+            // {
+            //     autoSaveDelay -= Time.deltaTime;
+            // }
 
             // if (Input.GetKeyDown(KeyCode.P))
             // {
@@ -147,6 +147,7 @@ namespace CodeReverie
         {
             
             SpawnPlayerParty();
+            
 
             if (GameManager.Instance.newGame)
             {
@@ -203,7 +204,7 @@ namespace CodeReverie
             
             if (PlayerManager.Instance.combatConfigDetails != null)
             {
-                CanvasManager.Instance.victoryPopup.SetActive(false);
+                CanvasManager.Instance.combatVictoryPanel.gameObject.SetActive(false);
 
 
                 TransitionAnimator.Start(

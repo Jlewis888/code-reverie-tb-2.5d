@@ -82,7 +82,7 @@ namespace CodeReverie
                 CombatManager.Instance.movePlayerObject.characterBattleManager = CombatManager.Instance.selectedPlayerCharacter;
                 CombatManager.Instance.movePlayerObject.Init();
                 CombatManager.Instance.movePlayerObject.gameObject.SetActive(true);
-                CombatManager.Instance.movePlayerObject.GetComponent<AnimationManager>().ChangeAnimationState("run");
+                //CombatManager.Instance.movePlayerObject.GetComponent<AnimationManager>().ChangeAnimationState("run");
                 CameraManager.Instance.SetSelectedPlayerWeight(CombatManager.Instance.movePlayerObject.characterBattleManager, 10f, 3f);
                 CombatManager.Instance.combatManagerState = CombatManagerState.PlayerMove;
 

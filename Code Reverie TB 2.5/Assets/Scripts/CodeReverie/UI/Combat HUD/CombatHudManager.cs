@@ -20,6 +20,7 @@ namespace CodeReverie
         public List<CharacterActionSlider> characterActionSliders;
         public CommandWheelPanelManager commandWheelPanelManager;
         public TargetInfoPanel targetInfoPanel;
+        public SelectedPartyMemberPanel selectedPartyMemberPanel;
         
         private void Awake()
         {
@@ -117,6 +118,9 @@ namespace CodeReverie
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
+            selectedPartyMemberPanel.gameObject.SetActive(true);
+            selectedPartyMemberPanel.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+            selectedPartyMemberPanel.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
             CameraManager.Instance.SetSelectedPlayerWeight(characterBattleManager, 10f, 1.3f);
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.SetCharacterSkillDetails();
 
@@ -128,7 +132,7 @@ namespace CodeReverie
             targetInfoPanel.gameObject.SetActive(false);
             EventManager.Instance.combatEvents.OnCombatPause(false);
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = null;
-            
+            selectedPartyMemberPanel.gameObject.SetActive(false);
         }
 
         public void OnPlayerSelectTarget(CharacterBattleManager characterBattleManager)

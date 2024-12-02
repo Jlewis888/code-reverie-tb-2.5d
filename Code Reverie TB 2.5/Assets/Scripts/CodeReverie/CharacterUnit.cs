@@ -68,11 +68,11 @@ namespace CodeReverie
                 
                 
                 rend.material.SetFloat("_DissolveAmount", counter);
-                Debug.Log(rend.material.GetFloat("_DissolveAmount"));
+                //Debug.Log(rend.material.GetFloat("_DissolveAmount"));
                 yield return new WaitForSeconds(refreshRate);
             }
             
-            Debug.Log("Appear Complter");
+            //Debug.Log("Appear Complter");
 
             // while (elapsedTime > dissolveAmount)
             // {
@@ -120,11 +120,11 @@ namespace CodeReverie
                 
                 
                 rend.material.SetFloat("_DissolveAmount", counter);
-                Debug.Log(rend.material.GetFloat("_DissolveAmount"));
+                //Debug.Log(rend.material.GetFloat("_DissolveAmount"));
                 yield return new WaitForSeconds(refreshRate);
             }
             
-            Debug.Log("Dissolve Complter");
+            //Debug.Log("Dissolve Complter");
 
             // while (elapsedTime < dissolveAmount)
             // {

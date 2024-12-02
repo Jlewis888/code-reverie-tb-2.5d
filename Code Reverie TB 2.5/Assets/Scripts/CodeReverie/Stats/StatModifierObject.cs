@@ -13,6 +13,7 @@ namespace CodeReverie
         public float value;
         public float time;
         public float timer;
+        public int turns;
 
 
         private void Awake()

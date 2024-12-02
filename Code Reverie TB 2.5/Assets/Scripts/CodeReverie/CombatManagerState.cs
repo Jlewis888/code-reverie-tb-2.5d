@@ -10,6 +10,8 @@
         PlayerWin,
         PlayerLost,
         TargetSelect,
-        PlayerMove
+        PlayerMove,
+        OnSkillUse,
+        OnSkillUseEnd
     }
 }

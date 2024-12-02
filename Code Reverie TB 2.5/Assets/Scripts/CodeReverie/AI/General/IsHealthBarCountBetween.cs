@@ -16,7 +16,7 @@ namespace CodeReverie
         
         public override TaskStatus OnUpdate()
         {
-            Debug.Log(health.CurrentHealthBarCount);
+            //Debug.Log(health.CurrentHealthBarCount);
             return (health.CurrentHealthBarCount <= max && health.CurrentHealthBarCount > min) ? TaskStatus.Success : TaskStatus.Failure;
         }
     }

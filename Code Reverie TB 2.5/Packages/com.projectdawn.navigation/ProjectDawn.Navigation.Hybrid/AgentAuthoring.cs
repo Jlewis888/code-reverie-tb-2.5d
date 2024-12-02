@@ -120,6 +120,12 @@ namespace ProjectDawn.Navigation.Hybrid
         }
 
         /// <summary>
+        /// <see cref="AgentBody"/> component of this <see cref="AgentAuthoring"/> Entity.
+        /// Accessing this property is potentially heavy operation as it will require wait for agent jobs to finish.
+        /// </summary>
+        public ref AgentBody Body => ref World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentDataRW<AgentBody>(m_Entity).ValueRW;
+
+        /// <summary>
         /// <see cref="AgentSteering"/> component of this <see cref="AgentAuthoring"/> Entity.
         /// Accessing this property is potentially heavy operation as it will require wait for agent jobs to finish.
         /// </summary>

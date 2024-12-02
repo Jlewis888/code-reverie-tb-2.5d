@@ -36,5 +36,10 @@ namespace CodeReverie
             infernalRuneGameObject.gameObject.SetActive(true);
             
         }
+
+        public override void OnSkillEnd()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

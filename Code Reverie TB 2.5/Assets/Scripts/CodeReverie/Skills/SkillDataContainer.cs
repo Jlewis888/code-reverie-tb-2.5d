@@ -49,6 +49,8 @@ namespace CodeReverie
         [TabGroup("Skill Details")] public float skillRange = 1f;
         [TabGroup("Skill Details")] public SkillCastTime skillCastTime = SkillCastTime.Medium;
         [TabGroup("Skill Details")] public TargetType targetType;
+        [TabGroup("Skill Details")] public SkillDamageTargetType skillDamageTargetType;
+        [TabGroup("Skill Details")] public float aoeRadius = 3f;
         
         [TabGroup("Resonance Skills", TextColor = "yellow")]
         public List<SkillDataContainer> resonanceSkillsList = new List<SkillDataContainer>();

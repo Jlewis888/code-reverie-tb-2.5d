@@ -1,6 +1,8 @@
 using Unity.Entities;
 using UnityEngine;
 using ProjectDawn.Navigation.Hybrid;
+using System;
+
 #if ENABLE_ASTAR_PATHFINDING_PROJECT
 using Pathfinding.ECS;
 using Pathfinding;
@@ -130,45 +132,15 @@ namespace ProjectDawn.Navigation.Astar
         {
             public override void Bake(AgentAstarPathingAuthoring authoring)
             {
-                throw new System.NotImplementedException("Currently AgentAstarPathingBaker does not support subscene workflow. This will be implemented in the future patches.");
-
-                /*var entity = GetEntity(TransformUsageFlags.Dynamic);
-                var clonable = authoring.m_ManagedState as System.ICloneable;
-                AddComponent(entity, new AstarPathing { });
-                AddComponentObject(entity, Clone(authoring.m_ManagedState));
-                AddComponent(entity, authoring.DefaulMovementState);
-                AddComponentObject(entity, new AstarLinkTraversal
+                var entity = GetEntity(TransformUsageFlags.Dynamic);
+                AddComponent(entity, authoring.DefaultPath);
+                AddComponent(entity, new SetupManagedState
                 {
-                    UseDefaultSeeking = authoring.m_LinkTraversalMode == AstarLinkTraversalMode.Seeking,
+                    graphMask = authoring.ManagedState.pathfindingSettings.graphMask,
+                    LinkTraversalMode = authoring.m_LinkTraversalMode
                 });
-                if (authoring.m_LinkTraversalMode == AstarLinkTraversalMode.StateMachine)
-                {
-                    AddComponentObject(entity, new AstarLinkTraversalStateMachine
-                    {
-
-                    });
-                }*/
+                AddComponent(entity, authoring.DefaultMovementState);
             }
-
-            /*ManagedState Clone(ManagedState other)
-            {
-                return new ManagedState
-                {
-                    autoRepath = other.autoRepath.Clone(),
-                    pathTracer = default,
-                    rvoSettings = other.rvoSettings,
-                    pathfindingSettings = new PathRequestSettings
-                    {
-                        graphMask = other.pathfindingSettings.graphMask,
-                        tagPenalties = other.pathfindingSettings.tagPenalties != null ? (int[]) other.pathfindingSettings.tagPenalties.Clone() : null,
-                        traversableTags = other.pathfindingSettings.traversableTags,
-                        traversalProvider = null, // Cannot be safely cloned or copied
-                    },
-                    enableLocalAvoidance = other.enableLocalAvoidance,
-                    enableGravity = other.enableGravity,
-                    onTraverseOffMeshLink = null, // Cannot be safely cloned or copied
-                };
-            }*/
         }
 #endif
     }
