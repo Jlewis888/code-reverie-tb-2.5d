@@ -64,7 +64,7 @@ namespace CodeReverie
             // Debug.Log($"Crit Damage amount: {damageSource.ApplyCritModifier()}");
             //
             
-            float calculatedDamage = (damageSource.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Atk) + ApplyAdditiveDamage()) * (1 + ApplyDamageBonuses()) * ApplyDamageTypeCheck() * (1-ApplyDamageReduction()) * (1 + ApplyCritModifier());
+            float calculatedDamage = (damageSource.GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Atk) + ApplyAdditiveDamage()) * (1 + ApplyDamageBonuses()) * ApplyDamageTypeCheck() * (1-ApplyDamageReduction()) * (1 + ApplyCritModifier());
 
             damageAmount = calculatedDamage;
             
@@ -92,7 +92,7 @@ namespace CodeReverie
                 if(StatsManager.Instance.GetStatData(damageType) != null)
                 {
                     
-                    damageTypeStatBonus = damageSource.GetComponent<CharacterStatsManager>()
+                    damageTypeStatBonus = damageSource.GetComponent<CharacterUnitController>().character.characterStats
                         .GetStat(StatsManager.Instance.GetStatData(damageType).statAttributeType);
                 }
                 
@@ -180,11 +180,11 @@ namespace CodeReverie
         public float ApplyDamageReduction()
         {
             //todo look at this damage calculation
-            float damageReduction = (10f + ((.25f * damageTarget.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Defense))/100))/100;
+            float damageReduction = (10f + ((.25f * damageTarget.GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Defense))/100))/100;
 
             if (damageTarget.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Character))
             {
-                damageReduction = (10f + ((1.5f * damageTarget.GetComponent<CharacterUnitController>().character.Level)/100) + ((.25f * damageTarget.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Defense))/100))/100;
+                damageReduction = (10f + ((1.5f * damageTarget.GetComponent<CharacterUnitController>().character.Level)/100) + ((.25f * damageTarget.GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Defense))/100))/100;
             }
 
             
@@ -197,7 +197,7 @@ namespace CodeReverie
         {
             if (IsCrit())
             {
-                return damageSource.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.CritDmg)/100;
+                return damageSource.GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.CritDmg)/100;
             }
 
             return 0f;
@@ -207,7 +207,7 @@ namespace CodeReverie
         {
             float randomValue = Random.value * 100;
 
-            if (randomValue <= damageSource.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.CritChance))
+            if (randomValue <= damageSource.GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.CritChance))
             {
                 //CheckForTriggerConditions(AbilityTrigger.OnCrit);
                 isCrit = true;

@@ -11,7 +11,7 @@ namespace CodeReverie
     public class PreloadManager : SerializedMonoBehaviour
     {
         public SceneField persistentData;
-        public SceneField titleSceen;
+        public SceneField titleScreen;
 
         private void Awake()
         {

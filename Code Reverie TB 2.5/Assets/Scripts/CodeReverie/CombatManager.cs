@@ -98,6 +98,7 @@ namespace CodeReverie
             EventManager.Instance.combatEvents.onPlayerTurn -= SetSelectedCharacter;
             EventManager.Instance.combatEvents.onPlayerDeath -= AllPlayerDeathCheck;
             EventManager.Instance.combatEvents.onEnemyDeath -= AllEnemyDeathCheck;
+            EventManager.Instance.combatEvents.onEnemyDeath -= OnEnemyDeath;
             EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
         }
 
@@ -107,6 +108,7 @@ namespace CodeReverie
             EventManager.Instance.combatEvents.onPlayerTurn += SetSelectedCharacter;
             EventManager.Instance.combatEvents.onPlayerDeath += AllPlayerDeathCheck;
             EventManager.Instance.combatEvents.onEnemyDeath += AllEnemyDeathCheck;
+            EventManager.Instance.combatEvents.onEnemyDeath += OnEnemyDeath;
             EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
             //SetEnemyPositionsTest();
 
@@ -148,90 +150,90 @@ namespace CodeReverie
                     break;
                 case CombatManagerState.TargetSelect:
                     
-                    if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
-                    {
-                        EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
-                        combatManagerState = CombatManagerState.Battle;
-                        ConfirmAction();
-                    }
-            
-                    if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-                    {
-                        EventManager.Instance.combatEvents.OnPrevCommandWheelSelect();
-                        //EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
-                        combatManagerState = CombatManagerState.Battle;
-                        //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
-                    }
-                    
-                    
-                    
-                    if (navigationDelayTimer <= 0)
-                    {
-                        if (GameManager.Instance.playerInput.GetAxis("Navigate Combat Vertical Axis") < 0)
-                        {
-                            navigationDelayTimer = navigationDelay;
-                            if (targetSelectIndex + 1 > selectableTargets.Count - 1)
-                            {
-                                targetSelectIndex = 0;
-                            }
-                            else
-                            {
-                                targetSelectIndex++;
-                            }
-                            
-                            TargetNavigation();
-                        }
-                        else if (GameManager.Instance.playerInput.GetAxis("Navigate Combat Vertical Axis") > 0)
-                        {
-                            navigationDelayTimer = navigationDelay;
-                            if (targetSelectIndex == 0)
-                            {
-                                targetSelectIndex = selectableTargets.Count - 1;
-                            }
-                            else
-                            {
-                                targetSelectIndex--;
-                            }
-                    
-                            TargetNavigation();
-                        }
-                    }
-                    else {
-                        navigationDelayTimer -= Time.unscaledDeltaTime;
-                    }
-                    
-                    
-                    if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Combat Vertical"))
-                    {
-               
-                        navigationDelayTimer = navigationDelay;
-                        if (targetSelectIndex + 1 > selectableTargets.Count - 1)
-                        {
-                            targetSelectIndex = 0;
-                        }
-                        else
-                        {
-                            targetSelectIndex++;
-                        }
-                            
-                        TargetNavigation();
-                    }
-                    else if (GameManager.Instance.playerInput.GetButtonDown("Navigate Combat Vertical"))
-                    {
-                
-                
-                        navigationDelayTimer = navigationDelay;
-                        if (targetSelectIndex == 0)
-                        {
-                            targetSelectIndex = selectableTargets.Count - 1;
-                        }
-                        else
-                        {
-                            targetSelectIndex--;
-                        }
-                    
-                        TargetNavigation();
-                    }
+                    // if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
+                    // {
+                    //     EventManager.Instance.combatEvents.OnPlayerSelectTargetEnd(null);
+                    //     combatManagerState = CombatManagerState.Battle;
+                    //     ConfirmAction();
+                    // }
+                    //
+                    // if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+                    // {
+                    //     EventManager.Instance.combatEvents.OnPrevCommandWheelSelect();
+                    //     //EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
+                    //     combatManagerState = CombatManagerState.Battle;
+                    //     //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
+                    // }
+                    //
+                    //
+                    //
+                    // if (navigationDelayTimer <= 0)
+                    // {
+                    //     if (GameManager.Instance.playerInput.GetAxis("Navigate Combat Vertical Axis") < 0)
+                    //     {
+                    //         navigationDelayTimer = navigationDelay;
+                    //         if (targetSelectIndex + 1 > selectableTargets.Count - 1)
+                    //         {
+                    //             targetSelectIndex = 0;
+                    //         }
+                    //         else
+                    //         {
+                    //             targetSelectIndex++;
+                    //         }
+                    //         
+                    //         TargetNavigation();
+                    //     }
+                    //     else if (GameManager.Instance.playerInput.GetAxis("Navigate Combat Vertical Axis") > 0)
+                    //     {
+                    //         navigationDelayTimer = navigationDelay;
+                    //         if (targetSelectIndex == 0)
+                    //         {
+                    //             targetSelectIndex = selectableTargets.Count - 1;
+                    //         }
+                    //         else
+                    //         {
+                    //             targetSelectIndex--;
+                    //         }
+                    //
+                    //         TargetNavigation();
+                    //     }
+                    // }
+                    // else {
+                    //     navigationDelayTimer -= Time.unscaledDeltaTime;
+                    // }
+                    //
+                    //
+                    // if (GameManager.Instance.playerInput.GetNegativeButtonDown("Navigate Combat Vertical"))
+                    // {
+                    //
+                    //     navigationDelayTimer = navigationDelay;
+                    //     if (targetSelectIndex + 1 > selectableTargets.Count - 1)
+                    //     {
+                    //         targetSelectIndex = 0;
+                    //     }
+                    //     else
+                    //     {
+                    //         targetSelectIndex++;
+                    //     }
+                    //         
+                    //     TargetNavigation();
+                    // }
+                    // else if (GameManager.Instance.playerInput.GetButtonDown("Navigate Combat Vertical"))
+                    // {
+                    //
+                    //
+                    //     navigationDelayTimer = navigationDelay;
+                    //     if (targetSelectIndex == 0)
+                    //     {
+                    //         targetSelectIndex = selectableTargets.Count - 1;
+                    //     }
+                    //     else
+                    //     {
+                    //         targetSelectIndex--;
+                    //     }
+                    //
+                    //     TargetNavigation();
+                    // }
                     
                     
                     break;
@@ -248,6 +250,7 @@ namespace CodeReverie
             
                     if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
                     {
+                        movePlayerObject.gameObject.SetActive(false);
                         EventManager.Instance.combatEvents.OnPrevCommandWheelSelect();
                         combatManagerState = CombatManagerState.Battle;
                     }
@@ -353,6 +356,23 @@ namespace CodeReverie
         {
             selectedPlayerCharacter = characterBattleManager;
         }
+
+        public void OnEnemyDeath(CharacterUnitController characterController)
+        {
+            
+            foreach (CharacterBattleManager characterBattleManager in enemyUnits)
+            {
+                if (characterBattleManager.GetComponent<CharacterUnitController>() == characterController)
+                {
+                    allUnits.Remove(characterBattleManager);
+                    enemyUnits.Remove(characterBattleManager);
+                    return;
+                }
+            }
+            
+           
+        }
+        
         
         public void AllEnemyDeathCheck(CharacterUnitController characterController)
         {
@@ -362,6 +382,7 @@ namespace CodeReverie
                 if (characterBattleManager.GetComponent<CharacterUnitController>().character.characterState !=
                     CharacterState.Dead)
                 {
+                    
                     return;
                 }
             }
@@ -479,7 +500,7 @@ namespace CodeReverie
         
                 int randomNum = Random.Range(1, 21);
         
-                orderOfTurnsMap.Add(character, randomNum + (int)character.GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Initiative));
+                orderOfTurnsMap.Add(character, randomNum + (int)character.GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Initiative));
                 character.SetStartingPosition();
                 character.battleState = CharacterBattleState.MoveToStartingBattlePosition;
                 character.inCombat = true;
@@ -597,6 +618,7 @@ namespace CodeReverie
             {
                 case CharacterBattleActionState.Attack:
                 case CharacterBattleActionState.Break:
+                    Debug.Log("WTF ARE WE DOING");
                     selectedPlayerCharacter.target = selectedTarget;
                     // selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.SetAttackActionTargetPosition();

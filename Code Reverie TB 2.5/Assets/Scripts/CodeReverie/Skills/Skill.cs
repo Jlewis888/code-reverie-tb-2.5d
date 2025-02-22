@@ -12,6 +12,7 @@ namespace CodeReverie
     {
         public SkillDataContainer info;
         public string skillID;
+        public int level = 1;
         public CharacterBattleManager source;
         public MeleeSkillObject meleeSkillObject;
         public List<Skill> resonanceSkills = new List<Skill>();

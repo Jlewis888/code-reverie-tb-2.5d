@@ -188,12 +188,10 @@ namespace CodeReverie
 
                                 if (!CombatManager.Instance.pause)
                                 {
-                                    cooldownTimer += Time.deltaTime *
-                                                     (1 + GetComponent<CharacterStatsManager>()
-                                                         .GetStat(StatAttribute.Haste));
+                                    cooldownTimer += Time.deltaTime * (1 + GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Haste));
+                                    
 
-
-                                    if (cooldownTimer >= actionPhaseCooldown * .8f)
+                                    if (cooldownTimer >= actionPhaseCooldown * .75f)
                                     {
                                         if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
                                         {
@@ -204,7 +202,7 @@ namespace CodeReverie
                                             battleState = CharacterBattleState.WaitingAction;
                                         }
 
-                                        cooldownTimer = actionPhaseCooldown * .8f;
+                                        cooldownTimer = actionPhaseCooldown * .75f;
                                         characterTimelineGaugeState = CharacterTimelineGaugeState.CommandPhase;
                                     }
 
@@ -423,6 +421,11 @@ namespace CodeReverie
                                                     //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                                     //     battleState = CharacterBattleState.Action;
                                                     // }
+                                                    
+                                                    if (target == null)
+                                                    {
+                                                        EndTurn();
+                                                    }
 
                                                     bool distance = Vector3.Distance(
                                                                         new Vector3(transform.position.x, 0,
@@ -450,6 +453,12 @@ namespace CodeReverie
 
                                                 default:
                                                     
+                                                    if (target == null)
+                                                    {
+                                                        EndTurn();
+                                                    }
+                                                    
+                                                    
                                                     agent.SetDestination(target.transform.position);
                                                     
                                                     if (Vector3.Distance(
@@ -473,7 +482,7 @@ namespace CodeReverie
 
                                                     break;
                                             }
-
+                                            
                                             break;
 
 

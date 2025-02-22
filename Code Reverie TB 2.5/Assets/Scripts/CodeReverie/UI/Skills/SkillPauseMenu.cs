@@ -134,6 +134,12 @@ namespace CodeReverie
                         EventManager.Instance.generalEvents.OnPauseMenuNavigationStateChange(PauseMenuNavigationState.Menu);
                     }
                     
+                    if (GameManager.Instance.playerInput.GetButtonDown("Action Menu 1"))
+                    {
+                        Debug.Log("Level up Skill");
+                        IncreaseSkillLevel();
+                    }
+              
                     if (GameManager.Instance.playerInput.GetButtonDown("Navigate Menu Horizontal Button"))
                     {
                         partySlotIndex++;
@@ -190,7 +196,7 @@ namespace CodeReverie
                 //     break;
                 
                 case SkillsMenuNavigationState.LearnSkills:
-                    Debug.Log("Test");
+                    Debug.Log("Learn Skill");
                     LearnSkill();
                     break;
             }
@@ -317,6 +323,11 @@ namespace CodeReverie
 
             character.equippedArchetype.SetLearnedArchetypeSkill();
 
+        }
+
+        public void IncreaseSkillLevel()
+        {
+            selectedLearnSkillPauseMenuNavigationButton.archetypeSkillContainer.skill.level += 1;
         }
         
         public void OnSkillSlotSelect(LearnSkillPauseMenuNavigationButton skillSlotUI)

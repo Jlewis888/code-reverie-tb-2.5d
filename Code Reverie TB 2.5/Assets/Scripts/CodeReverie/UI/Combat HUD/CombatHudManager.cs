@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using a;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,13 +15,18 @@ namespace CodeReverie
         public ActionBarManager actionBarManager;
         public CurrentEnemyHealthPanel currentEnemyHealthPanel;
         public PartyHudPanelManager partyHudPanelManager;
-        //public CommandMenu commandMenu;
+        public CombatActionMenu commandMenu;
         public GameObject characterActionSliderHolder;
         public CharacterActionSlider characterActionSliderPF;
         public List<CharacterActionSlider> characterActionSliders;
         public CommandWheelPanelManager commandWheelPanelManager;
         public TargetInfoPanel targetInfoPanel;
         public SelectedPartyMemberPanel selectedPartyMemberPanel;
+
+        public ActionGauge actionGauge;
+        public GameObject actionGaugeHolder;
+        public CharacterActionGauge characterActionGaugePF;
+        public List<CharacterActionGauge> characterActionGauges;
         
         private void Awake()
         {
@@ -32,6 +38,7 @@ namespace CodeReverie
         private void OnEnable()
         {
             targetInfoPanel.gameObject.SetActive(false);
+            commandMenu.gameObject.SetActive(true);
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCommandMenuHolderOff();
             EventManager.Instance.combatEvents.onPlayerTurn += OnPlayerTurn;
             EventManager.Instance.combatEvents.onActionSelected += OnActionSelected;
@@ -71,13 +78,23 @@ namespace CodeReverie
             
             foreach (CharacterBattleManager characterBattleManager in CombatManager.Instance.allUnits)
             {
-                CharacterActionSlider characterActionSlider = Instantiate(characterActionSliderPF, characterActionSliderHolder.transform);
-                characterActionSlider.characterBattleManager = characterBattleManager;
-                characterActionSlider.name =
-                    $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Slider";
-                characterActionSlider.SetSliderIconPosition();
-                characterActionSlider.Init();
-                characterActionSliders.Add(characterActionSlider);
+                // CharacterActionSlider characterActionSlider = Instantiate(characterActionSliderPF, characterActionSliderHolder.transform);
+                // characterActionSlider.characterBattleManager = characterBattleManager;
+                // characterActionSlider.name =
+                //     $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Slider";
+                // characterActionSlider.SetSliderIconPosition();
+                // characterActionSlider.Init();
+                // characterActionSliders.Add(characterActionSlider);
+                
+                CharacterActionGauge characterActionGauge = Instantiate(characterActionGaugePF, actionGaugeHolder.transform);
+                characterActionGauge.characterBattleManager = characterBattleManager;
+                characterActionGauge.name =
+                    $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Gauge";
+                
+                characterActionGauge.SetSliderIconPosition();
+                characterActionGauge.Init();
+                characterActionGauges.Add(characterActionGauge);
+                
             }
             
             if (PlayerManager.Instance.currentParty != null)
@@ -114,15 +131,28 @@ namespace CodeReverie
         {
             EventManager.Instance.combatEvents.OnCombatPause(true);
             CombatManager.Instance.PauseAllAnimations();
-            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
-            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
-            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
-            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
-            selectedPartyMemberPanel.gameObject.SetActive(true);
-            selectedPartyMemberPanel.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
-            selectedPartyMemberPanel.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
+            // CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleCombatCommandMenuHolderOn();
+            // CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
+            // CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterBattleManager = characterBattleManager;
+            // CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+            // CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
+            //
+            
+            // commandMenu.ToggleCombatCommandMenuHolderOn();
+            // commandMenu.characterBattleManager = characterBattleManager;
+            // commandMenu.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+            // commandMenu.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
+            //
+            
+            
+            
+            // Debug.Log("We here arent we?");
+            // selectedPartyMemberPanel.gameObject.SetActive(true);
+            // selectedPartyMemberPanel.characterPortrait.sprite = characterBattleManager.GetComponent<CharacterUnitController>().character.GetCharacterPortrait();
+            // selectedPartyMemberPanel.characterName.text = characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName;
             CameraManager.Instance.SetSelectedPlayerWeight(characterBattleManager, 10f, 1.3f);
-            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.SetCharacterSkillDetails();
+            //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.SetCharacterSkillDetails();
+            commandMenu.SetCharacterSkillDetails();
 
         }
         

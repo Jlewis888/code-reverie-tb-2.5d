@@ -7,8 +7,6 @@ namespace CodeReverie
 {
     public class SettingsMenuManager : PauseMenu
     {
-        
-        
         private void Awake()
         {
             pauseMenuNavigation = new MenuNavigation();

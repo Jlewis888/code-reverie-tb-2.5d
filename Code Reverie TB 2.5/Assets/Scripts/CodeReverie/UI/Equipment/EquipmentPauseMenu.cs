@@ -407,8 +407,7 @@ namespace CodeReverie
         {
             foreach (StatMenuPanel statMenuPanel in statMenuPanels)
             {
-                statMenuPanel.statValueText.text = SelectedPartySlotNavigationUI.character.characterController
-                    .GetComponent<CharacterStatsManager>().GetStat(statMenuPanel.statAttribute).ToString();
+                statMenuPanel.statValueText.text = SelectedPartySlotNavigationUI.character.characterStats.GetStat(statMenuPanel.statAttribute).ToString();
             }
         }
 

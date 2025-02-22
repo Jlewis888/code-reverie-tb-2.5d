@@ -31,7 +31,7 @@ namespace CodeReverie
                 ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
                 
                 archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
-                archetypeSkillContainer.skillLevel = 1;
+                archetypeSkillContainer.tier = 1;
                 skillsLevel1.Add(archetypeSkillContainer);
             }
             
@@ -40,7 +40,7 @@ namespace CodeReverie
                 ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
                 
                 archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
-                archetypeSkillContainer.skillLevel = 2;
+                archetypeSkillContainer.tier = 2;
                 skillsLevel2.Add(archetypeSkillContainer);
             }
             
@@ -49,7 +49,7 @@ namespace CodeReverie
                 ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
                 
                 archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
-                archetypeSkillContainer.skillLevel = 3;
+                archetypeSkillContainer.tier = 3;
                 skillsLevel3.Add(archetypeSkillContainer);
             }
             
@@ -58,7 +58,7 @@ namespace CodeReverie
                 ArchetypeSkillContainer archetypeSkillContainer = new ArchetypeSkillContainer();
                 
                 archetypeSkillContainer.skill = SkillsManager.Instance.CreateSkill(skillDataContainer);
-                archetypeSkillContainer.skillLevel = 4;
+                archetypeSkillContainer.tier = 4;
                 skillsLevel4.Add(archetypeSkillContainer);
             }
             

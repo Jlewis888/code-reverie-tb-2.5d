@@ -4,7 +4,7 @@
     {
         public Skill skill;
         public bool hasLearned;
-        public int skillLevel;
+        public int tier;
 
     }
 }

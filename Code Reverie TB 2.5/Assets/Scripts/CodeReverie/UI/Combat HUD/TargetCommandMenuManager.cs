@@ -38,12 +38,11 @@ namespace CodeReverie
                 ConfirmAction();
             }
             
-            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-            {
-                Debug.Log("Go to previous menu");
-                EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
-                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.TogglePrevMenu();
-            }
+            // if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            // {
+            //     EventManager.Instance.combatEvents.OnPlayerSelectTargetEnd(null);
+            //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.commandMenu.TogglePrevMenu();
+            // }
             
             commandMenuNavigation.NavigationInputUpdate();
             
@@ -118,7 +117,8 @@ namespace CodeReverie
         public void ConfirmAction()
         {
             //EventManager.Instance.combatEvents.OnPlayerSelectTarget(SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
-            EventManager.Instance.combatEvents.onPlayerSelectTargetEnd(null);
+            //EventManager.Instance.combatEvents.OnPlayerSelectTargetEnd(null);
+            EventManager.Instance.combatEvents.OnPlayerTurnEnd();
             CombatManager.Instance.ConfirmAction();
         }
         

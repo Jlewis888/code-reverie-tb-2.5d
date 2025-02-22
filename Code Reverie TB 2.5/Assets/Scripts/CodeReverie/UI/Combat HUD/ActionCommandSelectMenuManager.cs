@@ -36,10 +36,10 @@ namespace CodeReverie
                 ConfirmAction();
             }
             
-            if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
-            {
-                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
-            }
+            // if (GameManager.Instance.playerInput.GetButtonDown("Cancel"))
+            // {
+            //     CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleCommandAction();
+            // }
             
             commandMenuNavigation.NavigationInputUpdate();
 

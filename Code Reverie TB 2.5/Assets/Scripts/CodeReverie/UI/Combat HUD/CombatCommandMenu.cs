@@ -11,7 +11,7 @@ namespace CodeReverie
     {
         public CharacterBattleManager characterBattleManager;
         public Image characterPortrait;
-        public TMP_Text characterName;
+        public TMP_Text characterNames;
         
         public List<GameObject> commandMenus;
         public CommandSelectMenuManager commandSelectMenuManager;

@@ -80,8 +80,7 @@ namespace CodeReverie
         {
             foreach (StatMenuPanel statMenuPanel in statMenuPanels)
             {
-                statMenuPanel.statValueText.text = ActivePartySlot.character.characterController
-                    .GetComponent<CharacterStatsManager>().GetStat(statMenuPanel.statAttribute).ToString();
+                statMenuPanel.statValueText.text = ActivePartySlot.character.characterStats.GetStat(statMenuPanel.statAttribute).ToString();
             }
         }
 

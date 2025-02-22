@@ -26,26 +26,26 @@ namespace CodeReverie
         private void OnEnable()
         {
             //ToggleActionCommandWheelOff();
-            EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
-            EventManager.Instance.combatEvents.onPrevCommandWheelSelect += ReturnToPreviousCommandWheel;
-            EventManager.Instance.combatEvents.onPlayerTurn += ToggleActionCommandWheelOn;
-            EventManager.Instance.combatEvents.onPlayerTurnEnd += ToggleCommandWheelOff;
-            EventManager.Instance.combatEvents.onActionCommandWheelSelect += ToggleActionCommandWheelOn;
-            EventManager.Instance.combatEvents.onSkillCommandWheelSelect += ToggleSkillCommandWheelOn;
-            EventManager.Instance.combatEvents.onItemCommandWheelSelect += ToggleItemCommandWheelOn;
+            // EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
+            // EventManager.Instance.combatEvents.onPrevCommandWheelSelect += ReturnToPreviousCommandWheel;
+            // EventManager.Instance.combatEvents.onPlayerTurn += ToggleActionCommandWheelOn;
+            // EventManager.Instance.combatEvents.onPlayerTurnEnd += ToggleCommandWheelOff;
+            // EventManager.Instance.combatEvents.onActionCommandWheelSelect += ToggleActionCommandWheelOn;
+            // EventManager.Instance.combatEvents.onSkillCommandWheelSelect += ToggleSkillCommandWheelOn;
+            // EventManager.Instance.combatEvents.onItemCommandWheelSelect += ToggleItemCommandWheelOn;
         }
 
         
 
         private void OnDisable()
         {
-            EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
-            EventManager.Instance.combatEvents.onPrevCommandWheelSelect -= ReturnToPreviousCommandWheel;
-            EventManager.Instance.combatEvents.onPlayerTurn -= ToggleActionCommandWheelOn;
-            EventManager.Instance.combatEvents.onPlayerTurnEnd -= ToggleCommandWheelOff;
-            EventManager.Instance.combatEvents.onActionCommandWheelSelect -= ToggleActionCommandWheelOn;
-            EventManager.Instance.combatEvents.onSkillCommandWheelSelect -= ToggleSkillCommandWheelOn;
-            EventManager.Instance.combatEvents.onItemCommandWheelSelect -= ToggleItemCommandWheelOn;
+            // EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
+            // EventManager.Instance.combatEvents.onPrevCommandWheelSelect -= ReturnToPreviousCommandWheel;
+            // EventManager.Instance.combatEvents.onPlayerTurn -= ToggleActionCommandWheelOn;
+            // EventManager.Instance.combatEvents.onPlayerTurnEnd -= ToggleCommandWheelOff;
+            // EventManager.Instance.combatEvents.onActionCommandWheelSelect -= ToggleActionCommandWheelOn;
+            // EventManager.Instance.combatEvents.onSkillCommandWheelSelect -= ToggleSkillCommandWheelOn;
+            // EventManager.Instance.combatEvents.onItemCommandWheelSelect -= ToggleItemCommandWheelOn;
         }
 
         public CommandWheelPanel ActiveCommandWheelPanel

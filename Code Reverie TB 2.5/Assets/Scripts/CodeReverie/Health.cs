@@ -83,10 +83,13 @@ namespace CodeReverie
 
         public void Update()
         {
-            if (TryGetComponent(out CharacterStatsManager characterStatsManager))
-            {
-                MaxHealth = characterStatsManager.GetStat(StatAttribute.Health);
-            }
+            // if (TryGetComponent(out CharacterStatsManager characterStatsManager))
+            // {
+            //     GetComponent<CharacterUnitController>().character.characterStats
+            //     MaxHealth = characterStatsManager.GetStat(StatAttribute.Health);
+            // }
+
+            MaxHealth = GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Health);
 
 
             if (Input.GetKeyDown(KeyCode.Z))
@@ -258,16 +261,7 @@ namespace CodeReverie
             if (GetComponent<CharacterUnitController>().character.characterState != CharacterState.Dead)
             {
                 GetComponent<CharacterUnitController>().character.characterState = CharacterState.Dead;
-                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                {
-                    EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterUnitController>()); 
-                }
-            
-             
-                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
-                {
-                    EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterUnitController>());
-                }
+                
             
                 
                 GetComponent<AnimationManager>().ChangeAnimationState("death");
@@ -275,6 +269,17 @@ namespace CodeReverie
                 // main.duration = 5f;
                 EventManager.Instance.combatEvents.OnCharacterDeath(GetComponent<CharacterBattleManager>());
                 EventManager.Instance.combatEvents.OnDeath(GetComponent<CharacterUnitController>().character.info.id);
+                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                {
+                    EventManager.Instance.combatEvents.OnEnemyDeath(GetComponent<CharacterUnitController>());
+                    Destroy(gameObject);
+                }
+            
+             
+                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
+                {
+                    EventManager.Instance.combatEvents.OnPlayerDeath(GetComponent<CharacterUnitController>());
+                }
                 
             }
             

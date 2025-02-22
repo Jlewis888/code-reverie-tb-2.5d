@@ -224,6 +224,23 @@ namespace CodeReverie
             onSkillComplete?.Invoke(characterBattleManager);
         }
         
+        public Action onActionCommandMenuSelect;
+
+        public void OnActionCommandMenuSelect()
+        {
+            onActionCommandMenuSelect?.Invoke();
+        }
+        
+        public Action onSkillCommandMenuSelect;
+
+        public void OnSkillCommandMenuSelect()
+        {
+            onSkillCommandMenuSelect?.Invoke();
+        }
+        
+        
+        
+        
         public Action onActionCommandWheelSelect;
 
         public void OnActionCommandWheelSelect()
