@@ -117,6 +117,21 @@ MonoBehaviour:
     - Name: skillSlots
       Entry: 6
       Data: 
+    - Name: gemSlotContainer
+      Entry: 7
+      Data: CodeReverie.GemSlotContainer, Assembly-CSharp
+    - Name: gemSlot1
+      Entry: 6
+      Data: 
+    - Name: gemSlot2
+      Entry: 6
+      Data: 
+    - Name: gemSlot3
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -125,6 +140,21 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: gemSlotContainer
+      Entry: 7
+      Data: CodeReverie.GemSlotContainer, Assembly-CSharp
+    - Name: gemSlot1
+      Entry: 6
+      Data: 
+    - Name: gemSlot2
+      Entry: 6
+      Data: 
+    - Name: gemSlot3
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8

@@ -15,6 +15,8 @@ namespace CodeReverie
         public GameObject highlight;
         public GameObject skillSlotHolder;
         public List<SkillSlotUI> skillSlotUIList = new List<SkillSlotUI>();
+        public GameObject gearDetailsPanel;
+        public GameObject gearSkillGemsPanel;
         
         private void OnEnable()
         {

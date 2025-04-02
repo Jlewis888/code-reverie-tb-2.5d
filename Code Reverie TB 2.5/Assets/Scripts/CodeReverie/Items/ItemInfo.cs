@@ -38,6 +38,7 @@ namespace CodeReverie
         public List<string> onUseParameters;
         public List<SkillSlot> skillSlots;
         public SkillDataContainer skillSlotSkillDataContainer;
+        public GemSlotContainer gemSlotContainer;
         
         private void OnValidate()
         {
@@ -71,8 +72,6 @@ namespace CodeReverie
                     combatItem = false;
                     break;
             }
-            
-            
 #endif
         
         }

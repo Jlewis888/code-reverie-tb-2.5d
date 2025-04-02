@@ -14,11 +14,15 @@ namespace CodeReverie
         public List<Stat> stats = new List<Stat>();
         public int amount;
         public List<SkillSlot> skillSlots;
+        public GemSlotContainer gemSlotContainer;
 
         public Item(ItemInfo itemInfo)
         {
             info = itemInfo;
             skillSlots = info.skillSlots;
+            
+            
+            
         }
         
         public virtual void UseItem()

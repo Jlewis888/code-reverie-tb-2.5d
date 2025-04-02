@@ -139,6 +139,21 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: gemSlotContainer
+      Entry: 7
+      Data: CodeReverie.GemSlotContainer, Assembly-CSharp
+    - Name: gemSlot1
+      Entry: 6
+      Data: 
+    - Name: gemSlot2
+      Entry: 6
+      Data: 
+    - Name: gemSlot3
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: GenericGluttonyRelic3
   itemName: GenericGluttonyRelic3
   itemDescription: GenericGluttonyRelic3
