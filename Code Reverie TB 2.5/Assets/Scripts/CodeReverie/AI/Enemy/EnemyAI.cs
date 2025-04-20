@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BehaviorDesigner.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,7 +13,6 @@ namespace CodeReverie
         public EnemyActiveWeapon activeWeapon;
         public Projectile projectile;
         public GameObject firePoint;
-        public ExternalBehavior externalBehavior;
         public bool debugging;
         public AttackIndicatorsManager attackIndicatorsManager;
         public GameObject attackCirclePF;
@@ -29,7 +27,7 @@ namespace CodeReverie
         }
 
         public State state;
-        private EnemyPathfinding enemyPathfinding;
+        //private EnemyPathfinding enemyPathfinding;
 
         private void Awake()
         {
@@ -47,16 +45,13 @@ namespace CodeReverie
             //     return;
             // }
             
-            if (externalBehavior != null)
-            {
-                GetComponent<BehaviorTree>().ExternalBehavior = externalBehavior;
-            }
+            
             
             EventManager.Instance.combatEvents.onEnemyDeath += OnEnemyDeath;
             
             
             state = State.Roaming;
-            enemyPathfinding = GetComponent<EnemyPathfinding>();
+            
         }
         
         // private void OnEnable()

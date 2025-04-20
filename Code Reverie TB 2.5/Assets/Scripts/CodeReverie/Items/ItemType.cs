@@ -20,7 +20,8 @@
         LustRelic,
         SlothRelic,
         KeyItem,
-        SkillItem
+        SkillItem,
+        SkillGem
         
     }
 }

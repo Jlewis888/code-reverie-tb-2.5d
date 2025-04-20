@@ -95,3 +95,4 @@ MonoBehaviour:
   initialAnimation: cecil_revolver_start
   castAnimation: cast_1
   animationComboList: []
+  playableDirector: {fileID: 0}

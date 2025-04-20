@@ -34,6 +34,7 @@ namespace CodeReverie
         public List<CharacterBattleManager> selectableTargets;
         public int targetIndex;
         public Queue<CharacterBattleManager> combatQueue;
+        public Queue<CharacterBattleManager> playerCharacterTurnQueue;
         public MovePlayerObject movePlayerObject;
         //public CombatDetailsConfig combatDetailsConfig;
         public CombatConfigDetails combatConfigDetails;
@@ -283,6 +284,7 @@ namespace CodeReverie
             CanvasManager.Instance.screenSpaceCanvasManager.hudManager.ToggleCombatHudManager();
             pause = true;
             combatQueue = new Queue<CharacterBattleManager>();
+            playerCharacterTurnQueue = new Queue<CharacterBattleManager>();
             GameManager.Instance.playerInput.controllers.maps.SetAllMapsEnabled(false);
             GameManager.Instance.playerInput.controllers.maps.SetMapsEnabled(true, 2);
             orderOfTurnsMap = new Dictionary<CharacterBattleManager, int>();
@@ -395,7 +397,7 @@ namespace CodeReverie
             // {
             //     Debug.Log("Set character inactive");
             //     character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
-            //     character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
+            //     character.characterController.GetComponent<CharacterBattleManager>().characterActionGaugeState = CharacterActionGaugeState.PostBattle;
             //     character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
             //
             //     //character.currentHealth = character.characterController.GetComponent<Health>().CurrentHealth;
@@ -444,7 +446,7 @@ namespace CodeReverie
             // {
             //     Debug.Log("Set character inactive");
             //     character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
-            //     character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
+            //     character.characterController.GetComponent<CharacterBattleManager>().characterActionGaugeState = CharacterActionGaugeState.PostBattle;
             //     character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
             // }
 
@@ -613,12 +615,13 @@ namespace CodeReverie
         
         public void ConfirmAction()
         {
-
+            
+            EventManager.Instance.combatEvents.OnPlayerTurnEnd();
+            
             switch (selectedPlayerCharacter.characterBattleActionState)
             {
                 case CharacterBattleActionState.Attack:
                 case CharacterBattleActionState.Break:
-                    Debug.Log("WTF ARE WE DOING");
                     selectedPlayerCharacter.target = selectedTarget;
                     // selectedPlayerCharacter.SetActionRange();
                     selectedPlayerCharacter.SetAttackActionTargetPosition();
@@ -673,6 +676,7 @@ namespace CodeReverie
             CameraManager.Instance.ResetTargetGroupSetting();
             //CameraManager.Instance.UpdateCamera(currentBattleArea.transform);
             EventManager.Instance.combatEvents.OnActionSelected();
+            playerCharacterTurnQueue.Dequeue();
         }
         
         public void UnsetBattle()
@@ -694,7 +698,7 @@ namespace CodeReverie
 
             foreach (CharacterBattleManager characterBattleManager in allUnits)
             {
-                if (characterBattleManager.battleState != CharacterBattleState.Waiting && characterBattleManager.characterTimelineGaugeState != CharacterTimelineGaugeState.StartTurnPhase)
+                if (characterBattleManager.battleState != CharacterBattleState.Waiting && characterBattleManager.characterActionGaugeState != CharacterActionGaugeState.StartTurnPhase)
                 {
                     return false;
                 }

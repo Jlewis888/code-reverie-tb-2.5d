@@ -4956,9 +4956,9 @@ GameObject:
   - component: {fileID: 4662933673690888661}
   - component: {fileID: 8932686705678154491}
   - component: {fileID: 588026674948223095}
-  - component: {fileID: 1985655139726216316}
   - component: {fileID: 3298262477157302555}
   - component: {fileID: 1632239061029741251}
+  - component: {fileID: 2188818876167357354}
   - component: {fileID: 3365969490004570494}
   - component: {fileID: 4685737514047295592}
   - component: {fileID: 9165936234528072040}
@@ -5100,60 +5100,6 @@ MonoBehaviour:
   characterSuperState: 0
   characterDirection: 0
   levelUpGameObjectPF: {fileID: 0}
---- !u!114 &1985655139726216316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6907802491086714676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0be84c8437405486b3a7cf985b240d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: selectedSkill
-      Entry: 6
-      Data: 
-    - Name: selectedItem
-      Entry: 6
-      Data: 
-  characterController: {fileID: 0}
-  battleState: 0
-  characterBattleActionState: 0
-  prevCharacterBattleActionState: 0
-  characterTimelineGaugeState: 0
-  battlePosition: {fileID: 0}
-  target: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  targetMovePosition: {x: 0, y: 0, z: 0}
-  targetBattlePosition: {x: 0, y: 0}
-  inCombat: 0
-  namePanel: {fileID: 0}
-  currentMaxTargets: 0
-  actionPhaseCooldown: 0
-  cooldownTimer: 0
-  moveDir: {x: 0, y: 0, z: 0}
-  repositionTime: 0
-  repositionTimer: 0
-  moveSpeed: 0
-  skillPointsMax: 0
-  currentSkillPoints: 0
-  actionRange: 0
-  skillCastTime: 0
-  castObjectHolder: {fileID: 8146441165837285600}
-  distanceFromCenter: 0
-  staminaGauge: 0
-  agent: {fileID: 0}
 --- !u!114 &3298262477157302555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5211,6 +5157,62 @@ MonoBehaviour:
   ignoreStats: 0
   shouldUseModifiers: 0
   statModifierProviders: []
+--- !u!114 &2188818876167357354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907802491086714676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7042d4d8e4f34466baff376318aa10d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: selectedSkill
+      Entry: 6
+      Data: 
+    - Name: selectedItem
+      Entry: 6
+      Data: 
+  characterController: {fileID: 0}
+  battleState: 0
+  _characterBattleActionState: 0
+  prevCharacterBattleActionState: 0
+  _characterActionGaugeState: 0
+  battlePosition: {fileID: 0}
+  target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetMovePosition: {x: 0, y: 0, z: 0}
+  targetBattlePosition: {x: 0, y: 0}
+  skillRecallTargetPosition: {x: 0, y: 0, z: 0}
+  inCombat: 0
+  namePanel: {fileID: 0}
+  currentMaxTargets: 0
+  actionPhaseCooldown: 5
+  cooldownTimer: 0
+  moveDir: {x: 0, y: 0, z: 0}
+  repositionTime: 0
+  repositionTimer: 0
+  moveSpeed: 0
+  skillPointsMax: 0
+  currentSkillPoints: 0
+  actionRange: 0
+  skillCastTime: 0
+  castObjectHolder: {fileID: 8146441165837285600}
+  distanceFromCenter: 0
+  staminaGauge: 0
+  agent: {fileID: 0}
+  hasteVal: 0
 --- !u!114 &3365969490004570494
 MonoBehaviour:
   m_ObjectHideFlags: 0

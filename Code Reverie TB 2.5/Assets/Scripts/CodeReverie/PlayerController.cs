@@ -223,7 +223,7 @@ namespace CodeReverie
                         {
                             // CanvasManager.Instance.combatTransitionAnimator.gameObject.SetActive(true);
                             // CanvasManager.Instance.sceneTransitionAnimator.gameObject.SetActive(true);
-
+                    
                             if (other.GetComponent<EnemyAI>().enemyList != null)
                             {
                                 

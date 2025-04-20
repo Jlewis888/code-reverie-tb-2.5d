@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityString;
 using Rewired;
 using UnityEngine;
 
@@ -47,6 +46,11 @@ namespace CodeReverie
             string skillName = String.IsNullOrEmpty(info.skillName) ? info.skillId : info.skillName;
             
             Debug.Log($"Use {skillName}");
+        }
+
+        public virtual void PlaySkillAnimation()
+        {
+            GameObject.Instantiate(info.playableDirector.gameObject);
         }
 
         public void SetSkillCamera()

@@ -16,11 +16,12 @@ namespace CodeReverie
         public GameObject skillSlotHolder;
         public List<SkillSlotUI> skillSlotUIList = new List<SkillSlotUI>();
         public GameObject gearDetailsPanel;
-        public GameObject gearSkillGemsPanel;
+        public GemSlotPanel gemSlotPanel;
         
         private void OnEnable()
         {
             EventManager.Instance.generalEvents.onPauseMenuCharacterSwap += Init;
+            ToggleGearDetailsPanel();
             SetSkillSlots();
             
         }
@@ -53,7 +54,20 @@ namespace CodeReverie
 
         public void SetSkillSlots()
         {
+
+
+            if (item != null)
+            {
+                gemSlotPanel.gemSlot1.gemSlot = item.gemSlotContainer.gemSlot1;
+                gemSlotPanel.gemSlot2.gemSlot = item.gemSlotContainer.gemSlot2;
+                gemSlotPanel.gemSlot3.gemSlot = item.gemSlotContainer.gemSlot3;
+            }
             
+            gemSlotPanel.Init();
+            
+            
+            
+            return;
             skillSlotUIList = new List<SkillSlotUI>();
             
             //TODO Convert to a POOL
@@ -130,5 +144,24 @@ namespace CodeReverie
             skillSlotHolder.SetActive(false);
             nameText.gameObject.SetActive(true);
         }
+
+        public void ToggleGearDetailsPanel()
+        {
+            gearDetailsPanel.SetActive(true);
+            gemSlotPanel.gameObject.SetActive(false);
+        }
+        
+        public void ToggleGearSkillsPanel()
+        {
+            gearDetailsPanel.SetActive(false);
+            gemSlotPanel.gameObject.SetActive(true);
+        }
+
+        public void EquipGemSlotItem(int slot, Item item)
+        {
+
+            gemSlotPanel.EquipGemSlotItem(slot, item);
+        }
+        
     }
 }

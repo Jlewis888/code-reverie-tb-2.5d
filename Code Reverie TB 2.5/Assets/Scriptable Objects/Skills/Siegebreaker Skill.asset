@@ -71,3 +71,4 @@ MonoBehaviour:
   initialAnimation: basic_attack_1
   castAnimation: cast_1
   animationComboList: []
+  playableDirector: {fileID: 0}

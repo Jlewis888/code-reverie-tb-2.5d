@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using TransitionsPlus;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
@@ -105,9 +106,20 @@ namespace CodeReverie
             //         break;
             //     }
             // }
-            
-            
-            
+
+
+            if (GameSceneManager.Instance.hasCutsceneToPlayOnSceneStart &&
+                !string.IsNullOrEmpty(GameSceneManager.Instance.cutsceneToPlayOnSceneStart))
+            {
+
+                PlayableDirector playableDirector = Instantiate(areaManagerConfig.areaCutscenes[GameSceneManager.Instance.cutsceneToPlayOnSceneStart], transform);
+                GameSceneManager.Instance.hasCutsceneToPlayOnSceneStart = false;
+                
+                
+                playableDirector.Play();
+                
+                EventManager.Instance.generalEvents.OnStartCutscene(areaManagerConfig.cutsceneOnStart);
+            }
             
             if (areaManagerConfig != null)
             {

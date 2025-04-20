@@ -1,9 +1,9 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
-
-namespace CodeReverie
-{
-    public class GeneralConditional : Conditional
-    {
-        
-    }
-}
+﻿// using BehaviorDesigner.Runtime.Tasks;
+//
+// namespace CodeReverie
+// {
+//     public class GeneralConditional : Conditional
+//     {
+//         
+//     }
+// }

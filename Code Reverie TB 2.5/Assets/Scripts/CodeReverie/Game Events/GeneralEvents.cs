@@ -115,6 +115,14 @@ namespace CodeReverie
             onSkillSlotSelect?.Invoke(skillSlotUI);
         }
         
+        public Action<GemSlotUI> onGemSlotSelect;
+
+        public void OnGemSlotSelect(GemSlotUI gemSlotUI)
+        {
+            onGemSlotSelect?.Invoke(gemSlotUI);
+        }
+        
+        
         public Action<LearnSkillPauseMenuNavigationButton> onLearnSkillSlotSelect;
 
         public void OnLearnSkillSlotSelect(LearnSkillPauseMenuNavigationButton skillSlotUI)

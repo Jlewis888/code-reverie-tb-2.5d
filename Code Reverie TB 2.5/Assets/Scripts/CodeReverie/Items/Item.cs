@@ -20,9 +20,8 @@ namespace CodeReverie
         {
             info = itemInfo;
             skillSlots = info.skillSlots;
-            
-            
-            
+            gemSlotContainer = info.gemSlotContainer;
+            SortGemSlot();
         }
         
         public virtual void UseItem()
@@ -169,6 +168,56 @@ namespace CodeReverie
             }
         }
 
+        public void SortGemSlot()
+        {
+            List<GemSlot> gemSlots = new List<GemSlot>();
+
+            if (gemSlotContainer.gemSlot1 != null)
+            {
+                gemSlots.Add(gemSlotContainer.gemSlot1);
+                gemSlotContainer.gemSlot1 = null;
+            }
+            
+            if (gemSlotContainer.gemSlot2 != null)
+            {
+                gemSlots.Add(gemSlotContainer.gemSlot2);
+            }
+            
+            if (gemSlotContainer.gemSlot3 != null)
+            {
+                gemSlots.Add(gemSlotContainer.gemSlot3);
+            }
+            
+            gemSlotContainer.gemSlot1 = null;
+            gemSlotContainer.gemSlot2 = null;
+            gemSlotContainer.gemSlot3 = null;
+            
+            List<GemSlot> gemSlotsSorted = gemSlots.OrderByDescending(x => x.slotLevel).ToList();
+            //gemSlots.OrderByDescending(x => x.slotLevel).ToList();
+
+            int count = 1;
+            foreach (GemSlot gemSlot in gemSlotsSorted)
+            {
+                if (count == 1)
+                {
+                    gemSlotContainer.gemSlot1 = gemSlot;
+                }
+                
+                if (count == 2)
+                {
+                    gemSlotContainer.gemSlot2 = gemSlot;
+                }
+                
+                if (count == 3)
+                {
+                    gemSlotContainer.gemSlot3 = gemSlot;
+                }
+
+                count++;
+            }
+            
+            
+        }
         
     }
 }

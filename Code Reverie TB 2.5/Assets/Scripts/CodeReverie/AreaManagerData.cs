@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace CodeReverie
 {
@@ -12,5 +13,6 @@ namespace CodeReverie
         public List<Character> characterList = new List<Character>();
         public bool hasCutsceneOnStart;
         public string cutsceneOnStart;
+        public Dictionary<string, PlayableDirector> areaCutscenes;
     }
 }

@@ -98,3 +98,4 @@ MonoBehaviour:
   - basic_attack_1a
   - basic_attack_2a
   - basic_attack_3a
+  playableDirector: {fileID: 0}

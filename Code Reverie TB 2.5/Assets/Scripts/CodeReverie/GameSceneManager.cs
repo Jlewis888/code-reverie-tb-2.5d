@@ -16,6 +16,8 @@ namespace CodeReverie
         public string prevScene;
         public bool isTransitioningScenes;
         public bool fromLoadedData;
+        public string cutsceneToPlayOnSceneStart;
+        public bool hasCutsceneToPlayOnSceneStart;
         
         protected override void Awake()
         {

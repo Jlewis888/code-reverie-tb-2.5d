@@ -33,10 +33,17 @@ namespace CodeReverie
         public SkillSlotUI skillSlotUIPF;
         public SkillSlotUI selectedSkillSlotUI;
 
+        public MenuNavigation gemSlotMenuNavigation;
+        public GemSlotUI selectedGemSlotUI;
+
         private void Awake()
         {
             pauseMenuNavigation = new MenuNavigation();
             equipmentItemMenuNavigation = new MenuNavigation();
+            gemSlotMenuNavigation = new MenuNavigation();
+
+            gemSlotMenuNavigation.callBack = OnGemSlotNavigationChange;
+            
             SetNavigationButtons();
         }
 
@@ -44,6 +51,7 @@ namespace CodeReverie
         private void OnEnable()
         {
             EventManager.Instance.generalEvents.onSkillSlotSelect += OnSkillSlotSelect;
+            EventManager.Instance.generalEvents.onGemSlotSelect += OnGemSlotSelect;
             EventManager.Instance.generalEvents.ToggleCharacterSidePanelUI(false);
             equipItemPauseMenuNavigationButtonPanel.SetActive(false);
             //ClearNavigationButtons();
@@ -65,7 +73,9 @@ namespace CodeReverie
         private void OnDisable()
         {
             EventManager.Instance.generalEvents.onSkillSlotSelect -= OnSkillSlotSelect;
+            EventManager.Instance.generalEvents.onGemSlotSelect -= OnGemSlotSelect;
             selectedSkillSlotUI = null;
+            selectedGemSlotUI = null;
             ClearPartSlotUI();
             SelectedPartySlotNavigationUI = null;
             //ClearNavigationButtons();
@@ -96,8 +106,10 @@ namespace CodeReverie
                     if (GameManager.Instance.playerInput.GetButtonDown("Set Skills"))
                     {
                         ToggleSkillSlotsOn();
-                        SetSkillSlots();
-                        SetSkillSlotsNavigation();
+                        // SetSkillSlots();
+                        // SetSkillSlotsNavigation();
+                        SetGemSlotNavigation();
+                        gemSlotMenuNavigation.SetFirstItem();
                         equipItemMenuNavigationState = EquipItemMenuNavigationState.NavigateSkills;
                     }
                     
@@ -141,9 +153,8 @@ namespace CodeReverie
                         equipItemPauseMenuNavigationButtonPanel.SetActive(false);
                     }
                     
-                    
-                    
                     equipmentItemMenuNavigation.NavigationInputUpdate();
+                    
                     break;
                 case EquipItemMenuNavigationState.NavigateSkills:
                     if (GameManager.Instance.playerInput.GetButtonDown("Confirm"))
@@ -155,6 +166,9 @@ namespace CodeReverie
                         equipItemMenuNavigationState = EquipItemMenuNavigationState.Menu;
                         ToggleSkillSlotsOff();
                     }
+                    
+                    
+                    gemSlotMenuNavigation.NavigationInputUpdate();
                    
                     break;
                 case EquipItemMenuNavigationState.EquipSkill:
@@ -195,7 +209,8 @@ namespace CodeReverie
                    
                     break;
                 case EquipItemMenuNavigationState.EquipSkill:
-                    ConfirmSkillSelection();
+                    //ConfirmSkillSelection();
+                    ConfirmGemSelection();
                     break;
             }
 
@@ -206,7 +221,8 @@ namespace CodeReverie
         {
             equipItemPauseMenuNavigationButtonPanel.SetActive(true);
             equipItemMenuNavigationState = EquipItemMenuNavigationState.EquipSkill;
-            SetSkillSlotNavigationButtons();
+            //SetSkillSlotNavigationButtons();
+            SetGemSlotNavigationButtons();
         }
 
         void ConfirmItemSelection()
@@ -227,6 +243,18 @@ namespace CodeReverie
             SetStatMenuPanels();
             equipItemMenuNavigationState = EquipItemMenuNavigationState.NavigateSkills;
             equipItemPauseMenuNavigationButtonPanel.SetActive(false);
+        }
+        
+        void ConfirmGemSelection()
+        {
+            Character character = SelectedPartySlotNavigationUI.character;
+            selectedGemSlotUI.gemSlot.EquipGemSlotItem(equipmentItemMenuNavigation.SelectedNavigationButton.GetComponent<EquipItemPauseMenuNavigationButton>().item);
+            //SelectedPartySlotNavigationUI.character.characterSkills.SetLearnedSkills();
+            character.GemSetBonusCheck();
+            SetStatMenuPanels();
+            equipItemMenuNavigationState = EquipItemMenuNavigationState.NavigateSkills;
+            equipItemPauseMenuNavigationButtonPanel.SetActive(false);
+            
         }
 
 
@@ -309,7 +337,8 @@ namespace CodeReverie
         {
             foreach (PauseMenuNavigationButton pauseMenuNavigationButton in pauseMenuNavigation.pauseMenuNavigationButtons)
             {
-                pauseMenuNavigationButton.GetComponent<GearSlotUI>().ToggleSkillSlotOn();
+                //pauseMenuNavigationButton.GetComponent<GearSlotUI>().ToggleSkillSlotOn();
+                pauseMenuNavigationButton.GetComponent<GearSlotUI>().ToggleGearSkillsPanel();
             }
         }
         
@@ -317,7 +346,8 @@ namespace CodeReverie
         {
             foreach (PauseMenuNavigationButton pauseMenuNavigationButton in pauseMenuNavigation.pauseMenuNavigationButtons)
             {
-                pauseMenuNavigationButton.GetComponent<GearSlotUI>().ToggleSkillSlotOff();
+                //pauseMenuNavigationButton.GetComponent<GearSlotUI>().ToggleSkillSlotOff();
+                pauseMenuNavigationButton.GetComponent<GearSlotUI>().ToggleGearDetailsPanel();
             }
         }
 
@@ -380,6 +410,53 @@ namespace CodeReverie
             
             equipmentItemMenuNavigation.SetFirstItem();
         }
+
+        public void SetGemSlotNavigation()
+        {
+            gemSlotMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+            
+            
+            foreach (PauseMenuNavigationButton pauseMenuNavigationButton in pauseMenuNavigation.pauseMenuNavigationButtons)
+            {
+                
+                pauseMenuNavigationButton.GetComponent<GearSlotUI>().SetSkillSlots();
+                
+                gemSlotMenuNavigation.pauseMenuNavigationButtons.AddRange(pauseMenuNavigationButton.GetComponent<GearSlotUI>().gemSlotPanel.gemSlotUiList);
+            }
+            
+        }
+        
+        public void SetGemSlotNavigationButtons()
+        {
+            equipmentItemMenuNavigation.pauseMenuNavigationButtons = new List<PauseMenuNavigationButton>();
+            
+            foreach (Transform child in equipItemPauseMenuNavigationButtonHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            int gemSlotLevel = gemSlotMenuNavigation.SelectedNavigationButton.GetComponent<GemSlotUI>().gemSlot
+                .slotLevel;
+            
+            foreach (Item item in PlayerManager.Instance.inventory.items)
+            {
+
+                if (item.info.itemType == ItemType.SkillGem && item.info.gemLevel <= gemSlotLevel)
+                {
+                    EquipItemPauseMenuNavigationButton equipItemPauseMenuNavigationButton =
+                        Instantiate(equipItemPauseMenuNavigationButtonPF, equipItemPauseMenuNavigationButtonHolder.transform);
+
+                    equipItemPauseMenuNavigationButton.item = item;
+                    equipItemPauseMenuNavigationButton.nameText.text = item.info.itemName;
+                    equipItemPauseMenuNavigationButton.inventoryCountText.text = item.amount.ToString();
+
+                    equipmentItemMenuNavigation.Add(equipItemPauseMenuNavigationButton);
+                }
+                
+            }
+            
+            equipmentItemMenuNavigation.SetFirstItem();
+        }
         
 
         public PartySlotNavigationUI SelectedPartySlotNavigationUI
@@ -414,6 +491,16 @@ namespace CodeReverie
         public void OnSkillSlotSelect(SkillSlotUI skillSlotUI)
         {
             selectedSkillSlotUI = skillSlotUI;
+        }
+        
+        public void OnGemSlotSelect(GemSlotUI gemSlotUI)
+        {
+            selectedGemSlotUI = gemSlotUI;
+        }
+        
+        public void OnGemSlotNavigationChange()
+        {
+            selectedGemSlotUI = gemSlotMenuNavigation.SelectedNavigationButton.GetComponent<GemSlotUI>();
         }
         
     }

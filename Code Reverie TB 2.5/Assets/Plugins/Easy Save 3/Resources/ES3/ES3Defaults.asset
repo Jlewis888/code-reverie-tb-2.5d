@@ -45,7 +45,6 @@ MonoBehaviour:
     - ProjectDawn.Navigation.Astar
     - ProjectDawn.Navigation.Hybrid
     - ProjectDawn.ReciprocalAvoidance
-    - ScriptableBuildPipelineTests
     - SerializableGUID
     - Timeline.Samples.Annotation
     - Timeline.Samples.Text

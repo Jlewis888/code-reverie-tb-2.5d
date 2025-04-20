@@ -481,8 +481,8 @@ namespace CodeReverie
                         currentParty[count - 1].characterController.gameObject;
                 }
 
-                character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState =
-                    CharacterTimelineGaugeState.WaitPhase;
+                character.characterController.GetComponent<CharacterBattleManager>().characterActionGaugeState =
+                    CharacterActionGaugeState.WaitPhase;
                 
                 count++;
             }

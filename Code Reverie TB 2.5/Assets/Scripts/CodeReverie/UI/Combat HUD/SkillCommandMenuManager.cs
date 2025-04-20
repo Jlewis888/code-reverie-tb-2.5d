@@ -34,6 +34,7 @@ namespace CodeReverie
             
             if (GameManager.Instance.playerInput.GetButtonDown("Confirm Action"))
             {
+                //Debug.Log("THis is whaat i am looking for");
                 ConfirmAction();
             }
             
@@ -69,10 +70,17 @@ namespace CodeReverie
                 if (CombatManager.Instance.selectedPlayerCharacter.GetComponent<CharacterUnitController>().character
                         .availableResonancePoints >= selectedSkill.info.resonancePointsCost)
                 {
+                    Debug.Log("We in this bithc");
                     CombatManager.Instance.selectedPlayerCharacter.characterBattleActionState = CharacterBattleActionState.Skill;
                     CombatManager.Instance.SetSelectableTargets();
+                   
                     CombatManager.Instance.selectedPlayerCharacter.selectedSkill = selectedSkill;
-                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+                    //CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.combatCommandMenu.ToggleTargetMenu(this);
+                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.commandMenu.ToggleTargetMenu();
+                }
+                else
+                {
+                    Debug.Log("Not enough Resonance Points");
                 }
                 
             }

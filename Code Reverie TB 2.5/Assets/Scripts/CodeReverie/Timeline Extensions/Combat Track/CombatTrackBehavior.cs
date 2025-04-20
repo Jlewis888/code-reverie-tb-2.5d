@@ -10,6 +10,7 @@ namespace CodeReverie
         public bool hasPlayed;
         public List<CharacterDataContainer> characterDataContainers;
         public SceneField sceneToLoad;
+        public SceneField returnSceneName;
 
         // public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         // {
@@ -25,7 +26,7 @@ namespace CodeReverie
             if (!hasPlayed  && Application.isPlaying)
             {
                 CombatConfigDetails combatConfigDetails= new CombatConfigDetails(
-                    returnSceneName: SceneManager.GetActiveScene().name,
+                    returnSceneName: returnSceneName.SceneName,
                     characterReturnPosition: Vector3.zero,
                     enemyList: characterDataContainers
                 );

@@ -79,10 +79,34 @@ MonoBehaviour:
       Entry: 7
       Data: CodeReverie.GemSlotContainer, Assembly-CSharp
     - Name: gemSlot1
+      Entry: 7
+      Data: 4|CodeReverie.GemSlot, Assembly-CSharp
+    - Name: slotLevel
+      Entry: 3
+      Data: 0
+    - Name: skill
       Entry: 6
       Data: 
-    - Name: gemSlot2
+    - Name: equippedItem
       Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: gemSlot2
+      Entry: 7
+      Data: 5|CodeReverie.GemSlot, Assembly-CSharp
+    - Name: slotLevel
+      Entry: 3
+      Data: 1
+    - Name: skill
+      Entry: 6
+      Data: 
+    - Name: equippedItem
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: gemSlot3
       Entry: 6
@@ -114,3 +138,5 @@ MonoBehaviour:
   onUse: 
   onUseParameters: []
   skillSlotSkillDataContainer: {fileID: 0}
+  gemSetType: 0
+  gemLevel: 1

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using ProjectDawn.Navigation.Hybrid;
 using Sirenix.OdinInspector;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
+using Action = System.Action;
 using Random = UnityEngine.Random;
 
 namespace CodeReverie
@@ -14,10 +16,12 @@ namespace CodeReverie
     {
         //private Rigidbody rb;
         public CharacterController characterController;
+        private BehaviorGraphAgent _behaviorGraphAgent;
         public CharacterBattleState battleState;
-        public CharacterBattleActionState characterBattleActionState;
+        [SerializeField] private CharacterBattleActionState _characterBattleActionState;
         public CharacterBattleActionState prevCharacterBattleActionState;
-        public CharacterTimelineGaugeState characterTimelineGaugeState;
+        [SerializeField] private CharacterActionGaugeState _characterActionGaugeState;
+        
         public BattlePosition battlePosition;
         public CharacterBattleManager target;
         //public List<CharacterBattleManager> selectedTargets;
@@ -53,6 +57,8 @@ namespace CodeReverie
         //public NavMeshAgent agent;
         public AgentAuthoring agent;
 
+        public float hasteVal;
+
         private void Awake()
         {
             if (namePanel != null)
@@ -81,6 +87,12 @@ namespace CodeReverie
             
             //agent = GetComponent<NavMeshAgent>() != null ? GetComponent<NavMeshAgent>() : null;
             agent = GetComponent<AgentAuthoring>() != null ? GetComponent<AgentAuthoring>() : null;
+
+            //hasteVal = GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Haste);
+
+
+            _behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
+
         }
 
         private void Start()
@@ -129,7 +141,7 @@ namespace CodeReverie
                     //     }
                     //
                     //     battleState = CharacterBattleState.Waiting;
-                    //     characterTimelineGaugeState = CharacterTimelineGaugeState.StartTurnPhase;
+                    //     characterActionGaugeState = CharacterActionGaugeState.StartTurnPhase;
                     // }
                     
                     
@@ -156,7 +168,7 @@ namespace CodeReverie
                                 // }
                                 
                                 battleState = CharacterBattleState.Waiting;
-                                characterTimelineGaugeState = CharacterTimelineGaugeState.StartTurnPhase;
+                                characterActionGaugeState = CharacterActionGaugeState.StartTurnPhase;
                             }
                         }
                     }
@@ -168,43 +180,14 @@ namespace CodeReverie
                 {
                     if (GetComponent<CharacterUnitController>().character.characterState == CharacterState.Alive)
                     {
-                        switch (characterTimelineGaugeState)
+                        switch (characterActionGaugeState)
                         {
-                            case CharacterTimelineGaugeState.StartTurnPhase:
-
-                                GetComponent<CharacterUnitController>().character.AddResonancePoints();
-                                GetComponent<CharacterUnitController>().character.characterStats.UpdateTempStats();
-                                SetRandomTargetMovePosition();
-                                characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
+                            
+                            case CharacterActionGaugeState.WaitPhase:
                                 
-                                if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                                {
-                                    AutoTurnPicks();
-                                }
-
-                                break;
-                            case CharacterTimelineGaugeState.WaitPhase:
-                                //skillCastTime = SkillCastTime.None;
-
                                 if (!CombatManager.Instance.pause)
                                 {
-                                    cooldownTimer += Time.deltaTime * (1 + GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Haste));
                                     
-
-                                    if (cooldownTimer >= actionPhaseCooldown * .75f)
-                                    {
-                                        if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Player))
-                                        {
-                                            EventManager.Instance.combatEvents.OnPlayerTurn(this);
-                                        }
-                                        else
-                                        {
-                                            battleState = CharacterBattleState.WaitingAction;
-                                        }
-
-                                        cooldownTimer = actionPhaseCooldown * .75f;
-                                        characterTimelineGaugeState = CharacterTimelineGaugeState.CommandPhase;
-                                    }
 
                                     switch (battleState)
                                     {
@@ -212,57 +195,9 @@ namespace CodeReverie
                                             FaceNearestEnemy();
                                             GetComponent<AnimationManager>().ChangeAnimationState("idle");
                                             break;
-
-                                        case CharacterBattleState.MoveToStartingBattlePosition:
-                                            //TODO Happens in the PRE-BATTLE
-                                            Debug.Log("Move to starting position. Need to update!!!!!!!!");
-                                            
-                                            
-
-                                            // repositionTimer -= Time.deltaTime;
-                                            //
-                                            // //rb.MovePosition(rb.position + moveDir * (15f * Time.fixedDeltaTime));
-                                            // //characterController.Move(moveDir * (4f * Time.fixedDeltaTime));
-                                            // characterController.Move(moveDir * (1f * Time.fixedDeltaTime));
-                                            // FlipSpriteMoveDirection();
-                                            //
-                                            // StopMovementOnReachingMaxDistance();
-                                            //
-                                            // if (repositionTimer <= 0)
-                                            // {
-                                            //     //FaceNearestEnemy();
-                                            //     
-                                            //     if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                                            //     {
-                                            //         AutoTurnPicks();
-                                            //     }
-                                            //
-                                            //     battleState = CharacterBattleState.Waiting;
-                                            // }
-
-                                            break;
+                                        
                                         case CharacterBattleState.MoveToRandomBattlePosition:
                                             GetComponent<AnimationManager>().ChangeAnimationState("run");
-                                            // repositionTimer -= Time.deltaTime;
-                                            //
-                                            // //rb.MovePosition(rb.position + moveDir * (5f * Time.fixedDeltaTime));
-                                            //
-                                            // //characterController.Move(moveDir * (4f * Time.fixedDeltaTime));
-                                            // characterController.Move(moveDir * (1f * Time.fixedDeltaTime));
-                                            // FlipSpriteMoveDirection();
-                                            // StopMovementOnReachingMaxDistance();
-                                            // if (repositionTimer <= 0)
-                                            // {
-                                            //     
-                                            //     //FaceNearestEnemy();
-                                            //     
-                                            //     // if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                                            //     // {
-                                            //     //     AutoTurnPicks();
-                                            //     // }
-                                            //
-                                            //     battleState = CharacterBattleState.Waiting;
-                                            // }
                                             
                                             agent.SetDestination(targetMovePosition);
                                             
@@ -280,62 +215,19 @@ namespace CodeReverie
 
 
                                 break;
-                            case CharacterTimelineGaugeState.CommandPhase:
+                            case CharacterActionGaugeState.PreCommandPhase:
+                                cooldownTimer = actionPhaseCooldown * .75f;
+                                break;
+                            case CharacterActionGaugeState.CommandPhase:
 
                                 if (!CombatManager.Instance.pause)
                                 {
                                     switch (battleState)
                                     {
-                                        case CharacterBattleState.WaitingAction:
-                                            if (!CombatManager.Instance.pause)
-                                            {
-                                                switch (skillCastTime)
-                                                {
-                                                    case SkillCastTime.Instant:
-                                                        //cooldownTimer = actionPhaseCooldown;
-                                                        cooldownTimer += Time.deltaTime * 2f;
-                                                        
-                                                        break;
-                                                    case SkillCastTime.Short:
-                                                        //cooldownTimer += Time.deltaTime * (1 + GetComponent<CharacterStatsManager>().GetStat(StatAttribute.Haste)); 
-                                                        cooldownTimer += Time.deltaTime;
-                                                        break;
-                                                    case SkillCastTime.Medium:
-                                                        cooldownTimer += Time.deltaTime * (1f / 3f);
-                                                        break;
-                                                    case SkillCastTime.Long:
-                                                        cooldownTimer += Time.deltaTime * (1f / 4f);
-                                                        break;
-                                                }
-                                            }
-
-                                            if (cooldownTimer >= actionPhaseCooldown)
-                                            {
-                                                switch (characterBattleActionState)
-                                                {
-                                                    case CharacterBattleActionState.Attack:
-                                                    case CharacterBattleActionState.Defend:
-                                                    case CharacterBattleActionState.Item:
-                                                        break;
-
-                                                    case CharacterBattleActionState.Skill:
-                                                        CombatManager.Instance.combatQueue.Enqueue(this);
-                                                        break;
-                                                }
-
-                                                skillCastTime = SkillCastTime.None;
-
-                                                cooldownTimer = actionPhaseCooldown;
-
-                                                battleState = CharacterBattleState.WaitingQueue;
-                                                characterTimelineGaugeState = CharacterTimelineGaugeState.ActionPhase;
-                                            }
-
-                                            break;
                                         case CharacterBattleState.Interrupted:
                                             cooldownTimer /= 2;
                                             battleState = CharacterBattleState.Waiting;
-                                            characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
+                                            characterActionGaugeState = CharacterActionGaugeState.WaitPhase;
 
                                             if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
                                             {
@@ -351,7 +243,7 @@ namespace CodeReverie
                                 }
 
                                 break;
-                            case CharacterTimelineGaugeState.ActionPhase:
+                            case CharacterActionGaugeState.ActionPhase:
                                 if (!CombatManager.Instance.pause)
                                 {
                                     switch (battleState)
@@ -365,7 +257,6 @@ namespace CodeReverie
                                                 case CharacterBattleActionState.Move:
                                                 case CharacterBattleActionState.Defend:
                                                 case CharacterBattleActionState.Item:
-                                                    //Debug.Log($"{name}: Change to MoveToCombatActionPosition");
                                                     SetRandomTargetMovePosition();
                                                     battleState = CharacterBattleState.MoveToCombatActionPosition;
                                                     break;
@@ -378,9 +269,7 @@ namespace CodeReverie
                                                     }
 
                                                     break;
-                                                // default:
-                                                //     battleState = CharacterBattleState.MoveToCombatActionPosition;
-                                                //     break;
+                                               
                                             }
 
                                             break;
@@ -389,38 +278,12 @@ namespace CodeReverie
 
                                             Vector3 direction = targetPosition - GetPosition();
 
-                                            //Debug.Log($"{name}: In MoveToCombatActionPosition");
-
                                             switch (characterBattleActionState)
                                             {
                                                 case CharacterBattleActionState.Defend:
                                                     battleState = CharacterBattleState.Action;
                                                     break;
                                                 case CharacterBattleActionState.Move:
-                                                    
-
-                                                    // transform.position = Vector3.MoveTowards(GetPosition(),
-                                                    //     targetPosition,
-                                                    //     4f * Time.fixedDeltaTime);
-                                                    //
-                                                    // if (targetPosition.x < GetPosition().x)
-                                                    // {
-                                                    //     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
-                                                    // } 
-                                                    // else if (targetPosition.x > GetPosition().x)
-                                                    // {
-                                                    //     GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
-                                                    // }
-                                                    //
-                                                    //
-                                                    // if (Vector3.Distance(
-                                                    //         new Vector3(transform.position.x, 0, transform.position.z),
-                                                    //         new Vector3(targetPosition.x, 0, targetPosition.z)) <=
-                                                    //     0.001f)
-                                                    // {
-                                                    //     GetComponent<AnimationManager>().ChangeAnimationState("idle");
-                                                    //     battleState = CharacterBattleState.Action;
-                                                    // }
                                                     
                                                     if (target == null)
                                                     {
@@ -436,7 +299,7 @@ namespace CodeReverie
                                                     
                                                     agent.SetDestination(targetPosition);
                                             
-                                                    //if (!IsAgentMoving() || distance)
+                                                   
                                                     if (distance)
                                                     {
                                                         GetComponent<AnimationManager>().ChangeAnimationState("idle");
@@ -487,76 +350,11 @@ namespace CodeReverie
 
 
                                         case CharacterBattleState.Action:
-                                            PerformAction(() =>
-                                            {
-                                                // switch (characterBattleActionState)
-                                                // {
-                                                //     case CharacterBattleActionState.Attack:
-                                                //     case CharacterBattleActionState.Skill:
-                                                //     case CharacterBattleActionState.Item:
-                                                //         characterBattleActionState = CharacterBattleActionState.Idle;
-                                                //         SetRoamingDirection();
-                                                //         repositionTimer = repositionTime;
-                                                //
-                                                //         
-                                                //         battleState = CharacterBattleState.MoveToRandomBattlePosition;
-                                                //         break;
-                                                //
-                                                //     case CharacterBattleActionState.Defend:
-                                                //         battleState = CharacterBattleState.CompleteAction;
-                                                //         break;
-                                                // }
-                                                //
-                                                // EventManager.Instance.combatEvents.OnCombatPause(false);
-                                                // if (CombatManager.Instance.combatQueue.Peek() == this)
-                                                // {
-                                                //     CombatManager.Instance.combatQueue.Dequeue();
-                                                // }
-                                                // cooldownTimer = 0;
-                                                // characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
-                                            });
+                                            PerformAction(() => { });
 
                                             break;
                                     }
                                 }
-
-                                break;
-                            case CharacterTimelineGaugeState.EndTurnPhase:
-                                GetComponent<AnimationManager>().ChangeAnimationState("idle");
-                                switch (prevCharacterBattleActionState)
-                                {
-                                    case CharacterBattleActionState.Skill:
-                                        CameraManager.Instance.ResetCombatFollowTarget();
-                                        CameraManager.Instance.ResetTargetGroupSetting();
-                                        characterBattleActionState = CharacterBattleActionState.Idle;
-                                        SetRoamingDirection();
-                                        SetRandomTargetMovePosition();
-                                        repositionTimer = repositionTime;
-                                        battleState = CharacterBattleState.MoveToRandomBattlePosition;
-
-                                        EventManager.Instance.combatEvents.OnCombatPause(false);
-                                        //Debug.Log("This shopuld change to false");
-                                        DequeueAction();
-                                        cooldownTimer = 0;
-                                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                                        prevCharacterBattleActionState = CharacterBattleActionState.Idle;
-                                        characterTimelineGaugeState = CharacterTimelineGaugeState.StartTurnPhase;
-                                        
-                                        break;
-                                    default:
-
-                                        characterBattleActionState = CharacterBattleActionState.Idle;
-
-                                        SetRoamingDirection();
-                                        SetRandomTargetMovePosition();
-                                        repositionTimer = repositionTime;
-                                        battleState = CharacterBattleState.MoveToRandomBattlePosition;
-                                        cooldownTimer = 0;
-                                        prevCharacterBattleActionState = CharacterBattleActionState.Idle;
-                                        characterTimelineGaugeState = CharacterTimelineGaugeState.StartTurnPhase;
-                                        break;
-                                }
-
 
                                 break;
                         }
@@ -569,7 +367,65 @@ namespace CodeReverie
             }
         }
 
-        private void GetDistanceFromBattleAreaCenter()
+        public void EndTurnResetSkill()
+        {
+            CameraManager.Instance.ResetCombatFollowTarget();
+            CameraManager.Instance.ResetTargetGroupSetting();
+            characterBattleActionState = CharacterBattleActionState.Idle;
+            SetRoamingDirection();
+            SetRandomTargetMovePosition();
+            repositionTimer = repositionTime;
+            battleState = CharacterBattleState.MoveToRandomBattlePosition;
+
+            EventManager.Instance.combatEvents.OnCombatPause(false);
+            //Debug.Log("This shopuld change to false");
+            DequeueAction();
+            cooldownTimer = 0;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            prevCharacterBattleActionState = CharacterBattleActionState.Idle;
+            characterActionGaugeState = CharacterActionGaugeState.StartTurnPhase;
+
+        }
+
+        public CharacterBattleActionState characterBattleActionState
+        {
+            get => _characterBattleActionState;
+            set
+            {
+
+                if (value != _characterBattleActionState)
+                {
+                    prevCharacterBattleActionState = _characterBattleActionState;
+                   
+                    
+                   
+                }
+                
+                _characterBattleActionState = value;
+
+                
+                
+                
+            }
+        }
+        
+        public CharacterActionGaugeState characterActionGaugeState
+        {
+            get => _characterActionGaugeState;
+            set
+            {
+                _characterActionGaugeState = value;
+                
+                if (_behaviorGraphAgent)
+                {
+                    _behaviorGraphAgent.SetVariableValue("Character Action Gauge State", _characterActionGaugeState);
+                }
+            }
+        }
+        
+        
+
+        protected void GetDistanceFromBattleAreaCenter()
         {
             distanceFromCenter = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z),
                 new Vector3(CombatManager.Instance.areaCollider.transform.position.x, 0,
@@ -587,10 +443,6 @@ namespace CodeReverie
                 vect *= CombatManager.Instance.areaRange / distanceFromCenter;
                 transform.position = CombatManager.Instance.areaCollider.transform.position + vect;
             }
-        }
-
-        private void FixedUpdate()
-        {
         }
 
         public void SelectAction()
@@ -658,6 +510,19 @@ namespace CodeReverie
                 //     
                 //     break;
             }
+        }
+
+        public void EndTurnReset()
+        {
+            characterBattleActionState = CharacterBattleActionState.Idle;
+
+            SetRoamingDirection();
+            SetRandomTargetMovePosition();
+            repositionTimer = repositionTime;
+            battleState = CharacterBattleState.MoveToRandomBattlePosition;
+            cooldownTimer = 0;
+            prevCharacterBattleActionState = CharacterBattleActionState.Idle;
+            characterActionGaugeState = CharacterActionGaugeState.StartTurnPhase;
         }
 
         public void SetActionRange()
@@ -792,7 +657,7 @@ namespace CodeReverie
         public void EndTurn()
         {
             //Debug.LogError($"{name}: End Turn");
-            characterTimelineGaugeState = CharacterTimelineGaugeState.EndTurnPhase;
+            characterActionGaugeState = CharacterActionGaugeState.EndTurnPhase;
         }
 
         // public void OnAttackEnd(CharacterBattleManager characterBattleManager)
@@ -813,7 +678,7 @@ namespace CodeReverie
         //
         //         //DequeueAction();
         //         cooldownTimer = 0;
-        //         characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
+        //         characterActionGaugeState = CharacterActionGaugeState.WaitPhase;
         //     }
         // }
 
@@ -856,19 +721,19 @@ namespace CodeReverie
                 selectedSkill.UseSkill();
                 
                 
-                StartCoroutine(CameraManager.Instance.RotateSkillCamera(() =>
-                {
-                    
-                    
-                    //TODO Placeholder for animations and skills VFX
-                    // List<DamageTypes> damageTypes = new List<DamageTypes>();
-                    // damageTypes.Add(DamageTypes.Fire);
-                    // DamageProfile damage = new DamageProfile(this, target.GetComponent<Health>(), damageTypes);
-                    // CameraManager.Instance.SetBattleCamera();
-                    // CombatManager.Instance.RecallCharacters();
-                    // CombatManager.Instance.selectedSkillPlayerCharacter = null;
-                    // EndTurn();
-                }));
+                // StartCoroutine(CameraManager.Instance.RotateSkillCamera(() =>
+                // {
+                //     
+                //     
+                //     //TODO Placeholder for animations and skills VFX
+                //     // List<DamageTypes> damageTypes = new List<DamageTypes>();
+                //     // damageTypes.Add(DamageTypes.Fire);
+                //     // DamageProfile damage = new DamageProfile(this, target.GetComponent<Health>(), damageTypes);
+                //     // CameraManager.Instance.SetBattleCamera();
+                //     // CombatManager.Instance.RecallCharacters();
+                //     // CombatManager.Instance.selectedSkillPlayerCharacter = null;
+                //     // EndTurn();
+                // }));
                 
             }
         }
@@ -887,7 +752,7 @@ namespace CodeReverie
         //         EventManager.Instance.combatEvents.OnCombatPause(false);
         //         DequeueAction();
         //         cooldownTimer = 0;
-        //         characterTimelineGaugeState = CharacterTimelineGaugeState.WaitPhase;
+        //         characterActionGaugeState = CharacterActionGaugeState.WaitPhase;
         //         transform.rotation = Quaternion.Euler(0, 0, 0);
         //     }
         // }
@@ -898,12 +763,12 @@ namespace CodeReverie
             StatModifier statModifier = new StatModifier(stat, 2);
             
             GetComponent<CharacterUnitController>().character.characterStats.tempStatModifiers.Add(statModifier);
-            characterTimelineGaugeState = CharacterTimelineGaugeState.EndTurnPhase;
+            characterActionGaugeState = CharacterActionGaugeState.EndTurnPhase;
         }
 
         public void MovePos()
         {
-            characterTimelineGaugeState = CharacterTimelineGaugeState.EndTurnPhase;
+            characterActionGaugeState = CharacterActionGaugeState.EndTurnPhase;
         }
 
 
@@ -984,7 +849,7 @@ namespace CodeReverie
         }
         
         
-        bool IsAgentMoving()
+        protected bool IsAgentMoving()
         {
             // Check if the velocity is above a small threshold to account for floating-point precision errors
 

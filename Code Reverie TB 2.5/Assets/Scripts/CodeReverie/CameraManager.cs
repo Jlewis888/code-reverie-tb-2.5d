@@ -204,15 +204,30 @@ public class CameraManager : ManagerSingleton<CameraManager>
 
     public void ToggleSkillCamera()
     {
-        SetPriorityCamera(skillVirtualCamera);
-        skillVirtualCamera.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value = -90;
+        skillVirtualCamera.gameObject.SetActive(false);
         
-        skillVirtualCamera.Follow = CombatManager.Instance.selectedSkillPlayerCharacter
-            .transform;
-        skillVirtualCamera.LookAt = CombatManager.Instance.selectedSkillPlayerCharacter
-            .transform;
+        SetPriorityCamera(skillVirtualCamera);
+        skillVirtualCamera.gameObject.SetActive(true);
+        // skillVirtualCamera.GetComponent<CinemachineOrbitalFollow>().HorizontalAxis.Value = -90;
+        //
+        // skillVirtualCamera.Follow = CombatManager.Instance.selectedSkillPlayerCharacter
+        //     .transform;
+        // skillVirtualCamera.LookAt = CombatManager.Instance.selectedSkillPlayerCharacter
+        //     .transform;
 
         //StartCoroutine(RotateSkillCamera(() => {}));
+    }
+
+    public void SetSkillCameraFollow(GameObject skillGameObject)
+    {
+        skillVirtualCamera.GetComponent<CinemachineFollow>().enabled = false;
+        skillVirtualCamera.GetComponent<CinemachineRotationComposer>().enabled = false;
+        skillVirtualCamera.Follow = skillGameObject.transform;
+        skillVirtualCamera.LookAt = skillGameObject.transform;
+
+        
+        skillVirtualCamera.GetComponent<CinemachineFollow>().enabled = true;
+        skillVirtualCamera.GetComponent<CinemachineRotationComposer>().enabled = true;
     }
 
     public IEnumerator RotateSkillCamera(Action onComplete)

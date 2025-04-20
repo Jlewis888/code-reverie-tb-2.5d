@@ -9,6 +9,7 @@ namespace CodeReverie
 
         public List<CharacterDataContainer> characterDataContainers;
         public SceneField sceneToLoad;
+        public SceneField returnSceneName;
         
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
@@ -18,6 +19,7 @@ namespace CodeReverie
 
             combatTrackBehavior.characterDataContainers = characterDataContainers;
             combatTrackBehavior.sceneToLoad = sceneToLoad;
+            combatTrackBehavior.returnSceneName = returnSceneName;
             
 
             return playable;

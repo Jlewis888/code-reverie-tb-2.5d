@@ -10,10 +10,14 @@ namespace CodeReverie
 
         public BaseItemDetailsListContainer baseItemDetailsListContainer;
         public GearSetDataContainerList gearSets;
+        public GemSetDataContainerList gemSets;
         
         public Dictionary<string, ItemInfo> allItemInfoMap;
         public Dictionary<GearSetType, GearSetDataContainer> gearSetDataContainersMap =
             new Dictionary<GearSetType, GearSetDataContainer>();
+
+        public Dictionary<GemSetType, GemSetDataContainer> gemSetDataContainersMap =
+            new Dictionary<GemSetType, GemSetDataContainer>();
 
         public Dictionary<ItemRarity, ItemRarityData> itemRarityMap = new Dictionary<ItemRarity, ItemRarityData>();
         public Dictionary<ItemType, List<ItemSubType>> itemTypeMap = new Dictionary<ItemType, List<ItemSubType>>();
@@ -23,6 +27,7 @@ namespace CodeReverie
             base.Awake();
             SetAllItemsMap();
             gearSetDataContainersMap = gearSets.gearSetDataContainersMap;
+            gemSetDataContainersMap = gemSets.GemSetDataContainersMap;
 
             itemTypeMap = new Dictionary<ItemType, List<ItemSubType>>();
 
@@ -141,11 +146,24 @@ namespace CodeReverie
             return false;
         }
         
+        public bool CheckIfGemSetBonusKeyExist(GemSetType gemSetType, int setBonusNumber)
+        {
+            if (gemSetDataContainersMap[gemSetType].gemSetBonusMap.ContainsKey(setBonusNumber))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
         public GearSetBonus GetGearSetBonus(GearSetType gearSetType, int setBonusNumber)
         {
             return gearSetDataContainersMap[gearSetType].gearSetBonusMap[setBonusNumber];
         }
         
-        
+        public GemSetBonus GetGemSetBonus(GemSetType gemSetType, int setBonusNumber)
+        {
+            return gemSetDataContainersMap[gemSetType].gemSetBonusMap[setBonusNumber];
+        }
     }
 }

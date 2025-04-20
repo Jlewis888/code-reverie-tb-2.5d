@@ -1,5 +1,8 @@
-﻿namespace CodeReverie
+﻿using Unity.Behavior;
+
+namespace CodeReverie
 {
+    [BlackboardEnum]
     public enum CombatManagerState
     {
         Inactive,

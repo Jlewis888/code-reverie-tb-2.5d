@@ -72,3 +72,4 @@ MonoBehaviour:
   castAnimation: cast_1
   animationComboList:
   - 
+  playableDirector: {fileID: 0}

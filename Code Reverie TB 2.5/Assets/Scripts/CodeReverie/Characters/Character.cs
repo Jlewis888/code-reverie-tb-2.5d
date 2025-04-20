@@ -294,10 +294,18 @@ namespace CodeReverie
                 return;
             }
             
-            characterGear.relicSlots[item.info.gearSlotType].item = item;
+            //characterGear.relicSlots[item.info.gearSlotType].item = item;
+            characterGear.EquipRelic(item.info.gearSlotType, item);
+            
+            
             UpdateSkillSlots(item);
             characterSkills.SetLearnedSkills();
             
+        }
+
+        public void GemSetBonusCheck()
+        {
+            characterGear.GemSetBonusCheck();
         }
 
         public void UpdateSkillSlots(Item item)

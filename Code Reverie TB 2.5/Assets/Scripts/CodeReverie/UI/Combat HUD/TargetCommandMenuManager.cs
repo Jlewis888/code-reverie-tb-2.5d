@@ -118,7 +118,7 @@ namespace CodeReverie
         {
             //EventManager.Instance.combatEvents.OnPlayerSelectTarget(SelectedNavigationButton.GetComponent<TargetCommandMenuNavigationButton>().characterBattleManager);
             //EventManager.Instance.combatEvents.OnPlayerSelectTargetEnd(null);
-            EventManager.Instance.combatEvents.OnPlayerTurnEnd();
+            //EventManager.Instance.combatEvents.OnPlayerTurnEnd();
             CombatManager.Instance.ConfirmAction();
         }
         

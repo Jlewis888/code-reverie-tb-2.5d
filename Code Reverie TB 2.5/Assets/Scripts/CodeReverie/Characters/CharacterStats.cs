@@ -155,6 +155,7 @@ namespace CodeReverie
                 }
 
                 stats.AddRange(character.characterGear.gearSetBonusStats);
+                stats.AddRange(character.characterGear.gemSetBonusStats);
                 
                 
                 foreach (Skill skill in character.characterSkills.equippedPassivesSkills.Values)
@@ -286,6 +287,7 @@ namespace CodeReverie
                 }
 
                 stats.AddRange(character.characterGear.gearSetBonusStats);
+                stats.AddRange(character.characterGear.gemSetBonusStats);
 
                 foreach (Skill skill in character.characterSkills.equippedPassivesSkills.Values)
                 {

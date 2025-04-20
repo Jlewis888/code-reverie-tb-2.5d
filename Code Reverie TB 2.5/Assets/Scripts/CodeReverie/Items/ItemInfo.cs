@@ -39,6 +39,8 @@ namespace CodeReverie
         public List<SkillSlot> skillSlots;
         public SkillDataContainer skillSlotSkillDataContainer;
         public GemSlotContainer gemSlotContainer;
+        public GemSetType gemSetType;
+        public int gemLevel = 1;
         
         private void OnValidate()
         {

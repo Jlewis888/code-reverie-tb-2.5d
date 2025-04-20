@@ -20,6 +20,7 @@ namespace CodeReverie
         private Vector3 playerVelocity;
         [SerializeField]private bool groundedPlayer;
         private float gravityValue = -9.81f;
+        public string areaMask;
         
         private void Awake()
         {
@@ -39,7 +40,7 @@ namespace CodeReverie
         // Start is called before the first frame update
         void Start()
         {
-
+            areaMask = "Walkable";
         }
 
         // Update is called once per frame
@@ -187,9 +188,21 @@ namespace CodeReverie
                 Vector3 newPosition = transform.position + moveInput.normalized * (moveSpeed * Time.fixedDeltaTime);
 
                 NavMeshHit hit;
-
-                bool isValid = NavMesh.SamplePosition(newPosition, out hit, .3f, NavMesh.AllAreas);
-
+                
+                // int areaMask << NavMesh.GetAreaFromName("Jump");
+                // areaMask += 1 << NavMesh.GetAreaFromName("Everything");//turn on all
+                // areaMask -= 1 << NavMesh.GetAreaFromName("Jump");
+                // nma.areaMask=areaMask;
+                
+                int areaIndex = NavMesh.GetAreaFromName(areaMask); // e.g., "Walkable"
+                int _areaMask = 1 << areaIndex;
+                
+                //bool isValid = NavMesh.SamplePosition(newPosition, out hit, .3f, NavMesh.AllAreas);
+                bool isValid = NavMesh.SamplePosition(newPosition, out hit, .3f, _areaMask);
+                
+                // Debug.Log(isValid);
+                // Debug.Log(hit.mask);
+                //
                 if (isValid)
                 {
                     if ((transform.position - hit.position).magnitude >= .02f)
@@ -198,6 +211,40 @@ namespace CodeReverie
                     }
                 }
                 
+                // Directional Animation
+                if (Mathf.Abs(moveInput.z) > Mathf.Abs(moveInput.x))
+                {
+                    if (moveInput.z > 0)
+                    {
+                        characterDirection = CharacterDirection.Up;
+                        GetComponent<AnimationManager>().ChangeAnimationState("run_up");
+                    }
+                    else
+                    {
+                        characterDirection = CharacterDirection.Down;
+                        GetComponent<AnimationManager>().ChangeAnimationState("run_down");
+                    }
+                }
+                else
+                {
+                    characterDirection = CharacterDirection.Side;
+
+                    if (moveInput.x < 0)
+                    {
+                        GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = true;
+                    }
+                    else if (moveInput.x > 0)
+                    {
+                        GetComponentInChildren<CharacterUnit>().spriteRenderer.flipX = false;
+                    }
+
+                    GetComponent<AnimationManager>().ChangeAnimationState("run");
+                }
+                
+            }  else
+            {
+                // No movement, play idle
+                GetComponent<AnimationManager>().ChangeAnimationState("idle");
             }
         }
 

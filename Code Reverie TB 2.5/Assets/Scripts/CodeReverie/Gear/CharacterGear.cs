@@ -13,6 +13,9 @@ namespace CodeReverie
         
         public Dictionary<GearSetType, int> gearSetMap = new Dictionary<GearSetType, int>();
         public List<Stat> gearSetBonusStats = new List<Stat>();
+
+        public Dictionary<GemSetType, int> gemSetMap = new Dictionary<GemSetType, int>();
+        public List<Stat> gemSetBonusStats = new List<Stat>();
         
         
         public CharacterGear()
@@ -60,6 +63,7 @@ namespace CodeReverie
             }
             
             relicSlots[gearSlotType].item = item;
+            GearBonusChecks();
         }
         
         // public void EquipRelic(Item item)
@@ -78,12 +82,13 @@ namespace CodeReverie
         {
             accessorySlots[slot].item = item;
             
-            GearSetBonusCheck();
+            GearBonusChecks();
         }
         
         public void EquipArtifact(Item item, int slot)
         {
             artifactSlots[slot].item = item;
+            GearBonusChecks();
         }
 
         public void EquipCombatItem(Item item, int slot)
@@ -106,7 +111,7 @@ namespace CodeReverie
                         if (gearSlot.item == item)
                         {
                             gearSlot.item = null;
-                            GearSetBonusCheck();
+                            GearBonusChecks();
                             return;
                         }
                     }
@@ -125,6 +130,13 @@ namespace CodeReverie
                     break;
             }
         }
+
+        public void GearBonusChecks()
+        {
+            GearSetBonusCheck();
+            GemSetBonusCheck();
+        }
+        
         
         public void GearSetBonusCheck()
         {
@@ -133,7 +145,7 @@ namespace CodeReverie
             gearSetMap = new Dictionary<GearSetType, int>();
             gearSetBonusStats = new List<Stat>();
             
-            foreach (GearSlot gearSlot in accessorySlots.Values)
+            foreach (GearSlot gearSlot in relicSlots.Values)
             {
 
                 if (gearSlot.item == null)
@@ -166,6 +178,89 @@ namespace CodeReverie
                     }
                         
                 }
+            }
+        }
+        
+        public void GemSetBonusCheck()
+        {
+            
+            Debug.Log("Did the gem set bonust check run?");
+            
+            gemSetMap = new Dictionary<GemSetType, int>();
+            gemSetBonusStats = new List<Stat>();
+            
+            foreach (GearSlot gearSlot in relicSlots.Values)
+            {
+
+                if (gearSlot.item == null)
+                {
+                    continue;
+                }
+
+                Item item = null;
+
+                if (gearSlot.item.gemSlotContainer.gemSlot1 != null)
+                {
+                    if (gearSlot.item.gemSlotContainer.gemSlot1.equippedItem != null)
+                    {
+                        item = gearSlot.item.gemSlotContainer.gemSlot1.equippedItem;
+                        SetGemBonus(item);
+                    }
+                }
+                
+                if (gearSlot.item.gemSlotContainer.gemSlot2 != null)
+                {
+                    if (gearSlot.item.gemSlotContainer.gemSlot2.equippedItem != null)
+                    {
+                        item = gearSlot.item.gemSlotContainer.gemSlot2.equippedItem;
+                        SetGemBonus(item);
+                    }
+                }
+                
+                if (gearSlot.item.gemSlotContainer.gemSlot3 != null)
+                {
+                    if (gearSlot.item.gemSlotContainer.gemSlot3.equippedItem != null)
+                    {
+                        item = gearSlot.item.gemSlotContainer.gemSlot3.equippedItem;
+                        SetGemBonus(item);
+                    }
+                }
+
+                if (item == null)
+                {
+                    continue;
+                }
+                
+                
+                
+            }
+        }
+
+        void SetGemBonus(Item item)
+        {
+            ItemInfo itemData = item.info;
+                    
+            if (itemData.gemSetType != GemSetType.None)
+            {
+                        
+                        
+                if (gemSetMap.ContainsKey(itemData.gemSetType))
+                {
+                    gemSetMap[itemData.gemSetType] += 1;
+                }
+                else
+                {
+                    gemSetMap.Add(itemData.gemSetType, 1);
+                }
+
+                if (ItemManager.Instance.CheckIfGemSetBonusKeyExist(itemData.gemSetType,
+                        gemSetMap[itemData.gemSetType]))
+                {
+                          
+                            
+                    ApplyGemSetBonus(itemData.gemSetType, gemSetMap[itemData.gemSetType]);
+                }
+                        
             }
         }
         
@@ -202,9 +297,40 @@ namespace CodeReverie
                     //GetComponent<PlayerSkillsManager>().gearSetBonusSkills.Add(SkillsManager.Instance.CreateSkill(gearSetBonusSkill.skillDataContainer));
                     break;
             }
-            
-            
-            
+        }
+        
+        public void ApplyGemSetBonus(GemSetType gemSetType, int setBonusNumber)
+        {
+
+
+            switch (ItemManager.Instance.GetGemSetBonus(gemSetType, setBonusNumber).gemSetBonusType)
+            {
+                case GemSetBonusType.AdditiveStat:
+                    GemSetBonusAdditiveStat gemSetBonus1 =
+                        ItemManager.Instance.GetGemSetBonus(gemSetType, setBonusNumber) as GemSetBonusAdditiveStat;
+
+                    //Stat stat = new Stat(gearSetBonus1.statAttribute, gearSetBonus1.value, gearSetBonus1.statType);
+                    gemSetBonusStats.Add(new Stat(gemSetBonus1.statAttribute, gemSetBonus1.value, gemSetBonus1.statType));
+                    //gearSetBonusStats.Add(new StatModifier(gearSetBonus1.statAttribute, gearSetBonus1.value, 10, true));
+                    
+                    break;
+                case GemSetBonusType.PercentageStat:
+                    GemSetBonusPercentageStat gemSetBonus2 =
+                        ItemManager.Instance.GetGemSetBonus(gemSetType, setBonusNumber) as GemSetBonusPercentageStat;
+                
+                
+                    //gearSetBonusPercentageStats.Add(new StatPercentageModifier(gearSetBonus2.statAttribute, gearSetBonus2.value, 10, true));
+                    gemSetBonusStats.Add(new Stat(gemSetBonus2.statAttribute, gemSetBonus2.value, gemSetBonus2.statType));
+                    break;
+                case GemSetBonusType.Skill:
+                    
+                    //todo Add Trigger Skill
+                    //GearSetBonusSkill gearSetBonusSkill = ItemManager.Instance.GetGearSetBonus(gearSetType, setBonusNumber) as GearSetBonusSkill;
+
+                    
+                    //GetComponent<PlayerSkillsManager>().gearSetBonusSkills.Add(SkillsManager.Instance.CreateSkill(gearSetBonusSkill.skillDataContainer));
+                    break;
+            }
         }
 
        

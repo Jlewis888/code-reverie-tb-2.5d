@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 
 namespace CodeReverie
@@ -79,7 +80,7 @@ namespace CodeReverie
 
         [TabGroup("Animations")] public List<SkillEventListener> skillEventListeners = new List<SkillEventListener>();
 
-        
+        [TabGroup("Animations")] public PlayableDirector playableDirector;
         
         
         protected virtual void OnValidate()

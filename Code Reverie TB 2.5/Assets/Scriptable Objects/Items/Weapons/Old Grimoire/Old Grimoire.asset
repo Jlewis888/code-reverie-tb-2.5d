@@ -129,3 +129,5 @@ MonoBehaviour:
   onUse: 
   onUseParameters: []
   skillSlotSkillDataContainer: {fileID: 0}
+  gemSetType: 0
+  gemLevel: 1

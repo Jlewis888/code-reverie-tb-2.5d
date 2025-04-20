@@ -44,7 +44,7 @@ namespace CodeReverie
             foreach (Character character in PlayerManager.Instance.currentParty)
             {
                 character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
-                character.characterController.GetComponent<CharacterBattleManager>().characterTimelineGaugeState = CharacterTimelineGaugeState.PostBattle;
+                character.characterController.GetComponent<CharacterBattleManager>().characterActionGaugeState = CharacterActionGaugeState.PostBattle;
                 character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
 
                 //character.currentHealth = character.characterController.GetComponent<Health>().CurrentHealth;
@@ -77,7 +77,7 @@ namespace CodeReverie
         {
             Debug.Log("Exit out of Encounter");
             
-            
+            CombatManager.Instance.UnsetBattle();
             // TransitionAnimator.Start(
             //     TransitionType.Fade, // transition type
             //     duration: 1f,
