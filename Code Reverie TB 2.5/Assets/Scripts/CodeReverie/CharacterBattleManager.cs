@@ -24,6 +24,7 @@ namespace CodeReverie
         
         public BattlePosition battlePosition;
         public CharacterBattleManager target;
+        public List<CharacterBattleManager> targetList = new List<CharacterBattleManager>();
         //public List<CharacterBattleManager> selectedTargets;
         public Vector3 targetPosition;
         
@@ -182,6 +183,12 @@ namespace CodeReverie
                     {
                         switch (characterActionGaugeState)
                         {
+                            
+                            case CharacterActionGaugeState.StartTurnPhase:
+                                
+                                GetComponent<CharacterUnitController>().character.characterStats.UpdateTempStats();
+                                break;
+                            
                             
                             case CharacterActionGaugeState.WaitPhase:
                                 
@@ -357,6 +364,7 @@ namespace CodeReverie
                                 }
 
                                 break;
+                            
                         }
                     }
                 }
@@ -378,7 +386,6 @@ namespace CodeReverie
             battleState = CharacterBattleState.MoveToRandomBattlePosition;
 
             EventManager.Instance.combatEvents.OnCombatPause(false);
-            //Debug.Log("This shopuld change to false");
             DequeueAction();
             cooldownTimer = 0;
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -514,6 +521,7 @@ namespace CodeReverie
 
         public void EndTurnReset()
         {
+            DequeueAction();
             characterBattleActionState = CharacterBattleActionState.Idle;
 
             SetRoamingDirection();
@@ -610,7 +618,7 @@ namespace CodeReverie
             characterBattleActionState = CharacterBattleActionState.Idle;
             GetComponent<AnimationManager>().ChangeAnimationState("attack");
             
-            DequeueAction();
+            //DequeueAction();
         }
 
         public void HitTarget()
@@ -651,7 +659,7 @@ namespace CodeReverie
             damageTypes.Add(DamageTypes.Physical);
             DamageProfile damage =
                 new DamageProfile(this, target.GetComponent<Health>(), damageTypes, true);
-            DequeueAction();
+            //DequeueAction();
         }
 
         public void EndTurn()
@@ -687,14 +695,38 @@ namespace CodeReverie
             GetComponent<AnimationManager>().ChangeAnimationState("idle");
             if (selectedSkill != null)
             {
-                List<CharacterBattleManager> targetList = new List<CharacterBattleManager>();
+                CameraManager.Instance.SetSkillCharacterFocusVirtualCamera(gameObject);
+                // CameraManager.Instance.SetBattleCamera();
+                //
+                // if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                // {
+                //     CombatManager.Instance.selectedSkillPlayerCharacter = this;
+                //     characterBattleActionState = CharacterBattleActionState.Idle;
+                //     prevCharacterBattleActionState = CharacterBattleActionState.Skill;
+                //     selectedSkill.source = this;
+                //     
+                //     selectedSkill.UseSkill();
+                //     return;
+                // }
+
+                
+
+
+
+                targetList = new List<CharacterBattleManager>();
                 targetList.Add(target);
                 switch (selectedSkill.info.skillDamageTargetType)
                 {
+                    
+                    
+                    
                     case SkillDamageTargetType.Circle:
                         targetList.AddRange(target.GetUnitsInSkillRadius(selectedSkill.info.aoeRadius));
+                        targetList.Remove(this);
                         break;
                 }
+                
+                targetList = targetList.Distinct().ToList();
                 
                 
                 CombatManager.Instance.selectedSkillPlayerCharacter = this;
@@ -702,25 +734,22 @@ namespace CodeReverie
                 GetComponent<AnimationManager>().ChangeAnimationState("idle");
                 skillRecallTargetPosition = GetPosition();
                 
-                
-                
-                
-                
                 CombatManager.Instance.MoveCharactersToSkillPositions(targetList);
                 Debug.Log("Set Skill Camera");
-                
-                
                 
                 GetComponent<AnimationManager>().ChangeAnimationState("idle");
                 characterBattleActionState = CharacterBattleActionState.Idle;
                 prevCharacterBattleActionState = CharacterBattleActionState.Skill;
                 EventManager.Instance.combatEvents.OnCombatPause(true);
                 CombatManager.Instance.PauseAnimationsForSkills();
-                CameraManager.Instance.ToggleSkillCamera();
-                selectedSkill.source = this;
-                selectedSkill.UseSkill();
                 
                 
+                StartCoroutine(CameraManager.Instance.SkillCharacterFocusTimer(1f, () =>
+                {
+                    CameraManager.Instance.ToggleSkillCamera();
+                    selectedSkill.source = this;
+                    selectedSkill.UseSkill();
+                }));
                 // StartCoroutine(CameraManager.Instance.RotateSkillCamera(() =>
                 // {
                 //     
@@ -924,10 +953,12 @@ namespace CodeReverie
                 if (distance <= radius)
                 {
 
-                    if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy) && characterBattleManager.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
-                    {
-                        characterBattleManagers.Add(characterBattleManager);
-                    }
+                    // if (GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy) && characterBattleManager.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+                    // {
+                    //     characterBattleManagers.Add(characterBattleManager);
+                    // }
+                    
+                    characterBattleManagers.Add(characterBattleManager);
                 }
             }
 

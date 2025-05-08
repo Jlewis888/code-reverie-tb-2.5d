@@ -14,15 +14,17 @@ namespace CodeReverie
         public float expToGive;
         public int archetypePointsToGive;
         public int lumiesToGive;
+        public AreaManagerConfig areaManagerConfig;
         
 
 
-        public CombatConfigDetails(string returnSceneName = "", string characterInstanceID = "", Vector3 characterReturnPosition = default, List<CharacterDataContainer> enemyList = null)
+        public CombatConfigDetails(string returnSceneName = "", string characterInstanceID = "", Vector3 characterReturnPosition = default, List<CharacterDataContainer> enemyList = null, AreaManagerConfig areaManagerConfig = null)
         {
             this.returnSceneName = returnSceneName;
             this.characterInstanceID = characterInstanceID;
             this.enemyList = enemyList;
             this.characterReturnPosition = characterReturnPosition;
+            this.areaManagerConfig = areaManagerConfig;
             
             SetExpToGive();
         }

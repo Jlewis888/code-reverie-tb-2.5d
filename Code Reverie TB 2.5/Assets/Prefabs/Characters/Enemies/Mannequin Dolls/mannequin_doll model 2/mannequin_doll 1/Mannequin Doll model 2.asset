@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ca9e7e9cb44891812a8e5d2c8d83ce, type: 3}
+  m_Name: Mannequin Doll model 2
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  characterPortrait: {fileID: 888186747, guid: 4805e8c3154ad0a4d8379f2965decc8f, type: 3}
+  characterSprite: {fileID: 0}
+  id: 5d7181b6-a647-483b-a38a-6598d0869d3d
+  characterID: Mannequin Doll model 2
+  characterName: Mannequin Doll Model 2
+  characterType: 2
+  characterUnitPF: {fileID: 7890904489174111990, guid: 9365cf1e06d62e64898f8575e3c56d54,
+    type: 3}
+  experienceToGive: 5000
+  attackRange: 1
+  behaviorGraph: {fileID: 488394950231353101, guid: c555aab99a9855a489a064197e6d84e1,
+    type: 2}
+  baseStats: {fileID: 11400000, guid: e2763d39e78191f4fbce09f2ba131ca8, type: 2}
+  healthBarCount: 5
+  primaryArchetype: {fileID: 0}
+  archetypes: []
+  lootTableDataContainer: {fileID: 11400000, guid: 0a6fea150a47e7c498433518e9c7ad02,
+    type: 2}
+  vendorInventory: {fileID: 0}

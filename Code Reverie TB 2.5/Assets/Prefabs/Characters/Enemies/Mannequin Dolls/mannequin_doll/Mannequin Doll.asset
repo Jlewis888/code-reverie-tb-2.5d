@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   characterPortrait: {fileID: 888186747, guid: 4805e8c3154ad0a4d8379f2965decc8f, type: 3}
   characterSprite: {fileID: 0}
-  id: 8d6584a3-17f5-4039-98d5-1f54d7c0ee14
+  id: 5b54b340-ffdc-41ed-8074-bd85e2cb89f4
   characterID: Mannequin Doll
   characterName: Mannequin Doll
   characterType: 2
@@ -31,6 +31,8 @@ MonoBehaviour:
     type: 3}
   experienceToGive: 5000
   attackRange: 1
+  behaviorGraph: {fileID: 488394950231353101, guid: 241d747c56c664240a73fafb968d002d,
+    type: 2}
   baseStats: {fileID: 11400000, guid: 38be5803e56bc7847a93195bd07a7aca, type: 2}
   healthBarCount: 5
   primaryArchetype: {fileID: 0}

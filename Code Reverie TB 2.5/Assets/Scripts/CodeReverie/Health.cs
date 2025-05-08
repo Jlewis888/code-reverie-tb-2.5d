@@ -120,9 +120,11 @@ namespace CodeReverie
             // {
             //     healthBarCount = characterController.character.info.healthBarCount;
             // }
-            //
-            //
-            // CurrentHealth = MaxHealth;
+            
+            MaxHealth = GetComponent<CharacterUnitController>().character.characterStats.GetStat(StatAttribute.Health);
+            
+            
+            CurrentHealth = MaxHealth;
         }
 
 

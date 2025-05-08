@@ -46,11 +46,19 @@ namespace CodeReverie
             string skillName = String.IsNullOrEmpty(info.skillName) ? info.skillId : info.skillName;
             
             Debug.Log($"Use {skillName}");
+            
+            PlaySkillAnimation();
         }
+        
+        public virtual void OnSkillUseEnd(){}
 
         public virtual void PlaySkillAnimation()
         {
-            GameObject.Instantiate(info.playableDirector.gameObject);
+            if (info.playableDirector != null)
+            {
+                GameObject.Instantiate(info.playableDirector.gameObject);
+            }
+            
         }
 
         public void SetSkillCamera()

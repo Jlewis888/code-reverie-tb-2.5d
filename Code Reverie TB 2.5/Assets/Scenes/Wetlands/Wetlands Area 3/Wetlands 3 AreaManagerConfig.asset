@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e43bea36a1a43c79cd9c5bcafed4768, type: 3}
+  m_Name: Wetlands 3 AreaManagerConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: characterUnitAreaStateManagers
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeReverie.CharacterUnitAreaStateManager,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|CodeReverie.CharacterUnitAreaStateManager, Assembly-CSharp
+    - Name: characterID
+      Entry: 1
+      Data: c16d670e-8e04-4fbe-b4c1-ab7732ba3b22
+    - Name: characterState
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: characterList
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[CodeReverie.Character, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: areaCutscenes
+      Entry: 6
+      Data: 
+  combatLocation:
+    m_SceneAsset: {fileID: 102900000, guid: 7ecbae88c09f4de4083478821fadf4a0, type: 3}
+    m_SceneName: Battle Test Room
+  hasCutsceneOnStart: 0
+  cutsceneOnStart: 

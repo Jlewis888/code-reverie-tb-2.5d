@@ -7,6 +7,9 @@ namespace CodeReverie
 {
     public class ApplyDamageReceiver : SerializedMonoBehaviour, INotificationReceiver
     {
+        public GameObject particleObjectPF;
+        private GameObject particleObject;
+        
         public void OnNotify(Playable origin, INotification notification, object context)
         {
             ApplyDamageMarker applyDamageMarker = notification as ApplyDamageMarker;
@@ -19,16 +22,26 @@ namespace CodeReverie
             CharacterBattleManager characterBattleManager = CombatManager.Instance.selectedSkillPlayerCharacter;
             
             
-            List<DamageTypes> damageTypes = new List<DamageTypes>();
-            damageTypes.Add(DamageTypes.Fire);
-            DamageProfile damage = new DamageProfile(characterBattleManager, characterBattleManager.target.GetComponent<Health>(), damageTypes);
-            // var exp = Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
-            // Destroy(exp, DestroyExplosion);
-            EventManager.Instance.combatEvents.OnSkillComplete(characterBattleManager);
-            CombatManager.Instance.combatManagerState = CombatManagerState.OnSkillUseEnd;
-            //characterBattleManager.EndTurn();
+            // List<DamageTypes> damageTypes = new List<DamageTypes>();
+            // damageTypes.Add(DamageTypes.Fire);
+
+            foreach (CharacterBattleManager target in characterBattleManager.targetList)
+            {
+                if (particleObjectPF != null)
+                {
+                    particleObject = Instantiate(particleObjectPF, target.transform);
+                }
+                DamageProfile damage = new DamageProfile(characterBattleManager, target, characterBattleManager.selectedSkill);
+                Destroy(particleObject, 10f);
+            }
             
-            //Destroy(gameObject);
+            // // var exp = Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
+            // // Destroy(exp, DestroyExplosion);
+            // EventManager.Instance.combatEvents.OnSkillComplete(characterBattleManager);
+            // CombatManager.Instance.combatManagerState = CombatManagerState.OnSkillUseEnd;
+            // //characterBattleManager.EndTurn();
+            //
+            // //Destroy(gameObject);
         }
     }
 }

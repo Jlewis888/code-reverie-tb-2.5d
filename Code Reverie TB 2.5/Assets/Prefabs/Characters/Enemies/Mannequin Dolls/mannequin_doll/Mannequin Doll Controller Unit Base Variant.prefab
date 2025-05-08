@@ -629,6 +629,48 @@ PrefabInstance:
       propertyPath: 'serializationData.SerializedBytes.Array.data[253]'
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: m_Graph
+      value: 
+      objectReference: {fileID: 488394950231353101, guid: 241d747c56c664240a73fafb968d002d,
+        type: 2}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: 'managedReferences[3527262337251410300]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: managedReferences[3527262337251410300].Name
+      value: Self
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: managedReferences[3527262337251410300].m_Value
+      value: 
+      objectReference: {fileID: 1751151809084106637}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[0]'
+      value: 3527262337251410300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: managedReferences[3527262337251410300].GUID.m_Value0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353338022278493046, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: managedReferences[3527262337251410300].GUID.m_Value1
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1430708873287786343, guid: 7868211f7bc62254d87a164eee1eda24,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -938,7 +980,7 @@ PrefabInstance:
     - target: {fileID: 5847682289967289029, guid: 7868211f7bc62254d87a164eee1eda24,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6195856956228804043, guid: 7868211f7bc62254d87a164eee1eda24,
         type: 3}
@@ -1079,6 +1121,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8010502415995552772, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8010502415995552772, guid: 7868211f7bc62254d87a164eee1eda24,
+        type: 3}
     - target: {fileID: 8618350670493096888, guid: 7868211f7bc62254d87a164eee1eda24,
         type: 3}
       propertyPath: m_Sprite
@@ -1216,11 +1264,7 @@ PrefabInstance:
     - {fileID: 3911774601596891375, guid: 7868211f7bc62254d87a164eee1eda24, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3118206223678837613, guid: 7868211f7bc62254d87a164eee1eda24,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3129437221277978145}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7868211f7bc62254d87a164eee1eda24, type: 3}
 --- !u!1 &1751151809084106637 stripped
 GameObject:
@@ -1228,54 +1272,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3678120660245656800}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3129437221277978145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751151809084106637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Graph: {fileID: 488394950231353101, guid: 241d747c56c664240a73fafb968d002d, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 3527262038301868681
-  - rid: 3527262038301868887
-  m_IsInitialised: 0
-  m_IsStarted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 3527262038301868681
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
-        ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 1751151809084106637}
-    - rid: 3527262038301868887
-      type: {class: 'BlackboardVariable`1[[CodeReverie.CharacterBattleManager, Assembly-CSharp]]',
-        ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 11587911891946781721
-          m_Value1: 14677278541192126863
-        Name: Character Battle Manager
-        m_Value: {fileID: 2364857522477001607}
---- !u!114 &2364857522477001607 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1430708873287786343, guid: 7868211f7bc62254d87a164eee1eda24,
-    type: 3}
-  m_PrefabInstance: {fileID: 3678120660245656800}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751151809084106637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0be84c8437405486b3a7cf985b240d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

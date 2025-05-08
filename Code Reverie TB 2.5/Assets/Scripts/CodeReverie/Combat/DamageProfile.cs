@@ -11,9 +11,10 @@ namespace CodeReverie
         public Health damageTarget;
         public float damageAmount;
         public List<DamageTypes> damageTypes;
-        public bool isCrit;
+        public bool isCrit = false;
         public bool applyAbsorptionHeal;
         public bool isBreak;
+        public Skill skillUsed;
         
 
         public DamageProfile(CharacterBattleManager damageSource, Health damageTarget, List<DamageTypes> damageTypes, bool isBreak = false)
@@ -37,6 +38,26 @@ namespace CodeReverie
             
             ApplyDamage();
         }
+        
+        public DamageProfile(CharacterBattleManager damageSource, CharacterBattleManager damageTarget, Skill skill)
+        {
+            this.damageSource = damageSource;
+            this.damageTarget = damageTarget.GetComponent<Health>();
+            skillUsed = skill;
+            damageTypes = skillUsed.info.skillDamageTypes;
+            
+            ApplyDamage();
+        }
+
+        public DamageProfile(StatusEffect statusEffect)
+        {
+            damageSource = statusEffect.source;
+            damageTarget = statusEffect.target.GetComponent<Health>();
+            damageTypes = statusEffect.damageTypes;
+            
+            ApplyDamage();
+        }
+
 
         public void ApplyDamage()
         {

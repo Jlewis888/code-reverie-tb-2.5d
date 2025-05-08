@@ -27,6 +27,7 @@ namespace CodeReverie
         public float currentHealth;
         public int currentSkillPoints;
 
+        public List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
         public Dictionary<ArchetypeCategory, int> archetypeLevelMap = new Dictionary<ArchetypeCategory, int>();
         
         public int currentLevel = 1;
@@ -393,11 +394,30 @@ namespace CodeReverie
             }
             
             characterController = GameObject.Instantiate(info.characterUnitPF, transform, Quaternion.identity);
+            characterController.name = info.characterName;
             characterController.gameObject.SetActive(false);
             characterController.character = this;
             characterController.GetComponent<Health>().SetHealth();
         }
-        
+
+        public void UpdateActiveStatusEffects()
+        {
+            List<StatusEffect> statusEffects = new List<StatusEffect>();
+
+            foreach (StatusEffect statusEffect in activeStatusEffects)
+            {
+                statusEffect.duration -= 1;
+
+                if (statusEffect.duration > 0)
+                {
+                    statusEffects.Add(statusEffect);
+                }
+                
+            }
+
+            activeStatusEffects = statusEffects;
+
+        }
 
     }
 }

@@ -23,7 +23,7 @@ namespace CodeReverie
                         character.characterController.GetComponent<CharacterController>().enabled = true;
                     }
                 }
-                
+                GameSceneManager.Instance.SetTransitionName("");
                 //PlayerController.Instance.transform.position = transform.position;
                 CanvasManager.Instance.uiFade.FadeToClear();
             }

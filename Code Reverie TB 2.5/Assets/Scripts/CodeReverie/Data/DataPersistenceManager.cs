@@ -52,8 +52,8 @@ namespace CodeReverie
         public void OnSceneUnloaded(Scene scene)
         {
             
-            Debug.Log("Scene Unloaded");
-            Debug.Log(SceneManager.GetActiveScene().name);
+            // Debug.Log("Scene Unloaded");
+            // Debug.Log(SceneManager.GetActiveScene().name);
             GameSceneManager.Instance.prevScene = SceneManager.GetActiveScene().name;
             //AutoSave();
         }
@@ -72,8 +72,8 @@ namespace CodeReverie
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            Debug.Log("Scene Loaded");
-            Debug.Log(SceneManager.GetActiveScene().name);
+            // Debug.Log("Scene Loaded");
+            // Debug.Log(SceneManager.GetActiveScene().name);
             dataPersistenceObjects = FindAllDataPersistenceObjects();
             
         }

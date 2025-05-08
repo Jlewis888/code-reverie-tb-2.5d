@@ -2,7 +2,6 @@
 {
     public enum DamageTypes
     {
-        None,
         Physical,
         Fire,
         Air,

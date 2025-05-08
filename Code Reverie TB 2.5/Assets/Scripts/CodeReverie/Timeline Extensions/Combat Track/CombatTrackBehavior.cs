@@ -28,7 +28,8 @@ namespace CodeReverie
                 CombatConfigDetails combatConfigDetails= new CombatConfigDetails(
                     returnSceneName: returnSceneName.SceneName,
                     characterReturnPosition: Vector3.zero,
-                    enemyList: characterDataContainers
+                    enemyList: characterDataContainers,
+                    areaManagerConfig: AreaManager.instance.areaManagerConfig
                 );
                 
                 PlayerManager.Instance.StartCombat(combatConfigDetails, sceneToLoad.SceneName);

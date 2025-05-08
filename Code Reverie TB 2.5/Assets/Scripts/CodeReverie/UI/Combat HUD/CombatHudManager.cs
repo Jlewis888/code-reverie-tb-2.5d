@@ -42,6 +42,7 @@ namespace CodeReverie
             EventManager.Instance.combatEvents.onPlayerTurn += OnPlayerTurn;
             EventManager.Instance.combatEvents.onActionSelected += OnActionSelected;
             EventManager.Instance.combatEvents.onPlayerSelectTarget += OnPlayerSelectTarget;
+            EventManager.Instance.combatEvents.onCharacterDeath += RemoveCharacterActionGauge;
 
         }
 
@@ -51,6 +52,7 @@ namespace CodeReverie
             EventManager.Instance.combatEvents.onPlayerTurn -= OnPlayerTurn;
             
             EventManager.Instance.combatEvents.onPlayerSelectTarget -= OnPlayerSelectTarget;
+            EventManager.Instance.combatEvents.onCharacterDeath -= RemoveCharacterActionGauge;
         }
 
 
@@ -85,14 +87,16 @@ namespace CodeReverie
                 // characterActionSlider.Init();
                 // characterActionSliders.Add(characterActionSlider);
                 
-                CharacterActionGauge characterActionGauge = Instantiate(characterActionGaugePF, actionGaugeHolder.transform);
-                characterActionGauge.characterBattleManager = characterBattleManager;
-                characterActionGauge.name =
-                    $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Gauge";
                 
-                characterActionGauge.SetSliderIconPosition();
-                characterActionGauge.Init();
-                characterActionGauges.Add(characterActionGauge);
+                InitCharacterActionGauge(characterBattleManager);
+                // CharacterActionGauge characterActionGauge = Instantiate(characterActionGaugePF, actionGaugeHolder.transform);
+                // characterActionGauge.characterBattleManager = characterBattleManager;
+                // characterActionGauge.name =
+                //     $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Gauge";
+                //
+                // characterActionGauge.SetSliderIconPosition();
+                // characterActionGauge.Init();
+                // characterActionGauges.Add(characterActionGauge);
                 
             }
             
@@ -110,9 +114,36 @@ namespace CodeReverie
             EventManager.Instance.playerEvents.OnActionBarSet();
         }
 
+        public void InitCharacterActionGauge(CharacterBattleManager characterBattleManager)
+        {
+            CharacterActionGauge characterActionGauge = Instantiate(characterActionGaugePF, actionGaugeHolder.transform);
+            characterActionGauge.characterBattleManager = characterBattleManager;
+            characterActionGauge.name =
+                $"{characterBattleManager.GetComponent<CharacterUnitController>().character.info.characterName} Gauge";
+                
+            characterActionGauge.SetSliderIconPosition();
+            characterActionGauge.Init();
+            characterActionGauges.Add(characterActionGauge);
+        }
+
+        public void RemoveCharacterActionGauge(CharacterBattleManager characterBattleManager)
+        {
+            CharacterActionGauge characterActionGauge =
+                characterActionGauges.Find(x => x.characterBattleManager == characterBattleManager);
+
+            characterActionGauges.Remove(characterActionGauge);
+            Destroy(characterActionGauge.gameObject);
+
+        }
+
         public void ClearSliders()
         {
             foreach (Transform child in characterActionSliderHolder.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            
+            foreach (Transform child in actionGaugeHolder.transform)
             {
                 Destroy(child.gameObject);
             }

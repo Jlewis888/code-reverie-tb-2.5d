@@ -21,7 +21,20 @@ public partial class EndTurnResetAction : Action
             return Status.Failure;
         }
         
-        Self.Value.GetComponent<CharacterBattleManager>().EndTurnReset();
+        CharacterBattleManager characterBattleManager = Self.Value.GetComponent<CharacterBattleManager>();
+
+
+        if (characterBattleManager.prevCharacterBattleActionState == CharacterBattleActionState.Skill)
+        {
+             
+            characterBattleManager.EndTurnResetSkill();
+        }
+        else
+        {
+             
+            characterBattleManager.EndTurnReset();
+        }
+       
 
         
         return Status.Running;

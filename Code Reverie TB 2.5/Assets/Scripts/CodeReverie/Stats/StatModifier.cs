@@ -6,6 +6,7 @@
         public float value;
         public int duration;
         public bool isPermanent;
+        public StatusEffect statusEffect;
     
         
         public StatModifier(Stat stat, int duration, bool isPermanent = false)
@@ -14,6 +15,16 @@
             this.duration = duration;
             this.isPermanent = isPermanent;
         }
+
+        public StatModifier(Stat stat, StatusEffect statusEffect)
+        {
+            this.stat = stat;
+            this.statusEffect = statusEffect;
+            isPermanent = true;
+            duration = 1000;
+
+        }
+        
         
         //
         // public void ChangeStat(StatAttribute newStat)

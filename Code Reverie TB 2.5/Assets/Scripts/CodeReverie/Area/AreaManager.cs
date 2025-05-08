@@ -32,7 +32,7 @@ namespace CodeReverie
 
         public Tilemap mapBase;
         public string audioClip;
-        public SceneField combatLocation;
+        //public SceneField combatLocation;
         public SceneField persistentData;
 
         private void Awake()
@@ -68,7 +68,30 @@ namespace CodeReverie
         public void SetCharacterIDs()
         {
             //TODO MAKE SURE ALL IS UNIQUE
-            GetComponentsInChildren<CharacterUnitController>().ToList().ForEach(x => x.SetInstanceID());
+
+            if (areaManagerConfig != null)
+            {
+                areaManagerConfig.characterUnitAreaStateManagers =
+                    new List<CharacterUnitAreaStateManager>();
+                
+                
+                
+                foreach (CharacterUnitController characterUnitController in GetComponentsInChildren<CharacterUnitController>().ToList())
+                {
+                    characterUnitController.SetInstanceID();
+
+                    CharacterUnitAreaStateManager characterUnitAreaStateManager = new CharacterUnitAreaStateManager();
+
+                    characterUnitAreaStateManager.characterState = CharacterState.Alive;
+                    characterUnitAreaStateManager.characterID = characterUnitController.characterInstanceID;
+                    
+                    areaManagerConfig.characterUnitAreaStateManagers.Add(characterUnitAreaStateManager);
+                } 
+            }
+            
+            
+            
+            // GetComponentsInChildren<CharacterUnitController>().ToList().ForEach(x => x.SetInstanceID());
         }
 #endif
 
@@ -157,6 +180,33 @@ namespace CodeReverie
 
         public void Init()
         {
+
+            // foreach (KeyValuePair<string, CharacterUnitAreaStateManager> characterUnitAreaStateManager in areaManagerConfig.characterUnitAreaStateManagers)
+            // {
+            //     if (characterUnitAreaStateManager.Value.characterState == CharacterState.Dead)
+            //     {
+            //         DestroyImmediate(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x =>
+            //                 x.characterInstanceID == characterUnitAreaStateManager.Value.characterID)
+            //             .gameObject);
+            //     }
+            // }
+
+
+            if (areaManagerConfig != null)
+            {
+                if (areaManagerConfig.characterUnitAreaStateManagers != null)
+                {
+                    foreach (CharacterUnitAreaStateManager characterUnitAreaStateManager in areaManagerConfig.characterUnitAreaStateManagers)
+                    {
+                        if (characterUnitAreaStateManager.characterState == CharacterState.Dead)
+                        {
+                            DestroyImmediate(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x =>
+                                    x.characterInstanceID == characterUnitAreaStateManager.characterID)
+                                .gameObject);
+                        }
+                    }
+                }
+            }
             
             SpawnPlayerParty();
             
@@ -231,9 +281,9 @@ namespace CodeReverie
                 CameraManager.Instance.UnsetBattleCamera();
                 CameraManager.Instance.UpdateCamera(PlayerManager.Instance.currentParty[0].characterController
                     .transform);
-                Destroy(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x =>
-                        x.characterInstanceID == PlayerManager.Instance.combatConfigDetails.characterInstanceID)
-                    .gameObject);
+                // DestroyImmediate(GetComponentsInChildren<CharacterUnitController>().ToList().Find(x =>
+                //         x.characterInstanceID == PlayerManager.Instance.combatConfigDetails.characterInstanceID)
+                //     .gameObject);
 
                 PlayerManager.Instance.SetPartyReturnPosition();
                 PlayerManager.Instance.combatConfigDetails = null;

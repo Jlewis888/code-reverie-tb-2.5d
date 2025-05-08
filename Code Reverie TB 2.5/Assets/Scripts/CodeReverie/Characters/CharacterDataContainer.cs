@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeReverie.Vendors;
 using Sirenix.OdinInspector;
+using Unity.Behavior;
 using UnityEditor;
 using UnityEngine;
+using Unity.Behavior.GraphFramework;
 
 namespace CodeReverie
 {
@@ -40,6 +42,8 @@ namespace CodeReverie
         [TabGroup("Character Details")]
         public float attackRange = 1f;
         
+        [TabGroup("Character Details")]
+        public BehaviorGraph behaviorGraph;
         
         [TabGroup("Base Stats", TextColor = "blue"), HideLabel]
         public CharacterBaseStats baseStats;
@@ -68,6 +72,10 @@ namespace CodeReverie
         [Button("Update Assets")]
         public void UpdateAssets()
         {
+            
+            id = Guid.NewGuid().ToString();
+            characterID = name;
+            
             string assetPath  = AssetDatabase.GetAssetPath(this);
 
             if (characterType == CharacterType.Playable)
@@ -83,9 +91,57 @@ namespace CodeReverie
                 // }
             }
             
-            string baseStatsAssetPath = assetPath.Replace($"/{name}.asset", "");
-            List<CharacterBaseStats> baseStatsList = AssetDatabase.FindAssets("t:CharacterBaseStats", new []{baseStatsAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterBaseStats>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
-            List<CharacterUnitController> characterControllers = AssetDatabase.FindAssets("Character Unit Manager t:prefab", new []{baseStatsAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterUnitController>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
+            string baseAssetPath = assetPath.Replace($"/{name}.asset", "");
+            // Debug.Log(baseAssetPath);
+            // Debug.Log(assetPath);
+            List<CharacterBaseStats> baseStatsList = AssetDatabase.FindAssets("t:CharacterBaseStats", new []{baseAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterBaseStats>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
+            List<BehaviorGraph> behaviorGraphAgentsList = AssetDatabase.FindAssets("t:BehaviorGraph", new []{baseAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<BehaviorGraph>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
+           
+            List<CharacterUnitController> characterControllers = new List<CharacterUnitController>();
+            string[] prefabGuids = AssetDatabase.FindAssets("t:prefab", new[] { baseAssetPath });
+            
+            
+            foreach (string guid in prefabGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+
+                if (prefab != null)
+                {
+                    CharacterUnitController controller = prefab.GetComponent<CharacterUnitController>();
+                    if (controller != null)
+                    {
+                        characterControllers.Add(controller);
+                    }
+                }
+            }
+            
+            
+            //string[] behaviorGuids = AssetDatabase.FindAssets("t:BehaviorAuthoringGraph", new[] { baseAssetPath });
+            // string[] scriptableObjectGuids = AssetDatabase.FindAssets("t:ScriptableObject", new[] { baseAssetPath });
+            // var behaviorAuthoringGraphs = new List<ScriptableObject>();
+            //
+            // foreach (string guid in scriptableObjectGuids)
+            // {
+            //     string path = AssetDatabase.GUIDToAssetPath(guid);
+            //     
+            //     var allAssets = AssetDatabase.LoadAllAssetsAtPath(path);
+            //
+            //     foreach (var asset in allAssets)
+            //     {
+            //         if (asset == null) continue;
+            //
+            //         Type assetType = asset.GetType();
+            //         if (assetType.FullName == "Unity.Behavior.BehaviorAuthoringGraph")
+            //         {
+            //             behaviorAuthoringGraphs.Add((ScriptableObject)asset);
+            //         }
+            //     }
+            // }
+            //
+            // Debug.Log(behaviorAuthoringGraphs.Count);
+            
+            //List<CharacterUnitController> characterControllers = AssetDatabase.FindAssets("Character Unit Manager t:prefab", new []{baseAssetPath}).Select(guid => AssetDatabase.LoadAssetAtPath<CharacterUnitController>(AssetDatabase.GUIDToAssetPath(guid)) ).ToList();
 
             
             if (baseStatsList.Count > 0)
@@ -98,6 +154,17 @@ namespace CodeReverie
                 characterUnitPF = characterControllers[0];
             }
             
+            
+            if (behaviorGraphAgentsList.Count > 0)
+            {
+                behaviorGraph = behaviorGraphAgentsList[0];
+                if (characterUnitPF != null)
+                {
+                    characterUnitPF.GetComponent<BehaviorGraphAgent>().Graph = behaviorGraph;
+                }
+                //behaviorGraphAgent = behaviorAuthoringGraphs[0];
+            }
+            UnityEditor.EditorUtility.SetDirty(this);
         }
         
         #endif

@@ -31,6 +31,7 @@ MonoBehaviour:
     type: 3}
   experienceToGive: 0
   attackRange: 1
+  behaviorGraph: {fileID: 0}
   baseStats: {fileID: 11400000, guid: d90e7e66d32d0a346803e4b2eb5b41da, type: 2}
   healthBarCount: 5
   primaryArchetype: {fileID: 11400000, guid: 403bc2701f0feec4fb4e938477ad3d81, type: 2}

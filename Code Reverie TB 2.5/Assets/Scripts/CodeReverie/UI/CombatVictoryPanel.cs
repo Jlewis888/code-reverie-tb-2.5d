@@ -21,16 +21,23 @@ namespace CodeReverie
 
         private void Awake()
         {
-            characterVictoryPanels = new List<CharacterVictoryPanel>();
-            characterVictoryPanels.Add(characterVictoryPanel1);
-            characterVictoryPanels.Add(characterVictoryPanel2);
-            characterVictoryPanels.Add(characterVictoryPanel3);
-            characterVictoryPanels.Add(characterVictoryPanel4);
+            // characterVictoryPanels = new List<CharacterVictoryPanel>();
+            // characterVictoryPanels.Add(characterVictoryPanel1);
+            // characterVictoryPanels.Add(characterVictoryPanel2);
+            // characterVictoryPanels.Add(characterVictoryPanel3);
+            // characterVictoryPanels.Add(characterVictoryPanel4);
+            //
+            // foreach (CharacterVictoryPanel characterVictoryPanel in characterVictoryPanels)
+            // {
+            //     characterVictoryPanel.gameObject.SetActive(false);
+            // }
+        }
 
-            foreach (CharacterVictoryPanel characterVictoryPanel in characterVictoryPanels)
-            {
-                characterVictoryPanel.gameObject.SetActive(false);
-            }
+        private void Start()
+        {
+
+            
+            
         }
 
         private void OnEnable()
@@ -40,19 +47,36 @@ namespace CodeReverie
             lumiesToGiveText.text = CombatManager.Instance.combatConfigDetails.lumiesToGive.ToString();
             archetypePointsToGiveText.text = CombatManager.Instance.combatConfigDetails.archetypePointsToGive.ToString();
 
+            
+            foreach (CharacterUnitAreaStateManager characterUnitAreaStateManager in PlayerManager.Instance.combatConfigDetails.areaManagerConfig.characterUnitAreaStateManagers)
+            {
+                
+                Debug.Log(characterUnitAreaStateManager.characterID);
+                
+                if (characterUnitAreaStateManager.characterID ==
+                    PlayerManager.Instance.combatConfigDetails.characterInstanceID)
+                {
+                    characterUnitAreaStateManager.characterState = CharacterState.Dead;
+                    break;
+                }
+            }
+            
+            
             int count = 0;
             foreach (Character character in PlayerManager.Instance.currentParty)
             {
                 character.characterController.GetComponent<CharacterBattleManager>().inCombat = false;
                 character.characterController.GetComponent<CharacterBattleManager>().characterActionGaugeState = CharacterActionGaugeState.PostBattle;
                 character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Inactive;
-
+            
                 //character.currentHealth = character.characterController.GetComponent<Health>().CurrentHealth;
                 characterVictoryPanels[count].gameObject.SetActive(true);
                 characterVictoryPanels[count].Set(character, CombatManager.Instance.combatConfigDetails.expToGive);
                 
                 count++;
             }
+            
+            
         }
 
         private void OnDisable()

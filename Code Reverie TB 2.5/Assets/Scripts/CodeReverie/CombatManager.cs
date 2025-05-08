@@ -67,7 +67,8 @@ namespace CodeReverie
                 combatConfigDetails= new CombatConfigDetails(
                     returnSceneName: SceneManager.GetActiveScene().name,
                     characterReturnPosition: Vector3.zero,
-                    enemyList: debugEnemyList
+                    enemyList: debugEnemyList,
+                    areaManagerConfig: null
                 );
             }
             else
@@ -259,6 +260,7 @@ namespace CodeReverie
                 case CombatManagerState.OnSkillUseEnd:
                     CameraManager.Instance.SetBattleCamera();
                     RecallCharacters();
+                    selectedSkillPlayerCharacter.selectedSkill.OnSkillUseEnd();
                     //Debug.LogError(selectedSkillPlayerCharacter);
                     selectedSkillPlayerCharacter.EndTurn();
                     selectedSkillPlayerCharacter = null;
@@ -329,9 +331,41 @@ namespace CodeReverie
             }
         }
 
+        public void InstantiateNewEnemy(CharacterDataContainer characterDataContainer, Vector3 spawnPoint)
+        {
+            Character character = new Character(characterDataContainer);
+            character.SpawnCharacter(spawnPoint);
+            character.characterController.gameObject.SetActive(true);
+            enemyUnits.Add(character.characterController.GetComponent<CharacterBattleManager>());
+            allUnits.Add(character.characterController.GetComponent<CharacterBattleManager>());
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.InitCharacterActionGauge(character.characterController.GetComponent<CharacterBattleManager>());
+            character.characterController.GetComponent<CharacterBattleManager>().battleState = CharacterBattleState.Waiting;
+            character.characterController.GetComponent<CharacterBattleManager>().characterActionGaugeState = CharacterActionGaugeState.StartTurnPhase;
+            
+            SetRandomCombatPosition(character.characterController.GetComponent<CharacterBattleManager>());
+        }
+
         public void InstantiatePlayerUnits()
         {
             
+        }
+
+        public void DestroyCharacterBattleManager(CharacterBattleManager characterBattleManager)
+        {
+            allUnits.Remove(characterBattleManager);
+
+            if (characterBattleManager.GetComponent<ComponentTagManager>().HasTag(ComponentTag.Enemy))
+            {
+                enemyUnits.Remove(characterBattleManager);
+            }
+            else
+            {
+                playerUnits.Remove(characterBattleManager);
+            }
+            
+            
+            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.combatHudManager.RemoveCharacterActionGauge(characterBattleManager);
+            DestroyImmediate(characterBattleManager.gameObject);
         }
 
         public void SetAreaMaterial()
@@ -347,11 +381,21 @@ namespace CodeReverie
         {
             foreach (CharacterBattleManager unit in allUnits)
             {
-                float xBound = Random.Range(startingPositionCollider.bounds.min.x, startingPositionCollider.bounds.max.x);
-                float zBound = Random.Range(startingPositionCollider.bounds.min.z, startingPositionCollider.bounds.max.z);
-
-                unit.transform.position = new Vector3(xBound, 0, zBound);
+                // float xBound = Random.Range(startingPositionCollider.bounds.min.x, startingPositionCollider.bounds.max.x);
+                // float zBound = Random.Range(startingPositionCollider.bounds.min.z, startingPositionCollider.bounds.max.z);
+                //
+                // unit.transform.position = new Vector3(xBound, 0, zBound);
+                
+                SetRandomCombatPosition(unit);
             }
+        }
+
+        public void SetRandomCombatPosition(CharacterBattleManager characterBattleManager)
+        {
+            float xBound = Random.Range(startingPositionCollider.bounds.min.x, startingPositionCollider.bounds.max.x);
+            float zBound = Random.Range(startingPositionCollider.bounds.min.z, startingPositionCollider.bounds.max.z);
+
+            characterBattleManager.transform.position = new Vector3(xBound, 0, zBound);
         }
         
         public void SetSelectedCharacter(CharacterBattleManager characterBattleManager)
@@ -723,7 +767,7 @@ namespace CodeReverie
             
             foreach (CharacterBattleManager characterBattleManager in targetCharacterBattleManagers)
             {
-                if (count < 3)
+                if (count < 12)
                 {
                     
                     selectedSkillTargets.Add(characterBattleManager);
@@ -742,7 +786,6 @@ namespace CodeReverie
 
                 count++;
             }
-            
             
             characterBattleManagersToIgnore.Add(selectedSkillPlayerCharacter);
             

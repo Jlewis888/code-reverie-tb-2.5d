@@ -66,7 +66,7 @@ MonoBehaviour:
   aoeRadius: 3
   resonanceSkillsList: []
   skillModifierDetailsList: []
-  skillDamageTypes: 
+  skillDamageTypes: 00000000
   skillGameObject: {fileID: 0}
   initialAnimation: 
   castAnimation: cast_1

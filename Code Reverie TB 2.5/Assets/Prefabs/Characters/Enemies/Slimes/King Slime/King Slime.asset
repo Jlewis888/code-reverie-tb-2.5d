@@ -30,6 +30,7 @@ MonoBehaviour:
   characterUnitPF: {fileID: 0}
   experienceToGive: 5000
   attackRange: 1
+  behaviorGraph: {fileID: 0}
   baseStats: {fileID: 11400000, guid: 02e6b6399e053364bb8fc5565506d087, type: 2}
   healthBarCount: 5
   primaryArchetype: {fileID: 0}

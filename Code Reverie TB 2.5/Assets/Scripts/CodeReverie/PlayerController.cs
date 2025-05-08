@@ -17,14 +17,12 @@ namespace CodeReverie
         public Transform hollowFollowPointRight;
         public CharacterSuperState characterSuperState;
         public CharacterDirection characterDirection;
-        
-        
-        
+
+
         public LevelUpGO levelUpGameObjectPF;
-        
+
         protected void Awake()
         {
-            
             DontDestroyOnLoad(this);
             //base.Awake();
             playerMovementController = GetComponent<PlayerMovementController>();
@@ -37,8 +35,8 @@ namespace CodeReverie
             EventManager.Instance.playerEvents.onCharacterSwap += CharacterSwap;
             EventManager.Instance.playerEvents.onLevelUp += OnLevelUp;
         }
-        
-        
+
+
         private void OnDisable()
         {
             EventManager.Instance.playerEvents.onPlayerLock -= SetCanAttackInventoryListener;
@@ -50,39 +48,34 @@ namespace CodeReverie
         {
             EventManager.Instance.playerEvents.onPlayerLock -= SetCanAttackInventoryListener;
             EventManager.Instance.playerEvents.onCharacterSwap -= CharacterSwap;
-            
         }
 
         private void Update()
         {
-           
         }
 
         public void SetCanAttackInventoryListener(bool canAttack)
         {
-            
             GetComponent<PlayerCombatController>().canAttack = !canAttack;
-            
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * 1f, transform.localScale.y, transform.localScale.z);
+
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * 1f, transform.localScale.y,
+                transform.localScale.z);
         }
 
         public void SwapCharacterListener(Character character, CharacterController characterUnitManager)
         {
             if (GetComponent<CharacterUnitController>().character == character)
             {
-                
             }
         }
 
         public void CharacterSwap()
         {
-            
         }
 
 
         public void CharacterMenuSwap(PartySlot partySlot)
         {
-            
         }
 
         public void SetHollowFollowPointSideLeft()
@@ -90,7 +83,7 @@ namespace CodeReverie
             //hollowFollowPoint.transform.position = new Vector3(Mathf.Abs(transform.localPosition.x) * -1f, transform.localPosition.y, transform.localPosition.z);
             //hollowFollowPoint.transform.position = hollowFollowPointLeft.transform.position;
         }
-        
+
         public void SetHollowFollowPointSideRight()
         {
             //hollowFollowPoint.transform.position = new Vector3(Mathf.Abs(transform.localPosition.x) * 1f, transform.localPosition.y, transform.localPosition.z);
@@ -102,16 +95,14 @@ namespace CodeReverie
             // CameraManager.Instance.ScreenShake2();
             // Instantiate(levelUpGameObjectPF, transform);
         }
-        
-        
+
+
         private void OnTriggerEnter(Collider other)
         {
-            
             //Debug.Log(other.name);
-            
+
             if (other.TryGetComponent(out Interactable interactable))
             {
-                
                 // if (!PlayerManager.Instance.interactables.Contains(interactable))
                 // { 
                 //     PlayerManager.Instance.interactables.Add(interactable);
@@ -128,53 +119,56 @@ namespace CodeReverie
 
                 if (interactable.HasActiveInteractables())
                 {
-                    if (!CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Contains(interactable))
+                    if (!CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                            .interactiveCommandMenuHolder.interactables.Contains(interactable))
                     {
-
-                        if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.isActiveAndEnabled)
+                        if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                            .interactiveCommandMenuHolder.isActiveAndEnabled)
                         {
-                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.AddInteractableButton(interactable);
+                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                                .interactiveCommandMenuHolder.AddInteractableButton(interactable);
                         }
                         else
                         {
-                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Add(interactable);
+                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                                .interactiveCommandMenuHolder.interactables.Add(interactable);
                             interactable.SetQueue();
 
-                            if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables.Count == 1)
+                            if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                                    .interactiveCommandMenuHolder.interactables.Count == 1)
                             {
-                                if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0] != null)
+                                if (CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                                        .interactiveCommandMenuHolder.interactables[0] != null)
                                 {
-                                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.interactables[0].Activate();
+                                    CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                                        .interactiveCommandMenuHolder.interactables[0].Activate();
                                 }
                             }
-                        
-                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.ToggleInteractiveCommandMenuHolderOn();
+
+                            CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu
+                                .ToggleInteractiveCommandMenuHolderOn();
                         }
                     }
                 }
-                
             }
 
             if (other.TryGetComponent(out CombatTrigger combatTrigger))
             {
                 if (other.GetComponentInParent<ComponentTagManager>())
                 {
-
                     ComponentTagManager componentTagManager = other.GetComponentInParent<ComponentTagManager>();
-                    
+
                     if (componentTagManager.HasTag(ComponentTag.Enemy))
                     {
-                  
                         // if (CombatManager.Instance.battleManagerState == BattleManagerState.Inactive && CombatManager.Instance.currentBattleArea != null)
                         // {
                         //     EventManager.Instance.combatEvents.OnCombatEnter();
                         // }
                         //
-                    
                     }
                 }
             }
-            
+
             // if (other.GetComponent<ComponentTagManager>())
             // {
             //
@@ -191,125 +185,128 @@ namespace CodeReverie
             //         
             //     }
             // }
-            
-            
+
+
             if (other.TryGetComponent(out ComponentTagManager tagManager))
             {
-                
-                
                 if (tagManager.HasTag(ComponentTag.BattleArea))
                 {
                     //BattleManager.Instance.currentBattleArea = other.GetComponent<BattleArea>();
                 }
-                
+
                 if (tagManager.HasTag(ComponentTag.Enemy))
                 {
-                  
                     // if (BattleManager.Instance.battleManagerState == BattleManagerState.Inactive && BattleManager.Instance.currentBattleArea != null)
                     // {
                     //     EventManager.Instance.combatEvents.OnCombatEnter();
                     // }
-                    
-                    
 
 
                     if (AreaManager.instance != null && other.GetComponent<EnemyAI>() != null)
                     {
-                        
+                        //Debug.Log("Here 1");
                         // Destroy(other.gameObject);
-                        
+
                         //if (!AreaManager.instance.combatLocation.IsNullOrEmpty)
-                        if (AreaManager.instance.combatLocation != null)
+
+                        if (AreaManager.instance.areaManagerConfig != null)
                         {
-                            // CanvasManager.Instance.combatTransitionAnimator.gameObject.SetActive(true);
-                            // CanvasManager.Instance.sceneTransitionAnimator.gameObject.SetActive(true);
-                    
-                            if (other.GetComponent<EnemyAI>().enemyList != null)
+                            if (AreaManager.instance.areaManagerConfig.combatLocation != null)
                             {
-                                
+                                //Debug.Log("Here 2");
+                                // CanvasManager.Instance.combatTransitionAnimator.gameObject.SetActive(true);
+                                // CanvasManager.Instance.sceneTransitionAnimator.gameObject.SetActive(true);
+
                                 GetComponent<PlayerMovementController>().enabled = false;
-                                
-                                
-                                PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
-                                    returnSceneName: SceneManager.GetActiveScene().name,
-                                    characterInstanceID: other.GetComponent<CharacterUnitController>().characterInstanceID,
-                                    characterReturnPosition: transform.position,
-                                    enemyList: other.GetComponent<EnemyAI>().enemyList.Count > 0 ? other.GetComponent<EnemyAI>().enemyList : new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
+
+
+                                if (other.GetComponent<EnemyAI>().enemyList != null)
+                                {
+                                    List<CharacterDataContainer> enemyList = new List<CharacterDataContainer>();
+                                    enemyList.Add(other.GetComponent<CharacterUnitController>().character.info);
+                                    enemyList.AddRange(other.GetComponent<EnemyAI>().enemyList);
+                                    //Debug.Log("Here 3");
+
+                                    PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
+                                        returnSceneName: SceneManager.GetActiveScene().name,
+                                        characterInstanceID: other.GetComponent<CharacterUnitController>()
+                                            .characterInstanceID,
+                                        characterReturnPosition: transform.position,
+                                        //enemyList: other.GetComponent<EnemyAI>().enemyList.Count > 0 ? other.GetComponent<EnemyAI>().enemyList : new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info},
+                                        enemyList: enemyList,
+                                        areaManagerConfig: AreaManager.instance.areaManagerConfig
                                     );
-                                
+
+                                    // TransitionAnimator.Start(
+                                    //     TransitionType.Smear, // transition type
+                                    //     duration: 1f,
+                                    //     sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
+                                    // );
+                                }
+                                else
+                                {
+                                    //GetComponent<PlayerMovementController>().enabled = false;
+                                    //Debug.Log("Here 4");
+
+                                    PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
+                                        returnSceneName: SceneManager.GetActiveScene().name,
+                                        characterInstanceID: other.GetComponent<CharacterUnitController>()
+                                            .characterInstanceID,
+                                        characterReturnPosition: transform.position,
+                                        enemyList: new List<CharacterDataContainer>
+                                            { other.GetComponent<CharacterUnitController>().character.info },
+                                        areaManagerConfig: AreaManager.instance.areaManagerConfig
+                                    );
+                                }
+
                                 TransitionAnimator.Start(
                                     TransitionType.Smear, // transition type
                                     duration: 1f,
-                                    sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
+                                    sceneNameToLoad: AreaManager.instance.areaManagerConfig.combatLocation.SceneName
                                 );
+
+                                //SceneManager.LoadScene(AreaManager.instance.combatLocation);
                             }
                             else
                             {
-                                GetComponent<PlayerMovementController>().enabled = false;
-                                
-                                
-                                PlayerManager.Instance.combatConfigDetails = new CombatConfigDetails(
-                                    returnSceneName: SceneManager.GetActiveScene().name,
-                                    characterInstanceID: other.GetComponent<CharacterUnitController>().characterInstanceID,
-                                    characterReturnPosition: transform.position,
-                                    enemyList: new List<CharacterDataContainer>{other.GetComponent<CharacterUnitController>().character.info} 
-                                );
-                                
-                                TransitionAnimator.Start(
-                                    TransitionType.Smear, // transition type
-                                    duration: 1f,
-                                    sceneNameToLoad: AreaManager.instance.combatLocation.SceneName
-                                );
+                                Destroy(other.gameObject);
                             }
-                            
-                            
-                            
-                            //SceneManager.LoadScene(AreaManager.instance.combatLocation);
-                        }
-                        else
-                        {
-                            Destroy(other.gameObject);
                         }
                     }
-                    
                 }
             }
-            
         }
-        
-        
+
+
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out Interactable interactable))
             {
                 // PlayerManager.Instance.interactables.Remove(interactable);
                 // interactable.Deactivate();
-                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder.RemoveInteractableButton(
-                    interactable);
+                CanvasManager.Instance.screenSpaceCanvasManager.hudManager.commandMenu.interactiveCommandMenuHolder
+                    .RemoveInteractableButton(
+                        interactable);
             }
-            
+
             if (other.TryGetComponent(out ComponentTagManager tagManager))
             {
-                
                 if (tagManager.HasTag(ComponentTag.BattleArea))
                 {
                     //BattleManager.Instance.currentBattleArea = null;
                 }
             }
         }
-        
-        
-        
-        
+
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            
             //Debug.Log(other.name);
-            
+
             if (other.TryGetComponent(out Interactable interactable))
             {
                 if (!PlayerManager.Instance.interactables.Contains(interactable))
-                { 
+                {
                     PlayerManager.Instance.interactables.Add(interactable);
                     interactable.SetQueue();
 
@@ -320,34 +317,27 @@ namespace CodeReverie
                             PlayerManager.Instance.interactables[0].Activate();
                         }
                     }
-                    
                 }
             }
-            
+
             if (other.TryGetComponent(out ComponentTagManager tagManager))
             {
-                
-                
                 if (tagManager.HasTag(ComponentTag.BattleArea))
                 {
                     //BattleManager.Instance.currentBattleArea = other.GetComponent<BattleArea>();
                 }
-                
+
                 if (tagManager.HasTag(ComponentTag.Enemy))
                 {
-                  
                     // if (CombatManager.Instance.battleManagerState == BattleManagerState.Inactive && CombatManager.Instance.currentBattleArea != null)
                     // {
                     //     EventManager.Instance.combatEvents.OnCombatEnter();
                     // }
-                    
-                    
                 }
             }
-            
         }
-        
-        
+
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.TryGetComponent(out Interactable interactable))
@@ -355,16 +345,14 @@ namespace CodeReverie
                 PlayerManager.Instance.interactables.Remove(interactable);
                 interactable.Deactivate();
             }
-            
+
             if (other.TryGetComponent(out ComponentTagManager tagManager))
             {
-                
                 if (tagManager.HasTag(ComponentTag.BattleArea))
                 {
                     //BattleManager.Instance.currentBattleArea = null;
                 }
             }
         }
-        
     }
 }

@@ -39,6 +39,7 @@ namespace CodeReverie
         public Dictionary<int, int> accountExperienceMap= new Dictionary<int, int>();
         public CombatConfigDetails combatConfigDetails;
         public Vector3 characterOnSaveLoadPosition;
+        public Vector3 returnPosition;
         
         protected override void Awake()
         {
@@ -421,6 +422,7 @@ namespace CodeReverie
         {
             if (combatConfigDetails != null)
             {
+                returnPosition = combatConfigDetails.characterReturnPosition;
                 SetPartyPosition(combatConfigDetails.characterReturnPosition);
             } 
         }
@@ -428,10 +430,52 @@ namespace CodeReverie
 
         public void SetPartyPosition(Vector3 pos)
         {
+            Debug.Log($"Set Party Pos: {pos}");
             foreach (Character character in currentParty)
             {
-                character.characterController.transform.position = pos;
+                
+                if (character == currentParty[0])
+                {
+                    character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                    character.characterController.transform.position = pos;
+                    character.characterController.GetComponent<PlayerMovementController>().enabled = true;
+                    //CameraManager.Instance.UpdateCamera(character.characterController.transform);
+                    
+                }
+                else
+                {
+                    character.characterController.transform.position = pos;
+                }
+                // if (TryGetComponent(out PlayerMovementController playerMovementController))
+                // {
+                //     playerMovementController.enabled = false;
+                //     character.characterController.transform.position = pos;
+                //     
+                // }
+                //character.characterController.GetComponent<PlayerMovementController>().enabled = false;
+                //character.characterController.transform.position = pos;
+                Debug.Log(character.characterController.transform.position);
             }
+
+            if (!HasSetReturnPositionCheck())
+            {
+                SetPartyPosition(pos);
+            }
+            
+        }
+
+        public bool HasSetReturnPositionCheck()
+        {
+
+            foreach (Character character in currentParty)
+            {
+                if (character.characterController.transform.position != returnPosition)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void EnableCombatMode()

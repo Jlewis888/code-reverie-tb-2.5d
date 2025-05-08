@@ -121,6 +121,10 @@ namespace CodeReverie
                 actionPointsCost = 1;
             }
 
+            if (skillDamageTypes.Count == 0)
+            {
+                skillDamageTypes.Add(DamageTypes.Physical);
+            }
 
             // foreach (Stat statModifier in statModifiers)
             // {

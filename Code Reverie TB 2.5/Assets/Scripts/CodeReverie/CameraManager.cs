@@ -16,6 +16,7 @@ public class CameraManager : ManagerSingleton<CameraManager>
     public CinemachineCamera mainVirtualCamera;
     public CinemachineCamera inventoryVirtualCamera;
     public CinemachineCamera skillVirtualCamera;
+    public CinemachineCamera skillCharacterFocusVirtualCamera;
     public CinemachineCamera dialogueVirtualCamera;
     public CinemachineCamera combatVirtualCamera;
     public CinemachineTargetGroup combatTargetGroup;
@@ -229,6 +230,21 @@ public class CameraManager : ManagerSingleton<CameraManager>
         skillVirtualCamera.GetComponent<CinemachineFollow>().enabled = true;
         skillVirtualCamera.GetComponent<CinemachineRotationComposer>().enabled = true;
     }
+
+    public void SetSkillCharacterFocusVirtualCamera(GameObject characterObject)
+    {
+        skillCharacterFocusVirtualCamera.Follow = characterObject.transform;
+        
+        SetPriorityCamera(skillCharacterFocusVirtualCamera);
+        
+    }
+
+    public IEnumerator SkillCharacterFocusTimer(float seconds, Action onComplete)
+    {
+        yield return new WaitForSeconds(seconds);
+        onComplete();
+    }
+    
 
     public IEnumerator RotateSkillCamera(Action onComplete)
     {

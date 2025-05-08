@@ -89,7 +89,7 @@ MonoBehaviour:
   aoeRadius: 3
   resonanceSkillsList: []
   skillModifierDetailsList: []
-  skillDamageTypes: 
+  skillDamageTypes: 00000000
   skillGameObject: {fileID: 6186891313667908791, guid: 323b55ffac1795d4585c06c7668d7f82,
     type: 3}
   initialAnimation: cecil_revolver_start

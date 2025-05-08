@@ -21,5 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  areaManagerDataList:
+  areaManagerConfigList:
+  - {fileID: 11400000, guid: 7c3429047bde611408e895b2d822c07e, type: 2}
   - {fileID: 11400000, guid: 6276239a416894f41ba2684f6e50ddbf, type: 2}
+  - {fileID: 11400000, guid: 2b7221c862acb9c4cbf1d987747d2647, type: 2}
